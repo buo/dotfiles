@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# GNU core utilities (those that come with OS X are outdated)
+brew install coreutils
+
+# Fish Shell
+brew install fish
+
+# Update to the latest one
+brew install git
+
+# Use latest rsync rather than out-dated OS X rsync.
+brew install rsync
