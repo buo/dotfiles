@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-easy_install SpoofMAC
+sudo pip install SpoofMAC
