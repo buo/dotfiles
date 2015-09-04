@@ -1,0 +1,34 @@
+{
+  "name": "language-asciidoc",
+  "version": "0.12.0",
+  "description": "Syntax highlighting and snippets for AsciiDoc (with Asciidoctor flavor).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asciidoctor/atom-language-asciidoc.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "readme": "# AsciiDoc Package for Atom [![Build Status](https://travis-ci.org/asciidoctor/atom-language-asciidoc.svg?branch=master)](https://travis-ci.org/asciidoctor/atom-language-asciidoc)\n\nAdds syntax highlighting and snippets to AsciiDoc files. Supports [Asciidoctor](http://asciidoctor.org/)-specific features.\n\n![](https://raw.github.com/wiki/asciidoctor/atom-language-asciidoc/writers-guide-screenshot.png)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/asciidoctor/atom-language-asciidoc/issues"
+  },
+  "homepage": "https://github.com/asciidoctor/atom-language-asciidoc#readme",
+  "_id": "language-asciidoc@0.12.0",
+  "_shasum": "1cc1d7ecda4b2bd145c84f4412963f40f2226521",
+  "_resolved": "file:../d-11584-19186-4vqrlm/package.tgz",
+  "_from": "../d-11584-19186-4vqrlm/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "coffeelint.json",
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

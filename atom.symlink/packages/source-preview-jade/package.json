@@ -1,0 +1,866 @@
+{
+  "name": "source-preview-jade",
+  "main": "./lib/main",
+  "version": "0.1.1",
+  "description": "source-preview provider for jade",
+  "keywords": [
+    "jade"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aki77/atom-source-preview-jade"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "jade": "^1.11.0",
+    "loophole": "^1.0.0"
+  },
+  "providedServices": {
+    "preview.provider": {
+      "versions": {
+        "0.1.0": "provide"
+      }
+    }
+  },
+  "readme": "# source-preview-jade package\n\n[source-preview](https://atom.io/packages/source-preview) provider for jade\n\n[![Gyazo](http://i.gyazo.com/e9be65838fad5d98f930f2f23acdf588.gif)](http://gyazo.com/e9be65838fad5d98f930f2f23acdf588)\n\n## Requirement\n\n* [source-preview](https://atom.io/packages/source-preview)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/aki77/atom-source-preview-jade/issues"
+  },
+  "homepage": "https://github.com/aki77/atom-source-preview-jade",
+  "_id": "source-preview-jade@0.1.1",
+  "_shasum": "0507ef1a8ebe7110d41b6364adf1b677ac7a6176",
+  "_resolved": "file:../d-115622-6174-9cce0d/package.tgz",
+  "_from": "../d-115622-6174-9cce0d/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "jade",
+        "version": "1.11.0",
+        "path": "node_modules/jade/lib/index.js"
+      },
+      {
+        "name": "character-parser",
+        "version": "1.2.1",
+        "path": "node_modules/jade/node_modules/character-parser/index.js"
+      },
+      {
+        "name": "clean-css",
+        "version": "3.3.6",
+        "path": "node_modules/jade/node_modules/clean-css/index.js"
+      },
+      {
+        "name": "commander",
+        "version": "2.8.1",
+        "path": "node_modules/jade/node_modules/clean-css/node_modules/commander/index.js"
+      },
+      {
+        "name": "graceful-readlink",
+        "version": "1.0.1",
+        "path": "node_modules/jade/node_modules/clean-css/node_modules/commander/node_modules/graceful-readlink/index.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.4.4",
+        "path": "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map.js"
+      },
+      {
+        "name": "amdefine",
+        "version": "1.0.0",
+        "path": "node_modules/jade/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/amdefine.js"
+      },
+      {
+        "name": "commander",
+        "version": "2.6.0",
+        "path": "node_modules/jade/node_modules/commander/index.js"
+      },
+      {
+        "name": "constantinople",
+        "version": "3.0.2",
+        "path": "node_modules/jade/node_modules/constantinople/index.js"
+      },
+      {
+        "name": "acorn",
+        "version": "2.1.0",
+        "path": "node_modules/jade/node_modules/constantinople/node_modules/acorn/dist/acorn.js"
+      },
+      {
+        "name": "jstransformer",
+        "version": "0.0.2",
+        "path": "node_modules/jade/node_modules/jstransformer/index.js"
+      },
+      {
+        "name": "is-promise",
+        "version": "2.0.0",
+        "path": "node_modules/jade/node_modules/jstransformer/node_modules/is-promise/index.js"
+      },
+      {
+        "name": "promise",
+        "version": "6.1.0",
+        "path": "node_modules/jade/node_modules/jstransformer/node_modules/promise/index.js"
+      },
+      {
+        "name": "asap",
+        "version": "1.0.0",
+        "path": "node_modules/jade/node_modules/jstransformer/node_modules/promise/node_modules/asap/asap.js"
+      },
+      {
+        "name": "mkdirp",
+        "version": "0.5.1",
+        "path": "node_modules/jade/node_modules/mkdirp/index.js"
+      },
+      {
+        "name": "minimist",
+        "version": "0.0.8",
+        "path": "node_modules/jade/node_modules/mkdirp/node_modules/minimist/index.js"
+      },
+      {
+        "name": "transformers",
+        "version": "2.1.0",
+        "path": "node_modules/jade/node_modules/transformers/lib/transformers.js"
+      },
+      {
+        "name": "css",
+        "version": "1.0.8",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/css/index.js"
+      },
+      {
+        "name": "css-parse",
+        "version": "1.0.4",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-parse/index.js"
+      },
+      {
+        "name": "css-stringify",
+        "version": "1.0.5",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-stringify/index.js"
+      },
+      {
+        "name": "promise",
+        "version": "2.0.0",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/promise/index.js"
+      },
+      {
+        "name": "is-promise",
+        "version": "1.0.1",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/promise/node_modules/is-promise/index.js"
+      },
+      {
+        "name": "uglify-js",
+        "version": "2.2.5",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/uglify-js/tools/node.js"
+      },
+      {
+        "name": "optimist",
+        "version": "0.3.7",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/index.js"
+      },
+      {
+        "name": "wordwrap",
+        "version": "0.0.3",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/node_modules/wordwrap/index.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.1.43",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map.js"
+      },
+      {
+        "name": "amdefine",
+        "version": "1.0.0",
+        "path": "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js"
+      },
+      {
+        "name": "uglify-js",
+        "version": "2.4.23",
+        "path": "node_modules/jade/node_modules/uglify-js/tools/node.js"
+      },
+      {
+        "name": "async",
+        "version": "0.2.10",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/async/lib/async.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.1.34",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map.js"
+      },
+      {
+        "name": "amdefine",
+        "version": "1.0.0",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js"
+      },
+      {
+        "name": "uglify-to-browserify",
+        "version": "1.0.2",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/uglify-to-browserify/index.js"
+      },
+      {
+        "name": "yargs",
+        "version": "3.5.4",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/yargs/index.js"
+      },
+      {
+        "name": "camelcase",
+        "version": "1.1.0",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/camelcase/index.js"
+      },
+      {
+        "name": "decamelize",
+        "version": "1.0.0",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/decamelize/index.js"
+      },
+      {
+        "name": "window-size",
+        "version": "0.1.0",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/window-size/index.js"
+      },
+      {
+        "name": "wordwrap",
+        "version": "0.0.2",
+        "path": "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/wordwrap/index.js"
+      },
+      {
+        "name": "void-elements",
+        "version": "2.0.1",
+        "path": "node_modules/jade/node_modules/void-elements/index.js"
+      },
+      {
+        "name": "with",
+        "version": "4.0.3",
+        "path": "node_modules/jade/node_modules/with/index.js"
+      },
+      {
+        "name": "acorn",
+        "version": "1.2.2",
+        "path": "node_modules/jade/node_modules/with/node_modules/acorn/dist/acorn.js"
+      },
+      {
+        "name": "acorn-globals",
+        "version": "1.0.5",
+        "path": "node_modules/jade/node_modules/with/node_modules/acorn-globals/index.js"
+      },
+      {
+        "name": "acorn",
+        "version": "2.1.0",
+        "path": "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/dist/acorn.js"
+      },
+      {
+        "name": "loophole",
+        "version": "1.0.0",
+        "path": "node_modules/loophole/lib/loophole.js"
+      }
+    ],
+    "extensions": {
+      ".json": [
+        "coffeelint.json",
+        "node_modules/jade/.release.json",
+        "node_modules/jade/component.json",
+        "node_modules/jade/node_modules/character-parser/package.json",
+        "node_modules/jade/node_modules/clean-css/node_modules/commander/node_modules/graceful-readlink/package.json",
+        "node_modules/jade/node_modules/clean-css/node_modules/commander/package.json",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/package.json",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/package.json",
+        "node_modules/jade/node_modules/clean-css/package.json",
+        "node_modules/jade/node_modules/commander/package.json",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/package.json",
+        "node_modules/jade/node_modules/constantinople/package.json",
+        "node_modules/jade/node_modules/jstransformer/node_modules/is-promise/package.json",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/node_modules/asap/package.json",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/package.json",
+        "node_modules/jade/node_modules/jstransformer/package.json",
+        "node_modules/jade/node_modules/mkdirp/node_modules/minimist/package.json",
+        "node_modules/jade/node_modules/mkdirp/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/component.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-parse/component.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-parse/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-stringify/component.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-stringify/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/css/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/promise/node_modules/is-promise/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/promise/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/node_modules/wordwrap/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/package.json",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/package.json",
+        "node_modules/jade/node_modules/transformers/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/async/component.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/async/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/uglify-to-browserify/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/camelcase/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/decamelize/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/window-size/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/wordwrap/package.json",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/package.json",
+        "node_modules/jade/node_modules/uglify-js/package.json",
+        "node_modules/jade/node_modules/uglify-js/tools/domprops.json",
+        "node_modules/jade/node_modules/void-elements/package.json",
+        "node_modules/jade/node_modules/with/node_modules/acorn/package.json",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/package.json",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/package.json",
+        "node_modules/jade/node_modules/with/package.json",
+        "node_modules/jade/package.json",
+        "node_modules/loophole/package.json",
+        "package.json"
+      ],
+      ".coffee": [
+        "lib/jade-provider.coffee",
+        "lib/main.coffee"
+      ],
+      ".js": [
+        "node_modules/jade/bin/jade.js",
+        "node_modules/jade/jade.js",
+        "node_modules/jade/lib/compiler.js",
+        "node_modules/jade/lib/doctypes.js",
+        "node_modules/jade/lib/filters-client.js",
+        "node_modules/jade/lib/filters.js",
+        "node_modules/jade/lib/index.js",
+        "node_modules/jade/lib/inline-tags.js",
+        "node_modules/jade/lib/lexer.js",
+        "node_modules/jade/lib/nodes/attrs.js",
+        "node_modules/jade/lib/nodes/block-comment.js",
+        "node_modules/jade/lib/nodes/block.js",
+        "node_modules/jade/lib/nodes/case.js",
+        "node_modules/jade/lib/nodes/code.js",
+        "node_modules/jade/lib/nodes/comment.js",
+        "node_modules/jade/lib/nodes/doctype.js",
+        "node_modules/jade/lib/nodes/each.js",
+        "node_modules/jade/lib/nodes/filter.js",
+        "node_modules/jade/lib/nodes/index.js",
+        "node_modules/jade/lib/nodes/literal.js",
+        "node_modules/jade/lib/nodes/mixin-block.js",
+        "node_modules/jade/lib/nodes/mixin.js",
+        "node_modules/jade/lib/nodes/node.js",
+        "node_modules/jade/lib/nodes/tag.js",
+        "node_modules/jade/lib/nodes/text.js",
+        "node_modules/jade/lib/parser.js",
+        "node_modules/jade/lib/runtime.js",
+        "node_modules/jade/lib/utils.js",
+        "node_modules/jade/node_modules/character-parser/index.js",
+        "node_modules/jade/node_modules/clean-css/index.js",
+        "node_modules/jade/node_modules/clean-css/lib/clean.js",
+        "node_modules/jade/node_modules/clean-css/lib/colors/hex-name-shortener.js",
+        "node_modules/jade/node_modules/clean-css/lib/colors/hsl.js",
+        "node_modules/jade/node_modules/clean-css/lib/colors/rgb.js",
+        "node_modules/jade/node_modules/clean-css/lib/imports/inliner.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/break-up.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/can-override.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/clone.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/compactable.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/every-combination.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/has-inherit.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/optimizer.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/override-compactor.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/populate-components.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/remove-unused.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/restore-shorthands.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/restore.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/shorthand-compactor.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/validator.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/vendor-prefixes.js",
+        "node_modules/jade/node_modules/clean-css/lib/properties/wrap-for-optimizing.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/extractor.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/optimization-metadata.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/optimizer.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/optimizers/advanced.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/optimizers/clean-up.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/optimizers/simple.js",
+        "node_modules/jade/node_modules/clean-css/lib/selectors/reorderable.js",
+        "node_modules/jade/node_modules/clean-css/lib/source-maps/track.js",
+        "node_modules/jade/node_modules/clean-css/lib/stringifier/helpers.js",
+        "node_modules/jade/node_modules/clean-css/lib/stringifier/one-time.js",
+        "node_modules/jade/node_modules/clean-css/lib/stringifier/simple.js",
+        "node_modules/jade/node_modules/clean-css/lib/stringifier/source-maps.js",
+        "node_modules/jade/node_modules/clean-css/lib/text/comments-processor.js",
+        "node_modules/jade/node_modules/clean-css/lib/text/escape-store.js",
+        "node_modules/jade/node_modules/clean-css/lib/text/expressions-processor.js",
+        "node_modules/jade/node_modules/clean-css/lib/text/free-text-processor.js",
+        "node_modules/jade/node_modules/clean-css/lib/text/urls-processor.js",
+        "node_modules/jade/node_modules/clean-css/lib/tokenizer/chunker.js",
+        "node_modules/jade/node_modules/clean-css/lib/tokenizer/extract-properties.js",
+        "node_modules/jade/node_modules/clean-css/lib/tokenizer/extract-selectors.js",
+        "node_modules/jade/node_modules/clean-css/lib/tokenizer/tokenize.js",
+        "node_modules/jade/node_modules/clean-css/lib/urls/rebase.js",
+        "node_modules/jade/node_modules/clean-css/lib/urls/reduce.js",
+        "node_modules/jade/node_modules/clean-css/lib/urls/rewrite.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/compatibility.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/input-source-map-tracker.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/object.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/quote-scanner.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/source-reader.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/source-tracker.js",
+        "node_modules/jade/node_modules/clean-css/lib/utils/splitter.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/commander/index.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/commander/node_modules/graceful-readlink/index.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/build/assert-shim.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/build/mini-require.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/build/suffix-browser.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/build/test-prefix.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/build/test-suffix.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/array-set.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/base64-vlq.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/base64.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/binary-search.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/mapping-list.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/quick-sort.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/source-map-consumer.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/source-map-generator.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/source-node.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map/util.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/amdefine.js",
+        "node_modules/jade/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/intercept.js",
+        "node_modules/jade/node_modules/commander/index.js",
+        "node_modules/jade/node_modules/constantinople/index.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/bin/build-acorn.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/bin/generate-identifier-regex.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/dist/acorn.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/dist/acorn_csp.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/dist/acorn_loose.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/dist/walk.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/expression.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/identifier.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/index.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/location.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/locutil.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/acorn_loose.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/expression.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/index.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/parseutil.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/state.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/statement.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/loose/tokenize.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/lval.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/node.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/options.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/parseutil.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/state.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/statement.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/tokencontext.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/tokenize.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/tokentype.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/util.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/walk/index.js",
+        "node_modules/jade/node_modules/constantinople/node_modules/acorn/src/whitespace.js",
+        "node_modules/jade/node_modules/jstransformer/index.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/is-promise/index.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/core.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/index.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/lib/core.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/lib/done.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/lib/es6-extensions.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/lib/node-extensions.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/node_modules/asap/asap.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/polyfill-done.js",
+        "node_modules/jade/node_modules/jstransformer/node_modules/promise/polyfill.js",
+        "node_modules/jade/node_modules/mkdirp/bin/cmd.js",
+        "node_modules/jade/node_modules/mkdirp/examples/pow.js",
+        "node_modules/jade/node_modules/mkdirp/index.js",
+        "node_modules/jade/node_modules/mkdirp/node_modules/minimist/example/parse.js",
+        "node_modules/jade/node_modules/mkdirp/node_modules/minimist/index.js",
+        "node_modules/jade/node_modules/transformers/lib/shared.js",
+        "node_modules/jade/node_modules/transformers/lib/transformers.js",
+        "node_modules/jade/node_modules/transformers/node_modules/css/benchmark.js",
+        "node_modules/jade/node_modules/transformers/node_modules/css/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-parse/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/css/node_modules/css-stringify/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/css/test.js",
+        "node_modules/jade/node_modules/transformers/node_modules/promise/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/promise/node_modules/is-promise/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/ast.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/compress.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/mozilla-ast.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/output.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/parse.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/scope.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/sourcemap.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/transform.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib/utils.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/bool.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/boolean_double.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/boolean_single.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/default_hash.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/default_singles.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/divide.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/line_count.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/line_count_options.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/line_count_wrap.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/nonopt.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/reflect.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/short.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/string.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/usage-options.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example/xup.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/node_modules/wordwrap/example/center.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/node_modules/wordwrap/example/meat.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/node_modules/wordwrap/index.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/Makefile.dryice.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build/assert-shim.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build/mini-require.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build/suffix-browser.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build/test-prefix.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build/test-suffix.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/array-set.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/base64-vlq.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/base64.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/binary-search.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/mapping-list.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-map-consumer.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-map-generator.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-node.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map/util.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/intercept.js",
+        "node_modules/jade/node_modules/transformers/node_modules/uglify-js/tools/node.js",
+        "node_modules/jade/node_modules/uglify-js/bin/extract-props.js",
+        "node_modules/jade/node_modules/uglify-js/lib/ast.js",
+        "node_modules/jade/node_modules/uglify-js/lib/compress.js",
+        "node_modules/jade/node_modules/uglify-js/lib/mozilla-ast.js",
+        "node_modules/jade/node_modules/uglify-js/lib/output.js",
+        "node_modules/jade/node_modules/uglify-js/lib/parse.js",
+        "node_modules/jade/node_modules/uglify-js/lib/propmangle.js",
+        "node_modules/jade/node_modules/uglify-js/lib/scope.js",
+        "node_modules/jade/node_modules/uglify-js/lib/sourcemap.js",
+        "node_modules/jade/node_modules/uglify-js/lib/transform.js",
+        "node_modules/jade/node_modules/uglify-js/lib/utils.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/async/lib/async.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/Makefile.dryice.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build/assert-shim.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build/mini-require.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build/suffix-browser.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build/test-prefix.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build/test-suffix.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/array-set.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/base64-vlq.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/base64.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/binary-search.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-map-consumer.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-map-generator.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/source-node.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map/util.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/intercept.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/uglify-to-browserify/index.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/index.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/lib/completion.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/lib/parser.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/lib/usage.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/lib/validation.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/camelcase/index.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/decamelize/index.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/window-size/index.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/wordwrap/example/center.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/wordwrap/example/meat.js",
+        "node_modules/jade/node_modules/uglify-js/node_modules/yargs/node_modules/wordwrap/index.js",
+        "node_modules/jade/node_modules/uglify-js/tools/node.js",
+        "node_modules/jade/node_modules/void-elements/index.js",
+        "node_modules/jade/node_modules/void-elements/pre-publish.js",
+        "node_modules/jade/node_modules/with/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/bin/build-acorn.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/bin/generate-identifier-regex.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/dist/acorn.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/dist/acorn_csp.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/dist/acorn_loose.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/dist/walk.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/expression.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/identifier.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/location.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/acorn_loose.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/expression.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/parseutil.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/state.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/statement.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/loose/tokenize.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/lval.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/node.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/options.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/parseutil.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/state.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/statement.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/tokencontext.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/tokenize.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/tokentype.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/util.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/walk/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn/src/whitespace.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/bin/build-acorn.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/bin/generate-identifier-regex.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/dist/acorn.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/dist/acorn_csp.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/dist/acorn_loose.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/dist/walk.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/expression.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/identifier.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/location.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/locutil.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/acorn_loose.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/expression.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/parseutil.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/state.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/statement.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/loose/tokenize.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/lval.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/node.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/options.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/parseutil.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/state.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/statement.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/tokencontext.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/tokenize.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/tokentype.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/util.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/walk/index.js",
+        "node_modules/jade/node_modules/with/node_modules/acorn-globals/node_modules/acorn/src/whitespace.js",
+        "node_modules/jade/release.js",
+        "node_modules/jade/runtime.js",
+        "node_modules/loophole/lib/loophole.js"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "",
+          "lib",
+          "spec"
+        ],
+        "dependencies": {
+          "jade": "^1.11.0",
+          "loophole": "^1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade",
+          "node_modules/jade/bin",
+          "node_modules/jade/lib",
+          "node_modules/jade/lib/nodes"
+        ],
+        "dependencies": {
+          "character-parser": "1.2.1",
+          "clean-css": "^3.1.9",
+          "commander": "~2.6.0",
+          "constantinople": "~3.0.1",
+          "jstransformer": "0.0.2",
+          "mkdirp": "~0.5.0",
+          "transformers": "2.1.0",
+          "uglify-js": "^2.4.19",
+          "void-elements": "~2.0.1",
+          "with": "~4.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/clean-css",
+          "node_modules/jade/node_modules/clean-css/lib",
+          "node_modules/jade/node_modules/clean-css/lib/colors",
+          "node_modules/jade/node_modules/clean-css/lib/imports",
+          "node_modules/jade/node_modules/clean-css/lib/properties",
+          "node_modules/jade/node_modules/clean-css/lib/selectors",
+          "node_modules/jade/node_modules/clean-css/lib/selectors/optimizers",
+          "node_modules/jade/node_modules/clean-css/lib/source-maps",
+          "node_modules/jade/node_modules/clean-css/lib/stringifier",
+          "node_modules/jade/node_modules/clean-css/lib/text",
+          "node_modules/jade/node_modules/clean-css/lib/tokenizer",
+          "node_modules/jade/node_modules/clean-css/lib/urls",
+          "node_modules/jade/node_modules/clean-css/lib/utils"
+        ],
+        "dependencies": {
+          "commander": "2.8.x",
+          "source-map": "0.4.x"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/clean-css/node_modules/commander"
+        ],
+        "dependencies": {
+          "graceful-readlink": ">= 1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/clean-css/node_modules/source-map/build",
+          "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib/source-map",
+          "node_modules/jade/node_modules/clean-css/node_modules/source-map/lib",
+          "node_modules/jade/node_modules/clean-css/node_modules/source-map"
+        ],
+        "dependencies": {
+          "amdefine": ">=0.0.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/constantinople",
+          "node_modules/jade/node_modules/constantinople/test"
+        ],
+        "dependencies": {
+          "acorn": "^2.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/jstransformer"
+        ],
+        "dependencies": {
+          "is-promise": "^2.0.0",
+          "promise": "^6.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/jstransformer/node_modules/promise",
+          "node_modules/jade/node_modules/jstransformer/node_modules/promise/lib"
+        ],
+        "dependencies": {
+          "asap": "~1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/mkdirp/bin",
+          "node_modules/jade/node_modules/mkdirp/examples",
+          "node_modules/jade/node_modules/mkdirp",
+          "node_modules/jade/node_modules/mkdirp/test"
+        ],
+        "dependencies": {
+          "minimist": "0.0.8"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/lib",
+          "node_modules/jade/node_modules/transformers"
+        ],
+        "dependencies": {
+          "promise": "~2.0",
+          "css": "~1.0.8",
+          "uglify-js": "~2.2.5"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/node_modules/css"
+        ],
+        "dependencies": {
+          "css-parse": "1.0.4",
+          "css-stringify": "1.0.5"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/node_modules/promise"
+        ],
+        "dependencies": {
+          "is-promise": "~1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/lib",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/test/compress",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/test",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/tools"
+        ],
+        "dependencies": {
+          "source-map": "~0.1.7",
+          "optimist": "~0.3.5"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/example",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/test/_",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/test"
+        ],
+        "dependencies": {
+          "wordwrap": "~0.0.2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/build",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib/source-map",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/lib",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/test",
+          "node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/source-map/test/source-map"
+        ],
+        "dependencies": {
+          "amdefine": ">=0.0.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/uglify-js/bin",
+          "node_modules/jade/node_modules/uglify-js/lib",
+          "node_modules/jade/node_modules/uglify-js",
+          "node_modules/jade/node_modules/uglify-js/tools"
+        ],
+        "dependencies": {
+          "async": "~0.2.6",
+          "source-map": "0.1.34",
+          "uglify-to-browserify": "~1.0.0",
+          "yargs": "~3.5.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map",
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map/build",
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib/source-map",
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map/lib",
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map/test",
+          "node_modules/jade/node_modules/uglify-js/node_modules/source-map/test/source-map"
+        ],
+        "dependencies": {
+          "amdefine": ">=0.0.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/uglify-js/node_modules/yargs",
+          "node_modules/jade/node_modules/uglify-js/node_modules/yargs/lib"
+        ],
+        "dependencies": {
+          "camelcase": "^1.0.2",
+          "decamelize": "^1.0.0",
+          "window-size": "0.1.0",
+          "wordwrap": "0.0.2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/with"
+        ],
+        "dependencies": {
+          "acorn": "^1.0.1",
+          "acorn-globals": "^1.0.3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/jade/node_modules/with/node_modules/acorn-globals"
+        ],
+        "dependencies": {
+          "acorn": "^2.1.0"
+        }
+      }
+    ]
+  }
+}
