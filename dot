@@ -3,7 +3,7 @@
 set -e
 
 cd "$(dirname $0)"
-DOTFILES_ROOT=$(pwd)
+DOTROOT=$(pwd)
 
 function info {
   printf "\r\033[2K  [ \033[0;34m..\033[0m ] $*\n"
@@ -121,7 +121,7 @@ function _link {
 function link {
   info "link the symbolic links"
   local overwrite_all=false backup_all=false skip_all=false
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name "*.symlink")
+  for src in $(find -H "$DOTROOT" -maxdepth 2 -name "*.symlink")
   do
     dst="$HOME/.$(basename "${src%.*}")"
     _link "$src" "$dst"
