@@ -1,0 +1,53 @@
+set nocompatible
+
+set noswapfile
+set nobackup
+
+syntax on
+set t_Co=256
+colorscheme mustang
+
+set ruler
+set number
+
+set smarttab
+set autoindent
+set smartindent
+set backspace=eol,start,indent
+
+" Set the number of space characters that will be inserted
+" when the tab key is pressed.
+set tabstop=4
+set softtabstop=4
+
+" Set the number of space characters inserted for indentation.
+set shiftwidth=4
+
+" Insert space characters whenever the tab key is pressed.
+"set expandtab
+
+" Encodings
+set encoding=utf-8
+set fileencodings=utf-8
+
+set hlsearch
+
+"-------------------------------------------------------------------------------
+" limit 80 columns
+"-------------------------------------------------------------------------------
+if exists('+colorcolumn')
+  set colorcolumn=81
+else
+  au BufWinEnter * let w:m2=matchadd('ColorColumn', '\%>80v.\+', -1)
+endif
+
+" for NERD Tree plugin
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
+
+" Syntax highlight for LESS
+au BufNewFile,BufRead *.less set filetype=less
+
+" Syntax highlighting for Go
+au BufRead,BufNewFile *.go set filetype=go
+
+filetype plugin on
