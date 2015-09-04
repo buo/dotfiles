@@ -17,7 +17,6 @@ if [ "$(uname -s)" == "Darwin" ]; then
     mkdir "$HOME/.config/fish"
   fi
 
-  DIR="$(pwd)/$(dirname $0)"
-  ln -sf "$DIR/config.fish" "$HOME/.config/fish/config.fish"
-  ln -sf "$DIR/functions" "$HOME/.config/fish/functions"
+  ln -sf "$DOTROOT/fish/config.fish" "$HOME/.config/fish/config.fish"
+  ln -sf "$DOTROOT/fish/functions" "$HOME/.config/fish/functions"
 fi
