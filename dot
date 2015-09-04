@@ -42,6 +42,30 @@ function gitconfig {
   fi
 }
 
+function homebrew {
+  # Check for Homebrew
+  if test ! $(which brew); then
+    info "Installing Homebrew for you."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # Install homebrew cask
+  if test ! $(brew cask) &>/dev/null; then
+    brew tap phinze/cask
+    brew tap caskroom/fonts
+    brew tap caskroom/unofficial
+    brew tap caskroom/versions
+    brew install brew-cask
+  fi
+
+  # Changes the path where the symlinks to the applications will be generated.
+  #export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+  # clean up cache files
+  brew cleanup
+  brew cask cleanup
+}
+
 function _link {
   local src=$1 dst=$2
   local skip= overwrite= backup=
@@ -111,4 +135,10 @@ function install {
 
 gitconfig
 link
+
+# If we're on a Mac, let's install and setup homebrew.
+if [ "$(uname -s)" == "Darwin" ]; then
+  homebrew
+fi
+
 install
