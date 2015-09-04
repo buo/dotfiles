@@ -139,6 +139,7 @@ link
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]; then
   homebrew
+  sh -c "$DOTROOT/osx/preferences.sh"
 fi
 
 install
