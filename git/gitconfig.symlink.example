@@ -53,6 +53,7 @@
 [core]
     attributesfile = ~/.gitattributes
     autocrlf = input
+    editor = atom --wait
     excludesfile = ~/.gitignore
 
 [hub]
