@@ -1,0 +1,88 @@
+[alias]
+    # Shorter commands
+    a  = commit --amend
+    br = branch
+    ca = !git add -A && git commit          # commit all changes
+    cancel = reset --hard HARD~1
+    ci  = commit
+    co = checkout
+    count = !git shortlog -sn
+    d  = diff
+    dc = diff --cached
+    g  = log --graph --pretty=custom        # show custom graph
+    l  = log --pretty=custom                # show custom log
+    st = status
+    uc = reset --soft HEAD~1                # undo commit
+    who = shortlog -s --
+
+    # Credit an author on the latest commit
+    credit = "!f() { \
+                if [[ -n "$1" && -n "$2" ]]; then \
+                    git commit --amend --author \"$1 <$2>\" -C HEAD; \
+                fi \
+              }; f"
+
+    # Create an unattached branch with no history
+    emptybranch = "!f() { \
+                     if [ -n "$1" ]; then \
+                         git symbolic-ref HEAD refs/heads/$1 && \
+                         rm .git/index && \
+                         git clean -fdx;  \
+                     fi \
+                   }; f"
+
+[color "branch"]
+    current = green bold
+    local = green
+    remote = yellow
+
+[color "diff"]
+    frag = magenta
+    meta = yellow
+    new = green
+    old = red
+
+[color "status"]
+    added = green reverse
+    changed = yellow reverse
+    untracked = red reverse
+
+#[commit]
+#   template = ~/.gitmessage
+
+[core]
+    attributesfile = ~/.gitattributes
+    autocrlf = input
+    excludesfile = ~/.gitignore
+
+[hub]
+    protocol = https
+
+[pretty]
+    # Custom log output
+    custom = "%C(cyan)%h%C(red)%d %C(white)%s %C(green)(%an) %C(reset)%ar"
+    #                  |        |           |            |             ⎩ author date (relative)
+    #                  |        |           |            ⎩ author name
+    #                  |        |           ⎩ subject
+    #                  |        ⎩ decorations (branch, heads or tags)
+    #                  ⎩ hash (abbreviated)
+
+[push]
+    # See `git help config` (search for push.default)
+    # for more information on different options of the below setting.
+    #
+    # Setting to git 2.0 default to surpress warning message
+    default = simple
+
+[user]
+    name = AUTHORNAME
+    email = AUTHOREMAIL
+[credential]
+    helper = GIT_CREDENTIAL_HELPER
+
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+
+[mergetool]
+    keepBackup = true

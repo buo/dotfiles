@@ -22,6 +22,26 @@ function ask {
   printf "\r\033[2K  [ \033[0;33m??\033[0m ] $1 "
 }
 
+function gitconfig {
+  if ! [ -f git/gitconfig.symlink ]; then
+    info "gitconfig"
+
+    git_credential="cache"
+    if [ "$(uname -s)" == "Darwin" ]; then
+      git_credential="osxkeychain"
+    fi
+
+    ask "What is your git author name?"
+    read -e git_authorname
+    ask "What is your git author email?"
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+
+    ok "created gitconfig.symlink"
+  fi
+}
+
 function _link {
   local src=$1 dst=$2
   local skip= overwrite= backup=
@@ -89,5 +109,6 @@ function install {
   find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 }
 
+gitconfig
 link
 install
