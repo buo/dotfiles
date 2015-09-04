@@ -7,6 +7,11 @@ brew cask install bettertouchtool
 brew cask install bittorrent-sync
 brew cask install dropbox
 brew cask install evernote
+
+# A typeface designed for source code.
+# http://sourcefoundry.org/hack/
+brew cask install font-hack
+
 brew cask install google-chrome
 brew cask install google-drive
 brew cask install iterm2
