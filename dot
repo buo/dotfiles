@@ -3,7 +3,7 @@
 set -e
 
 cd "$(dirname $0)"
-DOTROOT=$(pwd)
+export DOTROOT=$(pwd)
 
 function info {
   printf "\r\033[2K  [ \033[0;34m..\033[0m ] $*\n"
