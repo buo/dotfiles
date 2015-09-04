@@ -3,9 +3,6 @@
 # GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 
-# Fish Shell
-brew install fish
-
 # Update to the latest one
 brew install git
 
