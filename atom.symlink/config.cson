@@ -1,7 +1,7 @@
 "*":
   editor:
     showIndentGuide: true
-    fontFamily: "Hack"
+    fontFamily: "Menlo"
     fontSize: 16
     invisibles: {}
     showInvisibles: true
