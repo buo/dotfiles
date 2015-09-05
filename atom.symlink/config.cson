@@ -5,6 +5,7 @@
     fontSize: 16
     invisibles: {}
     showInvisibles: true
+    tabLength: 2
   core:
     ignoredNames: [
       ".bundle"
