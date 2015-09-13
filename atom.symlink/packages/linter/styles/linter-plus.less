@@ -1,0 +1,195 @@
+@import "ui-variables";
+@import 'octicon-utf-codes';
+
+@spacing: 3px;
+
+linter-message {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  font-size: @font-size;
+  line-height: 1.2;
+  & > .badge {
+    align-self: flex-start;
+  }
+}
+
+.linter-message-item {
+  margin: @spacing;
+}
+
+linter-multiline-message {
+  display: block;
+  pointer-events: auto;
+  linter-message-line {
+    display: block;
+    white-space: pre;
+  }
+  linter-message-line:not(:first-child) {
+    display: none;
+    margin-left: 1.1em;
+  }
+  linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+    font-family: 'Octicons Regular';
+    content: @triangle-right;
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.1em;
+    text-align: center;
+    height: 1em;
+  }
+  &:focus, &.expanded {
+    linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+      content: @triangle-down;
+    }
+    linter-message-line:not(:first-child) {
+      display: block;
+    }
+  }
+}
+
+linter-panel {
+  display: block;
+  overflow-y: auto;
+  max-height: 150px;
+  &[hidden]{
+    display: none;
+  }
+  padding-left: @spacing;
+  padding-right: @spacing;
+  linter-message:first-child {
+    padding-top: @spacing;
+  }
+  linter-message:last-child {
+    padding-bottom: @spacing;
+  }
+}
+
+#linter-inline {
+  @linter-inline-link: fade(@base-background-color, 66%);
+  @linter-inline-fg: @base-background-color;
+  @linter-inline-bg: @text-color;
+  margin-top: 4px;
+  padding: @spacing;
+  color: @linter-inline-fg;
+  border-radius: @component-border-radius * 1.5;
+  border-top-left-radius: 0;
+  background: @linter-inline-bg;
+  box-shadow: 0 1px 3px hsla(0, 0, 0%, 0.4);
+
+  transition: opacity 300ms;
+  &.transparent {
+    opacity: 0.2;
+  }
+
+  // pointer arrow
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 0;
+    border: 4px solid;
+    border-color: transparent transparent @linter-inline-bg @linter-inline-bg;
+  }
+  a {
+    color: @linter-inline-link;
+    &:last-of-type {
+      padding-right: @spacing * 1.5; // a bit extra space for visual pleasing
+    }
+  }
+}
+
+linter-bottom-tab {
+  display: inline-block;
+  margin-right: -1px; // hide left border
+  padding: 0 .6em;
+  line-height: 1.8em;
+  color: @text-color-subtle;
+  border: 1px solid @button-border-color;
+  background: fade(@button-background-color, 33%);
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  &:first-of-type {
+    border-top-left-radius: @component-border-radius;
+    border-bottom-left-radius: @component-border-radius;
+  }
+  &:last-of-type {
+    margin-right: .6em;
+    border-top-right-radius: @component-border-radius;
+    border-bottom-right-radius: @component-border-radius;
+  }
+
+  &:active {
+    background: transparent;
+  }
+  &.active {
+    color: @text-color-highlight;
+    background: @button-background-color;
+  }
+
+  .count {
+    margin-left: .2em;
+  }
+}
+
+atom-text-editor::shadow .linter-highlight .icon-right{
+  visibility: visible;
+  &::before{
+    content: @primitive-dot;
+    font-size: 1.1em;
+  }
+}
+// Styling Error Types
+atom-text-editor::shadow .linter-highlight, .linter-highlight{
+  &.badge {
+    border-radius: @component-border-radius;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &.error {
+    &:not(.line-number){
+      background-color: @background-color-error;
+      color: white;
+    }
+    .icon-right::before{
+      color: @background-color-error;
+    }
+    .region {
+      border-bottom: 1px dashed @background-color-error;
+    }
+  }
+  &.warning {
+    &:not(.line-number){
+      background-color: @background-color-warning;
+      color: white;
+    }
+    .icon-right::before{
+      color: @background-color-warning;
+    }
+    .region {
+      border-bottom: 1px dashed @background-color-warning;
+    }
+  }
+  &.trace {
+    &:not(.line-number){
+      background-color: @background-color-info;
+      color: white;
+    }
+    .icon-right::before{
+      color: @background-color-info;
+    }
+    .region {
+      border-bottom: 1px dashed @background-color-info;
+    }
+  }
+
+  // Used by bottom status icon
+  &.status-error {
+    color: @background-color-error;
+  }
+  &.status-success{
+    color: @background-color-success;
+  }
+}
