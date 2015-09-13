@@ -22,6 +22,7 @@
     ]
     themes: [
       "nucleus-dark-ui"
+      "base16-tomorrow-dark-theme"
     ]
   "spell-check":
     grammars: [
