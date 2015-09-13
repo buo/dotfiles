@@ -1,0 +1,164 @@
+status-bar {
+  .text(subtle);
+  background: @base-background-color;
+  height: @input-height;
+  line-height: @component-line-height;
+  font-size: 10px;
+
+  & > .flexbox-repaint-hack {
+    padding-top: 3px;
+  }
+}
+
+atom-workspace {
+  border-top: 1px solid @base-border-color;
+}
+
+.platform-darwin .close-icon:before {
+  content: '✕' !important;
+}
+
+.find-and-replace .find-meta-container {
+  top: 4px;
+
+  & span {
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+}
+
+atom-text-editor[mini],
+atom-text-editor[mini]::shadow {
+  transition: all @transition-time ease;
+  letter-spacing: 0;
+  color: @text-color-highlight;
+  background-color: transparent;
+  border: 1px solid @input-background-color;
+  border-radius: @component-border-radius;
+  padding-left: @component-padding / 2;
+  height: @input-height;
+  max-height: @input-height;
+  line-height: @input-height - 2px;
+
+  &:hover {
+    background-color: @button-background-color-hover !important;
+  }
+
+  .placeholder-text {
+    .text(subtle);
+    height: @input-height;
+    line-height: @input-height - 2px;
+  }
+
+  .cursor {
+    border-color: @text-color;
+  }
+
+  .selection .region {
+    background-color: @background-color-highlight !important;
+  }
+}
+
+atom-text-editor[mini].is-focused,
+atom-text-editor[mini].is-focused::shadow {
+  border: 1px solid @text-color-highlight;
+  background-color: @input-background-color-active;
+
+  &:hover {
+    background-color: @input-background-color-active !important;
+  }
+
+  .selection .region {
+    background-color: @background-color-highlight !important;
+  }
+}
+
+.icon-x::before {
+  content: '✕' !important;
+}
+
+atom-notification .close:before {
+  color: fade(@theme-background-color, 50%);
+}
+
+atom-notification .close {
+  transition: all @transition-time ease;
+}
+
+atom-notifications {
+  .text(normal);
+}
+
+.background-message .message,
+.background-message li {
+  .text(subtle);
+  font-size: 24px;
+  font-weight: 300;
+
+  .keystroke {
+    border-width: 1px;
+    font-weight: 300;
+  }
+}
+
+kbd {
+  .text(highlight);
+  background: @tooltip-key-color;
+  font-size: 90%;
+  border-radius: @component-border-radius/2;
+  margin-left: @component-padding/2;
+}
+
+.scrollbars-visible-always {
+  /deep/ ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /deep/ ::-webkit-scrollbar-track,
+  /deep/ ::-webkit-scrollbar-corner {
+    background: @scrollbar-track-color;
+  }
+
+  /deep/ ::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    background: @scrollbar-color;
+    border: 1px solid @scrollbar-border;
+    background-clip: content-box;
+    border-right: 0;
+  }
+
+  /deep/::-webkit-scrollbar-thumb:vertical:active {
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+
+  /deep/::-webkit-scrollbar-thumb:horizontal:active {
+    border-radius: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+  }
+
+  atom-text-editor,
+  .settings-view {
+    /deep/ ::-webkit-scrollbar-track,
+    /deep/ ::-webkit-scrollbar-corner {
+      background: @scrollbar-track-color;
+    }
+
+    /deep/ ::-webkit-scrollbar-thumb {
+      border-right: 1px solid @scrollbar-border;
+    }
+  }
+}
+
+// FIND PROPER PLACE
+pre {
+  border-color: @base-border-color;
+  .text(normal);
+}
+
+.well {
+  border-radius: @component-border-radius;
+}

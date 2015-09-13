@@ -20,6 +20,9 @@
       "exception-reporting"
       "metrics"
     ]
+    themes: [
+      "nucleus-dark-ui"
+    ]
   "spell-check":
     grammars: [
       "text.plain"
