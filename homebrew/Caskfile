@@ -6,6 +6,10 @@ brew cask install atom
 brew cask install bettertouchtool
 brew cask install bittorrent-sync
 brew cask install dropbox
+
+# Duet Display turns your iPad into an extra display.
+brew cask install duet
+
 brew cask install evernote
 
 # A typeface designed for source code.
