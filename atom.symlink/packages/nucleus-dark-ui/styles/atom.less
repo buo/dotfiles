@@ -3,10 +3,14 @@ status-bar {
   background: @base-background-color;
   height: @input-height;
   line-height: @component-line-height;
-  font-size: 10px;
+  font-size: 11px;
 
   & > .flexbox-repaint-hack {
     padding-top: 3px;
+  }
+
+  span {
+    font-size: 11px;
   }
 }
 
@@ -25,8 +29,8 @@ atom-workspace {
 .find-and-replace .find-meta-container {
   top: 4px;
 
-  & span {
-    font-size: 10px;
+  span {
+    font-size: 11px;
     text-transform: uppercase;
   }
 }
@@ -34,7 +38,6 @@ atom-workspace {
 atom-text-editor[mini],
 atom-text-editor[mini]::shadow {
   transition: all @transition-time ease;
-  letter-spacing: 0;
   color: @text-color-highlight;
   background-color: transparent;
   border: 1px solid @input-background-color;
@@ -108,16 +111,20 @@ atom-notifications {
 .background-message li {
   .text(subtle);
   font-size: 24px;
-  font-weight: 300;
 
   .keystroke {
-    border-width: 1px;
-    font-weight: 300;
+    .text(normal);
+    color: @tooltip-key-text-color;
+    background: @tooltip-key-background-color;
+    font-size: 90%;
+    border: 1px solid @tooltip-key-text-color;
+    border-radius: @component-border-radius/2;
+    margin-left: @component-padding/2;
   }
 }
 
 kbd {
-  .text(bold);
+  .text(normal);
   color: @tooltip-key-text-color;
   background: @tooltip-key-background-color;
   font-size: 90%;
@@ -170,7 +177,6 @@ kbd {
   }
 }
 
-// FIND PROPER PLACE
 pre {
   border-color: @base-border-color;
   .text(normal);

@@ -1,4 +1,8 @@
 .settings-view {
+  .breadcrumb {
+    .text(light);
+  }
+
   .text(normal);
 
   .setting-title,
@@ -10,8 +14,8 @@
     .text(normal);
 
     &.control-label {
-      .setting-description {
-        min-height: 3em;
+      .theme-description {
+        min-height: 36px;
       }
     }
   }
@@ -20,13 +24,14 @@
     background-color: @app-background-color;
 
     .section-heading {
-      .text(light);
-      font-size: 2em;
+      .text(highlight);
+      font-size: 24px;
+      font-weight: 200;
     }
 
     .sub-section-heading {
       .text(light);
-      font-size: 1.5em;
+      font-size: 16px;
     }
   }
 
@@ -55,19 +60,45 @@
   }
 
   .package-card {
-    background-color: @tool-panel-background-color !important;
+    .text(normal);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: @component-padding 0 @component-padding 0;
+
+    .card-name {
+      .text(highlight);
+    }
+  }
+  .package-card:hover,
+  .package-detail .package-card:hover {
+    background: transparent;
   }
 
-  .package-update-view .thumbnail {
-    background-color: @tool-panel-background-color !important;
+  .package-container .row:not(:first-child) {
+    border-top: 1px solid @indent-guide-color;
   }
 
-  .package-update-view .package-status.icon-check {
-    color: @text-color-success;
+  .collapsed .package-container .row {
+    border: 0;
   }
 
-  .package-update-view .package-status.icon-cloud-download {
-    color: @text-color-info;
+  .package-update-view {
+    .thumbnail {
+      background-color: @tool-panel-background-color !important;
+    }
+
+    .package-status.icon-check {
+      color: @text-color-success;
+    }
+
+    .package-status.icon-cloud-download {
+      color: @text-color-info;
+    }
+  }
+
+  .package-readme {
+    font-size: 1em;
   }
 
   button.uninstall-button.is-uninstalling {
@@ -82,22 +113,22 @@
     background: @background-color-info;
   }
 
-  input[type="checkbox"]:focus {
-  box-shadow: none;
-  }
-
-  input[type="checkbox"]:before,
-  input[type="checkbox"]:after {
-    background: @base-background-color;
+  input[type="checkbox"] {
+    &:focus {
+      box-shadow: none;
+    }
+    &:before,
+    &:after {
+      background: @base-background-color;
+    }
   }
 
   select.form-control {
     .button(@button-border-color);
-    font-size: 13px;
-    height: 40px;
-    line-height: 40px;
+    .text(normal);
+    height: @input-height;
+    line-height: @input-height;
     text-transform: none;
-    letter-spacing: 0.04em;
 
     &:focus,
     &:hover {
