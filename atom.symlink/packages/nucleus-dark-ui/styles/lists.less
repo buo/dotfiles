@@ -1,3 +1,7 @@
+@import "ui-variables.less";
+@import "ui-mixins.less";
+@import "octicon-mixins";
+
 .list-group,
 .list-tree {
   li .character-match {
@@ -12,6 +16,7 @@
 
   li.selected .character-match {
     .text(selected);
+    font-size: @font-size;
   }
 
   li.selected .word {
@@ -66,6 +71,7 @@
   li:not(.list-nested-item).selected,
   li.list-nested-item.selected > .list-item {
     .text(selected);
+    font-size: @font-size
   }
 }
 

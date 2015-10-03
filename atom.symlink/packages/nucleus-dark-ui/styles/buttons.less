@@ -1,3 +1,7 @@
+@import "ui-variables.less";
+@import "ui-mixins.less";
+@import "octicon-mixins";
+
 // Buttons ---------------------------------------------------------------------
 .btn-default,
 .btn {
@@ -55,6 +59,16 @@
   }
 }
 
+.btn-group {
+  & > .btn:first-child {
+    border-left: 1px solid @button-border-color;
+  }
+
+  & > .btn:last-child {
+    border-right: 1px solid @button-border-color;
+  }
+}
+
 // Mixins ----------------------------------------------------------------------
 .button(@color) {
   color: @text-color;
@@ -62,10 +76,14 @@
   font-weight: 400;
   background: transparent;
   height: @input-height;
+  line-height: @input-height;
   border-radius: @component-border-radius;
-  border: 1px solid @color !important;
+  border-color: @color;
+  border-width: 1px !important;
+  border-style: solid !important;
   box-shadow: none !important;
   transition: all @transition-time ease;
+  padding: 0 10px;
 
   &:focus {
     outline: none;
@@ -103,10 +121,14 @@
 }
 
 .button-variant(@color) {
-  .button(@color);
+  .button(mix(@color, @base-background-color, 32%));
   color: @color;
 
   &.selected {
     color: @color;
   }
+}
+
+button[click="cancel"] {
+  .button-variant(@text-color-error) !important;
 }

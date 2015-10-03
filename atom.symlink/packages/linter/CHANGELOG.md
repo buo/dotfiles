@@ -1,3 +1,24 @@
+## 1.7.2
+
+* Fixed links for multiline messages
+
+## 1.7.1
+
+* Fix a crash that would happen if message has a filePath but doesn't have a link in DOM
+
+## 1.7.0
+
+* Add `showProviderName` config
+* Deprecated self-APIs `Linter::{onDidChangeMessages, onDidChangeProjectMessages, getProjectMessages, setProjectMessages, deleteProjectMessages}` have been removed
+* Add new `gutterEnabled` and `gutterPosition` configurations
+* Removed EditorLinter::destroy in favor of EditorLinter::dispose
+* `.icon-right::before` css selector has been replaced by `.linter-gutter` of the new linter gutter element.
+* Added `onDidMessage{Add, Remove, Delete}` listeners on EditorLinter for self-api consumers
+* Added EditorLinter::getMessages API for getting messages specific to that editor linter.
+* Linter now supports decorating multiple panes at the same time. Decorations are no longer removed and re-added on tab changed, only added to the new tab. Which could improve the tab switch performance with large errors.
+* Multiline messages render correctly by allowing overflow and using flexbox to enable single line output of the location.
+* Remove location from bubble information.
+
 ## 1.6.0
 
 * Fixed messages so that they line up and don't wrap in weird ways (Fixes #859)

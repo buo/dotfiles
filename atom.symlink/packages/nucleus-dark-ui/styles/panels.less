@@ -1,4 +1,8 @@
-atom-panel {
+@import "ui-variables.less";
+@import "ui-mixins.less";
+@import "octicon-mixins";
+
+atom-panel { //atom-panel {
   .text(normal);
   background: @tool-panel-background-color;
 
@@ -34,9 +38,8 @@ atom-panel-container,
 
 .inset-panel .panel-heading,
 .panel-heading {
-  .text(light);
-  color: @text-color-highlight;
-  font-size: 2em;
+  .text(heading);
+  font-size: 24px;
   border-radius: 0;
 }
 

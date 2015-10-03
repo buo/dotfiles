@@ -1,3 +1,7 @@
+@import "ui-variables.less";
+@import "ui-mixins.less";
+@import "octicon-mixins";
+
 // autocomplete-plus -----------------------------------------------------------
 autocomplete-suggestion-list.select-list.popover-list ol.list-group li > .word-container,
 autocomplete-suggestion-list.select-list.popover-list ol.list-group li > .word-container span {
@@ -50,8 +54,20 @@ linter-panel:empty {
 }
 
 // deprecation-cop -------------------------------------------------------------
-.deprecation-cop .deprecation-info:hover {
-  background: transparent !important;
+.deprecation-cop {
+  .deprecation-info:hover {
+    background: transparent !important;
+  }
+
+  .list-item:hover {
+    color: @text-color !important;
+  }
+
+  .stack-trace {
+    border-radius: @component-border-radius;
+    margin-right: @component-padding;
+    margin-top: @component-padding;
+  }
 }
 
 // timecop ---------------------------------------------------------------------
@@ -257,6 +273,44 @@ atom-panel.clipboard-plus > .select-list > atom-text-editor[mini]:before {
   border: 0;
 }
 
+.git-control .dialog button {
+  .button(@button-border-color);
+}
+
+.git-control .dialog input,
+.git-control .dialog select,
+.git-control .dialog textarea {
+  .button(@button-border-color);
+  .text(normal);
+  height: @input-height;
+  line-height: @input-height;
+  text-transform: none;
+
+  &:focus,
+  &:hover {
+    background: @background-color-highlight;
+    color: @text-color;
+  }
+}
+
+.git-control .dialog select {
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+}
+
+.git-control .dialog textarea {
+  height: auto;
+
+  &:focus,
+  &:active {
+    background: @base-background-color;
+    border: 1px solid @text-color-highlight !important;
+    color: @text-color-highlight;
+  }
+}
+
+
 // foldingtext-for-atom --------------------------------------------------------
 ft-outline-editor {
   .text(normal);
@@ -289,8 +343,8 @@ ft-text-input {
 // remote-sync -----------------------------------------------------------------
 atom-panel.modal > .remote-sync {
   &:before {
-    .text(light);
-    font-size: 2em;
+    .text(heading);
+    font-size: 24px;
     margin-left: -@component-padding*2;
     margin-right: -@component-padding*2;
     margin-bottom: @component-padding*2;
