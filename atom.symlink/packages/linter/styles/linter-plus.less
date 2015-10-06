@@ -5,7 +5,7 @@
 
 linter-message {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   font-size: @font-size;
   line-height: 1.2;
 }
@@ -16,37 +16,40 @@ linter-message {
 
 .linter-highlight {
   flex: 0 0 auto;
+  align-self: flex-start;
 }
 
 .linter-message-link {
-  float: right;
-  margin: 0 0 @spacing @spacing;
+  margin: 0 0 0 @spacing;
+}
+
+linter-message-line {
+  white-space: pre-wrap; /* Enable whitespace to be maintained from the user message. */
 }
 
 linter-multiline-message {
-  display: block;
-  pointer-events: auto;
-  linter-message-line {
-    display: block;
-    white-space: pre;
-  }
-  linter-message-line:not(:first-child) {
-    display: none;
-    margin-left: 1.1em;
-  }
-  linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+  cursor: pointer;
+
+  &::before {
     font-family: 'Octicons Regular';
     content: @triangle-right;
     display: inline-block;
     width: 1em;
-    margin-right: 0.1em;
+    margin-right: 0.2em;
     text-align: center;
     height: 1em;
   }
-  &:focus, &.expanded {
-    linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+
+  linter-message-line:not(:first-child) {
+    display: none;
+    margin-left: 1.2em;
+  }
+
+  &.expanded {
+    &::before {
       content: @triangle-down;
     }
+
     linter-message-line:not(:first-child) {
       display: block;
     }
@@ -56,17 +59,10 @@ linter-multiline-message {
 linter-panel {
   display: block;
   overflow-y: auto;
-  max-height: 150px;
-  &[hidden]{
-    display: none;
-  }
-  padding-left: @spacing;
-  padding-right: @spacing;
-  linter-message:first-child {
-    padding-top: @spacing;
-  }
-  linter-message:last-child {
-    padding-bottom: @spacing;
+  min-height: 2em;
+
+  .linter-messages {
+    padding: @spacing;
   }
 }
 
@@ -115,7 +111,6 @@ linter-bottom-tab {
   cursor: pointer;
   vertical-align: middle;
   position: relative;
-  top: -2px;
   &:first-of-type {
     border-top-left-radius: @component-border-radius;
     border-bottom-left-radius: @component-border-radius;
@@ -138,14 +133,23 @@ linter-bottom-tab {
     margin-left: .2em;
   }
 }
+
+atom-text-editor::shadow .linter-row {
+  /* Take up the full allowed width */
+  left: 0;
+  right: 0;
+  /* Align the linter dot in the middle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 atom-text-editor::shadow .linter-gutter {
-  height: 7px !important;
-  width: 7px;
-  display: block;
-  margin-left: 2px;
-  margin-top: 6px;
+  height: 0.5em !important;
+  width: 0.5em;
   border-radius: 50%;
 }
+
 // Styling Error Types
 atom-text-editor::shadow .linter-highlight, .linter-highlight{
   &.badge {
@@ -177,7 +181,7 @@ atom-text-editor::shadow .linter-highlight, .linter-highlight{
       border-bottom: 1px dashed @background-color-warning;
     }
   }
-  &.trace {
+  &.trace, &.info {
     &:not(.line-number){
       background-color: @background-color-info;
       color: white;

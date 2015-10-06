@@ -6,6 +6,7 @@ export class Message extends HTMLElement {
   initialize(message, includeLink = true) {
     this.message = message
     this.includeLink = includeLink
+    this.status = false
     return this
   }
   updateVisibility(scope) {
@@ -26,9 +27,13 @@ export class Message extends HTMLElement {
       }
     }
 
+    this.status = status
+
     if (status) {
       this.removeAttribute('hidden')
     } else this.setAttribute('hidden', true)
+
+    return this
   }
   attachedCallback() {
     if (atom.config.get('linter.showProviderName') && this.message.linter) {
@@ -65,24 +70,20 @@ export class Message extends HTMLElement {
     return el
   }
   static getMessage(message, includeLink) {
-    if (
-      message.multiline ||
-      (message.html && message.html.match(NewLine)) ||
-      (message.text && message.text.match(NewLine))
-    ) {
+    if (message.multiline || NewLine.test(message.text)) {
       return Message.getMultiLineMessage(message, includeLink)
     }
 
     const el = document.createElement('span')
-    const messageEl = document.createElement('span')
+    const messageEl = document.createElement('linter-message-line')
 
     el.className = 'linter-message-item'
+
+    el.appendChild(messageEl)
 
     if (includeLink && message.filePath) {
       el.appendChild(Message.getLink(message))
     }
-
-    el.appendChild(messageEl)
 
     if (message.html && typeof message.html !== 'string') {
       messageEl.appendChild(message.html.cloneNode(true))
@@ -95,28 +96,48 @@ export class Message extends HTMLElement {
     return el
   }
   static getMultiLineMessage(message, includeLink) {
-    const container = document.createElement('linter-multiline-message')
-    const messageText = message.text || message.html
-    for (let line of messageText.split(NewLine)) {
-      if (!line) continue
+    const container = document.createElement('span')
+    const messageEl = document.createElement('linter-multiline-message')
+
+    container.className = 'linter-message-item'
+    messageEl.setAttribute('title', message.text)
+
+    message.text.split(NewLine).forEach(function(line, index) {
+      if (!line) return
+
       const el = document.createElement('linter-message-line')
       el.textContent = line
-      container.appendChild(el)
-    }
-    if (includeLink && message.filePath) {
-      container.appendChild(Message.getLink(message))
-    }
+      messageEl.appendChild(el)
+
+      // Render the link in the "title" line.
+      if (index === 0 && includeLink && message.filePath) {
+        messageEl.appendChild(Message.getLink(message))
+      }
+    })
+
+    container.appendChild(messageEl)
+
+    messageEl.addEventListener('click', function(e) {
+      // Avoid opening the message contents when we click the link.
+      var link = e.target.tagName === 'A' ? e.target : e.target.parentNode
+
+      if (!link.classList.contains('linter-message-link')) {
+        messageEl.classList.toggle('expanded')
+      }
+    })
+
     return container
   }
   static getName(message) {
     const el = document.createElement('span')
-    el.className = `linter-message-item badge badge-flexible linter-highlight`
+    el.className = 'linter-message-item badge badge-flexible linter-highlight'
     el.textContent = message.linter
     return el
   }
   static getRibbon(message) {
     const el = document.createElement('span')
-    el.className = `linter-message-item badge badge-flexible linter-highlight ${message.class}`
+    el.className = 'linter-message-item badge badge-flexible linter-highlight'
+    el.className += ` ${message.class}`
     el.textContent = message.type
     return el
   }

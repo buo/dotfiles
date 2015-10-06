@@ -24,6 +24,18 @@ describe 'editor-registry', ->
       atom.workspace.destroyActivePaneItem()
       expect(editorRegistry.editorLinters.size).toBe(0)
 
+  describe '::has', ->
+    it 'returns the status of existence', ->
+      editor = atom.workspace.getActiveTextEditor()
+      expect(editorRegistry.has(1)).toBe(false)
+      expect(editorRegistry.has(false)).toBe(false)
+      expect(editorRegistry.has([])).toBe(false)
+      expect(editorRegistry.has(editor)).toBe(false)
+      editorRegistry.create(editor)
+      expect(editorRegistry.has(editor)).toBe(true)
+      atom.workspace.destroyActivePaneItem()
+      expect(editorRegistry.has(editor)).toBe(false)
+
   describe '::forEach', ->
     it 'calls the callback once per editorLinter', ->
       editorRegistry.create(atom.workspace.getActiveTextEditor())
@@ -37,7 +49,7 @@ describe 'editor-registry', ->
       expect(editorRegistry.ofTextEditor(null)).toBeUndefined()
       expect(editorRegistry.ofTextEditor(1)).toBeUndefined()
       expect(editorRegistry.ofTextEditor(5)).toBeUndefined()
-      expect(editorRegistry.ofTextEditor("asd")).toBeUndefined()
+      expect(editorRegistry.ofTextEditor('asd')).toBeUndefined()
     it 'returns editorLinter when valid key is provided', ->
       activeEditor = atom.workspace.getActiveTextEditor()
       expect(editorRegistry.ofTextEditor(activeEditor)).toBeUndefined()
@@ -49,7 +61,7 @@ describe 'editor-registry', ->
       expect(editorRegistry.ofPath(null)).toBeUndefined()
       expect(editorRegistry.ofPath(1)).toBeUndefined()
       expect(editorRegistry.ofPath(5)).toBeUndefined()
-      expect(editorRegistry.ofPath("asd")).toBeUndefined()
+      expect(editorRegistry.ofPath('asd')).toBeUndefined()
     it 'returns editorLinter when valid key is provided', ->
       activeEditor = atom.workspace.getActiveTextEditor()
       editorPath = activeEditor.getPath()

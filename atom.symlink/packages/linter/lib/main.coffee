@@ -10,7 +10,7 @@ module.exports =
       order: 1
 
     ignoredMessageTypes:
-      title: "Ignored message Types"
+      title: 'Ignored message Types'
       type: 'array'
       default: []
       items:
@@ -51,6 +51,18 @@ module.exports =
       type: 'boolean'
       default: true
       order: 4
+    errorPanelHeight:
+      title: 'Error Panel Height'
+      description: 'The error panel height in pixels'
+      type: 'number'
+      default: 150
+      order: 4
+    alwaysTakeMinimumSpace:
+      title: 'Always Take Minimum Space'
+      description: 'Resize the error panel smaller than the height where possible'
+      type: 'boolean'
+      default: true
+      order: 4
 
     displayLinterInfo:
       title: 'Display Linter Info in Status Bar'
@@ -74,7 +86,7 @@ module.exports =
       default: true
       order: 5
     statusIconScope:
-      title: "Scope of messages to show in status icon"
+      title: 'Scope of messages to show in status icon'
       type: 'string'
       enum: ['File', 'Line', 'Project']
       default: 'Project'
