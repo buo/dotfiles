@@ -1,0 +1,5 @@
+'atom-text-editor.editor.editor':
+  "ctrl-'": 'expand-selection-to-quotes:toggle'
+
+'.platform-darwin atom-text-editor.editor.editor':
+  'cmd-\'': 'expand-selection-to-quotes:toggle'

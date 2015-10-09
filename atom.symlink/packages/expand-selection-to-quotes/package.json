@@ -1,0 +1,48 @@
+{
+  "name": "expand-selection-to-quotes",
+  "main": "./lib/expand-selection-to-quotes",
+  "version": "0.7.0",
+  "description": "Expands selections to single or double quotes.",
+  "activationCommands": {
+    "atom-text-editor": [
+      "expand-selection-to-quotes:toggle"
+    ]
+  },
+  "keywords": [
+    "quotes",
+    "selection",
+    "expand selection",
+    "expand selection to quotes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clessg/atom-expand-selection-to-quotes.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "readme": "# Atom expand-selection-to-quotes\n\nExpands selections in the Atom editor to single or double quotes.\n\nThe default keybinding is Ctrl+' and Cmd+'.\n\nOriginally written by Ben Johnson. The original package seems to have disappeared and has deprecations, so I am reposting it with fixes.\n\nThis project is based on the awesome work of kek in [sublime-expand-selection-to-quotes](https://github.com/kek/sublime-expand-selection-to-quotes).\n\nNow supports multiple selections! Thanks [@de-monkeyz](https://github.com/de-monkeyz).\n\n## Known Issues\n* It assumes that the type of quote to the left of the cursor is the one we want, which is stupid and not always true.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/clessg/atom-expand-selection-to-quotes/issues"
+  },
+  "homepage": "https://github.com/clessg/atom-expand-selection-to-quotes#readme",
+  "_id": "expand-selection-to-quotes@0.7.0",
+  "_shasum": "583165b4720ab0f0c3def91fe86ed9407a4ee05f",
+  "_resolved": "file:../d-11598-91304-1871v95/package.tgz",
+  "_from": "../d-11598-91304-1871v95/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/expand-selection-to-quotes.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
