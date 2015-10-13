@@ -1,3 +1,56 @@
+<a name="v0.17.1"></a>
+# v0.17.1 (2015-10-12)
+
+## Bug Fixes
+
+- Remove engine restriction now that pigments support for old API is back ([2d4d8282](https://github.com/abe33/atom-pigments/commit/2d4d828205a0a7ebbc77bde6617f3af9e5c2176d))
+
+<a name="v0.17.0"></a>
+# v0.17.0 (2015-10-10)
+
+## Features
+
+- Add supportedFiletypes setting ([c99fce03](https://github.com/abe33/atom-pigments/commit/c99fce031776bbd5810d7fba95bad14eee6c0d94))  <br>It should help avoiding users to be confused by the ignored scopes
+  setting as discussed in [#93](https://github.com/abe33/atom-pigments/issues/93).
+
+## Performances
+
+- Avoid evaluating a restored color ([d98d0e45](https://github.com/abe33/atom-pigments/commit/d98d0e45274467e701ab5b2ad4f8db741fc3d4f1))
+
+<a name="v0.16.3"></a>
+# v0.16.3 (2015-10-09)
+
+## Bug Fixes
+
+- Support both new and old API until 1.0.20 is released ([660ca2c5](https://github.com/abe33/atom-pigments/commit/660ca2c5b8f5332f8a1c080a7632cb66ee07d7e2))
+
+<a name="v0.16.2"></a>
+# v0.16.2 (2015-10-03)
+
+## Bug Fixes
+
+- Fix remaining deprecations triggered by context menu ([f551e012](https://github.com/abe33/atom-pigments/commit/f551e0123b02e21fe70984b1ea2f202ac4dd845d))
+
+<a name="v0.16.1"></a>
+# v0.16.1 (2015-09-29)
+
+## Bug Fixes
+
+- Fix error raised when a variable doesn't have any dependencies ([e6845d94](https://github.com/abe33/atom-pigments/commit/e6845d947feb611afb35ba6fcf88584fff6d145e))
+
+<a name="v0.16.0"></a>
+# v0.16.0 (2015-09-28)
+
+## Bug Fixes
+
+- Fix broken marker element specs ([1db49ee8](https://github.com/abe33/atom-pigments/commit/1db49ee87e9790e136dabde7655968d0bb25c5da))
+- Fix use of deprecated scroll event on table editor ([ce94dc11](https://github.com/abe33/atom-pigments/commit/ce94dc11f16e074677c57a5e4e86fc77914bc6aa))
+- Fix broken buffer element due to change in display buffer ([5a3100ef](https://github.com/abe33/atom-pigments/commit/5a3100efab71775da4e3c622cb11ac0e77756d4d))
+
+## Dependencies Update
+
+- Bump atom-utils version ([a2e7edd4](https://github.com/abe33/atom-pigments/commit/a2e7edd470b943a7717629955e70ac6f7d39e924))
+
 <a name="v0.15.0"></a>
 # v0.15.0 (2015-09-14)
 

@@ -486,7 +486,7 @@ describe 'ColorProject', ->
 
           waitsFor -> eventSpy.callCount > 0
 
-        it 'removes every variables from the file', ->
+        it 'removes every variable from the file', ->
           expect(colorBuffer.scanBufferForVariables).toHaveBeenCalled()
           expect(project.getVariables().length).toEqual(0)
 
@@ -791,7 +791,7 @@ describe 'ColorProject', ->
         atom.themes.deactivateThemes()
         atom.themes.unwatchUserStylesheet()
 
-      it 'includes the variables set for ui and syntaxt themes in the palette', ->
+      it 'includes the variables set for ui and syntax themes in the palette', ->
         expect(project.getColorVariables().length).toEqual(72)
 
       it 'still includes the paths from the project', ->

@@ -6,7 +6,7 @@ A package to display colors in project and files:
 
 ![Screenshot](https://github.com/abe33/atom-pigments/blob/master/resources/pigments.gif?raw=true)
 
-Pigments will scan source files in your project directories looking for colors and will build a palette with all of them. Then for each opened file, it will use the palette to evaluate the value of a given color. The legible source paths can be defined through various settings either at the global or per project level.
+Pigments will scan source files in your project directories looking for colors and will build a palette with all of them. Then for each opened file, it will use the palette to evaluate the value of a given color. The legible source paths can be defined through various settings either at the global or per project level. **By default colors in every file will be highlighted, to limit the display of colors to the desired filetype only please see the [Defining Where Pigments Applies](#defining-where-pigments-applies) below.**
 
 Pigments supports out of the box most of the color transformations functions and expressions of the three biggest CSS pre-processors out there, namely LESS, Sass and Stylus. However, it doesn't mean pigments is able to parse and understand all of these languages constructs. For the moment, Pigments' aim is to support the widest range of usage, even if it implies reducing its ability to parse certain complex constructs. You can refer to the [parser specs](https://github.com/abe33/atom-pigments/blob/master/spec/color-parser-spec.coffee) for an exhaustive list of the supported expressions.
 
@@ -19,6 +19,16 @@ apm install pigments
 ```
 
 Or search for `pigments` in Atom settings view.
+
+## Defining Where Pigments Applies
+
+By default, Pigments will highlight every color in every file, but you can limit that using the two settings [`Supported Filetypes`](#supported-filetypes) and [`Ignored Scopes`](#ignored-scopes).
+
+The first setting allow you to specify the list of extensions where pigments will apply. For instance, by using the values `css, less`, colors will be visible only in CSS and Less files.
+
+The second setting takes an array of regular expression strings used to exclude colors in specific scopes (like comments or strings). You can find the scope that applies at the cursor position with the `Editor: Log Cursor Scope` command (<kbd>cmd-alt-p</kdb> or <kbd>ctrl-alt-shift-p</kbd>).
+
+![get scope](https://github.com/abe33/atom-pigments/blob/master/resources/get-scope.gif?raw=true)
 
 ## Defaults File
 
@@ -38,7 +48,7 @@ You can display the project's palette through the `Pigments: Show Palette` comma
 
 ![Screenshot](https://github.com/abe33/atom-pigments/blob/master/resources/palette.gif?raw=true)
 
-The project palette is made of all the colors that are affected to a variable, which means it won't display hardcoded colors affected to a CSS property. If you want to find every colors used in a project, including the hardcoded colors in CSS files, use the `Pigments: Find Colors` instead.
+The project palette is made of all the colors that are affected to a variable, which means it won't display hardcoded colors affected to a CSS property. If you want to find every color used in a project, including the hardcoded colors in CSS files, use the `Pigments: Find Colors` instead.
 
 Patterns for Less, Sass, Scss and Stylus variables are currently supported, which includes:
 
@@ -53,7 +63,7 @@ $my-var: #123456; // scss
 @my-var: #123456; /* less */
 ```
 
-As with every commands, this command can be triggered using the keyboard by defining a keybinding like this:
+As with every command, this command can be triggered using the keyboard by defining a keybinding like this:
 
 ```coffee
 'atom-workspace':
@@ -66,7 +76,7 @@ You can search for all colors in your project using the `Pigments: Find Colors` 
 
 ![Screenshot](https://github.com/abe33/atom-pigments/blob/master/resources/search.gif?raw=true)
 
-The results will include colors declared in variables, places where the color variables are used as well as hardcoded color values in every files that matches one of the patterns defined in both `pigments.sourceNames` and `pigments.extendedSearchNames` settings.
+The results will include colors declared in variables, places where the color variables are used as well as hardcoded color values in every file that matches one of the patterns defined in both `pigments.sourceNames` and `pigments.extendedSearchNames` settings.
 
 By default this includes:
 
@@ -102,7 +112,7 @@ These commands can be triggered using the keyboard by defining a keybinding like
   'alt-shift-j': 'pigments:convert-to-rgba'
 ```
 
-When triggered from the command palette or from the keyboard, the conversion will operate on every cursors positioned on color markers.
+When triggered from the command palette or from the keyboard, the conversion will operate on every cursor positioned on color markers.
 
 ### Pigments: Project Settings
 
@@ -154,6 +164,13 @@ An array of glob patterns of files to include in the `Pigments: Find Colors` sca
 * Key: `pigments.extendedSearchNames`
 * Default: `['**/*.css']`
 
+### Supported Filetypes
+
+An array of file extensions where colors will be highlighted. If the wildcard `*` is present in this array then colors in every file will be highlighted.
+
+* Key: `pigments.supportedFiletypes`
+* Default: `['*']`
+
 ### Ignored Scopes
 
 An array of regular expressions strings to match scopes to ignore when rendering colors in a text editor.
@@ -202,7 +219,7 @@ Whether to traverse symlinked directories to find source files or not.
 
 ### Ignore VCS Ignored Paths
 
-When this setting is enabled, every files that are ignored by the VCS will also be ignored in Pigments. That means they'll be excluded when searching for colors and when building the project palette.
+When this setting is enabled, every file that are ignored by the VCS will also be ignored in Pigments. That means they'll be excluded when searching for colors and when building the project palette.
 
 * Key: `pigments.ignoreVcsIgnoredPaths`
 * Default: `true`

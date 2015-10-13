@@ -2,7 +2,7 @@
   "name": "linter-coffeelint",
   "main": "./lib/init",
   "activationCommands": {},
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Lint CoffeeScript on the fly, using coffeelint",
   "repository": {
     "type": "git",
@@ -33,10 +33,10 @@
     "url": "https://github.com/AtomLinter/linter-coffeelint/issues"
   },
   "homepage": "https://github.com/AtomLinter/linter-coffeelint#readme",
-  "_id": "linter-coffeelint@1.1.0",
-  "_shasum": "1edb876df728665bb7b4d3e78be6abbb2d53f1b2",
-  "_resolved": "file:../d-11599-29579-gpxptd/package.tgz",
-  "_from": "../d-11599-29579-gpxptd/package.tgz",
+  "_id": "linter-coffeelint@1.1.2",
+  "_shasum": "e67c25d4f9ce13aeb3a25ac233cb0da7d5820f88",
+  "_resolved": "file:../d-115913-80167-1t1472t/package.tgz",
+  "_from": "../d-115913-80167-1t1472t/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -457,7 +457,7 @@
       },
       {
         "name": "jsonparse",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "path": "node_modules/coffeelint/node_modules/browserify/node_modules/deps-sort/node_modules/JSONStream/node_modules/jsonparse/jsonparse.js"
       },
       {
@@ -547,7 +547,7 @@
       },
       {
         "name": "jsonparse",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "path": "node_modules/coffeelint/node_modules/browserify/node_modules/insert-module-globals/node_modules/JSONStream/node_modules/jsonparse/jsonparse.js"
       },
       {
@@ -712,7 +712,7 @@
       },
       {
         "name": "jsonparse",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "path": "node_modules/coffeelint/node_modules/browserify/node_modules/module-deps/node_modules/JSONStream/node_modules/jsonparse/jsonparse.js"
       },
       {
