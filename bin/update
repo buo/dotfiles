@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Update everything
+#
+
+sudo softwareupdate -i -a
+brew upgrade && brew update
+brew update && brew upgrade brew-cask && brew cleanup
+npm update -g
+sudo gem update
