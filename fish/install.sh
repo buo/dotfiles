@@ -17,7 +17,15 @@ if [ "$(uname -s)" == "Darwin" ]; then
     mkdir "$HOME/.config/fish"
   fi
 
-  ln -sf "$DOTROOT/fish/config.fish" "$HOME/.config/fish/config.fish"
-  ln -sf "$DOTROOT/fish/completions" "$HOME/.config/fish/completions"
-  ln -sf "$DOTROOT/fish/functions" "$HOME/.config/fish/functions"
+  if ! [ -e "$HOME/.config/fish/config.fish" ]; then
+    ln -sf "$DOTROOT/fish/config.fish" "$HOME/.config/fish/config.fish"
+  fi
+
+  if ! [ -e "$HOME/.config/fish/completions" ]; then
+    ln -sf "$DOTROOT/fish/completions" "$HOME/.config/fish/completions"
+  fi
+
+  if ! [ -e "$HOME/.config/fish/functions" ]; then
+    ln -sf "$DOTROOT/fish/functions" "$HOME/.config/fish/functions"
+  fi
 fi
