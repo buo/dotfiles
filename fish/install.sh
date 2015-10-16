@@ -1,7 +1,9 @@
 #!/bin/sh
 
 if [ "$(uname -s)" == "Darwin" ]; then
-  brew install fish
+  if ! command -v fish >/dev/null 2>&1; then
+    brew install fish
+  fi
 
   # Add fish to standard shells
   echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
