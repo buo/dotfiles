@@ -6,10 +6,15 @@ if [ "$(uname -s)" == "Darwin" ]; then
   fi
 
   # Add fish to standard shells
-  echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+  if [ `grep "/usr/local/bin/fish" /etc/shells | wc -l` = "0" ]; then
+    echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+  fi
 
   # Make fish your default shell
-  chsh -s /usr/local/bin/fish
+  me=`whoami`
+  if [ `dscl . -read /Users/$me UserShell | grep "/usr/local/bin/fish" | wc -l` = "0" ]; then
+    chsh -s /usr/local/bin/fish
+  fi
 
   if ! [ -d "$HOME/.config" ]; then
     mkdir "$HOME/.config"
