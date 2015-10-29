@@ -56,11 +56,10 @@ function homebrew {
 
   # Install homebrew cask
   if test ! $(brew cask) &>/dev/null; then
-    brew tap phinze/cask
     brew tap caskroom/fonts
-    brew tap caskroom/unofficial
-    brew tap caskroom/versions
-    brew install brew-cask
+    #brew tap caskroom/unofficial
+    #brew tap caskroom/versions
+    brew install caskroom/cask/brew-cask
   fi
 
   # Changes the path where the symlinks to the applications will be generated.
