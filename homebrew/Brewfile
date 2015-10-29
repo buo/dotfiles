@@ -6,5 +6,8 @@ brew install coreutils
 # Update to the latest one
 brew install git
 
+# Nokogiri gem requires higher libxml2
+brew install libxml2
+
 # Use latest rsync rather than out-dated OS X rsync.
 brew install rsync
