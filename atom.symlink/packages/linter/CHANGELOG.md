@@ -1,3 +1,20 @@
+## 1.9.1
+
+* Add `ignoreMatchedFiles` config
+* Fix an issue where the `linter.displayLinterInfo` preference was not respected
+
+## 1.9.0
+
+* Fix compatibility with upcoming version of atom
+* Support for buffer modifying linters has been removed (We don't think anybody was using them anyway)
+* Add a new `inlineTooltipInterval` config
+* Major speed improvements
+* Make ctrl-c work on bottom panel
+* Fix certain scenarios where inline bubbles would be placed incorrectly (Bubbles no longer follow the cursor, they re-use markers from underlines)
+* Add a new `lintOnFlyInterval` config
+* Messages of a single editor are now shown together
+* Add a new `ignoreVCSIgnoredFiles` config
+
 ## 1.8.1
 
 * Workaround an atom bug where moving an editor between panes would throw an error
@@ -13,7 +30,7 @@
 * Aligned bottom panel buttons
 * Made the text in the bottom panel selectable
 * Linter bottom panel is now resizable (Drag the height down to 0 to reset your changes)
-* Add a new `class` attribute for providers (when class is provided, no class is automatically added).
+* Add a new `class` attribute for provider messages (when class is provided, no class is automatically added).
 * Fix linter gutter dot alignment across themes and zoom level.
 
 ## 1.7.2

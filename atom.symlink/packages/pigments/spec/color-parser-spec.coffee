@@ -688,3 +688,78 @@ describe 'ColorParser', ->
     'b': '80%'
   }).asColor(0x99,0x99,0xff)
   itParses('lightness(a, b)').asInvalid()
+
+  itParses('Color(255, 0, 0, 255)').asColor(255,0,0)
+  itParses('Color(r, g, b, a)').withContext({
+    'r': '255'
+    'g': '0'
+    'b': '0'
+    'a': '255'
+  }).asColor(255,0,0)
+  itParses('Color(r, g, b, a)').asInvalid()
+
+  describe 'elm-lang support', ->
+    itParses('rgba 255 0 0 1').asColor(255,0,0)
+    itParses('rgba r g b a').withContext({
+      'r': '255'
+      'g': '0'
+      'b': '0'
+      'a': '1'
+    }).asColor(255,0,0)
+    itParses('rgba r g b a').asInvalid()
+
+    itParses('rgb 255 0 0').asColor(255,0,0)
+    itParses('rgb r g b').withContext({
+      'r': '255'
+      'g': '0'
+      'b': '0'
+    }).asColor(255,0,0)
+    itParses('rgb r g b').asInvalid()
+
+    itParses('hsla (degrees 200) 50 50 0.5').asColor(64, 149, 191, 0.5)
+    itParses('hsla (degrees h) s l a').withContext({
+      'h': '200'
+      's': '50'
+      'l': '50'
+      'a': '0.5'
+    }).asColor(64, 149, 191, 0.5)
+    itParses('hsla (degrees h) s l a').asInvalid()
+
+    itParses('hsla 3.49 50 50 0.5').asColor(64, 149, 191, 0.5)
+    itParses('hsla h s l a').withContext({
+      'h': '3.49'
+      's': '50'
+      'l': '50'
+      'a': '0.5'
+    }).asColor(64, 149, 191, 0.5)
+    itParses('hsla h s l a').asInvalid()
+
+    itParses('hsl (degrees 200) 50 50').asColor(64, 149, 191)
+    itParses('hsl (degrees h) s l').withContext({
+      'h': '200'
+      's': '50'
+      'l': '50'
+    }).asColor(64, 149, 191)
+    itParses('hsl (degrees h) s l').asInvalid()
+
+    itParses('hsl 3.49 50 50').asColor(64, 149, 191)
+    itParses('hsl h s l').withContext({
+      'h': '3.49'
+      's': '50'
+      'l': '50'
+    }).asColor(64, 149, 191)
+    itParses('hsl h s l').asInvalid()
+
+    itParses('grayscale 1').asColor(0, 0, 0)
+    itParses('greyscale 0.5').asColor(127, 127, 127)
+    itParses('grayscale 0').asColor(255, 255, 255)
+    itParses('grayscale g').withContext({
+      'g': '0.5'
+    }).asColor(127, 127, 127)
+    itParses('grayscale g').asInvalid()
+
+    itParses('complement rgb 255 0 0').asColor('#00ffff')
+    itParses('complement base').withContext({
+      'base': asColor 'red'
+    }).asColor('#00ffff')
+    itParses('complement base').asInvalid()

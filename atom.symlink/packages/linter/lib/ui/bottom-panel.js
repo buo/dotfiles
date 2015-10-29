@@ -1,38 +1,52 @@
 'use babel'
 
 const Interact = require('interact.js')
+const Clipboard = require('clipboard')
 import {CompositeDisposable} from 'atom'
 import {Message} from './message-element'
 
-export class BottomPanel {
+export default class BottomPanel {
   constructor(scope) {
     this.subscriptions = new CompositeDisposable
-    this.element = document.createElement('linter-panel') // TODO(steelbrain): Make this a `div`
-    this.element.tabIndex = '-1'
-    this.messagesElement = document.createElement('div')
-    this.panel = atom.workspace.addBottomPanel({item: this.element, visible: false, priority: 500})
+
     this.visibility = false
     this.visibleMessages = 0
     this.alwaysTakeMinimumSpace = atom.config.get('linter.alwaysTakeMinimumSpace')
     this.errorPanelHeight = atom.config.get('linter.errorPanelHeight')
     this.configVisibility = atom.config.get('linter.showErrorPanel')
     this.scope = scope
+    this.editorMessages = new Map()
     this.messages = new Map()
 
-    // Keep messages contained to measure height.
-    this.element.appendChild(this.messagesElement)
+    const element = document.createElement('linter-panel') // TODO(steelbrain): Make this a `div`
+    element.tabIndex = '-1'
+    this.messagesElement = document.createElement('div')
+    element.appendChild(this.messagesElement)
+    this.panel = atom.workspace.addBottomPanel({item: element, visible: false, priority: 500})
+    Interact(element).resizable({edges: {top: true}})
+      .on('resizemove', event => {
+        event.target.style.height = `${event.rect.height}px`
+      })
+      .on('resizeend', event => {
+        atom.config.set('linter.errorPanelHeight', event.target.clientHeight)
+      })
+    element.addEventListener('keydown', function(e) {
+      if (e.which === 67 && e.ctrlKey) {
+        Clipboard.writeText(getSelection().toString())
+      }
+    })
 
-    this.subscriptions.add(atom.config.onDidChange('linter.alwaysTakeMinimumSpace', ({newValue, oldValue}) => {
+    this.subscriptions.add(atom.config.onDidChange('linter.alwaysTakeMinimumSpace', ({newValue}) => {
       this.alwaysTakeMinimumSpace = newValue
       this.updateHeight()
     }))
 
-    this.subscriptions.add(atom.config.onDidChange('linter.errorPanelHeight', ({newValue, oldValue}) => {
+    this.subscriptions.add(atom.config.onDidChange('linter.errorPanelHeight', ({newValue}) => {
       this.errorPanelHeight = newValue
       this.updateHeight()
     }))
 
-    this.subscriptions.add(atom.config.onDidChange('linter.showErrorPanel', ({newValue, oldValue}) => {
+    this.subscriptions.add(atom.config.onDidChange('linter.showErrorPanel', ({newValue}) => {
       this.configVisibility = newValue
       this.updateVisibility()
     }))
@@ -42,34 +56,85 @@ export class BottomPanel {
       this.updateVisibility()
     }))
 
-    Interact(this.element).resizable({edges: {top: true}})
-      .on('resizemove', event => {
-        event.target.style.height = `${event.rect.height}px`
-      })
-      .on('resizeend', event => {
-        atom.config.set('linter.errorPanelHeight', event.target.clientHeight)
-      })
-  }
-  refresh(scope) {
-    this.scope = scope
-    this.visibleMessages = 0
-
-    for (let message of this.messages) {
-      if (message[1].updateVisibility(scope).status) this.visibleMessages++
+    // Container for messages with no filePath
+    const defaultContainer = document.createElement('div')
+    this.editorMessages.set(null, defaultContainer)
+    this.messagesElement.appendChild(defaultContainer)
+    if (scope !== 'Project') {
+      defaultContainer.setAttribute('hidden', true)
     }
+  }
+  setMessages({added, removed}) {
+    if (removed.length) {
+      this.removeMessages(removed)
+    }
+    if (added.length) {
+      let activeFile = atom.workspace.getActiveTextEditor()
+      activeFile = activeFile ? activeFile.getPath() : undefined
+      added.forEach(message => {
+        if (!this.editorMessages.has(message.filePath)) {
+          const container = document.createElement('div')
+          this.editorMessages.set(message.filePath, container)
+          this.messagesElement.appendChild(container)
+          if (!(this.scope === 'Project' || activeFile === message.filePath)) {
+            container.setAttribute('hidden', true)
+          }
+        }
+        const messageElement = Message.fromMessage(message)
+        this.messages.set(message, messageElement)
+        this.editorMessages.get(message.filePath).appendChild(messageElement)
+        if (messageElement.updateVisibility(this.scope).visibility) {
+          this.visibleMessages++
+        }
+      })
+    }
+
+    this.editorMessages.forEach((child, key) => {
+      // Never delete the default container
+      if (key !== null && !child.childNodes.length) {
+        child.remove()
+        this.editorMessages.delete(key)
+      }
+    })
 
     this.updateVisibility()
   }
-  setMessages({added, removed}) {
-    if (removed.length)
-      this.removeMessages(removed)
+  removeMessages(messages) {
+    messages.forEach(message => {
+      const messageElement = this.messages.get(message)
+      this.messages.delete(message)
+      messageElement.remove()
+      if (messageElement.visibility) {
+        this.visibleMessages--
+      }
+    })
+  }
+  refresh(scope) {
+    if (scope) {
+      this.scope = scope
+    } else scope = this.scope
+    this.visibleMessages = 0
 
-    for (let message of added) {
-      const messageElement = Message.fromMessage(message)
-      this.messagesElement.appendChild(messageElement)
-      messageElement.updateVisibility(this.scope)
-      if (messageElement.status) this.visibleMessages++
-      this.messages.set(message, messageElement)
+    this.messages.forEach(messageElement => {
+      if (messageElement.updateVisibility(scope).visibility && scope === 'Line') {
+        this.visibleMessages++
+      }
+    })
+
+    if (scope === 'File') {
+      let activeFile = atom.workspace.getActiveTextEditor()
+      activeFile = activeFile ? activeFile.getPath() : undefined
+      this.editorMessages.forEach((messagesElement, filePath) => {
+        if (filePath === activeFile) {
+          messagesElement.removeAttribute('hidden')
+          this.visibleMessages = messagesElement.childNodes.length
+        } else messagesElement.setAttribute('hidden', true)
+      })
+    } else if (scope === 'Project') {
+      this.visibleMessages = this.messages.size
+      this.editorMessages.forEach(messageElement => {
+        messageElement.removeAttribute('hidden')
+      })
     }
 
     this.updateVisibility()
@@ -82,17 +147,7 @@ export class BottomPanel {
       height = Math.min(this.messagesElement.clientHeight + 1, height)
     }
 
-    this.element.style.height = `${height}px`
-  }
-  removeMessages(removed) {
-    for (let message of removed) {
-      if (this.messages.has(message)) {
-        const messageElement = this.messages.get(message)
-        if (messageElement.status) this.visibleMessages--
-        this.messagesElement.removeChild(messageElement)
-        this.messages.delete(message)
-      }
-    }
+    this.messagesElement.parentNode.style.height = `${height}px`
   }
   getVisibility() {
     return this.visibility

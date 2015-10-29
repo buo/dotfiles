@@ -1,10 +1,12 @@
 describe 'editor-linter', ->
-  {getMessage} = require('./common')
+  {getMessage, wait} = require('./common')
   EditorLinter = require('../lib/editor-linter')
   editorLinter = null
   textEditor = null
 
   beforeEach ->
+    global.setTimeout = require('remote').getGlobal('setTimeout')
+    global.setInterval = require('remote').getGlobal('setInterval')
     waitsForPromise ->
       atom.workspace.destroyActivePaneItem()
       atom.workspace.open(__dirname + '/fixtures/file.txt').then ->
@@ -64,6 +66,36 @@ describe 'editor-linter', ->
       expect(messageChange.mostRecentCall.args[0].type).toBe('delete')
       expect(messageChange.mostRecentCall.args[0].message).toBe(message)
 
+  describe '::active', ->
+    it 'updates currentFile attribute on the messages', ->
+      message = getMessage('Hey!', __dirname + '/fixtures/file.txt', [[0, 1], [0, 2]])
+      editorLinter.addMessage(message)
+      expect(message.currentFile).toBe(true)
+      editorLinter.active = false
+      expect(message.currentFile).toBe(false)
+      editorLinter.deleteMessage(message)
+      editorLinter.addMessage(message)
+      expect(message.currentFile).toBe(false)
+
+  describe '::{calculateLineMessages, onDidCalculateLineMessages}', ->
+    it 'works and also ignores', ->
+      listener = jasmine.createSpy('onDidCalculateLineMessages')
+      message = getMessage('Hey!', __dirname + '/fixtures/file.txt', [[0, 1], [0, 2]])
+      editorLinter.addMessage(message)
+      editorLinter.onDidCalculateLineMessages(listener)
+      atom.config.set('linter.showErrorTabLine', true)
+      expect(editorLinter.calculateLineMessages(0)).toBe(1)
+      expect(editorLinter.countLineMessages).toBe(1)
+      expect(listener).toHaveBeenCalledWith(1)
+      atom.config.set('linter.showErrorTabLine', false)
+      expect(editorLinter.calculateLineMessages(0)).toBe(0)
+      expect(editorLinter.countLineMessages).toBe(0)
+      expect(listener).toHaveBeenCalledWith(0)
+      atom.config.set('linter.showErrorTabLine', true)
+      expect(editorLinter.calculateLineMessages(0)).toBe(1)
+      expect(editorLinter.countLineMessages).toBe(1)
+      expect(listener).toHaveBeenCalledWith(1)
+
   describe '::{handle, add, remove}Gutter', ->
     it 'handles the attachment and detachment of gutter to text editor', ->
       editorLinter.gutterEnabled = false
@@ -82,7 +114,7 @@ describe 'editor-linter', ->
       expect(editorLinter.gutter is null).toBe(true)
 
   describe '::onShouldLint', ->
-    it 'ignores instant save requests', ->
+    it 'is triggered on save', ->
       timesTriggered = 0
       editorLinter.onShouldLint ->
         timesTriggered++
@@ -92,6 +124,35 @@ describe 'editor-linter', ->
       textEditor.save()
       textEditor.save()
       expect(timesTriggered).toBe(5)
+    it 'respects lintOnFlyInterval config', ->
+      timeCalled = null
+      flyStatus = null
+      atom.config.set('linter.lintOnFlyInterval', 300)
+      editorLinter.onShouldLint (fly) ->
+        flyStatus = fly
+        timeCalled = new Date()
+      timeDid = new Date()
+      editorLinter.editor.insertText("Hey\n")
+      waitsForPromise ->
+        wait(300).then ->
+          expect(timeCalled isnt null).toBe(true)
+          expect(flyStatus isnt null).toBe(true)
+          expect(flyStatus).toBe(true)
+          expect(timeCalled - timeDid).toBeLessThan(400)
+
+          atom.config.set('linter.lintOnFlyInterval', 600)
+          timeCalled = null
+          flyStatus = null
+          timeDid = new Date()
+          editorLinter.editor.insertText("Hey\n")
+
+          wait(600)
+        .then ->
+          expect(timeCalled isnt null).toBe(true)
+          expect(flyStatus isnt null).toBe(true)
+          expect(flyStatus).toBe(true)
+          expect(timeCalled - timeDid).toBeGreaterThan(599)
+          expect(timeCalled - timeDid).toBeLessThan(700)
 
   describe '::onDidDestroy', ->
     it 'is called when TextEditor is destroyed', ->

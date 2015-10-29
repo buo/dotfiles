@@ -1,7 +1,7 @@
 {
   "name": "minimap",
   "main": "./lib/main",
-  "version": "4.13.4",
+  "version": "4.15.0",
   "private": true,
   "description": "A preview of the full source code.",
   "author": {
@@ -53,10 +53,10 @@
     "url": "https://github.com/atom-minimap/minimap/issues"
   },
   "homepage": "https://github.com/atom-minimap/minimap#readme",
-  "_id": "minimap@4.13.4",
-  "_shasum": "7c9a3066113df135a367a94b658f13343c426ba8",
-  "_resolved": "file:../d-11593-60294-irs48o/package.tgz",
-  "_from": "../d-11593-60294-irs48o/package.tgz",
+  "_id": "minimap@4.15.0",
+  "_shasum": "441d7f43c974537222b41a1da51342755ced90d0",
+  "_resolved": "file:../d-115930-67731-cu6tej/package.tgz",
+  "_from": "../d-115930-67731-cu6tej/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -72,12 +72,12 @@
       },
       {
         "name": "event-kit",
-        "version": "1.3.0",
+        "version": "1.4.1",
         "path": "node_modules/event-kit/lib/event-kit.js"
       },
       {
         "name": "grim",
-        "version": "1.4.2",
+        "version": "1.5.0",
         "path": "node_modules/event-kit/node_modules/grim/lib/grim.js"
       },
       {
@@ -107,7 +107,7 @@
       },
       {
         "name": "es6-symbol",
-        "version": "3.0.0",
+        "version": "3.0.1",
         "path": "node_modules/event-kit/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-symbol/index.js"
       },
       {
@@ -195,6 +195,8 @@
         "package.json"
       ],
       ".coffee": [
+        "lib/adapters/beta-adapter.coffee",
+        "lib/adapters/legacy-adapter.coffee",
         "lib/decoration.coffee",
         "lib/main.coffee",
         "lib/minimap-element.coffee",
@@ -666,6 +668,7 @@
       {
         "paths": [
           "",
+          "lib/adapters",
           "lib",
           "lib/mixins",
           "spec/fixtures",
@@ -936,7 +939,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.7"
+          "es5-ext": "~0.10.8"
         }
       },
       {

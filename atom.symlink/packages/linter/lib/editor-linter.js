@@ -1,21 +1,27 @@
 'use babel'
 
-import {TextEditor, Emitter, CompositeDisposable} from 'atom'
+import {Emitter, CompositeDisposable} from 'atom'
+import Helpers from './helpers'
+
 export default class EditorLinter {
   constructor(editor) {
-    if (!(editor instanceof TextEditor)) {
+    if (typeof editor !== 'object' || typeof editor.markBufferRange !== 'function') {
       throw new Error('Given editor is not really an editor')
     }
 
     this.editor = editor
     this.emitter = new Emitter()
     this.messages = new Set()
-    this.markers = new WeakMap()
-    this.gutter = null
+    this.markers = new Map()
     this.subscriptions = new CompositeDisposable
+    this.gutter = null
+    this.countLineMessages = 0
 
     this.subscriptions.add(atom.config.observe('linter.underlineIssues', underlineIssues =>
       this.underlineIssues = underlineIssues
+    ))
+    this.subscriptions.add(atom.config.observe('linter.showErrorInline', showBubble =>
+      this.showBubble = showBubble
     ))
     this.subscriptions.add(this.editor.onDidDestroy(() =>
       this.dispose()
@@ -25,7 +31,7 @@ export default class EditorLinter {
     ))
     this.subscriptions.add(this.editor.onDidChangeCursorPosition(({oldBufferPosition, newBufferPosition}) => {
       if (newBufferPosition.row !== oldBufferPosition.row) {
-        this.emitter.emit('should-update-line-messages')
+        this.calculateLineMessages(newBufferPosition.row)
       }
       this.emitter.emit('should-update-bubble')
     }))
@@ -38,7 +44,7 @@ export default class EditorLinter {
       this.handleGutter()
     ))
     this.subscriptions.add(this.onDidMessageAdd(message => {
-      if (!this.underlineIssues && !this.gutterEnabled) {
+      if (!this.underlineIssues && !this.gutterEnabled && !this.showBubble || !message.range) {
         return // No-Op
       }
       const marker = this.editor.markBufferRange(message.range, {invalidate: 'inside'})
@@ -65,12 +71,30 @@ export default class EditorLinter {
       }
     }))
 
-    // Atom invokes the onDidStopChanging callback immediately on Editor creation. So we wait a moment
-    setImmediate(() => {
-      this.subscriptions.add(this.editor.onDidStopChanging(() =>
+    // TODO: Atom invokes onDid{Change, StopChanging} callbacks immediately. Workaround it
+    atom.config.observe('linter.lintOnFlyInterval', (interval) => {
+      if (this.changeSubscription) {
+        this.changeSubscription.dispose()
+      }
+      this.changeSubscription = this.editor.onDidChange(Helpers.debounce(() => {
         this.emitter.emit('should-lint', true)
-      ))
+      }, interval))
     })
+
+    this.active = true
+  }
+
+  set active(value) {
+    value = Boolean(value)
+    if (value !== this._active) {
+      this._active = value
+      if (this.messages.size) {
+        this.messages.forEach(message => message.currentFile = value)
+      }
+    }
+  }
+  get active() {
+    return this._active
   }
 
   handleGutter() {
@@ -93,8 +117,8 @@ export default class EditorLinter {
   removeGutter() {
     if (this.gutter !== null) {
       try {
-        this.gutter.destroy()
         // Atom throws when we try to remove a gutter container from a closed text editor
+        this.gutter.destroy()
       } catch (err) {}
       this.gutter = null
     }
@@ -106,6 +130,9 @@ export default class EditorLinter {
 
   addMessage(message) {
     if (!this.messages.has(message)) {
+      if (this.active) {
+        message.currentFile = true
+      }
       this.messages.add(message)
       this.emitter.emit('did-message-add', message)
       this.emitter.emit('did-message-change', {message, type: 'add'})
@@ -118,6 +145,24 @@ export default class EditorLinter {
       this.emitter.emit('did-message-delete', message)
       this.emitter.emit('did-message-change', {message, type: 'delete'})
     }
+  }
+
+  calculateLineMessages(row) {
+    if (atom.config.get('linter.showErrorTabLine')) {
+      if (row === null) {
+        row = this.editor.getCursorBufferPosition().row
+      }
+      this.countLineMessages = 0
+      this.messages.forEach(message => {
+        if (message.currentLine = message.range && message.range.intersectsRow(row)) {
+          this.countLineMessages++
+        }
+      })
+    } else {
+      this.countLineMessages = 0
+    }
+    this.emitter.emit('did-calculate-line-messages', this.countLineMessages)
+    return this.countLineMessages
   }
 
   lint(onChange = false) {
@@ -136,12 +181,12 @@ export default class EditorLinter {
     return this.emitter.on('did-message-change', callback)
   }
 
-  onShouldUpdateBubble(callback) {
-    return this.emitter.on('should-update-bubble', callback)
+  onDidCalculateLineMessages(callback) {
+    return this.emitter.on('did-calculate-line-messages', callback)
   }
 
-  onShouldUpdateLineMessages(callback) {
-    return this.emitter.on('should-update-line-messages', callback)
+  onShouldUpdateBubble(callback) {
+    return this.emitter.on('should-update-bubble', callback)
   }
 
   onShouldLint(callback) {
@@ -160,7 +205,10 @@ export default class EditorLinter {
     }
     this.removeGutter()
     this.subscriptions.dispose()
-    this.messages.clear()
+    if (this.changeSubscription) {
+      this.changeSubscription.dispose()
+    }
     this.emitter.dispose()
+    this.messages.clear()
   }
 }

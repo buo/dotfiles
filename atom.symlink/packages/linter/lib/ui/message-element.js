@@ -6,59 +6,46 @@ export class Message extends HTMLElement {
   initialize(message, includeLink = true) {
     this.message = message
     this.includeLink = includeLink
-    this.status = false
+    this.scope = 'Project'
     return this
   }
   updateVisibility(scope) {
-    let status = true
-    if (scope === 'Line')
-      status = this.message.currentLine
-    else if (scope === 'File')
-      status = this.message.currentFile
-
-    if (this.children.length && this.message.filePath) {
-      const link = this.querySelector('.linter-message-link')
+    const visibility = scope === 'Line' ? Boolean(this.message.currentLine && this.message.currentFile) : true
+    if (this.scope !== scope) {
+      const link = this.querySelector('.linter-message-link span')
       if (link) {
         if (scope === 'Project') {
-          link.querySelector('span').removeAttribute('hidden')
-        } else {
-          link.querySelector('span').setAttribute('hidden', true)
-        }
+          link.removeAttribute('hidden')
+        } else link.setAttribute('hidden', true)
       }
+      this.scope = scope
     }
-
-    this.status = status
-
-    if (status) {
-      this.removeAttribute('hidden')
-    } else this.setAttribute('hidden', true)
-
+    if (visibility !== this.visibility) {
+      if (visibility) {
+        this.removeAttribute('hidden')
+      } else this.setAttribute('hidden', true)
+      this.visibility = visibility
+    }
     return this
   }
   attachedCallback() {
-    if (atom.config.get('linter.showProviderName') && this.message.linter) {
-      this.appendChild(Message.getName(this.message))
+    if (!this.childNodes.length) {
+      if (atom.config.get('linter.showProviderName') && this.message.linter) {
+        this.appendChild(Message.getName(this.message))
+      }
+      this.appendChild(Message.getRibbon(this.message))
+      this.appendChild(Message.getMessage(this.message, this.includeLink))
     }
-    this.appendChild(Message.getRibbon(this.message))
-    this.appendChild(Message.getMessage(this.message, this.includeLink))
   }
   static getLink(message) {
     const el = document.createElement('a')
     const pathEl = document.createElement('span')
-    let displayFile = message.filePath
 
     el.className = 'linter-message-link'
-
-    for (let path of atom.project.getPaths())
-      if (displayFile.indexOf(path) === 0) {
-        displayFile = displayFile.substr(path.length + 1) // Path + Path Separator
-        break
-      }
-
     if (message.range) {
       el.textContent = `at line ${message.range.start.row + 1} col ${message.range.start.column + 1}`
     }
-    pathEl.textContent = ' in ' + displayFile
+    pathEl.textContent = ' in ' + atom.project.relativizePath(message.filePath)[1]
     el.appendChild(pathEl)
     el.addEventListener('click', function() {
       atom.workspace.open(message.filePath).then(function() {
@@ -136,8 +123,7 @@ export class Message extends HTMLElement {
   }
   static getRibbon(message) {
     const el = document.createElement('span')
-    el.className = 'linter-message-item badge badge-flexible linter-highlight'
-    el.className += ` ${message.class}`
+    el.className = `linter-message-item badge badge-flexible linter-highlight ${message.class}`
     el.textContent = message.type
     return el
   }
