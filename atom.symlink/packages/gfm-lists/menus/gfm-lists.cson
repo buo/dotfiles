@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle gfm-lists'
+      'command': 'gfm-lists:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'gfm-lists'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'gfm-lists:toggle'
+        }
+      ]
+    ]
+  }
+]

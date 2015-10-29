@@ -1,0 +1,42 @@
+{
+  "name": "gfm-lists",
+  "main": "./lib/gfm-lists",
+  "version": "1.0.0",
+  "description": "GitHub flavored Markdown list helpers",
+  "keywords": [],
+  "activationCommands": {
+    "atom-text-editor": "editor:newline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonmagic/gfm-lists.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "readme": "# gfm-lists package\n\nGitHub flavored Markdown list helpers. Currently supports inserting a new list item line when you press enter at the end of a list item line.\n\n![markdown lists](http://cl.ly/image/380l0c0y163D/Screen%20Recording%202015-09-18%20at%2012.14%20AM.gif)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/jonmagic/gfm-lists/issues"
+  },
+  "homepage": "https://github.com/jonmagic/gfm-lists#readme",
+  "_id": "gfm-lists@1.0.0",
+  "_shasum": "97fc4bde62d4bd5192a62d5b80004f7e3e109955",
+  "_resolved": "file:../d-115916-12046-ulr1y8/package.tgz",
+  "_from": "../d-115916-12046-ulr1y8/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/gfm-lists.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
