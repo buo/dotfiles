@@ -16,11 +16,15 @@ export default class BottomContainer extends HTMLElement {
 
     this.subscriptions.add(this.emitter)
     this.subscriptions.add(atom.config.observe('linter.displayLinterInfo', displayInfo => {
-      this.visibility = displayInfo
+      this.displayInfo = displayInfo
+      this.visibility = typeof this.visibility === 'undefined' ? true : this.visibility
     }))
     this.subscriptions.add(atom.config.observe('linter.statusIconScope', iconScope => {
       this.iconScope = iconScope
       this.status.count = this.tabs.get(iconScope).count
+    }))
+    this.subscriptions.add(atom.config.observe('linter.displayLinterStatus', visibiltiy => {
+      this.status.visibility = visibiltiy
     }))
 
     for (let tab of this.tabs) {
@@ -57,7 +61,7 @@ export default class BottomContainer extends HTMLElement {
     return !this.hasAttribute('hidden')
   }
   set visibility(value) {
-    if (value) {
+    if (value && this.displayInfo) {
       this.removeAttribute('hidden')
     } else {
       this.setAttribute('hidden', true)

@@ -1,3 +1,18 @@
+<a name="v4.15.2"></a>
+# v4.15.2 (2015-10-31)
+
+## :bug: Bug Fixes
+
+- Fix minimap broken with changes in flex box behaviour ([0c9389d8](https://github.com/atom-minimap/minimap/commit/0c9389d8141de337dec32724f85ec9d58271124d))
+- Fix deprecations in tests ([3bb81d39](https://github.com/atom-minimap/minimap/commit/3bb81d39261271347dfb4bd58873879b0262659d))
+
+<a name="v4.15.1"></a>
+# v4.15.1 (2015-10-30)
+
+## :bug: Bug Fixes
+
+- Fix unusual issue if an invisible char is not a string ([f261d5ad](https://github.com/atom-minimap/minimap/commit/f261d5ad3396455d4c0beb1ce4f98520c51cb9a5), [#397](https://github.com/atom-minimap/minimap/issues/397))
+
 <a name="v4.15.0"></a>
 # v4.15.0 (2015-10-22)
 

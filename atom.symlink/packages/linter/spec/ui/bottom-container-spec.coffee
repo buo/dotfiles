@@ -76,3 +76,27 @@ describe 'Bottom Container', ->
       expect(listener).not.toHaveBeenCalled()
       trigger(bottomContainer.getTab('Project'), 'click')
       expect(listener).toHaveBeenCalled()
+
+  describe '::visibility', ->
+    it 'depends on displayLinterInfo', ->
+      atom.config.set('linter.displayLinterInfo', true)
+      bottomContainer.visibility = true
+      expect(bottomContainer.visibility).toBe(true)
+      atom.config.set('linter.displayLinterInfo', false)
+      expect(bottomContainer.visibility).toBe(false)
+      bottomContainer.visibility = true
+      expect(bottomContainer.visibility).toBe(false)
+      atom.config.set('linter.displayLinterInfo', true)
+      bottomContainer.visibility = true
+      expect(bottomContainer.visibility).toBe(true)
+      bottomContainer.visibility = false
+      expect(bottomContainer.visibility).toBe(false)
+
+  describe '.status::visibility', ->
+    it 'depends on displayLinterStatus', ->
+      atom.config.set('linter.displayLinterStatus', true)
+      expect(bottomContainer.status.visibility).toBe(true)
+      atom.config.set('linter.displayLinterStatus', false)
+      expect(bottomContainer.status.visibility).toBe(false)
+      atom.config.set('linter.displayLinterStatus', true)
+      expect(bottomContainer.status.visibility).toBe(true)

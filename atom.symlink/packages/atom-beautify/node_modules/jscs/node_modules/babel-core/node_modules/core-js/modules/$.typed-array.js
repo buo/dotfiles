@@ -1,14 +1,13 @@
 'use strict';
-var DEBUG = true;
+var DEBUG = false;
 
-var global             = require('./$.global')
+var DESCRIPTORS        = require('./$.support-desc')
+  , global             = require('./$.global')
+  , LIBRARY            = require('./$.library')
+  , $                  = require('./$')
+  , fails              = require('./$.fails')
   , $def               = require('./$.def')
   , $buffer            = require('./$.buffer')
-  , $ArrayBuffer       = $buffer.ArrayBuffer
-  , $DataView          = $buffer.DataView
-  , $                  = require('./$')
-  , setDesc            = $.setDesc
-  , getDesc            = $.getDesc
   , ctx                = require('./$.ctx')
   , strictNew          = require('./$.strict-new')
   , propertyDesc       = require('./$.property-desc')
@@ -28,6 +27,14 @@ var global             = require('./$.global')
   , $fill              = require('./$.array-fill')
   , $copyWithin        = require('./$.array-copy-within')
   , speciesConstructor = require('./$.species-constructor')
+  , $iterators         = require('./es6.array.iterator')
+  , Iterators          = require('./$.iterators')
+  , $iterDetect        = require('./$.iter-detect')
+  , setSpecies         = require('./$.species')
+  , $ArrayBuffer       = $buffer.ArrayBuffer
+  , $DataView          = $buffer.DataView
+  , setDesc            = $.setDesc
+  , getDesc            = $.getDesc
   , $forEach           = arrayMethods(0)
   , $map               = arrayMethods(1)
   , $filter            = arrayMethods(2)
@@ -37,6 +44,9 @@ var global             = require('./$.global')
   , $findIndex         = arrayMethods(6)
   , $indexOf           = arrayIncludes(false)
   , $includes          = arrayIncludes(true)
+  , $values            = $iterators.values
+  , $keys              = $iterators.keys
+  , $entries           = $iterators.entries
   , $lastIndexOf       = [].lastIndexOf
   , $reduce            = [].reduce
   , $reduceRight       = [].reduceRight
@@ -45,12 +55,24 @@ var global             = require('./$.global')
   , $sort              = [].sort
   , $slice             = [].slice
   , $toString          = [].toString
-  , $toLocaleString    = [].toLocaleString
+  , _toLocaleString    = [].toLocaleString
+  , ITERATOR           = wks('iterator')
   , TAG                = wks('toStringTag')
   , TYPED_ARRAY        = wks('typed_array')
   , TYPED_CONSTRUCTOR  = wks('typed_constructor')
   , DEF_CONSTRUCTOR    = wks('def_constructor')
   , BYTES_PER_ELEMENT  = 'BYTES_PER_ELEMENT';
+
+var ARRAY_NAMES = ('Int8Array,Uint8Array,Uint8ClampedArray,Int16Array,' +
+  'Uint16Array,Int32Array,Uint32Array,Float32Array,Float64Array').split(',');
+
+DEBUG && ARRAY_NAMES.forEach(function(it){
+  delete global[it];
+});
+
+var ALL_ARRAYS = $every(ARRAY_NAMES, function(key){
+  return global[key];
+});
 
 var validate = function(it){
   if(isObject(it) && TYPED_ARRAY in it)return it;
@@ -95,16 +117,15 @@ var addGetter = function(C, key, internal){
   setDesc(C.prototype, key, {get: function(){ return this._d[internal]; }});
 };
 
-var statics = {
-  // @@species -> this
-  from: $from,
-  of: function of(/*...items*/){
-    var index  = 0
-      , length = arguments.length
-      , result = new this(length);
-    while(length > index)result[index] = arguments[index++];
-    return result;
-  }
+var $of = function of(/*...items*/){
+  var index  = 0
+    , length = arguments.length
+    , result = allocate(this, length);
+  while(length > index)result[index] = arguments[index++];
+  return result;
+};
+var $toLocaleString = function toLocaleString(){
+  return _toLocaleString.apply(validate(this), arguments);
 };
 
 var proto = {
@@ -173,68 +194,61 @@ var proto = {
   sort: function sort(comparefn){
     return $sort.call(validate(this), comparefn);
   },
-  subarray: function subarray(/* begin, end */){
+  subarray: function subarray(begin, end){
     var O      = validate(this)
       , length = O.length
-      , $$     = arguments
-      , $$len  = $$.length
-      , begin  = toIndex($$len > 0 ? $$[0] : undefined, length)
-      , end    = $$len > 1 ? $$[1] : undefined;
+      , $begin = toIndex(begin, length);
     return new (speciesConstructor(O, O[DEF_CONSTRUCTOR]))(
       O.buffer,
-      O.byteOffset + begin * O.BYTES_PER_ELEMENT,
-      toLength((end === undefined ? length : toIndex(end, length)) - begin)
+      O.byteOffset + $begin * O.BYTES_PER_ELEMENT,
+      toLength((end === undefined ? length : toIndex(end, length)) - $begin)
     );
   },
-  toLocaleString: function toLocaleString(){
-    return $toLocaleString.apply(validate(this), arguments);
-  },
-  toString: function toString(){
-    return $toString.call(this);
-  },
   entries: function entries(){
-    // looks like Array equal + ValidateTypedArray
+    return $entries.call(validate(this));
   },
   keys: function keys(){
-    // looks like Array equal + ValidateTypedArray
+    return $keys.call(validate(this));
   },
   values: function values(){
-    // looks like Array equal + ValidateTypedArray
+    return $values.call(validate(this));
   }
-  // @@iterator
 };
 
 var isTADesc = function(target, key){
   return isObject(target) && TYPED_ARRAY in target
     && (typeof key == 'string' || typeof key == 'number') && isInteger(+key); // <- use toPrimitive
 };
-var $getDesc = $.getDesc = function getOwnPropertyDescriptor(target, key){
+var $getDesc = function getOwnPropertyDescriptor(target, key){
   return isTADesc(target, key) ? propertyDesc(2, target[key]) : getDesc(target, key);
 };
-var $setDesc = $.setDesc = function defineProperty(target, key, desc){
+var $setDesc = function defineProperty(target, key, desc){
   if(isTADesc(target, key) && isObject(desc)){
     if('value' in desc)target[key] = desc.value;
     return target;
   } else return setDesc(target, key, desc);
 };
 
-DEBUG && $def($def.S + $def.F * DEBUG, 'Object', {
+if(DESCRIPTORS && !ALL_ARRAYS){
+  $.getDesc = $getDesc;
+  $.setDesc = $setDesc;
+}
+
+$def($def.S + $def.F * (DESCRIPTORS && !ALL_ARRAYS), 'Object', {
   getOwnPropertyDescriptor: $getDesc,
   defineProperty: $setDesc
 });
 
-DEBUG && ('Int8Array,Uint8Array,Uint8ClampedArray,Int16Array,Uint16Array,Int32Array,' +
-'Uint32Array,Float32Array,Float64Array').split(',').forEach(function(it){
-  delete global[it];
-});
-
 module.exports = function(KEY, BYTES, wrapper, CLAMPED){
+  if(!DESCRIPTORS)return;
   CLAMPED = !!CLAMPED;
   var NAME        = KEY + (CLAMPED ? 'Clamped' : '') + 'Array'
     , GETTER      = 'get' + KEY
     , SETTER      = 'set' + KEY
     , $TypedArray = global[NAME]
-    , Base        = $TypedArray
+    , Base        = $TypedArray || {}
+    , FORCED      = !$TypedArray || !$buffer.useNative
+    , $iterator   = proto.values
     , O           = {};
   var addElement = function(that, index){
     setDesc(that, index, {
@@ -251,7 +265,7 @@ module.exports = function(KEY, BYTES, wrapper, CLAMPED){
     });
   };
   if(!$ArrayBuffer)return;
-  if(!$TypedArray || !$buffer.useNative){
+  if(FORCED){
     $TypedArray = wrapper(function(that, data, $offset, $length){
       strictNew(that, $TypedArray, NAME);
       var index  = 0
@@ -291,24 +305,46 @@ module.exports = function(KEY, BYTES, wrapper, CLAMPED){
     addGetter($TypedArray, 'length', 'e');
     $hide($TypedArray, BYTES_PER_ELEMENT, BYTES);
     $hide($TypedArray.prototype, BYTES_PER_ELEMENT, BYTES);
-  } else if(!require('./$.iter-detect')(function(iter){
+  } else if(!$iterDetect(function(iter){
     new $TypedArray(iter); // eslint-disable-line no-new
   }, true)){
     $TypedArray = wrapper(function(that, data, $offset, $length){
       strictNew(that, $TypedArray, NAME);
       if(isObject(data) && isIterable(data))return $from.call($TypedArray, data);
-      return new $TypedArray(data, $offset, $length);
+      return $length === undefined ? new Base(data, $offset) : new Base(data, $offset, $length);
     });
     $TypedArray.prototype = Base.prototype;
+    if(!LIBRARY)$TypedArray.prototype.constructor = $TypedArray;
   }
+  var $TypedArrayPrototype = $TypedArray.prototype;
+  var $nativeIterator = $TypedArrayPrototype[ITERATOR];
   $hide($TypedArray, TYPED_CONSTRUCTOR, true);
-  $hide($TypedArray.prototype, TYPED_ARRAY, NAME);
-  $hide($TypedArray.prototype, DEF_CONSTRUCTOR, $TypedArray);
-  TAG in $TypedArray.prototype || $.setDesc($TypedArray.prototype, TAG, {
+  $hide($TypedArrayPrototype, TYPED_ARRAY, NAME);
+  $hide($TypedArrayPrototype, DEF_CONSTRUCTOR, $TypedArray);
+  TAG in $TypedArrayPrototype || $.setDesc($TypedArrayPrototype, TAG, {
     get: function(){ return NAME; }
   });
-  DEBUG && require('./$.mix')($TypedArray.prototype, proto);
-  DEBUG && require('./$.mix')($TypedArray, statics);
+
   O[NAME] = $TypedArray;
-  $def($def.G + $def.F * ($TypedArray != Base), O);
+
+  $def($def.G + $def.W + $def.F * ($TypedArray != Base), O);
+
+  $def($def.S + $def.F * ($TypedArray != Base), NAME, {
+    BYTES_PER_ELEMENT: BYTES,
+    from: Base.from || $from,
+    of: Base.of || $of
+  });
+
+  $def($def.P + $def.F * FORCED, NAME, proto);
+
+  $def($def.P + $def.F * ($TypedArrayPrototype.toString != $toString), NAME, {toString: $toString});
+
+  $def($def.P + $def.F * fails(function(){
+    return [1, 2].toLocaleString() != new Typed([1, 2]).toLocaleString()
+  }), NAME, {toLocaleString: $toLocaleString});
+  
+  Iterators[NAME] = $nativeIterator || $iterator;
+  LIBRARY || $nativeIterator || $hide($TypedArrayPrototype, ITERATOR, $iterator);
+  
+  setSpecies(NAME);
 };
