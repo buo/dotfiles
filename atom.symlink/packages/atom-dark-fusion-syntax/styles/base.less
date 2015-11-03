@@ -1,4 +1,5 @@
 @import "syntax-variables";
+@import "ruby";
 
 atom-text-editor, :host {
   background-color: @syntax-background-color;
@@ -21,7 +22,7 @@ atom-text-editor, :host {
     color: @syntax-gutter-text-color;
 
     .line-number {
-      padding-left: calc(~"1.0em");
+      width: 100%;
       &.cursor-line {
         background-color: @syntax-gutter-background-color-selected;
         color: @syntax-gutter-text-color-selected;
@@ -73,7 +74,7 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other.inherited-class {
-    color: @green;
+    color: @orange;
   }
 
   &.name {
@@ -148,7 +149,7 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other.symbol {
-    color: @green;
+    color: @orange;
   }
 }
 
@@ -202,7 +203,7 @@ atom-text-editor .search-results .marker.current-result .region,
 }
 
 .string {
-  color: @green;
+  color: @orange;
 
 
   &.regexp {
@@ -248,7 +249,7 @@ atom-text-editor .search-results .marker.current-result .region,
     }
 
     &.tag {
-      color: saturate(spin(darken(@blue, 12%), 5), 12%);
+      color: saturate(spin(darken(@blue, 16%), 6), 13%);
     }
 
     &.bold {
@@ -314,12 +315,12 @@ atom-text-editor .search-results .marker.current-result .region,
   }
 
   &.other.attribute-name {
-    color: @blue;
+    //color: @blue;
 
-    &.id {
+    //&.id {
       //color: @very-light-gray;
       color: @light-orange;
-    }
+    //}
   }
 }
 
@@ -397,7 +398,7 @@ atom-text-editor .search-results .marker.current-result .region,
 .source.gfm .markup {
   -webkit-font-smoothing: auto;
   &.heading {
-    color: @green;
+    color: @orange;
   }
 }
 
@@ -470,6 +471,40 @@ atom-text-editor .search-results .marker.current-result .region,
   &.doctype {
     color: @orange;
   }
+}
+
+.cs {
+    &.meta {
+        &.body {
+            color: @syntax-text-color;
+        }
+
+        &.method,
+        &.namespace {
+            &.body {
+                color: @syntax-text-color;
+            }
+            color: @light-orange;
+        }
+
+        &.keyword {
+            &.using {
+                color: @light-orange;
+
+                &.other {
+                    color: @cyan;
+                }
+            }
+        }
+
+        .variable {
+            &.parameter {
+                &.function {
+                    color: @syntax-text-color;
+                }
+            }
+        }
+    }
 }
 
 .shell {

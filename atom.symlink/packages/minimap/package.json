@@ -1,7 +1,7 @@
 {
   "name": "minimap",
   "main": "./lib/main",
-  "version": "4.15.2",
+  "version": "4.16.0",
   "private": true,
   "description": "A preview of the full source code.",
   "author": {
@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "atom-utils": "0.5.x",
+    "atom-utils": "0.7.x",
     "delegato": "1.x",
     "event-kit": "1.x",
     "fs-plus": "2.x",
@@ -53,17 +53,22 @@
     "url": "https://github.com/atom-minimap/minimap/issues"
   },
   "homepage": "https://github.com/atom-minimap/minimap#readme",
-  "_id": "minimap@4.15.2",
-  "_shasum": "9dcb9d78d1ee3e3879635d1bf19795fabfe220b3",
-  "_resolved": "file:../d-115101-89510-dt7gld/package.tgz",
-  "_from": "../d-115101-89510-dt7gld/package.tgz",
+  "_id": "minimap@4.16.0",
+  "_shasum": "b013640e4635108022e038ade0af3f48a064ddd5",
+  "_resolved": "file:../d-115104-8607-h8ulhs/package.tgz",
+  "_from": "../d-115104-8607-h8ulhs/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "atom-utils",
-        "version": "0.5.0",
+        "version": "0.7.4",
         "path": "node_modules/atom-utils/lib/atom-utils.js"
+      },
+      {
+        "name": "grim",
+        "version": "2.0.0",
+        "path": "node_modules/atom-utils/node_modules/grim/lib/grim.js"
       },
       {
         "name": "delegato",
@@ -169,6 +174,7 @@
     "extensions": {
       ".json": [
         "coffeelint.json",
+        "node_modules/atom-utils/node_modules/grim/package.json",
         "node_modules/atom-utils/package.json",
         "node_modules/delegato/package.json",
         "node_modules/event-kit/api.json",
@@ -210,12 +216,17 @@
       ],
       ".js": [
         "node_modules/atom-utils/lib/atom-utils.js",
+        "node_modules/atom-utils/lib/custom-elements-updater.js",
         "node_modules/atom-utils/lib/mixins/ancestors-methods.js",
+        "node_modules/atom-utils/lib/mixins/ancestors.js",
         "node_modules/atom-utils/lib/mixins/disposable-events.js",
         "node_modules/atom-utils/lib/mixins/events-delegation.js",
         "node_modules/atom-utils/lib/mixins/index.js",
         "node_modules/atom-utils/lib/mixins/resize-detection.js",
         "node_modules/atom-utils/lib/mixins/space-pen-dsl.js",
+        "node_modules/atom-utils/lib/register-or-update-element.js",
+        "node_modules/atom-utils/node_modules/grim/lib/deprecation.js",
+        "node_modules/atom-utils/node_modules/grim/lib/grim.js",
         "node_modules/delegato/lib/delegator.js",
         "node_modules/event-kit/lib/composite-disposable.js",
         "node_modules/event-kit/lib/disposable.js",
@@ -679,7 +690,7 @@
           "templates/plugin-javascript"
         ],
         "dependencies": {
-          "atom-utils": "0.5.x",
+          "atom-utils": "0.7.x",
           "delegato": "1.x",
           "event-kit": "1.x",
           "fs-plus": "2.x",
@@ -696,7 +707,17 @@
         ],
         "dependencies": {
           "event-kit": "^1",
-          "mixto": "^1"
+          "mixto": "^1",
+          "grim": "^2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-utils/node_modules/grim/lib",
+          "node_modules/atom-utils/node_modules/grim"
+        ],
+        "dependencies": {
+          "event-kit": "^1.4.1"
         }
       },
       {
