@@ -1,4 +1,8 @@
 function cask-clean
   git checkout master
-  git branch | grep -v master | xargs git branch -D
+  for branch in (git branch | grep -v master)
+    set branch (echo "$branch" | sed 's/^[[:space:]]*//')
+    git branch -D "$branch"
+    git push buo ":$branch"
+  end
 end
