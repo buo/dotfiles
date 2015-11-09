@@ -495,6 +495,58 @@ If in CSS values leading 0s immediately preceeding a decimal should be removed o
 }
 ```
 
+####  [CSS - comb custom config file](#css---comb-custom-config-file) 
+
+**Namespace**: `css`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "configPath": ""
+    }
+}
+```
+
+####  [CSS - comb predefined config](#css---comb-predefined-config) 
+
+**Namespace**: `css`
+
+**Key**: `predefinedConfig`
+
+**Default**: `csscomb`
+
+**Type**: `string`
+
+**Enum**:  `csscomb`  `yandex`  `zen` 
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Used if neither a project or custom config file exists. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "predefinedConfig": "csscomb"
+    }
+}
+```
+
 ####  [D - Config Path](#d---config-path) 
 
 **Namespace**: `d`
@@ -1254,11 +1306,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Break chained method calls across subsequent lines (Supported by JS Beautify)
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -2007,7 +2059,7 @@ Disable C Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -2117,7 +2169,7 @@ Disable C++ Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -2642,6 +2694,61 @@ Automatically beautify Handlebars files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - Handlebars - Beautify On Save*" and change it to your desired configuration.
 
+####  [Language Config - Haskell - Disable Beautifying Language](#language-config---haskell---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Haskell Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Haskell - Default Beautifier](#language-config---haskell---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `stylish-haskell`
+
+**Type**: `string`
+
+**Enum**:  `stylish-haskell` 
+
+**Description**:
+
+Default Beautifier to be used for Haskell
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Haskell - Beautify On Save](#language-config---haskell---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Haskell files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Haskell - Beautify On Save*" and change it to your desired configuration.
+
 ####  [Language Config - HTML - Disable Beautifying Language](#language-config---html---disable-beautifying-language) 
 
 **Important**: This option is only configurable from within Atom Beautify's setting panel.
@@ -3162,7 +3269,7 @@ Disable Objective-C Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `clang-format` 
 
 **Description**:
 
@@ -3437,7 +3544,7 @@ Disable Python Beautification
 
 **Type**: `string`
 
-**Enum**:  `autopep8` 
+**Enum**:  `autopep8`  `yapf` 
 
 **Description**:
 
@@ -5224,11 +5331,11 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Break chained method calls across subsequent lines (Supported by JS Beautify)
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -5893,6 +6000,30 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 }
 ```
 
+####  [JavaScript - Break chained methods](#javascript---break-chained-methods) 
+
+**Namespace**: `js`
+
+**Key**: `break_chained_methods`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "break_chained_methods": false
+    }
+}
+```
+
 ####  [JavaScript - Wrap line length](#javascript---wrap-line-length) 
 
 **Namespace**: `js`
@@ -5937,6 +6068,61 @@ If a terminating comma should be inserted into arrays, object literals, and dest
 {
     "js": {
         "end_with_comma": false
+    }
+}
+```
+
+
+### CSScomb
+
+####  [CSS - comb custom config file](#css---comb-custom-config-file) 
+
+**Namespace**: `css`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Path to custom CSScomb config file, used in absense of a `.csscomb.json` or `.csscomb.cson` at the root of your project. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "configPath": ""
+    }
+}
+```
+
+####  [CSS - comb predefined config](#css---comb-predefined-config) 
+
+**Namespace**: `css`
+
+**Key**: `predefinedConfig`
+
+**Default**: `csscomb`
+
+**Type**: `string`
+
+**Enum**:  `csscomb`  `yandex`  `zen` 
+
+**Supported Beautifiers**:  [`CSScomb`](#csscomb) 
+
+**Description**:
+
+Used if neither a project or custom config file exists. (Supported by CSScomb)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "predefinedConfig": "csscomb"
     }
 }
 ```

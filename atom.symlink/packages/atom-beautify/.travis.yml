@@ -19,13 +19,14 @@ notifications:
 script: sh build-package.sh
 
 env:
-    - APM_TEST_PACKAGES="language-marko language-tss language-html-swig language-svg"
+    - APM_TEST_PACKAGES="language-marko language-html-swig language-svg"
 
 cache:
     - pip
     - directories:
         - node_modules
         - $HOME/.atom
+        - $HOME/.stack
 
 before_install:
   # Update Homebrew

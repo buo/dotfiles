@@ -1,7 +1,7 @@
 {
   "name": "atom-beautify",
   "main": "./src/beautify",
-  "version": "0.28.16",
+  "version": "0.28.17",
   "private": true,
   "description": "Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, and SQL in Atom",
   "repository": {
@@ -54,6 +54,10 @@
     {
       "name": "Zhang YANG",
       "url": "https://github.com/ProgramFan"
+    },
+    {
+      "name": "Daniel Bayley",
+      "url": "https://github.com/danielbayley"
     }
   ],
   "engines": {
@@ -82,7 +86,8 @@
     "loophole": "^1.0.0",
     "node-dir": "^0.1.8",
     "node-uuid": "^1.4.3",
-    "prettydiff": "^1.12.19",
+    "prettydiff": "^1.15.7",
+    "season": "^5.3.0",
     "space-pen": "^5.1.1",
     "strip-json-comments": "^1.0.2",
     "temp": "^0.8.3",
@@ -163,13 +168,13 @@
     "docs": "coffee docs/",
     "lint": "coffeelint src/ spec/"
   },
-  "readme": "# [atom-beautify](https://github.com/donaldpipowitch/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> [Beautify](https://github.com/einars/js-beautify)\nHTML (including [Handlebars](http://handlebarsjs.com/)),\nCSS (including [Sass](http://sass-lang.com/) and [LESS](http://lesscss.org/)),\nJavaScript, and much more in Atom.\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\n- [x] JavaScript and JSON\n- [x] HTML, including\n  - [x] [Handlebars](http://handlebarsjs.com/)\n  - [x] [Mustache](http://mustache.github.io)\n  - [x] [Embedded Ruby (ERB)](https://github.com/Glavin001/atom-beautify/issues/80)\n    - Requires [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)\n  - [x] XML\n  - [x] SVG\n  - [x] [Marko](https://github.com/raptorjs/marko)\n    - Requires [language-marko](https://github.com/raptorjs/atom-language-marko)\n- [x] CSS, including\n  - [Sass](http://sass-lang.com/)\n  - [LESS](http://lesscss.org/)\n- [x] [SQL](https://github.com/Glavin001/atom-beautify/pull/67)\n  - Requires [python-sqlparse](https://github.com/andialbrecht/sqlparse)\n- [x] [Markdown](https://github.com/Glavin001/atom-beautify/issues/292)\n- [x] [Perl](https://github.com/Glavin001/atom-beautify/issues/33)\n  - Requires [perltidy](http://perltidy.sourceforge.net/)\n- [x] [PHP](https://github.com/donaldpipowitch/atom-beautify/issues/26)  \n  - Requires [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to be already installed.\n- [x] [Python](https://github.com/donaldpipowitch/atom-beautify/issues/24)\n  - Requires [autopep8](https://github.com/hhatto/autopep8) to be already installed.\n  - Beautifies to [PEP 8](http://legacy.python.org/dev/peps/pep-0008/).\n- [x] [Ruby](https://github.com/donaldpipowitch/atom-beautify/issues/25)\n  - Requires [Ruby Beautify](https://github.com/erniebrodeur/ruby-beautify)\n- [x] [CoffeeScript](https://github.com/donaldpipowitch/atom-beautify/issues/31)\n- [x] [Golang](https://github.com/Glavin001/atom-beautify/issues/176)\n- [x] [Java](https://github.com/Glavin001/atom-beautify/issues/45)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C++](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C#](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Objective-C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [D](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Fortran](https://github.com/Glavin001/atom-beautify/issues/300)\n  - Requires [GNU Emacs](http://www.gnu.org/software/emacs/)\n- [x] [Pawn](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Vala](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [TypeScript](https://github.com/Glavin001/atom-beautify/issues/49)\n- [x] [Haskell](https://github.com/Glavin001/atom-beautify/issues/628)\n  - Requires [stylish-haskell](https://github.com/jaspervdj/stylish-haskell)\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), and type `Beautify`.\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n### Shortcut\n\nYou can also type `ctrl-alt-b` as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
+  "readme": "# [atom-beautify](https://github.com/donaldpipowitch/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> [Beautify](https://github.com/einars/js-beautify)\nHTML (including [Handlebars](http://handlebarsjs.com/)),\nCSS (including [Sass](http://sass-lang.com/) and [Less](http://lesscss.org/)),\nJavaScript, and much more in Atom.\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\n- [x] JavaScript and JSON\n- [x] HTML, including\n  - [x] [Handlebars](http://handlebarsjs.com/)\n  - [x] [Mustache](http://mustache.github.io)\n  - [x] [Embedded Ruby (ERB)](https://github.com/Glavin001/atom-beautify/issues/80)\n    - Requires [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)\n  - [x] XML\n  - [x] SVG\n  - [x] [Marko](https://github.com/raptorjs/marko)\n    - Requires [language-marko](https://github.com/raptorjs/atom-language-marko)\n- [x] CSS, including\n  - [Sass](http://sass-lang.com/)\n  - [Less](http://lesscss.org/)\n- [x] [SQL](https://github.com/Glavin001/atom-beautify/pull/67)\n  - Requires [python-sqlparse](https://github.com/andialbrecht/sqlparse)\n- [x] [Markdown](https://github.com/Glavin001/atom-beautify/issues/292)\n- [x] [Perl](https://github.com/Glavin001/atom-beautify/issues/33)\n  - Requires [perltidy](http://perltidy.sourceforge.net/)\n- [x] [PHP](https://github.com/donaldpipowitch/atom-beautify/issues/26)  \n  - Requires [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to be already installed.\n- [x] [Python](https://github.com/donaldpipowitch/atom-beautify/issues/24)\n  - Requires [autopep8](https://github.com/hhatto/autopep8) or [YAPF](https://github.com/google/yapf) to be already installed.\n  - Beautifies to [PEP 8](https://www.python.org/dev/peps/pep-0008/).\n- [x] [Ruby](https://github.com/donaldpipowitch/atom-beautify/issues/25)\n  - Requires [Ruby Beautify](https://github.com/erniebrodeur/ruby-beautify)\n- [x] [CoffeeScript](https://github.com/donaldpipowitch/atom-beautify/issues/31)\n- [x] [Golang](https://github.com/Glavin001/atom-beautify/issues/176)\n- [x] [Java](https://github.com/Glavin001/atom-beautify/issues/45)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C++](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C#](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Objective-C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [D](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Fortran](https://github.com/Glavin001/atom-beautify/issues/300)\n  - Requires [GNU Emacs](http://www.gnu.org/software/emacs/)\n- [x] [Pawn](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Vala](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [TypeScript](https://github.com/Glavin001/atom-beautify/issues/49)\n- [x] [Haskell](https://github.com/Glavin001/atom-beautify/issues/628)\n  - Requires [stylish-haskell](https://github.com/jaspervdj/stylish-haskell)\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), and type `Beautify`.\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n### Shortcut\n\nYou can also type `ctrl-alt-b` as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
   "readmeFilename": "README.md",
   "homepage": "https://github.com/Glavin001/atom-beautify#readme",
-  "_id": "atom-beautify@0.28.16",
-  "_shasum": "e678b0fc6040933edc016e3f68dd7ff8eee2fcaa",
-  "_resolved": "file:../d-115101-89510-p5v2tb/package.tgz",
-  "_from": "../d-115101-89510-p5v2tb/package.tgz",
+  "_id": "atom-beautify@0.28.17",
+  "_shasum": "65943c7e330a87ba3607897a033351e7c874a6d9",
+  "_resolved": "file:../d-1151010-21609-1jtxg9o/package.tgz",
+  "_from": "../d-1151010-21609-1jtxg9o/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -515,22 +520,42 @@
       },
       {
         "name": "regenerator",
-        "version": "0.8.41",
+        "version": "0.8.42",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/main.js"
       },
       {
         "name": "commoner",
-        "version": "0.10.3",
+        "version": "0.10.4",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/main.js"
       },
       {
         "name": "commander",
-        "version": "2.5.1",
+        "version": "2.9.0",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/index.js"
       },
       {
+        "name": "graceful-readlink",
+        "version": "1.0.1",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/node_modules/graceful-readlink/index.js"
+      },
+      {
+        "name": "detective",
+        "version": "4.3.1",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/index.js"
+      },
+      {
+        "name": "acorn",
+        "version": "1.2.2",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn.js"
+      },
+      {
+        "name": "defined",
+        "version": "1.0.0",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/index.js"
+      },
+      {
         "name": "glob",
-        "version": "4.2.2",
+        "version": "5.0.15",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/glob.js"
       },
       {
@@ -550,13 +575,23 @@
       },
       {
         "name": "minimatch",
-        "version": "1.0.0",
+        "version": "3.0.0",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/minimatch.js"
       },
       {
-        "name": "sigmund",
-        "version": "1.0.1",
-        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/sigmund.js"
+        "name": "brace-expansion",
+        "version": "1.1.1",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/index.js"
+      },
+      {
+        "name": "balanced-match",
+        "version": "0.2.1",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
+      },
+      {
+        "name": "concat-map",
+        "version": "0.0.1",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/index.js"
       },
       {
         "name": "once",
@@ -569,19 +604,19 @@
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js"
       },
       {
+        "name": "path-is-absolute",
+        "version": "1.0.0",
+        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/path-is-absolute/index.js"
+      },
+      {
         "name": "graceful-fs",
-        "version": "3.0.8",
+        "version": "4.1.2",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js"
       },
       {
         "name": "iconv-lite",
         "version": "0.4.13",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/index.js"
-      },
-      {
-        "name": "install",
-        "version": "0.1.8",
-        "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/install/main.js"
       },
       {
         "name": "mkdirp",
@@ -595,7 +630,7 @@
       },
       {
         "name": "q",
-        "version": "1.1.2",
+        "version": "1.4.1",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/q/q.js"
       },
       {
@@ -1335,7 +1370,7 @@
       },
       {
         "name": "jscs",
-        "version": "2.5.0",
+        "version": "2.5.1",
         "path": "node_modules/jscs/lib/checker.js"
       },
       {
@@ -1435,7 +1470,7 @@
       },
       {
         "name": "core-js",
-        "version": "1.2.4",
+        "version": "1.2.6",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/core-js/index.js"
       },
       {
@@ -1565,7 +1600,7 @@
       },
       {
         "name": "xtend",
-        "version": "4.0.0",
+        "version": "4.0.1",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/output-file-sync/node_modules/xtend/immutable.js"
       },
       {
@@ -1590,73 +1625,33 @@
       },
       {
         "name": "commoner",
-        "version": "0.10.3",
+        "version": "0.10.4",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/main.js"
       },
       {
-        "name": "commander",
-        "version": "2.5.1",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/commander/index.js"
+        "name": "detective",
+        "version": "4.3.1",
+        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/index.js"
       },
       {
-        "name": "glob",
-        "version": "4.2.2",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/glob.js"
+        "name": "acorn",
+        "version": "1.2.2",
+        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn.js"
       },
       {
-        "name": "inflight",
-        "version": "1.0.4",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/inflight.js"
-      },
-      {
-        "name": "wrappy",
-        "version": "1.0.1",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/node_modules/wrappy/wrappy.js"
-      },
-      {
-        "name": "inherits",
-        "version": "2.0.1",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/inherits.js"
-      },
-      {
-        "name": "minimatch",
+        "name": "defined",
         "version": "1.0.0",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/minimatch.js"
-      },
-      {
-        "name": "lru-cache",
-        "version": "2.7.0",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/lru-cache/lib/lru-cache.js"
-      },
-      {
-        "name": "sigmund",
-        "version": "1.0.1",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/sigmund.js"
-      },
-      {
-        "name": "once",
-        "version": "1.3.2",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/once.js"
-      },
-      {
-        "name": "wrappy",
-        "version": "1.0.1",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js"
+        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/index.js"
       },
       {
         "name": "graceful-fs",
-        "version": "3.0.8",
+        "version": "4.1.2",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js"
       },
       {
         "name": "iconv-lite",
         "version": "0.4.13",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/index.js"
-      },
-      {
-        "name": "install",
-        "version": "0.1.8",
-        "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/install/main.js"
       },
       {
         "name": "mkdirp",
@@ -1670,7 +1665,7 @@
       },
       {
         "name": "q",
-        "version": "1.1.2",
+        "version": "1.4.1",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/q/q.js"
       },
       {
@@ -1865,7 +1860,7 @@
       },
       {
         "name": "recast",
-        "version": "0.10.35",
+        "version": "0.10.37",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regexpu/node_modules/recast/main.js"
       },
       {
@@ -2595,7 +2590,7 @@
       },
       {
         "name": "node-dir",
-        "version": "0.1.10",
+        "version": "0.1.11",
         "path": "node_modules/node-dir/index.js"
       },
       {
@@ -2625,8 +2620,53 @@
       },
       {
         "name": "prettydiff",
-        "version": "1.15.4",
+        "version": "1.15.13",
         "path": "node_modules/prettydiff/prettydiff.js"
+      },
+      {
+        "name": "season",
+        "version": "5.3.0",
+        "path": "node_modules/season/lib/cson.js"
+      },
+      {
+        "name": "cson-parser",
+        "version": "1.0.9",
+        "path": "node_modules/season/node_modules/cson-parser/lib/cson-parser.js"
+      },
+      {
+        "name": "coffee-script",
+        "version": "1.9.0",
+        "path": "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/coffee-script.js"
+      },
+      {
+        "name": "fs-plus",
+        "version": "2.8.1",
+        "path": "node_modules/season/node_modules/fs-plus/lib/fs-plus.js"
+      },
+      {
+        "name": "async",
+        "version": "0.2.10",
+        "path": "node_modules/season/node_modules/fs-plus/node_modules/async/lib/async.js"
+      },
+      {
+        "name": "mkdirp",
+        "version": "0.3.5",
+        "path": "node_modules/season/node_modules/fs-plus/node_modules/mkdirp/index.js"
+      },
+      {
+        "name": "rimraf",
+        "version": "2.2.8",
+        "path": "node_modules/season/node_modules/fs-plus/node_modules/rimraf/rimraf.js"
+      },
+      {
+        "name": "optimist",
+        "version": "0.4.0",
+        "path": "node_modules/season/node_modules/optimist/index.js"
+      },
+      {
+        "name": "wordwrap",
+        "version": "0.0.3",
+        "path": "node_modules/season/node_modules/optimist/node_modules/wordwrap/index.js"
       },
       {
         "name": "space-pen",
@@ -2715,7 +2755,7 @@
       },
       {
         "name": "tidy-markdown",
-        "version": "0.3.2",
+        "version": "0.3.3",
         "path": "node_modules/tidy-markdown/lib/index.js"
       },
       {
@@ -2760,7 +2800,7 @@
       },
       {
         "name": "marked",
-        "version": "0.3.5",
+        "version": "0.3.2",
         "path": "node_modules/tidy-markdown/node_modules/marked/lib/marked.js"
       },
       {
@@ -2980,14 +3020,21 @@
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/degenerator/node_modules/esprima/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/degenerator/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/netmask/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/node_modules/graceful-readlink/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/node_modules/wrappy/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/package.json",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/package.json",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/path-is-absolute/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/big5-added.json",
@@ -2999,7 +3046,6 @@
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/gbk-added.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/shiftjis.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/package.json",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/install/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/node_modules/minimist/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/package.json",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/q/package.json",
@@ -3241,16 +3287,9 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/path-exists/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/path-is-absolute/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/private/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/commander/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/node_modules/wrappy/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/lru-cache/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/package.json",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/package.json",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/package.json",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/big5-added.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/cp936.json",
@@ -3261,7 +3300,6 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/gbk-added.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/tables/shiftjis.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/package.json",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/install/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/node_modules/minimist/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/package.json",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/q/package.json",
@@ -3526,6 +3564,17 @@
         "node_modules/prettydiff/bower.json",
         "node_modules/prettydiff/inch.json",
         "node_modules/prettydiff/package.json",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/bower.json",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/package.json",
+        "node_modules/season/node_modules/cson-parser/package.json",
+        "node_modules/season/node_modules/fs-plus/node_modules/async/component.json",
+        "node_modules/season/node_modules/fs-plus/node_modules/async/package.json",
+        "node_modules/season/node_modules/fs-plus/node_modules/mkdirp/package.json",
+        "node_modules/season/node_modules/fs-plus/node_modules/rimraf/package.json",
+        "node_modules/season/node_modules/fs-plus/package.json",
+        "node_modules/season/node_modules/optimist/node_modules/wordwrap/package.json",
+        "node_modules/season/node_modules/optimist/package.json",
+        "node_modules/season/package.json",
         "node_modules/space-pen/api.json",
         "node_modules/space-pen/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/d/package.json",
         "node_modules/space-pen/node_modules/grim/node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-iterator/package.json",
@@ -3555,7 +3604,6 @@
         "node_modules/tidy-markdown/node_modules/indent/package.json",
         "node_modules/tidy-markdown/node_modules/js-yaml/node_modules/esprima/package.json",
         "node_modules/tidy-markdown/node_modules/js-yaml/package.json",
-        "node_modules/tidy-markdown/node_modules/marked/bower.json",
         "node_modules/tidy-markdown/node_modules/marked/component.json",
         "node_modules/tidy-markdown/node_modules/marked/package.json",
         "node_modules/tidy-markdown/node_modules/pad/package.json",
@@ -3830,6 +3878,42 @@
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/lib/watcher.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/main.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander/node_modules/graceful-readlink/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/bench/detect.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/example/strings.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/example/strings_src.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/bin/build-acorn.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/bin/generate-identifier-regex.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn_csp.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn_loose.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/walk.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/expression.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/identifier.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/location.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/acorn_loose.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/expression.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/parseutil.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/state.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/statement.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/tokenize.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/lval.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/node.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/options.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/parseutil.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/state.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/statement.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokencontext.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokenize.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokentype.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/util.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/walk/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/whitespace.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/example/defined.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/index.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/common.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/glob.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/inflight.js",
@@ -3839,13 +3923,19 @@
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/inherits_browser.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/test.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/minimatch.js",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/bench.js",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/sigmund.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/example.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/example.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/example/map.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/index.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/once.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/path-is-absolute/index.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/sync.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/fs.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js",
+        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/legacy-streams.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/polyfills.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/dbcs-codec.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/dbcs-data.js",
@@ -3860,9 +3950,6 @@
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/extend-node.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/index.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/streams.js",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/install/install.js",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/install/install.min.js",
-        "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/install/main.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/bin/cmd.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/examples/pow.js",
         "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/index.js",
@@ -5596,7 +5683,6 @@
         "node_modules/jscs/lib/rules/require-space-before-object-values.js",
         "node_modules/jscs/lib/rules/require-space-before-postfix-unary-operators.js",
         "node_modules/jscs/lib/rules/require-space-between-arguments.js",
-        "node_modules/jscs/lib/rules/require-spaces-around-generators.js",
         "node_modules/jscs/lib/rules/require-spaces-in-anonymous-function-expression.js",
         "node_modules/jscs/lib/rules/require-spaces-in-call-expression.js",
         "node_modules/jscs/lib/rules/require-spaces-in-conditional-expression.js",
@@ -5604,6 +5690,7 @@
         "node_modules/jscs/lib/rules/require-spaces-in-function-declaration.js",
         "node_modules/jscs/lib/rules/require-spaces-in-function-expression.js",
         "node_modules/jscs/lib/rules/require-spaces-in-function.js",
+        "node_modules/jscs/lib/rules/require-spaces-in-generator.js",
         "node_modules/jscs/lib/rules/require-spaces-in-named-function-expression.js",
         "node_modules/jscs/lib/rules/require-spaces-inside-array-brackets.js",
         "node_modules/jscs/lib/rules/require-spaces-inside-brackets.js",
@@ -6239,12 +6326,13 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/js/array.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/js/index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.a-function.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.add-to-unscopables.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.an-object.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.array-copy-within.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.array-fill.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.array-includes.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.array-methods.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.assign.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.array-species-create.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.buffer.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.classof.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.cof.js",
@@ -6254,11 +6342,11 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.collection.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.core.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.ctx.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.def.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.defined.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.descriptors.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.dom-create.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.enum-keys.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.expm1.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.export.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.fails-is-regexp.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.fails.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.fix-re-wks.js",
@@ -6285,9 +6373,11 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.keyof.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.library.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.log1p.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.math-expm1.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.math-log1p.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.math-sign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.microtask.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.mix.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.object-assign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.object-define.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.object-sap.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.object-to-array.js",
@@ -6295,31 +6385,31 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.partial.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.path.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.property-desc.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.redef.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.redefine-all.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.redefine.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.replacer.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.same.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.same-value.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.set-proto.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.set-species.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.set-to-string-tag.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.shared.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.sign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.species-constructor.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.species.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.strict-new.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.string-at.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.string-context.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.string-pad.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.string-repeat.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.string-trim.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.support-desc.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.tag.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.task.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-integer.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-iobject.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-length.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-object.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.to-primitive.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.typed-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.typed.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.uid.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.unscope.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/$.wks.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/core.delay.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/core.dict.js",
@@ -6344,6 +6434,7 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.array.iterator.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.array.of.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.array.species.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.date.to-string.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.function.has-instance.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.function.name.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.map.js",
@@ -6420,17 +6511,17 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.string.starts-with.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.string.trim.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.symbol.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.array-buffer.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.data-view.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.float32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.float64-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.int16-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.int32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.int8-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.uint16-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.uint32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.uint8-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed-arrays.uint8-clamped-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.array-buffer.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.data-view.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.float32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.float64-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.int16-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.int32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.int8-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.uint16-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.uint32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.uint8-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.typed.uint8-clamped-array.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.weak-map.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es6.weak-set.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/modules/es7.array.includes.js",
@@ -6455,12 +6546,13 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/web/index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/library/web/timers.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.a-function.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.add-to-unscopables.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.an-object.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.array-copy-within.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.array-fill.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.array-includes.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.array-methods.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.assign.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.array-species-create.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.buffer.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.classof.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.cof.js",
@@ -6470,11 +6562,11 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.collection.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.core.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.ctx.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.def.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.defined.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.descriptors.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.dom-create.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.enum-keys.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.expm1.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.export.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.fails-is-regexp.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.fails.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.fix-re-wks.js",
@@ -6501,9 +6593,11 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.keyof.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.library.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.log1p.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.math-expm1.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.math-log1p.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.math-sign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.microtask.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.mix.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.object-assign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.object-define.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.object-sap.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.object-to-array.js",
@@ -6511,31 +6605,31 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.partial.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.path.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.property-desc.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.redef.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.redefine-all.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.redefine.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.replacer.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.same.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.same-value.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.set-proto.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.set-species.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.set-to-string-tag.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.shared.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.sign.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.species-constructor.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.species.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.strict-new.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.string-at.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.string-context.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.string-pad.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.string-repeat.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.string-trim.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.support-desc.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.tag.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.task.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-integer.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-iobject.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-length.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-object.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.to-primitive.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.typed-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.typed.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.uid.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.unscope.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/$.wks.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/core.delay.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/core.dict.js",
@@ -6560,6 +6654,7 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.array.iterator.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.array.of.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.array.species.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.date.to-string.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.function.has-instance.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.function.name.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.map.js",
@@ -6636,17 +6731,17 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.string.starts-with.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.string.trim.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.symbol.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.array-buffer.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.data-view.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.float32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.float64-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.int16-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.int32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.int8-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.uint16-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.uint32-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.uint8-array.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed-arrays.uint8-clamped-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.array-buffer.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.data-view.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.float32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.float64-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.int16-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.int32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.int8-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.uint16-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.uint32-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.uint8-array.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.weak-map.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es6.weak-set.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es7.array.includes.js",
@@ -6662,13 +6757,14 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es7.string.trim-left.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/es7.string.trim-right.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/js.array.statics.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.add-to-unscopables.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.collection.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.def.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.export.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.library.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.path.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.redef.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.species.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.unscope.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.redefine.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/$.set-species.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/es6.date.to-string.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/es6.function.name.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/es6.number.constructor.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/core-js/modules/library/es6.object.to-string.js",
@@ -6755,24 +6851,44 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/lib/util.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/lib/watcher.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/main.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/commander/index.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/common.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/glob.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/inflight.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/node_modules/wrappy/wrappy.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight/test.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/inherits.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/inherits_browser.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inherits/test.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/minimatch.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/lru-cache/lib/lru-cache.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/bench.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/sigmund/sigmund.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/node_modules/wrappy/wrappy.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/once.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/sync.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/bench/detect.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/example/strings.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/example/strings_src.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/index.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/bin/build-acorn.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/bin/generate-identifier-regex.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn_csp.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/acorn_loose.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/dist/walk.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/expression.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/identifier.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/index.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/location.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/acorn_loose.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/expression.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/index.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/parseutil.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/state.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/statement.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/loose/tokenize.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/lval.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/node.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/options.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/parseutil.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/state.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/statement.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokencontext.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokenize.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/tokentype.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/util.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/walk/index.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/acorn/src/whitespace.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/example/defined.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/node_modules/defined/index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/fs.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js",
+        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/legacy-streams.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/polyfills.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/dbcs-codec.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/encodings/dbcs-data.js",
@@ -6787,9 +6903,6 @@
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/extend-node.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/index.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/iconv-lite/lib/streams.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/install/install.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/install/install.min.js",
-        "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/install/main.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/bin/cmd.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/examples/pow.js",
         "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/mkdirp/index.js",
@@ -8735,6 +8848,54 @@
         "node_modules/prettydiff/lib/markuppretty.js",
         "node_modules/prettydiff/lib/safeSort.js",
         "node_modules/prettydiff/prettydiff.js",
+        "node_modules/season/lib/cson.js",
+        "node_modules/season/lib/csonc.js",
+        "node_modules/season/node_modules/cson-parser/lib/cson-parser.js",
+        "node_modules/season/node_modules/cson-parser/lib/parse.js",
+        "node_modules/season/node_modules/cson-parser/lib/stringify.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/browser.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/cake.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/coffee-script.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/command.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/grammar.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/helpers.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/index.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/lexer.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/nodes.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/optparse.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/parser.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/register.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/repl.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/rewriter.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/scope.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/lib/coffee-script/sourcemap.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/register.js",
+        "node_modules/season/node_modules/cson-parser/node_modules/coffee-script/repl.js",
+        "node_modules/season/node_modules/fs-plus/lib/fs-plus.js",
+        "node_modules/season/node_modules/fs-plus/node_modules/async/lib/async.js",
+        "node_modules/season/node_modules/fs-plus/node_modules/mkdirp/examples/pow.js",
+        "node_modules/season/node_modules/fs-plus/node_modules/mkdirp/index.js",
+        "node_modules/season/node_modules/fs-plus/node_modules/rimraf/bin.js",
+        "node_modules/season/node_modules/fs-plus/node_modules/rimraf/rimraf.js",
+        "node_modules/season/node_modules/optimist/example/bool.js",
+        "node_modules/season/node_modules/optimist/example/boolean_double.js",
+        "node_modules/season/node_modules/optimist/example/boolean_single.js",
+        "node_modules/season/node_modules/optimist/example/default_hash.js",
+        "node_modules/season/node_modules/optimist/example/default_singles.js",
+        "node_modules/season/node_modules/optimist/example/divide.js",
+        "node_modules/season/node_modules/optimist/example/line_count.js",
+        "node_modules/season/node_modules/optimist/example/line_count_options.js",
+        "node_modules/season/node_modules/optimist/example/line_count_wrap.js",
+        "node_modules/season/node_modules/optimist/example/nonopt.js",
+        "node_modules/season/node_modules/optimist/example/reflect.js",
+        "node_modules/season/node_modules/optimist/example/short.js",
+        "node_modules/season/node_modules/optimist/example/string.js",
+        "node_modules/season/node_modules/optimist/example/usage-options.js",
+        "node_modules/season/node_modules/optimist/example/xup.js",
+        "node_modules/season/node_modules/optimist/index.js",
+        "node_modules/season/node_modules/optimist/node_modules/wordwrap/example/center.js",
+        "node_modules/season/node_modules/optimist/node_modules/wordwrap/example/meat.js",
+        "node_modules/season/node_modules/optimist/node_modules/wordwrap/index.js",
         "node_modules/space-pen/lib/space-pen.js",
         "node_modules/space-pen/node_modules/grim/lib/deprecation.js",
         "node_modules/space-pen/node_modules/grim/lib/grim.js",
@@ -9264,6 +9425,9 @@
         "node_modules/tidy-markdown/bin/index.js",
         "node_modules/tidy-markdown/lib/cli.js",
         "node_modules/tidy-markdown/lib/index.js",
+        "node_modules/tidy-markdown/lib/preprocess.js",
+        "node_modules/tidy-markdown/lib/tidy-inline-markdown.js",
+        "node_modules/tidy-markdown/lib/utils.js",
         "node_modules/tidy-markdown/node_modules/argparse/examples/arguments.js",
         "node_modules/tidy-markdown/node_modules/argparse/examples/choice.js",
         "node_modules/tidy-markdown/node_modules/argparse/examples/constants.js",
@@ -9362,10 +9526,8 @@
         "node_modules/tidy-markdown/node_modules/js-yaml/node_modules/esprima/bin/esparse.js",
         "node_modules/tidy-markdown/node_modules/js-yaml/node_modules/esprima/bin/esvalidate.js",
         "node_modules/tidy-markdown/node_modules/js-yaml/node_modules/esprima/esprima.js",
-        "node_modules/tidy-markdown/node_modules/marked/Gulpfile.js",
         "node_modules/tidy-markdown/node_modules/marked/index.js",
         "node_modules/tidy-markdown/node_modules/marked/lib/marked.js",
-        "node_modules/tidy-markdown/node_modules/marked/marked.min.js",
         "node_modules/tidy-markdown/node_modules/pad/index.js",
         "node_modules/tidy-markdown/node_modules/pad/lib/pad.js",
         "node_modules/tidy-markdown/node_modules/pad/samples/left.js",
@@ -9715,7 +9877,8 @@
           "loophole": "^1.0.0",
           "node-dir": "^0.1.8",
           "node-uuid": "^1.4.3",
-          "prettydiff": "^1.12.19",
+          "prettydiff": "^1.15.7",
+          "season": "^5.3.0",
           "space-pen": "^5.1.1",
           "strip-json-comments": "^1.0.2",
           "temp": "^0.8.3",
@@ -10005,22 +10168,39 @@
       {
         "paths": [
           "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/lib",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/test",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/test/source",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/test/source/tests",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/test/source/widget"
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner"
         ],
         "dependencies": {
-          "q": "~1.1.2",
-          "recast": "~0.10.0",
-          "commander": "~2.5.0",
-          "graceful-fs": "~3.0.4",
-          "glob": "~4.2.1",
-          "mkdirp": "~0.5.0",
-          "private": "~0.1.6",
-          "install": "~0.1.7",
-          "iconv-lite": "~0.4.5"
+          "commander": "^2.5.0",
+          "detective": "^4.3.1",
+          "glob": "^5.0.15",
+          "graceful-fs": "^4.1.2",
+          "iconv-lite": "^0.4.5",
+          "mkdirp": "^0.5.0",
+          "private": "^0.1.6",
+          "q": "^1.1.2",
+          "recast": "^0.10.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/commander"
+        ],
+        "dependencies": {
+          "graceful-readlink": ">= 1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/bench",
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/example",
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective",
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/test",
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/detective/test/files"
+        ],
+        "dependencies": {
+          "acorn": "^1.0.3",
+          "defined": "^1.0.0"
         }
       },
       {
@@ -10030,8 +10210,9 @@
         "dependencies": {
           "inflight": "^1.0.4",
           "inherits": "2",
-          "minimatch": "^1.0.0",
-          "once": "^1.3.0"
+          "minimatch": "2 || 3",
+          "once": "^1.3.0",
+          "path-is-absolute": "^1.0.0"
         }
       },
       {
@@ -10045,12 +10226,19 @@
       },
       {
         "paths": [
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch",
-          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/test"
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch"
         ],
         "dependencies": {
-          "lru-cache": "2",
-          "sigmund": "~1.0.0"
+          "brace-expansion": "^1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion"
+        ],
+        "dependencies": {
+          "balanced-match": "^0.2.0",
+          "concat-map": "0.0.1"
         }
       },
       {
@@ -11380,61 +11568,31 @@
       {
         "paths": [
           "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/lib",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/test",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/test/source",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/test/source/tests",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/test/source/widget"
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner"
         ],
         "dependencies": {
-          "q": "~1.1.2",
-          "recast": "~0.10.0",
-          "commander": "~2.5.0",
-          "graceful-fs": "~3.0.4",
-          "glob": "~4.2.1",
-          "mkdirp": "~0.5.0",
-          "private": "~0.1.6",
-          "install": "~0.1.7",
-          "iconv-lite": "~0.4.5"
+          "commander": "^2.5.0",
+          "detective": "^4.3.1",
+          "glob": "^5.0.15",
+          "graceful-fs": "^4.1.2",
+          "iconv-lite": "^0.4.5",
+          "mkdirp": "^0.5.0",
+          "private": "^0.1.6",
+          "q": "^1.1.2",
+          "recast": "^0.10.0"
         }
       },
       {
         "paths": [
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob"
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/bench",
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/example",
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective",
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/test",
+          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/detective/test/files"
         ],
         "dependencies": {
-          "inflight": "^1.0.4",
-          "inherits": "2",
-          "minimatch": "^1.0.0",
-          "once": "^1.3.0"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/inflight"
-        ],
-        "dependencies": {
-          "once": "^1.3.0",
-          "wrappy": "1"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/minimatch/test"
-        ],
-        "dependencies": {
-          "lru-cache": "2",
-          "sigmund": "~1.0.0"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once",
-          "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/glob/node_modules/once/test"
-        ],
-        "dependencies": {
-          "wrappy": "1"
+          "acorn": "^1.0.3",
+          "defined": "^1.0.0"
         }
       },
       {
@@ -12640,6 +12798,49 @@
       },
       {
         "paths": [
+          "node_modules/season/lib",
+          "node_modules/season"
+        ],
+        "dependencies": {
+          "cson-parser": "1.0.9",
+          "fs-plus": "2.x",
+          "optimist": "~0.4.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/season/node_modules/cson-parser/lib",
+          "node_modules/season/node_modules/cson-parser"
+        ],
+        "dependencies": {
+          "coffee-script": "1.9.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/season/node_modules/fs-plus/lib",
+          "node_modules/season/node_modules/fs-plus"
+        ],
+        "dependencies": {
+          "underscore-plus": "1.x",
+          "mkdirp": "~0.3.5",
+          "rimraf": "~2.2.2",
+          "async": "~0.2.9"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/season/node_modules/optimist/example",
+          "node_modules/season/node_modules/optimist",
+          "node_modules/season/node_modules/optimist/test/_",
+          "node_modules/season/node_modules/optimist/test"
+        ],
+        "dependencies": {
+          "wordwrap": "~0.0.2"
+        }
+      },
+      {
+        "paths": [
           "node_modules/space-pen",
           "node_modules/space-pen/lib"
         ],
@@ -12931,7 +13132,7 @@
           "html-entities": "^1.0.10",
           "indent": "0.0.1",
           "js-yaml": "^3.2.7",
-          "marked": "^0.3.2",
+          "marked": "0.3.2",
           "pad": "0.0.5"
         }
       },
