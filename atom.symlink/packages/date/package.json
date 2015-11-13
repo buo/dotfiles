@@ -1,0 +1,79 @@
+{
+  "name": "date",
+  "main": "./lib/date.js",
+  "version": "1.1.1",
+  "description": "Insert the current date & time. See the readme for format options.",
+  "activationCommands": {
+    "atom-text-editor": [
+      "date:date",
+      "date:time",
+      "date:datetime"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannyfritz/atom-date.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.177.0"
+  },
+  "dependencies": {
+    "date-utils": "^1.2.16"
+  },
+  "readme": "# Atom Date Package\n\nInsert the current date & time.\n\n## Installation\n\n```sh\napm install date\n```\nor find it in the Packages tab under settings\n\n## Usage\n\nSelect a command from `Packages`, `Date & Time`.\n\nYou can also bind your keys to `date:date`, `date:time` and `date:datetime`.\n\n# Options\n\nYou can specify the following options for the date and time format:\n\n- YYYY - Four digit year\n- MMMM - Full month name. ie January\n- MMM  - Short month name. ie Jan\n- MM   - Zero padded month ie 01\n- M    - Month ie 1\n- DDDD - Full day or week name ie Tuesday\n- DDD  - Abbreviated day of the week ie Tue\n- DD   - Zero padded day ie 08\n- D    - Day ie 8\n- HH24 - Hours in 24 notation ie 18\n- HH   - Padded Hours ie 06\n- H    - Hours ie 6\n- MI   - Padded Minutes\n- SS   - Padded Seconds\n- PP   - AM or PM\n- P    - am or pm\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/dannyfritz/atom-date/issues"
+  },
+  "homepage": "https://github.com/dannyfritz/atom-date#readme",
+  "_id": "date@1.1.1",
+  "_shasum": "ba985b53caa0fc6858360017a043363ecb13b05f",
+  "_resolved": "file:../d-1151010-29694-ojputt/package.tgz",
+  "_from": "../d-1151010-29694-ojputt/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "date-utils",
+        "version": "1.2.17",
+        "path": "node_modules/date-utils/lib/date-utils.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib/date.js",
+        "node_modules/date-utils/doc/scripts/URI.js",
+        "node_modules/date-utils/doc/scripts/bootstrap-dropdown.js",
+        "node_modules/date-utils/doc/scripts/bootstrap-tab.js",
+        "node_modules/date-utils/doc/scripts/docstrap.lib.js",
+        "node_modules/date-utils/doc/scripts/linenumber.js",
+        "node_modules/date-utils/doc/scripts/prettify/jquery.min.js",
+        "node_modules/date-utils/doc/scripts/prettify/lang-css.js",
+        "node_modules/date-utils/doc/scripts/prettify/prettify.js",
+        "node_modules/date-utils/doc/scripts/sunlight.js",
+        "node_modules/date-utils/doc/scripts/toc.js",
+        "node_modules/date-utils/gulpfile.js",
+        "node_modules/date-utils/lib/date-utils.js",
+        "node_modules/date-utils/lib/date-utils.min.js"
+      ],
+      ".json": [
+        "node_modules/date-utils/bower.json",
+        "node_modules/date-utils/jsdoc.json",
+        "node_modules/date-utils/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          ""
+        ],
+        "dependencies": {
+          "date-utils": "^1.2.16"
+        }
+      }
+    ]
+  }
+}
