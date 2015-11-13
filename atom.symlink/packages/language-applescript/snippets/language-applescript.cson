@@ -1,0 +1,107 @@
+'.dyn.caret.begin.document':
+  '#!/usr/bin/osascript':
+    'prefix': 'osa'
+    'body': '#!/usr/bin/osascript\n'
+'.source.applescript':
+  'Alert':
+    'prefix': 'alert'
+    'body': 'display alert "${1:alert text}" ¬\n\t${2:message "${3:message text}" ¬\n\t}${4:as warning}'
+  'Choose Application(s)':
+    'prefix': 'choose'
+    'body': '${1/.+/set /}${1:the_application}${1/.+/ to /}choose application with prompt "${2:Choose an Application:}"${3/.+/ ¬\n\t/}${3:with multiple selections allowed}\n'
+  'Choose Color':
+    'prefix': 'choose'
+    'body': '${1:set the_color to }choose color default color ${2:{65536, 65536, 65536\\}}\n$0'
+  'Choose File(s)':
+    'prefix': 'choose'
+    'body': '${1:set the_file to }choose file with prompt "${2:Pick a file:}"${3: ¬\n\tdefault location path to home folder}${4: ¬\n\twith invisibles}${5: ¬\n\twith multiple selections allowed}${6: ¬\n\twith showing package contents}\n$0'
+  'Choose Folder(s)':
+    'prefix': 'choose'
+    'body': '${1:set the_folder to }choose folder with prompt "${2:Pick a folder:}"${3: ¬\n\tdefault location path to home folder}${4: ¬\n\twith invisibles}${5: ¬\n\twith multiple selections allowed}${6: ¬\n\twith showing package contents}\n$0'
+  'Choose Item from List':
+    'prefix': 'choose'
+    'body': 'set the_choice to choose from list ${1:{"${2:choices}"\\}}\n$0 '
+  'Choose New File':
+    'prefix': 'choose'
+    'body': '${1:set the_filename to }choose file name with prompt "${2:Name this file:}" ¬\n\tdefault name "${3:untitled}" default location ${4:path to home folder}\n$0'
+  'Choose URL':
+    'prefix': 'choose'
+    'body': '${1:set the_url to }choose URL showing ${2:Web} servers with editable URL\n$0'
+  'OK':
+    'prefix': 'dialog'
+    'body': 'display dialog ${1:"${2:text}"}${3/.+/ ¬\n\twith icon /}${3:1} ¬\n\tbuttons {"${4:OK}"} ¬\n\tdefault button 1\n'
+  'OK/Cancel':
+    'prefix': 'dialog'
+    'body': 'display dialog ${1:"${2:text}"}${3/.+/ ¬\n\twith icon /}${3:1} ¬\n\tbuttons {"${5:Cancel}", "${4:OK}"} ¬\n\tdefault button "$4"\nset button_pressed to button returned of result\nif button_pressed is "$4" then\n\t${6:-- statements for default button}${7/.+/\nelse\n\t/}${7:-- statements for cancel button}\nend if\n'
+  'OK/Cancel/Other':
+    'prefix': 'dialog'
+    'body': 'display dialog ${1:"${2:text}"}${3/.+/ ¬\n\twith icon /}${3:1} ¬\n\tbuttons {"${5:Cancel}", "${6:Other}", "${4:OK}"} ¬\n\tdefault button "$4"\nset button_pressed to button returned of result\nif button_pressed is "$4" then\n\t${7:-- statements for default button}${8/.+/\nelse if button_pressed is "$5" then\n\t/}${8:-- statements for cancel button}${9/.+/\nelse\n\t/}${9:-- statements for other button}\nend if\n'
+  'Text Field':
+    'prefix': 'dialog'
+    'body': 'display dialog ${1:"${2:text}"} ¬\n\tdefault answer ${3:"${4:default answer}"}${5/.+/ ¬\n\twith icon /}${5:1} ¬\n\tbuttons {"${7:Cancel}", "${6:OK}"} ¬\n\tdefault button "$6"\nset button_pressed to button returned of result\nset text_typed to text returned of result\nif button_pressed is "$6" then\n\t${8:-- statements for default button}${9/.+/\nelse\n\t/}${9:-- statements for cancel button}\nend if'
+  'change text item delimiters':
+    'prefix': 'delim'
+    'body': 'set oldDelims to AppleScript\'s text item delimiters\nset AppleScript\'s text item delimiters to {"${1:,}"}\n${0:-- statements}\nset AppleScript\'s text item delimiters to oldDelims'
+  'considering … end':
+    'prefix': 'con'
+    'body': 'considering ${1:case}\n\t${0:-- statements}\nend considering'
+  'copy … to …':
+    'prefix': 'copy'
+    'body': 'copy ${1:value} to ${0:location}'
+  'do shell script …':
+    'prefix': 'shell'
+    'body': '${1/.+/set /}${1:shell_output}${1/.+/ to /}do shell script${2/.+/ ¬\n\t/}${2:"${3:script}"}${4/.+/ ¬\n\t/}${4:without altering line endings}\n'
+  'duplicate … to …':
+    'prefix': 'dup'
+    'body': 'duplicate ${1:value} to ${0:location}'
+  'if … end':
+    'prefix': 'if'
+    'body': 'if ${1:condition} then\n\t${0:-- statements}\nend if'
+  'if … then …':
+    'prefix': 'iff'
+    'body': 'if ${1:condition} then ${0:value}'
+  'ignoring … end':
+    'prefix': 'ign'
+    'body': 'ignoring ${1:application responses}\n\t${0:-- statements}\nend ignoring'
+  'prop parent …':
+    'prefix': 'parent'
+    'body': 'property parent : ${1:application "${2:Finder}"}'
+  'prop …':
+    'prefix': 'prop'
+    'body': 'property ${1:prop_name} : ${0:value}'
+  'repeat [times] … end':
+    'prefix': 'rep'
+    'body': 'repeat${1/.+/ /}${1:number}${1/.+/ times/}\n\t${0:-- statements}\nend repeat'
+  'repeat until ... end':
+    'prefix': 'rep'
+    'body': 'repeat until ${1:condition}\n\t${0:-- statements}\nend repeat'
+  'repeat while ... end':
+    'prefix': 'rep'
+    'body': 'repeat while ${1:condition}\n\t${0:-- statements}\nend repeat'
+  'repeat with ... from ... end':
+    'prefix': 'rep'
+    'body': 'repeat with ${1:counter} from ${2:start} to ${3:stop}${4/.+/ by /}${4:step}\n\t${0:-- statements}\nend repeat'
+  'repeat with ... in ... end':
+    'prefix': 'rep'
+    'body': 'repeat with ${1:item} in ${2:list}\n\t${0:-- statements}\nend repeat'
+  'script … end':
+    'prefix': 'script'
+    'body': 'script ${1:script_object}\n\ton run\n\t\t${0:-- statements}\n\tend run\nend script'
+  'set … to …':
+    'prefix': 'set'
+    'body': 'set ${1:var_name} to ${0:value}'
+  'tell [app] … end':
+    'prefix': 'tell'
+    'body': 'tell ${1:application "${2:Finder}"}\n\t${0:-- statements}\nend tell'
+  'try … on error … end':
+    'prefix': 'try'
+    'body': 'try\n\t${1:-- statements}\non error\n\t${2:-- error handling}\nend try'
+  'using terms from [app] … end':
+    'prefix': 'terms'
+    'body': 'using terms from ${1:application "${2:Finder}"}\n\t${0:-- statements}\nend using terms from'
+  'with timeout … end':
+    'prefix': 'timeout'
+    'body': 'with timeout ${1:number} seconds\n\t${0:-- statements}\nend timeout'
+  'with transaction … end':
+    'prefix': 'transaction'
+    'body': 'with transaction${1/.+/ /}${1:session}\n\t${0:-- statements}\nend transaction'

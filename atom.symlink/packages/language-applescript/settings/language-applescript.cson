@@ -1,0 +1,4 @@
+'.source.applescript':
+  'editor':
+    'increaseIndentPattern': '(?x)\n\t\t^\\s*\n\t\t(\n\t\t tell \\s+ (?! .* \\b(to)\\b) .*\n\t\t|tell\\b.*?\\bto\\ tell \\s+ (?! .* \\b(to)\\b) .*\n\t\t|using\\ terms\\ from\\b.*\n\t\t|if\\b .* \\bthen\\b\n\t\t|else\\b .*\n\t\t|repeat\\b .*\n\t\t|( on | to ) \\b .*\n\t\t|try\n\t\t|with \\s+ timeout\\b .*\n\t\t|ignoring\\b .*\n\t\t)\\s*(--.*?)?$\n\t'
+    'decreaseIndentPattern': '(?x)\n\t\t^\\s* (end|else|on\\ error) \\b .*$\n\t'

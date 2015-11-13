@@ -1,0 +1,35 @@
+{
+  "name": "language-applescript",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Applescript language support for Atom. Converted from https://github.com/textmate/applescript.tmbundle.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franzheidl/atom-applescript.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# language-applescript package\n\nApplescript language support for Atom. Converted from [https://github.com/textmate/applescript.tmbundle](https://github.com/textmate/applescript.tmbundle).\n\n## Changelog\n\n* `0.2.0` Add .scpt support, store package settings in `settings/` \n\n* `0.1.0` Initial release",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/franzheidl/atom-applescript/issues"
+  },
+  "homepage": "https://github.com/franzheidl/atom-applescript#readme",
+  "_id": "language-applescript@0.2.0",
+  "_shasum": "b018ecccab7e428cfb680679b6f22dc51fcfa319",
+  "_resolved": "file:../d-1151013-91354-c2152n/package.tgz",
+  "_from": "../d-1151013-91354-c2152n/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
