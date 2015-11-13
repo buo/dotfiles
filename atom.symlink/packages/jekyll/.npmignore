@@ -1,0 +1,6 @@
+.DS_Store
+npm-debug.log
+node_modules
+_posts/
+example/
+spec/sample/_site/
