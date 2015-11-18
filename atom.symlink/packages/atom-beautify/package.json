@@ -1,7 +1,7 @@
 {
   "name": "atom-beautify",
   "main": "./src/beautify",
-  "version": "0.28.17",
+  "version": "0.28.18",
   "private": true,
   "description": "Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, and SQL in Atom",
   "repository": {
@@ -86,7 +86,7 @@
     "loophole": "^1.0.0",
     "node-dir": "^0.1.8",
     "node-uuid": "^1.4.3",
-    "prettydiff": "^1.15.7",
+    "prettydiff": "^1.15.16",
     "season": "^5.3.0",
     "space-pen": "^5.1.1",
     "strip-json-comments": "^1.0.2",
@@ -171,10 +171,10 @@
   "readme": "# [atom-beautify](https://github.com/donaldpipowitch/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> [Beautify](https://github.com/einars/js-beautify)\nHTML (including [Handlebars](http://handlebarsjs.com/)),\nCSS (including [Sass](http://sass-lang.com/) and [Less](http://lesscss.org/)),\nJavaScript, and much more in Atom.\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\n- [x] JavaScript and JSON\n- [x] HTML, including\n  - [x] [Handlebars](http://handlebarsjs.com/)\n  - [x] [Mustache](http://mustache.github.io)\n  - [x] [Embedded Ruby (ERB)](https://github.com/Glavin001/atom-beautify/issues/80)\n    - Requires [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)\n  - [x] XML\n  - [x] SVG\n  - [x] [Marko](https://github.com/raptorjs/marko)\n    - Requires [language-marko](https://github.com/raptorjs/atom-language-marko)\n- [x] CSS, including\n  - [Sass](http://sass-lang.com/)\n  - [Less](http://lesscss.org/)\n- [x] [SQL](https://github.com/Glavin001/atom-beautify/pull/67)\n  - Requires [python-sqlparse](https://github.com/andialbrecht/sqlparse)\n- [x] [Markdown](https://github.com/Glavin001/atom-beautify/issues/292)\n- [x] [Perl](https://github.com/Glavin001/atom-beautify/issues/33)\n  - Requires [perltidy](http://perltidy.sourceforge.net/)\n- [x] [PHP](https://github.com/donaldpipowitch/atom-beautify/issues/26)  \n  - Requires [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to be already installed.\n- [x] [Python](https://github.com/donaldpipowitch/atom-beautify/issues/24)\n  - Requires [autopep8](https://github.com/hhatto/autopep8) or [YAPF](https://github.com/google/yapf) to be already installed.\n  - Beautifies to [PEP 8](https://www.python.org/dev/peps/pep-0008/).\n- [x] [Ruby](https://github.com/donaldpipowitch/atom-beautify/issues/25)\n  - Requires [Ruby Beautify](https://github.com/erniebrodeur/ruby-beautify)\n- [x] [CoffeeScript](https://github.com/donaldpipowitch/atom-beautify/issues/31)\n- [x] [Golang](https://github.com/Glavin001/atom-beautify/issues/176)\n- [x] [Java](https://github.com/Glavin001/atom-beautify/issues/45)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C++](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C#](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Objective-C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [D](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Fortran](https://github.com/Glavin001/atom-beautify/issues/300)\n  - Requires [GNU Emacs](http://www.gnu.org/software/emacs/)\n- [x] [Pawn](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Vala](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [TypeScript](https://github.com/Glavin001/atom-beautify/issues/49)\n- [x] [Haskell](https://github.com/Glavin001/atom-beautify/issues/628)\n  - Requires [stylish-haskell](https://github.com/jaspervdj/stylish-haskell)\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), and type `Beautify`.\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n### Shortcut\n\nYou can also type `ctrl-alt-b` as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
   "readmeFilename": "README.md",
   "homepage": "https://github.com/Glavin001/atom-beautify#readme",
-  "_id": "atom-beautify@0.28.17",
-  "_shasum": "65943c7e330a87ba3607897a033351e7c874a6d9",
-  "_resolved": "file:../d-1151010-21609-1jtxg9o/package.tgz",
-  "_from": "../d-1151010-21609-1jtxg9o/package.tgz",
+  "_id": "atom-beautify@0.28.18",
+  "_shasum": "23bb38b98743d0d3f8f649a976765bd17c8d67f2",
+  "_resolved": "file:../d-1151018-59195-1tii7tx/package.tgz",
+  "_from": "../d-1151018-59195-1tii7tx/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -790,7 +790,7 @@
       },
       {
         "name": "window-size",
-        "version": "0.1.2",
+        "version": "0.1.4",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/window-size/index.js"
       },
       {
@@ -1145,7 +1145,7 @@
       },
       {
         "name": "diff",
-        "version": "2.2.0",
+        "version": "2.2.1",
         "path": "node_modules/diff/lib/index.js"
       },
       {
@@ -1360,7 +1360,7 @@
       },
       {
         "name": "nopt",
-        "version": "3.0.4",
+        "version": "3.0.6",
         "path": "node_modules/js-beautify/node_modules/nopt/lib/nopt.js"
       },
       {
@@ -1375,7 +1375,7 @@
       },
       {
         "name": "babel-core",
-        "version": "5.8.33",
+        "version": "5.8.34",
         "path": "node_modules/jscs/node_modules/babel-core/index.js"
       },
       {
@@ -1460,12 +1460,12 @@
       },
       {
         "name": "babylon",
-        "version": "5.8.29",
+        "version": "5.8.34",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/babylon/lib/index.js"
       },
       {
         "name": "convert-source-map",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/convert-source-map/index.js"
       },
       {
@@ -1825,7 +1825,7 @@
       },
       {
         "name": "window-size",
-        "version": "0.1.2",
+        "version": "0.1.4",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/window-size/index.js"
       },
       {
@@ -1860,7 +1860,7 @@
       },
       {
         "name": "recast",
-        "version": "0.10.37",
+        "version": "0.10.38",
         "path": "node_modules/jscs/node_modules/babel-core/node_modules/regexpu/node_modules/recast/main.js"
       },
       {
@@ -2615,12 +2615,12 @@
       },
       {
         "name": "node-uuid",
-        "version": "1.4.3",
+        "version": "1.4.7",
         "path": "node_modules/node-uuid/uuid.js"
       },
       {
         "name": "prettydiff",
-        "version": "1.15.13",
+        "version": "1.15.17",
         "path": "node_modules/prettydiff/prettydiff.js"
       },
       {
@@ -9877,7 +9877,7 @@
           "loophole": "^1.0.0",
           "node-dir": "^0.1.8",
           "node-uuid": "^1.4.3",
-          "prettydiff": "^1.15.7",
+          "prettydiff": "^1.15.16",
           "season": "^5.3.0",
           "space-pen": "^5.1.1",
           "strip-json-comments": "^1.0.2",
@@ -11410,7 +11410,7 @@
           "babel-plugin-runtime": "^1.0.7",
           "babel-plugin-undeclared-variables-check": "^1.0.2",
           "babel-plugin-undefined-to-void": "^1.1.6",
-          "babylon": "^5.8.29",
+          "babylon": "^5.8.34",
           "bluebird": "^2.9.33",
           "chalk": "^1.0.0",
           "convert-source-map": "^1.1.0",
