@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# This script converts the encoding of given file from CP949 to UTF-8.
+#
+
+if [ $# -eq 0 ]; then
+  echo -e "Usage: utf8 <file>\n"
+  exit 1
+fi
+
+# Sets the file creation mask to read and write for the owner and read-only for
+# any other users.
+umask 0177
+
+# Creates a temporary file.
+tmpfile=/tmp/utf8-"$(awk 'BEGIN {srand();printf "%d\n", rand() * 10^10}')"
+trap 'rm -f -- "$tmpfile"' INT TERM HUP EXIT
+
+iconv -f cp949 -t utf-8 $1 > $tmpfile || (echo "Failed." && exit 1)
+cp -f $tmpfile $1
+
+echo "Done."
