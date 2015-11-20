@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# A script reads the stdin, encodes it into base64, and copy it.
+# This is useful when you set an avatar for a project on GitLab.
+#
+# Example:
+#
+#   cat example.png | b64
+#   curl http://i.imgur.com/DSFkYiC.gif | b64
+
+cat | base64 - | pbcopy
