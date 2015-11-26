@@ -8,3 +8,6 @@ end
 
 # Append bin to the path list.
 set PATH $PATH $DOTROOT/bin
+
+# The GOPATH enviconment variable
+set -x GOPATH "$HOME/Projects"
