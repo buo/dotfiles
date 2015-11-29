@@ -1,0 +1,31 @@
+language: objective-c
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+before_install:
+  - brew update
+  - if brew outdated | grep -qx go; then brew upgrade go; fi
+
+before_script:
+  - pushd $HOME
+  - mkdir -p go
+  - export GOPATH="$HOME/go"
+  - export PATH=$PATH:$GOPATH/bin
+  - go version
+  - go get -u github.com/golang/lint/golint
+  - go get -u golang.org/x/tools/cmd/cover
+  - go get -u golang.org/x/tools/cmd/goimports
+  - go get -u golang.org/x/tools/cmd/vet
+  - go get -u golang.org/x/tools/cmd/oracle
+  - go get -u sourcegraph.com/sqs/goreturns
+  - go get -u github.com/nsf/gocode
+  - go get -u github.com/rogpeppe/godef
+  - popd
+
+script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
+git:
+  depth: 10

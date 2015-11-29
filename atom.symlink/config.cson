@@ -2,10 +2,10 @@
   editor:
     showIndentGuide: true
     fontFamily: "Menlo"
-    fontSize: 16
     invisibles: {}
     showInvisibles: true
     tabLength: 2
+    fontSize: 16
   core:
     ignoredNames: [
       ".bundle"
@@ -38,3 +38,5 @@
   minimap: {}
   "atom-beautify":
     _analyticsUserId: "b47ef96e-a2f6-4f69-9a8c-5043cd89e1ee"
+  "go-plus":
+    goPath: "$HOME/Projects"
