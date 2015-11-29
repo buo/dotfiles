@@ -1,6 +1,8 @@
 path = require 'path'
 ColorBuffer = require '../lib/color-buffer'
-jsonFixture = require('./spec-helper').jsonFixture(__dirname, 'fixtures')
+registry = require '../lib/color-expressions'
+jsonFixture = require('./helpers/fixtures').jsonFixture(__dirname, 'fixtures')
+
 
 describe 'ColorBuffer', ->
   [editor, colorBuffer, pigments, project] = []
@@ -36,6 +38,9 @@ describe 'ColorBuffer', ->
     waitsForPromise -> atom.packages.activatePackage('pigments').then (pkg) ->
       pigments = pkg.mainModule
       project = pigments.getProject()
+
+  afterEach ->
+    colorBuffer?.destroy()
 
   it 'creates a color buffer for each editor in the workspace', ->
     expect(project.colorBuffersByEditorId[editor.id]).toBeDefined()
@@ -408,7 +413,7 @@ describe 'ColorBuffer', ->
         colorsUpdateSpy = jasmine.createSpy('did-update-color-markers')
         colorBuffer.onDidUpdateColorMarkers(colorsUpdateSpy)
         editor.moveToBottom()
-        editBuffer '\n\n@new-color = @base0;\n'
+        editBuffer '\n\n@new-color: @base0;\n'
         waitsFor -> colorsUpdateSpy.callCount > 0
 
       it 'finds the newly added color', ->

@@ -4,7 +4,7 @@
 
 A bunch of general purpose utilities for Atom packages.
 
-### requirePackages
+### requirePackages(packageNames...)
 
 Returns a promise that is only resolved when all the requested packages have been activated.
 
@@ -15,6 +15,22 @@ requirePackages('tree-view', 'find-and-replace', 'snippets')
 .then ([treeView, findAndReplace, snippets]) ->
   # Do something with the required packages
 ```
+
+### registerOrUpdateElement(elementName, prototype)
+
+Registers or updates a custom element whose name is `elementName`.
+
+```coffee
+{registerOrUpdateElement} = require 'atom-utils'
+
+class MyElement
+  createdCallback: ->
+    console.log 'element created'
+
+registerOrUpdateElement('my-element', MyElement.prototype)
+```
+
+The update is performed by copying the properties from the passed-in prototype in the registered element prototype. As a node's callback methods can't be overriden once the element have been registered, a generic version is created that will invoke the concrete callback when called, that way even the node's callback methods can be updated.
 
 ### Ancestors (previously AncestorsMethods)
 
@@ -37,7 +53,7 @@ class DummyNode extends HTMLElement
 DummyNode = document.registerElement 'dummy-node', prototype: DummyNode.prototype
 ```
 
-#### ::parents(selector='*')
+#### ::parents(selector)
 
 Can be called with or without the selector argument.
 

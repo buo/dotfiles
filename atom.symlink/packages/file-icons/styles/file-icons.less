@@ -77,6 +77,7 @@
 
   // Database icon
   &[data-name$=".json"]:before   { .database-icon; .medium-yellow; }
+  &[data-name$=".hjson"]:before  { .database-icon; .medium-yellow; }
   &[data-name$=".ndjson"]:before { .database-icon; .medium-orange; }
   &[data-name$=".cson"]:before   { .database-icon; .medium-maroon; }
   &[data-name$=".yml"]:before,
@@ -219,6 +220,8 @@
 
   // JSX icon
   &[data-name$=".jsx"]:before { .react-icon; .medium-blue; }
+  &[data-name$=".tsx"]:before { .react-icon; .light-blue; }
+  &[data-name$=".react.js"]:before { .react-icon; .medium-blue; }
   /* &[data-name$=".jsx"]:before { .jsx-icon; .medium-blue; } */
 
   // Elm icon
@@ -297,6 +300,9 @@
 
   &[data-name$=".cs"]:before   { .csharp-icon; .medium-blue; }
   &[data-name$=".vb"]:before   { .code-icon; .medium-blue;   }
+
+  // Dart
+  &[data-name$=".dart"]:before   { .dart-icon; .medium-cyan; }
 
   // Sourcepwn
   &[data-name$=".sp"]:before,  { .clojure-icon; .medium-yellow; }
@@ -409,10 +415,12 @@
   &[data-name$=".png"]:before { .image-icon; .medium-orange; }
   &[data-name$=".gif"]:before { .image-icon; .medium-yellow; }
   &[data-name$=".jpg"]:before { .image-icon; .medium-green;  }
+  &[data-name$=".ico"]:before { .image-icon; .medium-blue;  }
   &[data-name$=".svg"]:before { .svg-icon; .dark-yellow;  }
   &[data-name$=".PNG"]:before { .image-icon; .medium-orange; }
   &[data-name$=".GIF"]:before { .image-icon; .medium-yellow; }
   &[data-name$=".JPG"]:before { .image-icon; .medium-green;  }
+  &[data-name$=".ICO"]:before { .image-icon; .medium-blue;  }
   &[data-name$=".SVG"]:before { .svg-icon; .dark-yellow;  }
 
   // Windows specific Files

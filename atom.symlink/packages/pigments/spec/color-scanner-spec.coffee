@@ -1,5 +1,6 @@
 ColorScanner = require '../lib/color-scanner'
-{TextEditor} = require 'atom'
+ColorContext = require '../lib/color-context'
+registry = require '../lib/color-expressions'
 
 describe 'ColorScanner', ->
   [scanner, editor, text, result, lastIndex] = []
@@ -19,7 +20,8 @@ describe 'ColorScanner', ->
   withScannerForTextEditor = (fixture, block) ->
     withTextEditor fixture, ->
       beforeEach ->
-        scanner = new ColorScanner
+        context = new ColorContext({registry})
+        scanner = new ColorScanner({context})
 
       afterEach -> scanner = null
 
@@ -28,21 +30,21 @@ describe 'ColorScanner', ->
   describe '::search', ->
     withScannerForTextEditor 'html-entities.html', ->
       beforeEach ->
-        result = scanner.search(text)
+        result = scanner.search(text, 'html')
 
       it 'returns nothing', ->
         expect(result).toBeUndefined()
 
     withScannerForTextEditor 'css-color-with-prefix.less', ->
       beforeEach ->
-        result = scanner.search(text)
+        result = scanner.search(text, 'less')
 
       it 'returns nothing', ->
         expect(result).toBeUndefined()
 
     withScannerForTextEditor 'four-variables.styl', ->
       beforeEach ->
-        result = scanner.search(text)
+        result = scanner.search(text, 'styl')
 
       it 'returns the first buffer color match', ->
         expect(result).toBeDefined()
@@ -65,7 +67,7 @@ describe 'ColorScanner', ->
 
       describe 'successive searches', ->
         it 'returns a buffer color for each match and then undefined', ->
-          doSearch = -> result = scanner.search(text, result.lastIndex)
+          doSearch = -> result = scanner.search(text, 'styl', result.lastIndex)
 
           expect(doSearch()).toBeDefined()
           expect(doSearch()).toBeDefined()
@@ -73,8 +75,36 @@ describe 'ColorScanner', ->
           expect(doSearch()).toBeUndefined()
 
         it 'stores the line of successive matches', ->
-          doSearch = -> result = scanner.search(text, result.lastIndex)
+          doSearch = -> result = scanner.search(text, 'styl', result.lastIndex)
 
           expect(doSearch().line).toEqual(2)
           expect(doSearch().line).toEqual(4)
           expect(doSearch().line).toEqual(6)
+
+      withScannerForTextEditor 'class-after-color.sass', ->
+        beforeEach ->
+          result = scanner.search(text, 'sass')
+
+        it 'returns the first buffer color match', ->
+          expect(result).toBeDefined()
+
+        describe 'the resulting buffer color', ->
+          it 'has a text range', ->
+            expect(result.range).toEqual([15,20])
+
+          it 'has a color', ->
+            expect(result.color).toBeColor('#ffffff')
+
+      withScannerForTextEditor 'project/styles/variables.styl', ->
+        beforeEach ->
+          result = scanner.search(text, 'styl')
+
+        it 'returns the first buffer color match', ->
+          expect(result).toBeDefined()
+
+        describe 'the resulting buffer color', ->
+          it 'has a text range', ->
+            expect(result.range).toEqual([18,25])
+
+          it 'has a color', ->
+            expect(result.color).toBeColor('#BF616A')

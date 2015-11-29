@@ -6,6 +6,8 @@ CanvasDrawer = require './mixins/canvas-drawer'
 
 MinimapQuickSettingsElement = null
 
+SPEC_MODE = atom.inSpecMode()
+
 # Public: The {MinimapElement} is the view meant to render a {Minimap} instance
 # in the DOM.
 #
@@ -376,9 +378,11 @@ class MinimapElement
   # Internal: Performs the actual {MinimapElement} update.
   update: ->
     return unless @attached and @isVisible() and @minimap?
+    minimap = @minimap
+    minimap.enableCache()
 
-    visibleAreaLeft = @minimap.getTextEditorScaledScrollLeft()
-    visibleAreaTop = @minimap.getTextEditorScaledScrollTop() - @minimap.getScrollTop()
+    visibleAreaLeft = minimap.getTextEditorScaledScrollLeft()
+    visibleAreaTop = minimap.getTextEditorScaledScrollTop() - minimap.getScrollTop()
     visibleWidth = Math.min(@canvas.width / devicePixelRatio, @width)
 
     if @adjustToSoftWrap and @flexBasis
@@ -386,40 +390,40 @@ class MinimapElement
     else
       @style.flexBasis = null
 
-    if atom.inSpecMode()
+    if SPEC_MODE
       @applyStyles @visibleArea,
         width: visibleWidth + 'px'
-        height: @minimap.getTextEditorScaledHeight() + 'px'
+        height: minimap.getTextEditorScaledHeight() + 'px'
         top: visibleAreaTop + 'px'
         left: visibleAreaLeft + 'px'
     else
       @applyStyles @visibleArea,
         width: visibleWidth + 'px'
-        height: @minimap.getTextEditorScaledHeight() + 'px'
+        height: minimap.getTextEditorScaledHeight() + 'px'
         transform: @makeTranslate(visibleAreaLeft, visibleAreaTop)
 
     @applyStyles @controls,
       width: visibleWidth + 'px'
 
-    canvasTop = @minimap.getFirstVisibleScreenRow() * @minimap.getLineHeight() - @minimap.getScrollTop()
+    canvasTop = minimap.getFirstVisibleScreenRow() * minimap.getLineHeight() - minimap.getScrollTop()
 
     canvasTransform = @makeTranslate(0, canvasTop)
     canvasTransform += " " + @makeScale(1 / devicePixelRatio) if devicePixelRatio isnt 1
 
-    if atom.inSpecMode()
+    if SPEC_MODE
       @applyStyles @canvas, top: canvasTop + 'px'
     else
       @applyStyles @canvas, transform: canvasTransform
 
-    if @minimapScrollIndicator and @minimap.canScroll() and not @scrollIndicator
+    if @minimapScrollIndicator and minimap.canScroll() and not @scrollIndicator
       @initializeScrollIndicator()
 
     if @scrollIndicator?
-      minimapScreenHeight = @minimap.getScreenHeight()
-      indicatorHeight = minimapScreenHeight * (minimapScreenHeight / @minimap.getHeight())
-      indicatorScroll = (minimapScreenHeight - indicatorHeight) * @minimap.getCapedTextEditorScrollRatio()
+      minimapScreenHeight = minimap.getScreenHeight()
+      indicatorHeight = minimapScreenHeight * (minimapScreenHeight / minimap.getHeight())
+      indicatorScroll = (minimapScreenHeight - indicatorHeight) * minimap.getCapedTextEditorScrollRatio()
 
-      if atom.inSpecMode()
+      if SPEC_MODE
         @applyStyles @scrollIndicator,
           height: indicatorHeight + 'px'
           top: indicatorScroll + 'px'
@@ -428,9 +432,10 @@ class MinimapElement
           height: indicatorHeight + 'px'
           transform: @makeTranslate(0, indicatorScroll)
 
-      @disposeScrollIndicator() if not @minimap.canScroll()
+      @disposeScrollIndicator() if not minimap.canScroll()
 
     @updateCanvas()
+    minimap.clearCache()
 
   # Defines whether to render the code highlights or not.
   #

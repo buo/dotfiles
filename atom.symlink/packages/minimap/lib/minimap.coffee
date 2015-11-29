@@ -1,4 +1,4 @@
-{Emitter, CompositeDisposable} = require 'event-kit'
+{Emitter, CompositeDisposable} = require 'atom'
 DecorationManagement = require './mixins/decoration-management'
 LegacyAdater = require './adapters/legacy-adapter'
 BetaAdater = require './adapters/beta-adapter'
@@ -424,3 +424,9 @@ class Minimap
 
   # Internal: Emits a change events with the passed-in changes as data.
   emitChanges: (changes) -> @emitter.emit('did-change', changes)
+
+  # Internal:
+  enableCache: -> @adapter.enableCache()
+
+  # Internal:
+  clearCache: -> @adapter.clearCache()

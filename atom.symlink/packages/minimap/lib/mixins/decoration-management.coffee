@@ -1,6 +1,6 @@
 Mixin = require 'mixto'
 path = require 'path'
-{Emitter} = require 'event-kit'
+{Emitter} = require 'atom'
 Decoration = null
 
 # Public: The mixin that provides the decorations API to the minimap editor
@@ -23,6 +23,8 @@ class DecorationManagement extends Mixin
     @decorationDestroyedSubscriptions = {}
 
     Decoration ?= require '../decoration'
+
+  getDecorations: -> decoration for id,decoration of @decorationsById
 
   # Registers an event listener to the `did-add-decoration` event.
   #
@@ -231,7 +233,7 @@ class DecorationManagement extends Mixin
   #
   # oldStart - The row index of the first range start.
   # oldEnd - The row index of the first range end.
-  # newStart - The row index of the second range start. 
+  # newStart - The row index of the second range start.
   # newEnd - The row index of the second range end.
   #
   # Returns an {Array}.

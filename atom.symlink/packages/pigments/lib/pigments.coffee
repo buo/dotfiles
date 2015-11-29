@@ -1,4 +1,4 @@
-{CompositeDisposable} = require 'atom'
+{CompositeDisposable, Disposable} = require 'atom'
 uris = require './uris'
 ColorProject = require './color-project'
 [PigmentsProvider, PigmentsAPI, url] = []
@@ -64,7 +64,7 @@ module.exports =
     markerType:
       type: 'string'
       default: 'background'
-      enum: ['background', 'outline', 'underline', 'dot', 'square-dot']
+      enum: ['background', 'outline', 'underline', 'dot', 'square-dot', 'gutter']
     sortPaletteColors:
       type: 'string'
       default: 'none'
@@ -86,8 +86,6 @@ module.exports =
       title: 'Ignore VCS Ignored Paths'
 
   activate: (state) ->
-    require './register-elements'
-
     @project = if state.project?
       atom.deserializers.deserialize(state.project)
     else
@@ -155,6 +153,34 @@ module.exports =
     PigmentsAPI ?= require './pigments-api'
     new PigmentsAPI(@getProject())
 
+  consumeColorExpressions: (options={}) ->
+    registry = @getProject().getColorExpressionsRegistry()
+
+    if options.expressions?
+      names = options.expressions.map (e) -> e.name
+      registry.createExpressions(options.expressions)
+
+      new Disposable -> registry.removeExpression(name) for name in names
+    else
+      {name, regexpString, handle, scopes, priority} = options
+      registry.createExpression(name, regexpString, priority, scopes, handle)
+
+      new Disposable -> registry.removeExpression(name)
+
+  consumeVariableExpressions: (options={}) ->
+    registry = @getProject().getVariableExpressionsRegistry()
+
+    if options.expressions?
+      names = options.expressions.map (e) -> e.name
+      registry.createExpressions(options.expressions)
+
+      new Disposable -> registry.removeExpression(name) for name in names
+    else
+      {name, regexpString, handle, scopes, priority} = options
+      registry.createExpression(name, regexpString, priority, scopes, handle)
+
+      new Disposable -> registry.removeExpression(name)
+
   shouldDisplayContextMenu: (event) ->
     @lastEvent = event
     setTimeout (=> @lastEvent = null), 10
@@ -199,3 +225,24 @@ module.exports =
       @project.loadPathsAndVariables()
     .catch (reason) ->
       console.error reason
+
+  loadDeserializersAndRegisterViews: ->
+    ColorBuffer = require './color-buffer'
+    ColorSearch = require './color-search'
+    Palette = require './palette'
+    ColorBufferElement = require './color-buffer-element'
+    ColorMarkerElement = require './color-marker-element'
+    ColorResultsElement = require './color-results-element'
+    ColorProjectElement = require './color-project-element'
+    PaletteElement = require './palette-element'
+    VariablesCollection = require './variables-collection'
+
+    ColorBufferElement.registerViewProvider(ColorBuffer)
+    ColorResultsElement.registerViewProvider(ColorSearch)
+    ColorProjectElement.registerViewProvider(ColorProject)
+    PaletteElement.registerViewProvider(Palette)
+
+    atom.deserializers.add(ColorProject)
+    atom.deserializers.add(VariablesCollection)
+
+module.exports.loadDeserializersAndRegisterViews()

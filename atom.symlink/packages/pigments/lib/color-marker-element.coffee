@@ -1,4 +1,5 @@
 {CompositeDisposable, Emitter} = require 'atom'
+{registerOrUpdateElement} = require 'atom-utils'
 
 RENDERERS =
   'background': require './renderers/background'
@@ -33,9 +34,7 @@ class ColorMarkerElement extends HTMLElement
       if isValid then @render() else @release()
 
     @subscriptions.add atom.config.observe 'pigments.markerType', (type) =>
-      @render()
-
-    @render()
+      @render() unless type is 'gutter'
 
   destroy: ->
     @parentNode?.removeChild(this)
@@ -82,10 +81,10 @@ class ColorMarkerElement extends HTMLElement
     @className = ''
     @style.cssText = ''
 
-module.exports = ColorMarkerElement =
-document.registerElement 'pigments-color-marker', {
-  prototype: ColorMarkerElement.prototype
-}
+module.exports =
+ColorMarkerElement =
+registerOrUpdateElement 'pigments-color-marker', ColorMarkerElement.prototype
 
 ColorMarkerElement.setMarkerType = (markerType) ->
+  return if markerType is 'gutter'
   @prototype.renderer = new RENDERERS[markerType]

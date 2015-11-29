@@ -1,6 +1,7 @@
 {Emitter, CompositeDisposable, Task, Range} = require 'atom'
 Color = require './color'
 ColorMarker = require './color-marker'
+ColorExpression = require './color-expression'
 VariablesCollection = require './variables-collection'
 
 module.exports =
@@ -192,6 +193,7 @@ class ColorBuffer
     buffer = @editor.getBuffer()
     config =
       buffer: @editor.getText()
+      registry: @project.getVariableExpressionsRegistry().serialize()
 
     new Promise (resolve, reject) =>
       @task = Task.once(
@@ -229,7 +231,8 @@ class ColorBuffer
 
   getColorMarkers: -> @colorMarkers
 
-  getValidColorMarkers: -> @getColorMarkers().filter (m) -> m.color.isValid()
+  getValidColorMarkers: ->
+    @getColorMarkers()?.filter((m) -> m.color.isValid()) ? []
 
   getColorMarkerAtBufferPosition: (bufferPosition) ->
     markers = @editor.findMarkers({
@@ -344,6 +347,7 @@ class ColorBuffer
     results = []
     taskPath = require.resolve('./tasks/scan-buffer-colors-handler')
     buffer = @editor.getBuffer()
+    registry = @project.getColorExpressionsRegistry().serialize()
 
     if options.variables?
       collection = new VariablesCollection()
@@ -351,15 +355,24 @@ class ColorBuffer
       options.variables = collection
 
     variables = if @isVariablesSource()
+      # In the case of files considered as source, the variables in the project
+      # are needed when parsing the files.
       (options.variables?.getVariables() ? []).concat(@project.getVariables() ? [])
     else
+      # Files that are not part of the sources will only use the variables
+      # defined in them and so the global variables expression must be
+      # discarded before sending the registry to the child process.
       options.variables?.getVariables() ? []
+
+    delete registry.expressions['pigments:variables']
+    delete registry.regexpString
 
     config =
       buffer: @editor.getText()
       bufferPath: @getPath()
       variables: variables
       colorVariables: variables.filter (v) -> v.isColor
+      registry: registry
 
     new Promise (resolve, reject) =>
       @task = Task.once(

@@ -1,19 +1,22 @@
+path = require 'path'
 ColorScanner = require '../color-scanner'
 ColorContext = require '../color-context'
-{getRegistry} = require '../color-expressions'
-{createVariableExpression} = require '../utils'
+ColorExpression = require '../color-expression'
+ExpressionsRegistry = require '../expressions-registry'
 ColorsChunkSize = 100
 
 class BufferColorsScanner
   constructor: (config) ->
-    {@buffer, variables, colorVariables, bufferPath} = config
-    @context = new ColorContext({variables, colorVariables, referencePath: bufferPath})
+    {@buffer, variables, colorVariables, @bufferPath, registry} = config
+    registry = ExpressionsRegistry.deserialize(registry, ColorExpression)
+    @context = new ColorContext({variables, colorVariables, referencePath: @bufferPath, registry})
     @scanner = new ColorScanner({@context})
     @results = []
 
   scan: ->
+    scope = path.extname @bufferPath
     lastIndex = 0
-    while result = @scanner.search(@buffer, lastIndex)
+    while result = @scanner.search(@buffer, scope, lastIndex)
       @results.push(result)
 
       @flushColors() if @results.length >= ColorsChunkSize
