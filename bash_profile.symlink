@@ -1,0 +1,10 @@
+if [ -d $HOME/.nvm ]
+then
+	export NVM_DIR=$HOME/.nvm
+fi
+
+src=$(brew --prefix nvm)/nvm.sh
+if [ -f $src ]
+then
+	source $src
+fi
