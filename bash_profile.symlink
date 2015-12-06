@@ -1,10 +1,1 @@
-if [ -d $HOME/.nvm ]
-then
-	export NVM_DIR=$HOME/.nvm
-fi
-
-src=$(brew --prefix nvm)/nvm.sh
-if [ -f $src ]
-then
-	source $src
-fi
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
