@@ -40,3 +40,4 @@
     _analyticsUserId: "b47ef96e-a2f6-4f69-9a8c-5043cd89e1ee"
   "go-plus":
     goPath: "$HOME/Projects"
+  "linter-docker": {}

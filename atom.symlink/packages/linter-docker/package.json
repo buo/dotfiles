@@ -1,0 +1,166 @@
+{
+  "name": "linter-docker",
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "main": "./lib/init",
+  "version": "0.1.2",
+  "description": "Linter plugin for Dockerfile's, using dockerlint",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtomLinter/linter-docker.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "atom-linter": "~3.3.5",
+    "dockerlint": "~0.1.3"
+  },
+  "readme": "linter-docker\n=========================\n\nThis plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to [dockerlint](https://github.com/RedCoolBeans/dockerlint).\n\n## Installation\nLinter package must be installed in order to use this plugin. If Linter is not installed, please follow the instructions [here](https://github.com/AtomLinter/Linter).\n\n### Plugin installation\n```\n$ apm install linter-docker\n```\n\n### Development and Testing\nIf you are developing or testing this plugin, it's easy to load using `apm link`\n\nFirst make sure you don't have linter-docker installed.\n```bash\napm uninstall linter-docker\n```\n\nClone this repository and then from the linter-docker directory:\n```bash\nnpm install\napm link\n```\n\nYou can reload Atom with `ctrl+opt+cmd+l` and to open the inspector `opt+cmd+i`.\n\nTo put it all back:\n```bash\napm unlink\napm install linter-docker\n```\n\n## Contributing\nIf you would like to contribute enhancements or fixes, please do the following:\n\n1. Fork the plugin repository.\n1. Hack on a separate topic branch created from the latest `master`.\n1. Commit and push the topic branch.\n1. Make a pull request.\n1. welcome to the club\n\nPlease note that modifications should follow these coding guidelines:\n\n- Indent is 2 spaces.\n- Code should pass coffeelint linter.\n- Vertical whitespace helps readability, don’t be afraid to use it.\n\nThank you for helping out!\n\n## Donation\n[![Share the love!](https://chewbacco-stuff.s3.amazonaws.com/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXUYS4ARNHCN8)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-docker/issues"
+  },
+  "homepage": "https://github.com/AtomLinter/linter-docker#readme",
+  "_id": "linter-docker@0.1.2",
+  "_shasum": "1dcbfa2c149845620e4f631788a412337e0ce596",
+  "_resolved": "file:../d-1151115-81031-1sgqalc/package.tgz",
+  "_from": "../d-1151115-81031-1sgqalc/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "tmp",
+        "version": "0.0.28",
+        "path": "node_modules/atom-linter/node_modules/tmp/lib/tmp.js"
+      },
+      {
+        "name": "os-tmpdir",
+        "version": "1.0.1",
+        "path": "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js"
+      },
+      {
+        "name": "xregexp",
+        "version": "2.0.0",
+        "path": "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
+      },
+      {
+        "name": "dockerlint",
+        "version": "0.1.3",
+        "path": "node_modules/dockerlint/bin/dockerlint.js"
+      },
+      {
+        "name": "sty",
+        "version": "0.6.1",
+        "path": "node_modules/dockerlint/node_modules/sty/lib/sty.js"
+      },
+      {
+        "name": "subarg",
+        "version": "1.0.0",
+        "path": "node_modules/dockerlint/node_modules/subarg/index.js"
+      },
+      {
+        "name": "minimist",
+        "version": "1.2.0",
+        "path": "node_modules/dockerlint/node_modules/subarg/node_modules/minimist/index.js"
+      }
+    ],
+    "extensions": {
+      ".coffee": [
+        "lib/init.coffee",
+        "node_modules/atom-linter/lib/helpers.coffee",
+        "node_modules/dockerlint/node_modules/sty/demo.coffee",
+        "node_modules/dockerlint/node_modules/sty/src/sty.coffee"
+      ],
+      ".js": [
+        "node_modules/atom-linter/node_modules/tmp/Gruntfile.js",
+        "node_modules/atom-linter/node_modules/tmp/lib/tmp.js",
+        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js",
+        "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js",
+        "node_modules/dockerlint/bin/dockerlint.js",
+        "node_modules/dockerlint/lib/checks.js",
+        "node_modules/dockerlint/lib/cli.js",
+        "node_modules/dockerlint/lib/parser.js",
+        "node_modules/dockerlint/lib/utils.js",
+        "node_modules/dockerlint/node_modules/sty/lib/sty.js",
+        "node_modules/dockerlint/node_modules/subarg/example/show.js",
+        "node_modules/dockerlint/node_modules/subarg/index.js",
+        "node_modules/dockerlint/node_modules/subarg/node_modules/minimist/example/parse.js",
+        "node_modules/dockerlint/node_modules/subarg/node_modules/minimist/index.js"
+      ],
+      ".json": [
+        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/package.json",
+        "node_modules/atom-linter/node_modules/tmp/package.json",
+        "node_modules/atom-linter/node_modules/xregexp/package.json",
+        "node_modules/atom-linter/package.json",
+        "node_modules/dockerlint/node_modules/sty/package.json",
+        "node_modules/dockerlint/node_modules/subarg/node_modules/minimist/package.json",
+        "node_modules/dockerlint/node_modules/subarg/package.json",
+        "node_modules/dockerlint/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          ""
+        ],
+        "dependencies": {
+          "atom-linter": "~3.3.5",
+          "dockerlint": "~0.1.3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/lib",
+          "node_modules/atom-linter",
+          "node_modules/atom-linter/spec/fixtures",
+          "node_modules/atom-linter/spec"
+        ],
+        "dependencies": {
+          "xregexp": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/node_modules/tmp",
+          "node_modules/atom-linter/node_modules/tmp/lib",
+          "node_modules/atom-linter/node_modules/tmp/test",
+          "node_modules/atom-linter/node_modules/tmp/test/symlinkme"
+        ],
+        "dependencies": {
+          "os-tmpdir": "~1.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/dockerlint/bin",
+          "node_modules/dockerlint/lib",
+          "node_modules/dockerlint",
+          "node_modules/dockerlint/test"
+        ],
+        "dependencies": {
+          "sty": "^0.6.1",
+          "subarg": "^1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/dockerlint/node_modules/subarg/example",
+          "node_modules/dockerlint/node_modules/subarg",
+          "node_modules/dockerlint/node_modules/subarg/test"
+        ],
+        "dependencies": {
+          "minimist": "^1.1.0"
+        }
+      }
+    ]
+  }
+}
