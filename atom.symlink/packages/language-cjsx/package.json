@@ -1,0 +1,38 @@
+{
+  "name": "language-cjsx",
+  "version": "0.3.0",
+  "author": {
+    "name": "Gordon L. Hempton",
+    "email": "ghempton@gmail.com"
+  },
+  "description": "CoffeeScript JSX language support",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghempton/language-cjsx.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# language-cjsx package\n\nAtom syntax highlighting for CoffeeScript JSX.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/ghempton/language-cjsx/issues"
+  },
+  "homepage": "https://github.com/ghempton/language-cjsx#readme",
+  "_id": "language-cjsx@0.3.0",
+  "_shasum": "b27c5a9220d751166565543c86cbe04a2d8a765d",
+  "_resolved": "file:../d-11612-34120-ztm8j4/package.tgz",
+  "_from": "../d-11612-34120-ztm8j4/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

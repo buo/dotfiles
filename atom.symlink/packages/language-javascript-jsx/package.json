@@ -1,0 +1,33 @@
+{
+  "name": "language-javascript-jsx",
+  "version": "0.3.7",
+  "description": "JavaScript, ES6, ES7, React JSX, Flow, etc… by SubtleGradient of Facebook",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subtlegradient/language-javascript-jsx.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "readme": "# JavaScript, ES6, ES7, React JSX, Flow, etc…\n## by SubtleGradient of Facebook\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/subtlegradient/language-javascript-jsx/issues"
+  },
+  "homepage": "https://github.com/subtlegradient/language-javascript-jsx#readme",
+  "_id": "language-javascript-jsx@0.3.7",
+  "_shasum": "3bb6f06e5178e278ce95274b5553ffae32c9a4cf",
+  "_resolved": "file:../d-11614-94048-ck1eeq/package.tgz",
+  "_from": "../d-11614-94048-ck1eeq/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

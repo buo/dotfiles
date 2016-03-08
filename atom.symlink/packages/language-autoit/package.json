@@ -1,0 +1,34 @@
+{
+  "name": "language-autoit",
+  "version": "0.2.1",
+  "description": "A converted Textmate bundle for AutoIt version 3 scripts. This now works with Atom. For more information visit: https://github.com/Red-Nova-Technologies/autoitv3-tmbundle",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bangonkali/-autoitv3-atom.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# language-autoit package\n\nThis package is a converted Textmate or e-TextEditor Syntax Highlighter. The original file is at https://github.com/Red-Nova-Technologies/autoitv3-tmbundle\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/bangonkali/-autoitv3-atom/issues"
+  },
+  "homepage": "https://github.com/bangonkali/-autoitv3-atom#readme",
+  "_id": "language-autoit@0.2.1",
+  "_shasum": "c177144ed28ce628f40d31dd176cebcf41619244",
+  "_resolved": "file:../d-116118-99188-1ur1nra/package.tgz",
+  "_from": "../d-116118-99188-1ur1nra/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

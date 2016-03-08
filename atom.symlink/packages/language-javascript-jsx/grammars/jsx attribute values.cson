@@ -1,0 +1,55 @@
+fileTypes: []
+injectionSelector: "source.js.jsx meta.tag.block.begin"
+name: "JSX attribute values"
+patterns: [
+  {
+    begin: "\\s*([_$a-zA-Z0-9][-_$a-zA-Z0-9]*)(=)(\\{)"
+    beginCaptures:
+      "1":
+        name: "entity.other.attribute-name.jsx"
+      "2":
+        name: "punctuation.separator.key-value.attribute.jsx"
+      "3":
+        name: "punctuation.section.embedded.begin.jsx"
+    contentName: "source.js.jsx"
+    end: "}"
+    endCaptures:
+      "0":
+        name: "punctuation.section.embedded.end.jsx"
+    name: "meta.embedded.expression.$1.jsx"
+    patterns: [
+      {
+        include: "source.js.jsx"
+      }
+    ]
+  }
+  {
+    match: "([_$a-zA-Z0-9][-_$a-zA-Z0-9]*)"
+    name: "entity.other.attribute-name.jsx"
+  }
+  {
+    begin: "\""
+    beginCaptures:
+      "0":
+        name: "punctuation.definition.string.begin.jsx"
+    contentName: "meta.scope.inner"
+    end: "\""
+    endCaptures:
+      "0":
+        name: "punctuation.definition.string.end.jsx"
+    name: "string.quoted.double.jsx"
+  }
+  {
+    begin: "'"
+    beginCaptures:
+      "0":
+        name: "punctuation.definition.string.begin.jsx"
+    contentName: "meta.scope.inner"
+    end: "'"
+    endCaptures:
+      "0":
+        name: "punctuation.definition.string.end.jsx"
+    name: "string.quoted.single.jsx"
+  }
+]
+scopeName: "source.js.jsx.attribute-values"

@@ -1,0 +1,124 @@
+'fileTypes': [
+  'au3'
+]
+'foldingStartMarker': '/\\*\\*|\\{\\s*$'
+'foldingStopMarker': '\\*\\*/|^\\s*\\}'
+'name': 'AutoItv3'
+'patterns': [
+  {
+    'match': '(?i:\\s*((\\${1})\\w*))(\\.\\w+)?'
+    'name': 'variable.other.autoit'
+  }
+  {
+    'match': '(?x:(?:0x\\h+)|(?:-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:e[+-]?\\d+)?))'
+    'name': 'constant.numeric.autoit'
+  }
+  {
+    'comment': 'Filename'
+    'match': '\\w+\\.\\w{3}'
+    'name': 'entity.name.other.autoit'
+  }
+  {
+    'match': '(?i:\\b(EndWith|With|ByRef|Return|For|to|Next|In|While|WEnd|ExitLoop|Enum|Step|Do|Until|If|Then|else|ElseIf|EndIf|Select|EndSelect|Case|Switch|EndSwitch|ContinueCase)\\b)'
+    'name': 'keyword.control.autoit'
+  }
+  {
+    'match': '(?:\\b(Func|EndFunc)\\b)'
+    'name': 'support.type.autoit'
+  }
+  {
+    'match': '(?i:\\s*#(define|AutoIt3Wrapper_Res_Fileversion|AutoIt3Wrapper_Res_Description|AutoIt3Wrapper_Res_Comment|Region|AutoIt3Wrapper_Icon|AutoIt3Wrapper_Outfile|EndRegion|include-once|include|NoAutoIt3Execute|NoTrayIcon|OnAutoItStartRegister|RequireAdmin))'
+    'name': 'support.other.autoit'
+  }
+  {
+    'match': '\\s(=|\\+=|-=|\\*=|/=|&=)\\s'
+    'name': 'keyword.operator.assignment.autoit'
+  }
+  {
+    'match': '(\\+|-|\\*|/|&|\\^)'
+    'name': 'keyword.operator.arithmetic.autoit'
+  }
+  {
+    'match': '(=|==|<>|>|>=|<|<=)'
+    'name': 'keyword.operator.comparison.autoit'
+  }
+  {
+    'match': '(?i:\\b(AND|OR|NOT))'
+    'name': 'keyword.operator.logical.autoit'
+  }
+  {
+    'match': '(?i:\\b(True|False)\\b)'
+    'name': 'constant.boolean.autoit'
+  }
+  {
+    'match': '(?i:\\s*(ReDim|Dim|Local|Global|Const))'
+    'name': 'entity.name.declaration.autoit'
+  }
+  {
+    'match': '(?i:(\\s*@(AppDataCommonDir|AppDataDir|AutoItExe|AutoItPID|AutoItVersion|AutoItX64|COM_EventObj|CommonFilesDir|Compiled|ComputerName|ComSpec|CPUArch|CRLF|CR|DesktopCommonDir|DesktopDir|DesktopHeight|DesktopWidth|DesktopDepth|DesktopRefresh|DocumentsCommonDir|error|exitCode|exitMethod|extended|FavoritesCommonDir|FavoritesDir|GUI_CtrlId|GUI_CtrlHandle|GUI_DragId|GUI_DragFile|GUI_DropId|GUI_WinHandle|HomeDrive|HomePath|HomeShare|HOUR|IPAddress1|IPAddress2|IPAddress3|IPAddress4|KBLayout|LF|LogonDNSDomain|LogonDomain|LogonServer|MDAY|MIN|MON|MSEC|MUILang|MyDocumentsDir|NumParams|OSArch|OSBuild|OSLang|OSServicePack|OSType|OSVersion|ProgramFilesDir|ProgramsCommonDir|ProgramsDir|ScriptDir|ScriptFullPath|ScriptLineNumber|ScriptName|SEC|StartMenuCommonDir|StartMenuDir|StartupCommonDir|StartupDir|SW_DISABLE|SW_ENABLE|SW_HIDE|SW_LOCK|SW_MAXIMIZE|SW_MINIMIZE|SW_RESTORE|SW_SHOW|SW_SHOWDEFAULT|SW_SHOWMAXIMIZED|SW_SHOWMINIMIZED|SW_SHOWMINNOACTIVE|SW_SHOWNA|SW_SHOWNOACTIVATE|SW_SHOWNORMAL|SW_UNLOCK|SystemDir|TAB|TempDir|TRAY_ID|TrayIconFlashing|TrayIconVisible|UserProfileDir|UserName|WDAY|WindowsDir|WorkingDir|YDAY|YEAR))|Default)'
+    'name': 'support.constant.autoit'
+  }
+  {
+    'match': '(?i:(\\b(Abs|ACos|AdlibRegister|AdlibUnRegister|Asc|AscW|ASin|Assign|ATan|AutoItSetOption|AutoItWinGetTitle|AutoItWinSetTitle|Beep|Binary|BinaryLen|BinaryMid|BinaryToString|BitAND|BitNOT|BitOR|BitRotate|BitShift|BitXOR|BlockInput|Break|Call|CDTray|Ceiling|Chr|ChrW|ClipGet|ClipPut|ConsoleRead|ConsoleWrite|ConsoleWriteError|ControlClick|ControlCommand|ControlDisable|ControlEnable|ControlFocus|ControlGetFocus|ControlGetHandle|ControlGetPos|ControlGetText|ControlHide|ControlListView|ControlMove|ControlSend|ControlSetText|ControlShow|ControlTreeView|Cos|Dec|DirCopy|DirCreate|DirGetSize|DirMove|DirRemove|DllCall|DllCallbackFree|DllCallbackGetPtr|DllCallbackRegister|DllClose|DllOpen|DllStructCreate|DllStructGetData|DllStructGetPtr|DllStructGetSize|DllStructSetData|DriveGetDrive|DriveGetFileSystem|DriveGetLabel|DriveGetSerial|DriveGetType|DriveMapAdd|DriveMapDel|DriveMapGet|DriveSetLabel|DriveSpaceFree|DriveSpaceTotal|DriveStatus|EnvGet|EnvSet|EnvUpdate|Eval|Execute|Exp|FileChangeDir|FileClose|FileCopy|FileCreateNTFSLink|FileCreateShortcut|FileDelete|FileExists|FileFindFirstFile|FileFindNextFile|FileFlush|FileGetAttrib|FileGetEncoding|FileGetLongName|FileGetPos|FileGetShortcut|FileGetShortName|FileGetSize|FileGetTime|FileGetVersion|FileInstall|FileMove|FileOpen|FileOpenDialog|FileReadLine|FileRead|FileRecycle|FileRecycleEmpty|FileSaveDialog|FileSelectFolder|FileSetAttrib|FileSetPos|FileSetTime|FileWrite|FileWriteLine|Floor|FtpSetProxy|GUICreate|GUICtrlCreateAvi|GUICtrlCreateButton|GUICtrlCreateCheckbox|GUICtrlCreateCombo|GUICtrlCreateContextMenu|GUICtrlCreateDate|GUICtrlCreateDummy|GUICtrlCreateEdit|GUICtrlCreateGraphic|GUICtrlCreateGroup|GUICtrlCreateIcon|GUICtrlCreateInput|GUICtrlCreateLabel|GUICtrlCreateList|GUICtrlCreateListView|GUICtrlCreateListViewItem|GUICtrlCreateMenu|GUICtrlCreateMenuItem|GUICtrlCreateMonthCal|GUICtrlCreateObj|GUICtrlCreatePic|GUICtrlCreateProgress|GUICtrlCreateRadio|GUICtrlCreateSlider|GUICtrlCreateTab|GUICtrlCreateTabItem|GUICtrlCreateTreeView|GUICtrlCreateTreeViewItem|GUICtrlCreateUpdown|GUICtrlDelete|GUICtrlGetHandle|GUICtrlGetState|GUICtrlRead|GUICtrlRecvMsg|GUICtrlRegisterListViewSort|GUICtrlSendMsg|GUICtrlSendToDummy|GUICtrlSetBkColor|GUICtrlSetColor|GUICtrlSetCursor|GUICtrlSetData|GUICtrlSetDefBkColor|GUICtrlSetDefColor|GUICtrlSetFont|GUICtrlSetGraphic|GUICtrlSetImage|GUICtrlSetLimit|GUICtrlSetOnEvent|GUICtrlSetPos|GUICtrlSetResizing|GUICtrlSetState|GUICtrlSetStyle|GUICtrlSetTip|GUIDelete|GUIGetCursorInfo|GUIGetMsg|GUIGetStyle|GUIRegisterMsg|GUISetAccelerators|GUISetBkColor|GUISetCoord|GUISetCursor|GUISetFont|GUISetHelp|GUISetIcon|GUISetOnEvent|GUISetState|GUISetStyle|GUIStartGroup|GUISwitch|Hex|HotKeySet|HttpSetProxy|HttpSetUserAgent|HWnd|InetClose|InetGet|InetGetInfo|InetGetSize|InetRead|IniDelete|IniRead|IniReadSection|IniReadSectionNames|IniRenameSection|IniWrite|IniWriteSection|InputBox|Int|IsAdmin|IsArray|IsBinary|IsBool|IsDeclared|IsDllStruct|IsFloat|IsHWnd|IsInt|IsKeyword|IsNumber|IsObj|IsPtr|IsString|Log|MemGetStats|Mod|MouseClick|MouseClickDrag|MouseDown|MouseGetCursor|MouseGetPos|MouseMove|MouseUp|MouseWheel|MsgBox|Number|ObjCreate|ObjEvent|ObjGet|ObjName|OnAutoItExitRegister|OnAutoItExitUnRegister|Ping|PixelChecksum|PixelGetColor|PixelSearch|PluginClose|PluginOpen|ProcessClose|ProcessExists|ProcessGetStats|ProcessList|ProcessSetPriority|ProcessWait|ProcessWaitClose|ProgressOff|ProgressOn|ProgressSet|Ptr|Random|RegDelete|RegEnumKey|RegEnumVal|RegRead|RegWrite|Round|RunAs|RunAsWait|RunWait|Run|Send|SendKeepActive|SetError|SetExtended|ShellExecute|ShellExecuteWait|Shutdown|Sin|Sleep|SoundPlay|SoundSetWaveVolume|SplashImageOn|SplashOff|SplashTextOn|Sqrt|SRandom|StatusbarGetText|StderrRead|StdinWrite|StdioClose|StdoutRead|StringAddCR|StringCompare|StringFormat|StringFromASCIIArray|StringInStr|StringIsAlNum|StringIsAlpha|StringIsASCII|StringIsDigit|StringIsFloat|StringIsInt|StringIsLower|StringIsSpace|StringIsUpper|StringIsXDigit|StringLeft|StringLen|StringLower|StringMid|StringRegExp|StringRegExpReplace|StringReplace|StringRight|StringSplit|StringStripCR|StringStripWS|StringToASCIIArray|StringToBinary|StringTrimLeft|StringTrimRight|StringUpper|String|Tan|TCPAccept|TCPCloseSocket|TCPConnect|TCPListen|TCPNameToIP|TCPRecv|TCPSend|TCPShutdown,|UDPShutdown|Stops|TCP/UDP|services.|TCPStartup,|UDPStartup|Starts|TCP|or|UDP|services.|TimerDiff|TimerInit|ToolTip|TrayCreateItem|TrayCreateMenu|TrayGetMsg|TrayItemDelete|TrayItemGetHandle|TrayItemGetState|TrayItemGetText|TrayItemSetOnEvent|TrayItemSetState|TrayItemSetText|TraySetClick|TraySetIcon|TraySetOnEvent|TraySetPauseIcon|TraySetState|TraySetToolTip|TrayTip|UBound|UDPBind|UDPCloseSocket|UDPOpen|UDPRecv|UDPSend|VarGetType|WinActivate|WinActive|WinClose|WinExists|WinFlash|WinGetCaretPos|WinGetClassList|WinGetClientSize|WinGetHandle|WinGetPos|WinGetProcess|WinGetState|WinGetText|WinGetTitle|WinKill|WinList|WinMenuSelectItem|WinMinimizeAll|WinMinimizeAllUndo|WinMove|WinSetOnTop|WinSetState|WinSetTitle|WinSetTrans|WinWait|WinWaitActive|WinWaitClose|WinWaitNotActive))|Exit)\\b'
+    'name': 'support.function.autoit'
+  }
+  {
+    'match': '[a-zA-Z_]+[\\w_]*(?=\\()'
+    'name': 'entity.name.function.autoit'
+  }
+  {
+    'begin': '"'
+    'end': '"'
+    'name': 'string.quoted.double.autoit'
+    'patterns': [
+      {
+        'match': '`'
+        'name': 'constant.character.escape.autoit'
+      }
+    ]
+  }
+  {
+    'begin': '\''
+    'end': '\''
+    'name': 'string.quoted.single.autoit'
+    'patterns': [
+      {
+        'match': '`'
+        'name': 'constant.character.escape.autoit'
+      }
+    ]
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.comment.autoit'
+    'match': '(?:^[ \\t]+)?(;).*$\\n?'
+    'name': 'comment.line.semi-colon.autoit'
+  }
+  {
+    'begin': '(?i:^#((comments-start|cs)).*$)'
+    'captures':
+      '0':
+        'name': 'punctuation.definition.comment.autoit'
+    'comment': 'multiline comments'
+    'end': '(?i:^#((comments-end)|(ce)).*$)'
+    'name': 'comment.block.documentation.autoit'
+  }
+  {
+    'match': ','
+    'name': 'punctuation.separator.function.autoit'
+  }
+  {
+    'match': '\\[|\\]'
+    'name': 'punctuation.section.array.autoit'
+  }
+  {
+    'match': '\\(|\\)'
+    'name': 'punctuation.section.function.autoit'
+  }
+  {
+    'match': '(?i:\\bStatic\\b)'
+    'name': 'invalid.experimental.autoit'
+  }
+]
+'scopeName': 'source.autoit.3'

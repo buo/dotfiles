@@ -1,0 +1,3 @@
+'.source.autoit':
+  'editor':
+    'commentStart': ';'

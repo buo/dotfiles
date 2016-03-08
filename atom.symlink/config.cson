@@ -1,12 +1,12 @@
 "*":
-  editor:
-    showIndentGuide: true
-    fontFamily: "Menlo"
-    invisibles: {}
-    showInvisibles: true
-    tabLength: 2
-    fontSize: 16
+  "atom-beautify":
+    _analyticsUserId: "b47ef96e-a2f6-4f69-9a8c-5043cd89e1ee"
   core:
+    disabledPackages: [
+      "background-tips"
+      "exception-reporting"
+      "metrics"
+    ]
     ignoredNames: [
       ".bundle"
       ".git"
@@ -15,29 +15,29 @@
       "tmp"
       "vendor"
     ]
-    disabledPackages: [
-      "background-tips"
-      "exception-reporting"
-      "metrics"
-    ]
     themes: [
       "nucleus-dark-ui"
       "atom-dark-fusion-syntax"
     ]
+  editor:
+    fontFamily: "Menlo"
+    fontSize: 16
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    tabLength: 2
+  "go-plus":
+    goPath: "$HOME/Projects"
+  "linter-docker": {}
+  minimap: {}
+  "release-notes":
+    viewedVersion: "0.89.0"
   "spell-check":
     grammars: [
       "text.plain"
       "source.gfm"
       "text.git-commit"
     ]
+  "tree-view": {}
   welcome:
     showOnStartup: false
-  "release-notes":
-    viewedVersion: "0.89.0"
-  "tree-view": {}
-  minimap: {}
-  "atom-beautify":
-    _analyticsUserId: "b47ef96e-a2f6-4f69-9a8c-5043cd89e1ee"
-  "go-plus":
-    goPath: "$HOME/Projects"
-  "linter-docker": {}
