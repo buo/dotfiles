@@ -1,3 +1,4 @@
+fs = require 'fs'
 {Emitter, CompositeDisposable, Task, Range} = require 'atom'
 Color = require './color'
 ColorMarker = require './color-marker'
@@ -38,6 +39,18 @@ class ColorBuffer
       @project.appendPath(path) if @isVariablesSource()
       @update()
 
+    if @project.getPaths()? and @isVariablesSource() and !@project.hasPath(@editor.getPath())
+      if fs.existsSync(@editor.getPath())
+        @project.appendPath(@editor.getPath())
+      else
+        saveSubscription = @editor.onDidSave ({path}) =>
+          @project.appendPath(path)
+          @update()
+          saveSubscription.dispose()
+          @subscriptions.remove(saveSubscription)
+
+        @subscriptions.add(saveSubscription)
+
     @subscriptions.add @project.onDidUpdateVariables =>
       return unless @variableInitialized
       @scanBufferForColors().then (results) => @updateColorMarkers(results)
@@ -47,8 +60,11 @@ class ColorBuffer
 
     @subscriptions.add atom.config.observe 'pigments.delayBeforeScan', (@delayBeforeScan=0) =>
 
-    # Needed to clean the serialized markers from previous versions
-    @editor.findMarkers(type: 'pigments-variable').forEach (m) -> m.destroy()
+    if @editor.addMarkerLayer?
+      @markerLayer = @editor.addMarkerLayer()
+      @editor.findMarkers(type: 'pigments-color').forEach (m) -> m.destroy()
+    else
+      @markerLayer = @editor
 
     if colorMarkers?
       @restoreMarkersState(colorMarkers)
@@ -85,7 +101,7 @@ class ColorBuffer
     @colorMarkers = colorMarkers
     .filter (state) -> state?
     .map (state) =>
-      marker = @editor.getMarker(state.markerId) ? @editor.markBufferRange(state.bufferRange, {
+      marker = @editor.getMarker(state.markerId) ? @markerLayer.markBufferRange(state.bufferRange, {
         type: 'pigments-color'
         invalidate: 'touch'
       })
@@ -100,7 +116,7 @@ class ColorBuffer
       }
 
   cleanUnusedTextEditorMarkers: ->
-    @editor.findMarkers(type: 'pigments-color').forEach (m) =>
+    @markerLayer.findMarkers(type: 'pigments-color').forEach (m) =>
       m.destroy() unless @colorMarkersByMarkerId[m.id]?
 
   variablesAvailable: ->
@@ -229,13 +245,15 @@ class ColorBuffer
   ##    ##     ## ##     ## ##    ##  ##   ##  ##       ##    ##  ##    ##
   ##    ##     ## ##     ## ##     ## ##    ## ######## ##     ##  ######
 
+  getMarkerLayer: -> @markerLayer
+
   getColorMarkers: -> @colorMarkers
 
   getValidColorMarkers: ->
-    @getColorMarkers()?.filter((m) -> m.color.isValid()) ? []
+    @getColorMarkers()?.filter((m) -> m.color?.isValid() and not m.isIgnored()) ? []
 
   getColorMarkerAtBufferPosition: (bufferPosition) ->
-    markers = @editor.findMarkers({
+    markers = @markerLayer.findMarkers({
       type: 'pigments-color'
       containsBufferPosition: bufferPosition
     })
@@ -258,7 +276,7 @@ class ColorBuffer
         while results.length
           result = results.shift()
 
-          marker = @editor.markBufferRange(result.bufferRange, {
+          marker = @markerLayer.markBufferRange(result.bufferRange, {
             type: 'pigments-color'
             invalidate: 'touch'
           })
@@ -333,7 +351,7 @@ class ColorBuffer
 
   findColorMarkers: (properties={}) ->
     properties.type = 'pigments-color'
-    markers = @editor.findMarkers(properties)
+    markers = @markerLayer.findMarkers(properties)
     markers.map (marker) =>
       @colorMarkersByMarkerId[marker.id]
     .filter (marker) -> marker?
@@ -341,6 +359,19 @@ class ColorBuffer
   findValidColorMarkers: (properties) ->
     @findColorMarkers(properties).filter (marker) =>
       marker? and marker.color?.isValid() and not marker?.isIgnored()
+
+  selectColorMarkerAndOpenPicker: (colorMarker) ->
+    return if @destroyed
+
+    @editor.setSelectedBufferRange(colorMarker.marker.getBufferRange())
+
+    # For the moment it seems only colors in #RRGGBB format are detected
+    # by the color picker, so we'll exclude anything else
+    return unless @editor.getSelectedText()?.match(/^#[0-9a-fA-F]{3,8}$/)
+
+    if @project.colorPickerAPI?
+      @project.colorPickerAPI.open(@editor, @editor.getLastCursor())
+
 
   scanBufferForColors: (options={}) ->
     return Promise.reject("This ColorBuffer is already destroyed") if @destroyed

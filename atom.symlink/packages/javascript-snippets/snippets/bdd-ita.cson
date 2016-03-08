@@ -1,8 +1,8 @@
-".source.js":
+".source.js, .source.jsx, .source.ts":
   "it asynchronous":
     "prefix": "ita"
     "body": """
     it('${1:description}', function(done) {
-      ${0:// body...}
+    \t${0:// body...}
     });
     """

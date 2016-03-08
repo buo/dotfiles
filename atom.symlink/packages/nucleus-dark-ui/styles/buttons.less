@@ -93,9 +93,9 @@ button.icon,
 
   &:focus,
   &:hover {
-    color: @base-background-color;
-    background: @color;
-    border-color: @color;
+    color: @base-background-color !important;
+    background: @color !important;
+    border-color: @color !important;
   }
 
   &:active,
@@ -111,15 +111,16 @@ button.icon,
     border: 1px solid @color !important;
 
     &:hover {
-      color: @base-background-color;
+      color: @base-background-color !important;
       border: 1px solid @text-color-highlight !important;
-      background: @color;
+      background: @color !important;
     }
   }
 
-  &[disabled] {
+  &[disabled],
+  &.disabled {
     opacity: 1;
-    background-color: transparent;
+    background-color: transparent !important;
     border-color: transparent !important;
     color: @text-color-subtle !important;
   }
@@ -127,25 +128,22 @@ button.icon,
 
 .button-variant(@color) {
   .button(@color);
-  color: @color;
+  color: @color !important;;
   border-color: @color !important;
 
   &:hover {
     border-color: @color !important;
   }
+
   &.selected {
-    color: @color;
+    color: @color !important;
   }
 
   &[disabled],
   &.disabled {
     opacity: 1;
-    background-color: transparent;
+    background-color: transparent !important;
     border-color: transparent !important;
     color: @text-color-subtle !important;
   }
-}
-
-button[click="cancel"] {
-  .button-variant(@text-color-error) !important;
 }

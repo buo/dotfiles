@@ -12,6 +12,49 @@ autocomplete-suggestion-list.select-list.popover-list .suggestion-description-co
   color: @text-color;
 }
 
+// script ----------------------------------------------------------------------
+.script-view {
+  pre {
+    border: 0;
+  }
+}
+
+// build -----------------------------------------------------------------------
+.build {
+  border-left: 0;
+  animation: none !important;
+
+  .title {
+    background: transparent !important;
+    &.success {
+      color: @text-color-success;
+    }
+    &.error {
+      color: @text-color-error;
+    }
+  }
+
+  .output {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .control-container {
+    padding-left: 5px;
+    padding-right: 5px;
+    opacity: 1.0;
+    .btn {
+      .button(@button-border-color);
+
+      &.icon-zap {
+        .button-variant(@text-color-info);
+      }
+      &.icon-trashcan {
+        .button-variant(@text-color-error);
+      }
+    }
+  }
+}
 
 // mini-map --------------------------------------------------------------------
 atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-visible-area,
@@ -79,9 +122,9 @@ linter-panel:empty {
   border: 0 !important;
   background: transparent;
 
-  &:hover {
-    color: @text-color-highlight;
-    background: transparent;
+  &:hover, &:focus, :active {
+    color: @text-color-highlight !important;
+    background: transparent !important;
   }
 }
 
@@ -400,4 +443,105 @@ atom-text-editor::shadow .gutter .line-number.atom-jshint-error,
 
 #jshint-status-pane {
   border-top: 0;
+}
+
+// color-picker ----------------------------------------------------------------
+.ColorPicker-body {
+  .overlay-shadow();
+  background: @overlay-background-color;
+  border: 1px solid @base-border-color;
+}
+
+.ColorPicker-body-saturation {
+  border: 1px solid @base-border-color;
+}
+
+.ColorPicker-body-alpha {
+  border: 1px solid @base-border-color;
+}
+
+.ColorPicker-body-hue {
+  border: 1px solid @base-border-color;
+}
+
+.ColorPicker-format {
+  background: @overlay-background-color;
+  border: 1px solid @base-border-color;
+}
+
+.ColorPicker-format-button {
+  background: @overlay-background-color;
+  color: @text-color-subtle;
+  border: 0 !important;
+  text-shadow: none !important;
+  border-radius: 0;
+}
+
+.ColorPicker-format-button.is--active {
+  background: @base-background-color;
+  color: @text-color-highlight;
+}
+
+.ColorPicker-format-button:hover {
+  background: @background-color-highlight !important;
+  color: @text-color-highlight !important;
+}
+
+// tree-view-open-files --------------------------------------------------------
+.tree-view-open-files {
+  border-bottom: 1px solid @base-border-color;
+  & > .list-tree {
+    padding-left: 0;
+    padding-bottom: 0 !important;
+  }
+  .list-tree {
+    padding-bottom: 10px;
+    & > .list-nested-item > .list-item,
+    & > .list-nested-item.collapsed > .list-item, {
+      padding-left: 17px;
+      height: @tab-height + 1px;
+      line-height: @tab-height;
+      margin-left: 0 !important;
+      &:before {
+        display: none;
+      }
+      & > .name {
+        .text(bold);
+        color: @text-color-subtle;
+        &:before {
+          display: none;
+        }
+      }
+    }
+    .list-item {
+      color: @text-color-subtle;
+      margin-left: 24px !important;
+      &.selected:before {
+        background: transparent;
+      }
+      &:hover > button {
+        opacity: 1.0;
+      }
+      &:hover > button:before {
+        transform: scale(1);
+      }
+    }
+    .list-item > button {
+      opacity: 0;
+      border: 0 !important;
+      padding-left: 0;
+      padding-right: 5px;
+      text-align: left;
+      height: 24px;
+      line-height: 24px;
+      &:before {
+        transition: transform 400ms ease;
+        transform: scale(0);
+      }
+      &:hover {
+        background: transparent !important;
+        color: @text-color-highlight !important;
+      }
+    }
+  }
 }

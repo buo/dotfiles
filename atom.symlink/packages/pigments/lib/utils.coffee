@@ -58,7 +58,7 @@ utils =
     index = startIndex
     nests = 1
 
-    while nests && index < s.length
+    while nests and index < s.length
       curStr = s.substr index++, 1
 
       if curStr is closingChar
@@ -73,6 +73,7 @@ utils =
     l = s.length
     i = 0
     start = 0
+    previousStart = start
     `whileLoop: //`
     while i < l
       c = s.substr(i, 1)
@@ -80,6 +81,7 @@ utils =
       switch(c)
         when "("
           i = utils.findClosingIndex s, i + 1, c, ")"
+          `break whileLoop` if i is -1
         # A parser regexp will end with the last ), so sequences like (...)(...)
         # will end after the second parenthesis pair, by mathing ) we prevent
         # an infinite loop when splitting the string.
@@ -87,16 +89,20 @@ utils =
           `break whileLoop`
         when "["
           i = utils.findClosingIndex s, i + 1, c, "]"
+          `break whileLoop` if i is -1
         when ""
           i = utils.findClosingIndex s, i + 1, c, ""
+          `break whileLoop` if i is -1
         when sep
           a.push utils.strip s.substr start, i - start
           start = i + 1
+          `break whileLoop` if previousStart is start
+          previousStart = start
 
       i++
 
     a.push utils.strip s.substr start, i - start
-    a
+    a.filter (s) -> s? and s.length
 
 
 module.exports = utils

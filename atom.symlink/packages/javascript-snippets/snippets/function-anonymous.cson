@@ -1,8 +1,8 @@
-".source.js":
+".source.js, .source.jsx, .source.ts":
   "anonymous function":
     "prefix": "afn"
     "body": """
     function(${1:arguments}) {
-      ${0:// body...}
+    \t${0:// body...}
     }
     """

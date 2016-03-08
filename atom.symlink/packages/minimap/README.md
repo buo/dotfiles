@@ -1,4 +1,8 @@
-# Minimap package [![Build Status](https://travis-ci.org/atom-minimap/minimap.svg?branch=master)](https://travis-ci.org/atom-minimap/minimap)
+[![Build Status](https://travis-ci.org/atom-minimap/minimap.svg?branch=master)](https://travis-ci.org/atom-minimap/minimap)
+[![APM Version](https://img.shields.io/apm/v/minimap.svg)](https://atom.io/packages/minimap)
+[![APM Downloads](https://img.shields.io/apm/dm/minimap.svg)](https://atom.io/packages/minimap)
+
+# Minimap package
 
 A preview of the full source code.
 
@@ -27,21 +31,27 @@ Package|Description
 [Auto-Hide](https://atom.io/packages/minimap-autohide)|Hides the Minimap while editing.
 [Bookmarks](https://atom.io/packages/minimap-bookmarks)|Displays Atom bookmarks.
 [Code Glance](https://atom.io/packages/minimap-codeglance)|Shows the code that's under the mouse cursor when hovering the Minimap.
+[Cursor Line](https://atom.io/packages/minimap-cursorline)|Highlights the line with cursor.
 [Find And Replace](https://atom.io/packages/minimap-find-and-replace)|Displays the search matches.
 [Git Diff](https://atom.io/packages/minimap-git-diff)|Displays the file diff.
+[Google-Repo-Diff-Minimap](https://atom.io/packages/google-repo-diff-minimap)|A Minimap binding for the [google-repo-diff](https://atom.io/packages/google-repo-diff) package and [google-repo](https://atom.io/packages/google-repo) package.
+[GPool-Diff-Minimap](https://atom.io/packages/gpool-diff-minimap)|A minimap binding for the [gpool-diff](https://atom.io/packages/gpool-diff) package.
 [Hide on inactive panes](https://atom.io/packages/minimap-hide)|Hide the Minimap when pane isn't focus.
 [Highlight Selected](https://atom.io/packages/minimap-highlight-selected)|A Minimap binding for the [highlight-selected](http://atom.io/packages/highlight-selected) package.
 [Linter](https://atom.io/packages/minimap-linter)|Displays [linter](https://atom.io/packages/linter) markers.
 [Pigments](https://atom.io/packages/minimap-pigments)|Displays the [Pigments](https://atom.io/packages/pigments) colors.
 [Selection](https://atom.io/packages/minimap-selection)|Display the buffer's selections.
 [Split-Diff](https://atom.io/packages/minimap-split-diff)|A Minimap binding for the [split-diff](https://atom.io/packages/split-diff) package.
-[Google-Repo-Diff-Minimap](https://atom.io/packages/google-repo-diff-minimap)|A Minimap binding for the [google-repo-diff](https://atom.io/packages/google-repo-diff) package and [google-repo](https://atom.io/packages/google-repo) package.
 
 ### Settings
 
 #### Auto Toggle
 
 If checked the Minimap is toggled on at startup. `(default=true)`
+
+#### Device Pixel Ratio Rounding
+
+If checked the `devicePixelRatio` will be rounded using `Math.floor`. `(default=true)`
 
 #### Display Code Highlights
 
@@ -109,6 +119,23 @@ Toggles the display of a side line showing which part of the buffer is currently
 
 When plugins are installed, a setting is created for each to enable/disable them directly from the Minimap settings view.
 
+#### Plugins * Decorations Z-Index
+
+When several plugins create decorations for the same layer, the general rule is to render the decorations as follows:
+
+- On the background layer, the `line` decorations are rendered before the `highlight-under` decorations.
+- On the foreground layer, the `highlight-over` decorations are rendered before the `highlight-outine` decorations.
+- When two plugins adds the same type of decorations at the same place, the decorations are rendered in the order they have been created.
+
+But fortunately, it's possible to reorder decorations on their specific layer using these settings. These settings works as a `z-index` in CSS, the higher the value, the higher the decorations will be in the render stack, for instance, a plugin's decorations with an order value of `1` will appear above decorations from a plugin with an order value of `0`.
+
+#### Smooth Scrolling
+
+Whether to offset the minimap canvas when scrolling to keep the scroll smooth. When `true` the minimap canvas will be offseted, resulting in a smoother scroll, but with the side-effect of a blurry minimap when the canvas is placed between pixels. When `false` the canvas will always stay at the same position, and will never look blurry, but the scroll will appear more jagged. `(default=true)`
+
+`true`|`false`
+---|---
+![](https://github.com/atom-minimap/minimap/blob/master/resources/smooth-scroll.png?raw=true)|![](https://github.com/atom-minimap/minimap/blob/master/resources/no-smooth-scroll.png?raw=true)
 
 #### Scroll Animation
 
@@ -118,6 +145,15 @@ Enable animations when scrolling the editor by clicking on the Minimap. `(defaul
 
 Duration of the scroll animation when clicking on the Minimap. `(default=300)`
 
+#### Independent Minimap Scroll On Mouse Wheel Events
+
+When enabled, using the mouse wheel over the Minimap will make it scroll independently of the text editor. The Minimap will still sync with the editor whenever the editor is scrolled, but it will no longer relay the mouse wheel events to the editor. `(default=false)`
+
+![](https://github.com/atom-minimap/minimap/blob/master/resources/independent-scroll.gif?raw=true)
+
+#### Scroll Sensitivity
+
+The scrolling speed when the `Independent Minimap Scroll On Mouse Wheel Events` setting is enabled. `(default=0.5)`
 
 #### Use Hardware Acceleration
 
@@ -137,7 +173,7 @@ Note that this setting will do nothing if `Display Minimap On Left` is also enab
 
 The Minimap package doesn't provide any default keybindings. But you can define your own as demonstrated below:
 
-```cson
+```coffee
 'atom-workspace':
   'cmd-m': 'minimap:toggle'
   'ctrl-alt-cmd-j': 'minimap:generate-javascript-plugin'
@@ -211,6 +247,28 @@ atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-visible-area 
 
 The visible area will still allow interaction but the Minimap track won't.
 
+#### Making Minimap visible only in the focused pane
+
+You can put the following code in your user stylesheet to achieve this effect:
+
+```css
+atom-text-editor {
+  &, &::shadow {
+    atom-text-editor-minimap {
+      display: none;
+    }
+  }
+
+  &.is-focused {
+    &, &::shadow {
+      atom-text-editor-minimap {
+        display: block;
+      }
+    }
+  }
+}
+```
+
 ### ASCII Art Comments
 
 One neat trick is to use ASCII art to create huge comments visible in the minimap. This is really efficient when navigating huge files.
@@ -256,21 +314,22 @@ Starting with version 4.13, the Minimap can operate in a stand-alone mode. Basic
 
 The example below demonstrates how to retrieve and display a stand-alone Minimap:
 
-```coffee
-atom.packages.serviceHub.consume 'minimap', '1.0.0', (api) ->
+```js
+atom.packages.serviceHub.consume('minimap', '1.0.0', (api) => {
   editor = atom.workspace.getActiveTextEditor()
   minimap = api.standAloneMinimapForEditor(editor)
 
   minimapElement = atom.views.getView(minimap)
   minimapElement.attach(document.body)
-  minimapElement.style.cssText = '''
+  minimapElement.style.cssText = `
     width: 300px;
     height: 300px;
     position: fixed;
     top: 0;
     right: 100px;
     z-index: 10;
-  '''
+  `
+})
 ```
 
 In a nutshell, here's the main changes to expect when using a stand-alone Minimap:
@@ -293,15 +352,15 @@ While the interface is the same, some details such as the available decorations 
 
 The most important change is that decorations on the Minimap doesn't use a `class`, but rather a `scope`
 
-```coffee
-minimapView.decorateMarker(marker, type: 'line', scope: '.scope .to .the.marker.style')
+```js
+minimapView.decorateMarker(marker, {type: 'line', scope: '.scope .to .the.marker.style'})
 ```
 
 It's still possible to pass a class parameter to the decoration:
 
 
-```coffee
-minimapView.decorateMarker(marker, type: 'line', class: 'the marker style')
+```js
+minimapView.decorateMarker(marker, {type: 'line', class: 'the marker style'})
 ```
 
 In that case, when rendering the decoration a scope will be build that will look like `.minimap .editor .the.marker.style`.
@@ -322,11 +381,19 @@ Also note that only the `background` property will be retrieved to style a decor
 
 A last option is to pass a css color directly in a `color` option, such as:
 
-```coffee
-minimapView.decorateMarker(marker, type: 'line', color: '#ff0000')
+```js
+minimapView.decorateMarker(marker, {type: 'line', color: '#ff0000'})
 ```
 
 In that case neither the scope nor the class will be used.
+
+#### Decorations Origin
+
+A plugin can and should set the plugin origin on the decorations it creates so that the Minimap can easily know which order to apply on the decorations. When not provided, the plugin origin will be inferred from the path of the function invoking the `decorateMarker` method. If the origin can't be inferred the order value will always be `0` for this decoration.
+
+```js
+minimapView.decorateMarker(marker, {type: 'line', color: '#ff0000', plugin: 'my-plugin-name'})
+```
 
 #### Decorations Types
 
@@ -339,4 +406,4 @@ Another non-trivial change is the list of available decoration's type. At the ti
 
 ### License
 
-MIT
+[MIT](./LICENSE)

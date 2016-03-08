@@ -183,7 +183,7 @@ For instance, if you want to ignore colors in comments and strings in your sourc
 
 As you can notice, the `.` character in scopes are escaped. This is due to the fact that this setting uses javascript `RegExp` to test the token's scope and the `.` is used to match against any character.
 
-For instance, to ignores colors in html attributes you can use the following expression:
+For instance, to ignore colors in html attributes you can use the following expression:
 
 ```
 \.text\.html(.*)\.string
@@ -208,6 +208,13 @@ The autocomplete provider will only complete color names in editors whose scope 
 When enabled, the autocomplete provider will also provides completion for non-color variables.
 
 * Key: `pigments.extendAutocompleteToVariables`
+* Default: `false`
+
+### Extend Autocomplete To Color Value
+
+When enabled, the autocomplete provider will also provides color value.
+
+* Key: `pigments.extendAutocompleteToColorValue`
 * Default: `false`
 
 ### Traverse Into Symlink Directories

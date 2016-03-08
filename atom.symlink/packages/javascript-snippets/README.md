@@ -5,6 +5,7 @@
 ## Install
 
 Go to `Atom > Preferences...` then search for **JavaScript Snippets** in Packages tab.
+Restart atom.
 
 ## Development
 
@@ -30,6 +31,12 @@ console.dir(${1:obj});
 console.error(${1:obj});
 ```
 
+### [ci] console.info
+
+```javascript
+console.info(${1:obj});
+```
+
 ### [cl] console.log
 
 ```javascript
@@ -40,6 +47,12 @@ console.log(${1:obj});
 
 ```javascript
 console.warn(${1:obj});
+```
+
+### [de] debugger
+
+```javascript
+debugger;
 ```
 
 ## DOM
@@ -73,7 +86,7 @@ ${1:document}.createElement(${2:elem});
 ### [cdf] createDocumentFragment
 
 ```javascript
-${1:document}.createDocumentFragment(${2:elem});
+${1:document}.createDocumentFragment();
 ```
 
 ### [ca] classList.add
@@ -203,9 +216,9 @@ ${1:ClassName}.prototype.${2:methodName} = function(${3:arguments}) {
 ### [iife] immediately-invoked function expression
 
 ```javascript
-(function(window, document, undefined) {
+(function(${1:window}, ${2:document}) {
 	${0:// body...}
-})(window, document);
+})(${1:window}, ${2:document});
 ```
 
 ### [call] function call
@@ -226,6 +239,20 @@ ${1:methodName}.apply(${2:context}, [${3:arguments}])
 ${1:functionName}: function(${2:arguments}) {
 	${3:// body...}
 }
+```
+
+## JSON
+
+### [jp] JSON.parse
+
+```javascript
+JSON.parse(${1:obj});
+```
+
+### [js] JSON.stringify
+
+```javascript
+JSON.stringify(${1:obj});
 ```
 
 ## Timer
@@ -326,6 +353,12 @@ it('${1:description}');
 
 ```javascript
 alert('${1:msg}');
+```
+
+### [co] confirm
+
+```javascript
+confirm('${1:msg}');
 ```
 
 ### [pm] prompt

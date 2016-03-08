@@ -1,8 +1,8 @@
-".source.js":
+".source.js, .source.jsx, .source.ts":
   "it synchronous":
     "prefix": "its"
     "body": """
     it('${1:description}', function() {
-      ${0:// body...}
+    \t${0:// body...}
     });
     """

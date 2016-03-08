@@ -18,7 +18,7 @@ export default {
   activate: () => {
     // We are now using steelbrain's package dependency package to install our
     //  dependencies.
-    require("atom-package-deps").install("linter-ruby");
+    require("atom-package-deps").install();
   },
 
   provideLinter: () => {
@@ -40,7 +40,7 @@ export default {
           if (fileExtension === extension) return [];
         }
 
-        return helpers.exec(command, ['-wc'], {stdin: activeEditor.getText(), stream: 'stderr'}).then(output => {
+        return helpers.exec(command, ['-wc', '-Ku'], {stdin: activeEditor.getText(), stream: 'stderr'}).then(output => {
           var toReturn = [];
           output.split(/\r?\n/).forEach(function (line) {
             const matches = regex.exec(line);

@@ -1,8 +1,8 @@
-".source.js":
+".source.js, .source.jsx, .source.ts":
   "function":
     "prefix": "fn"
     "body": """
     function ${1:methodName} (${2:arguments}) {
-      ${0:// body...}
+    \t${0:// body...}
     }
     """

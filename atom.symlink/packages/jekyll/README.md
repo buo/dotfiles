@@ -1,4 +1,4 @@
-# Jekyll-Atom [![Build Status](https://travis-ci.org/Arcath/jekyll-atom.svg?branch=master)](https://travis-ci.org/Arcath/jekyll-atom) [![Dependency Status](https://david-dm.org/arcath/jekyll-atom.svg)](https://david-dm.org/arcath/jekyll-atom)
+# Jekyll-Atom [![Build Status](https://travis-ci.org/Arcath/jekyll-atom.svg?branch=master)](https://travis-ci.org/Arcath/jekyll-atom) [![Dependency Status](https://david-dm.org/arcath/jekyll-atom.svg)](https://david-dm.org/arcath/jekyll-atom) [![Join the chat at https://gitter.im/Arcath/jekyll-atom](https://badges.gitter.im/Arcath/jekyll-atom.svg)](https://gitter.im/Arcath/jekyll-atom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A collection of snippets and tools for [Jekyll] in [Atom]
 
@@ -8,23 +8,33 @@ A collection of snippets and tools for [Jekyll] in [Atom]
 
 Jekyll-Atom has a few settings that can be set through the [Atom] settings.
 
-`Layouts Dir` The path to your layouts, defaults to `_layouts/`
-
-`Layouts Type` The file type of your layouts, defaults to `.html`
-
-`Posts Dir` The path to your posts, defaults to `_posts/`
-
-`Posts Type` The file type of your posts, defaults to `.markdown`
-
-`Includes Dir` The path to your includes, defaults to `_includes/`
-
-`Data Dir` The path to your data, defaults to `_data/`
-
-`Sites Dir` The path to the compiled site, defaults to `_site/`
-
 `Server Port` The port used by [static-server](https://github.com/nbluis/static-server), defaults to `3000`
 
-`Build Command` An array containing the command to build a site, defaults to `jekyll, build`
+`Build Command` An array containing the default command to build a site, defaults to `jekyll, build`. Can be overridden in your projects `_config.yml`.
+
+ - The `Build Command` will most likely need changing due to some weirdness with $PATH in [Atom].
+   - Go into the packages settings (Settings -> Packages -> Jekyll).
+   - Change `Build Command` to `/path/to/jekyll, build`.
+   - You can get your /path/to/jekyll by using `which jekyll` in your terminal.
+
+`Draft By Default` whether the draft tick box is ticked by default on the new post screen.
+
+## _config.yml
+
+Jekyll Atom can pickup project specific config from your `_config.yml`.
+
+For Example:
+
+```yaml
+atom:
+  buildCommand:
+    - jekyll
+    - build
+    - --option
+    - --this
+  buildEnv:
+    JEKYLL_ENV: development
+```
 
 # Usage
 
@@ -67,8 +77,6 @@ When Triggered this function looks at the text around your cursor to find the da
 `Cmd-Shift-I` Open include
 
 `Cmd-Alt-J` Create a new post
-
-`Cmd-Alt-T` Open the toolbar
 
 `Alt-Shift-T` Turn the server on/off
 

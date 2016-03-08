@@ -1,6 +1,6 @@
 {
   "name": "editorconfig",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Helps developers maintain consistent coding styles between different editors",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,8 @@
     "code-style"
   ],
   "dependencies": {
-    "editorconfig": "^0.12.2"
+    "atom-set-text": "^1.1.0",
+    "editorconfig": "^0.13.2"
   },
   "devDependencies": {
     "xo": "*"
@@ -43,37 +44,47 @@
     "url": "https://github.com/sindresorhus/atom-editorconfig/issues"
   },
   "homepage": "https://github.com/sindresorhus/atom-editorconfig#readme",
-  "_id": "editorconfig@1.2.2",
-  "_shasum": "4b887978935c557410d3a99057e43c9d2bbab5e7",
-  "_resolved": "file:../d-1151129-37689-9ngy84/package.tgz",
-  "_from": "../d-1151129-37689-9ngy84/package.tgz",
+  "_id": "editorconfig@1.2.4",
+  "_shasum": "37fe8586bd97042be966318a684985e028dad9f8",
+  "_resolved": "file:../d-11628-62969-d5b1dc/package.tgz",
+  "_from": "../d-11628-62969-d5b1dc/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
+        "name": "atom-set-text",
+        "version": "1.1.1",
+        "path": "node_modules/atom-set-text/index.js"
+      },
+      {
         "name": "editorconfig",
-        "version": "0.12.2",
+        "version": "0.13.2",
         "path": "node_modules/editorconfig/editorconfig.js"
       },
       {
         "name": "bluebird",
-        "version": "2.10.2",
-        "path": "node_modules/editorconfig/node_modules/bluebird/js/main/bluebird.js"
+        "version": "3.3.4",
+        "path": "node_modules/editorconfig/node_modules/bluebird/js/release/bluebird.js"
       },
       {
         "name": "commander",
-        "version": "1.1.1",
+        "version": "2.9.0",
         "path": "node_modules/editorconfig/node_modules/commander/index.js"
       },
       {
-        "name": "keypress",
-        "version": "0.1.0",
-        "path": "node_modules/editorconfig/node_modules/commander/node_modules/keypress/index.js"
+        "name": "graceful-readlink",
+        "version": "1.0.1",
+        "path": "node_modules/editorconfig/node_modules/commander/node_modules/graceful-readlink/index.js"
       },
       {
         "name": "lru-cache",
-        "version": "2.0.4",
+        "version": "3.2.0",
         "path": "node_modules/editorconfig/node_modules/lru-cache/lib/lru-cache.js"
+      },
+      {
+        "name": "pseudomap",
+        "version": "1.0.2",
+        "path": "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/map.js"
       },
       {
         "name": "sigmund",
@@ -84,62 +95,66 @@
     "extensions": {
       ".js": [
         "index.js",
+        "node_modules/atom-set-text/index.js",
         "node_modules/editorconfig/editorconfig.js",
         "node_modules/editorconfig/lib/fnmatch.js",
         "node_modules/editorconfig/lib/ini.js",
         "node_modules/editorconfig/lib/version.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/browser/bluebird.core.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/browser/bluebird.core.min.js",
         "node_modules/editorconfig/node_modules/bluebird/js/browser/bluebird.js",
         "node_modules/editorconfig/node_modules/bluebird/js/browser/bluebird.min.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/any.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/assert.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/async.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/bind.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/bluebird.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/call_get.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/cancel.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/captured_trace.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/catch_filter.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/context.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/debuggability.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/direct_resolve.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/each.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/errors.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/es5.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/filter.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/finally.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/generators.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/join.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/map.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/method.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/nodeify.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/progress.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/promise.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/promise_array.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/promise_resolver.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/promisify.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/props.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/queue.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/race.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/reduce.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/schedule.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/settle.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/some.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/synchronous_inspection.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/thenables.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/timers.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/using.js",
-        "node_modules/editorconfig/node_modules/bluebird/js/main/util.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/any.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/assert.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/async.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/bind.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/bluebird.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/call_get.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/cancel.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/catch_filter.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/context.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/debuggability.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/direct_resolve.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/each.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/errors.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/es5.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/filter.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/finally.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/generators.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/join.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/map.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/method.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/nodeback.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/nodeify.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/promise.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/promise_array.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/promisify.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/props.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/queue.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/race.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/reduce.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/schedule.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/settle.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/some.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/synchronous_inspection.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/thenables.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/timers.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/using.js",
+        "node_modules/editorconfig/node_modules/bluebird/js/release/util.js",
         "node_modules/editorconfig/node_modules/commander/index.js",
-        "node_modules/editorconfig/node_modules/commander/node_modules/keypress/index.js",
-        "node_modules/editorconfig/node_modules/commander/node_modules/keypress/test.js",
+        "node_modules/editorconfig/node_modules/commander/node_modules/graceful-readlink/index.js",
         "node_modules/editorconfig/node_modules/lru-cache/lib/lru-cache.js",
+        "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/map.js",
+        "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/pseudomap.js",
         "node_modules/editorconfig/node_modules/sigmund/bench.js",
         "node_modules/editorconfig/node_modules/sigmund/sigmund.js"
       ],
       ".json": [
+        "node_modules/atom-set-text/package.json",
         "node_modules/editorconfig/node_modules/bluebird/package.json",
-        "node_modules/editorconfig/node_modules/commander/node_modules/keypress/package.json",
+        "node_modules/editorconfig/node_modules/commander/node_modules/graceful-readlink/package.json",
         "node_modules/editorconfig/node_modules/commander/package.json",
+        "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/package.json",
         "node_modules/editorconfig/node_modules/lru-cache/package.json",
         "node_modules/editorconfig/node_modules/sigmund/package.json",
         "node_modules/editorconfig/package.json",
@@ -153,19 +168,21 @@
           ""
         ],
         "dependencies": {
-          "editorconfig": "^0.12.2"
+          "atom-set-text": "^1.1.0",
+          "editorconfig": "^0.13.2"
         }
       },
       {
         "paths": [
           "node_modules/editorconfig",
-          "node_modules/editorconfig/lib"
+          "node_modules/editorconfig/lib",
+          "node_modules/editorconfig/test"
         ],
         "dependencies": {
-          "bluebird": "^2.3.6",
-          "commander": "~1.1.1",
-          "lru-cache": "~2.0.0",
-          "sigmund": "~1.0.0"
+          "bluebird": "^3.0.5",
+          "commander": "^2.9.0",
+          "lru-cache": "^3.2.0",
+          "sigmund": "^1.0.1"
         }
       },
       {
@@ -173,7 +190,17 @@
           "node_modules/editorconfig/node_modules/commander"
         ],
         "dependencies": {
-          "keypress": "0.1.x"
+          "graceful-readlink": ">= 1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/editorconfig/node_modules/lru-cache/lib",
+          "node_modules/editorconfig/node_modules/lru-cache",
+          "node_modules/editorconfig/node_modules/lru-cache/test"
+        ],
+        "dependencies": {
+          "pseudomap": "^1.0.1"
         }
       }
     ]

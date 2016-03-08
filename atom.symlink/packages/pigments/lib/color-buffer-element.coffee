@@ -1,8 +1,9 @@
 {Emitter, CompositeDisposable} = require 'atom'
-{registerOrUpdateElement} = require 'atom-utils'
+{registerOrUpdateElement, EventsDelegation} = require 'atom-utils'
 ColorMarkerElement = require './color-marker-element'
 
 class ColorBufferElement extends HTMLElement
+  EventsDelegation.includeInto(this)
 
   createdCallback: ->
     [@editorScrollLeft, @editorScrollTop] = [0, 0]
@@ -109,7 +110,7 @@ class ColorBufferElement extends HTMLElement
     @detach()
     @subscriptions.dispose()
     @releaseAllMarkerViews()
-    @colorModel = null
+    @colorBuffer = null
 
   update: ->
     if @useGutter()
@@ -148,13 +149,32 @@ class ColorBufferElement extends HTMLElement
     @gutter = @editor.addGutter name: 'pigments'
     @displayedMarkers = []
     @decorationByMarkerId = {}
+    gutterContainer = @getEditorRoot().querySelector('.gutter-container')
+    @gutterSubscription = @subscribeTo gutterContainer,
+      mousedown: (e) =>
+        targetDecoration = e.path[0]
+
+        unless targetDecoration.matches('span')
+          targetDecoration = targetDecoration.querySelector('span')
+
+        return unless targetDecoration?
+
+        markerId = targetDecoration.dataset.markerId
+        colorMarker = @displayedMarkers.filter((m) -> m.id is Number(markerId))[0]
+
+        return unless colorMarker? and @colorBuffer?
+
+        @colorBuffer.selectColorMarkerAndOpenPicker(colorMarker)
+
     @updateGutterDecorations()
 
   destroyGutter: ->
     @gutter.destroy()
+    @gutterSubscription.dispose()
     @displayedMarkers = []
     decoration.destroy() for id, decoration of @decorationByMarkerId
     @decorationByMarkerId = null
+    @gutterSubscription = null
     @updateMarkers()
 
   updateGutterDecorations: ->
@@ -194,7 +214,7 @@ class ColorBufferElement extends HTMLElement
   getGutterDecorationItem: (marker) ->
     div = document.createElement('div')
     div.innerHTML = """
-    <span style='background-color: #{marker.color.toCSS()};'></span>
+    <span style='background-color: #{marker.color.toCSS()};' data-marker-id='#{marker.id}'></span>
     """
     div
 
@@ -205,6 +225,25 @@ class ColorBufferElement extends HTMLElement
   ##    ##     ## ######### ##   ##   ##  ##   ##       ##   ##         ##
   ##    ##     ## ##     ## ##    ##  ##   ##  ##       ##    ##  ##    ##
   ##    ##     ## ##     ## ##     ## ##    ## ######## ##     ##  ######
+
+  requestMarkerUpdate: (markers) ->
+    if @frameRequested
+      @dirtyMarkers = @dirtyMarkers.concat(markers)
+      return
+    else
+      @dirtyMarkers = markers.slice()
+      @frameRequested = true
+
+    requestAnimationFrame =>
+      dirtyMarkers = []
+      dirtyMarkers.push(m) for m in @dirtyMarkers when m not in dirtyMarkers
+
+      delete @frameRequested
+      delete @dirtyMarkers
+
+      return unless @colorBuffer?
+
+      dirtyMarkers.forEach (marker) -> marker.render()
 
   updateMarkers: ->
     return if @editor.isDestroyed()
@@ -228,6 +267,7 @@ class ColorBufferElement extends HTMLElement
       view = @unusedMarkers.shift()
     else
       view = new ColorMarkerElement
+      view.setContainer(this)
       view.onDidRelease ({marker}) =>
         @displayedMarkers.splice(@displayedMarkers.indexOf(marker), 1)
         @releaseMarkerView(marker)
@@ -340,7 +380,7 @@ class ColorBufferElement extends HTMLElement
     else
       @editor
 
-    rootElement = @editorElement.shadowRoot ? @editorElement
+    rootElement = @getEditorRoot()
     {top, left} = rootElement.querySelector('.lines').getBoundingClientRect()
     top = clientY - top + scrollTarget.getScrollTop()
     left = clientX - left + scrollTarget.getScrollLeft()

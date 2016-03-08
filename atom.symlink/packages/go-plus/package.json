@@ -17,7 +17,7 @@
     "oracle",
     "vet"
   ],
-  "version": "3.5.2",
+  "version": "3.5.4",
   "main": "./lib/go-plus",
   "license": "Apache-2.0",
   "engines": {
@@ -44,11 +44,15 @@
     "event-kit": ">=0.8.1",
     "fs-plus": "2.x",
     "glob": ">=4.0.6",
-    "temp": ">=0.8.1",
+    "temp": ">=0.8.3",
     "underscore-plus": "1.x"
   },
   "devDependencies": {
-    "coffeelint": ">=1.8.1"
+    "coffeelint": ">=1.8.1",
+    "eslint": "^1.5.0",
+    "babel-eslint": "^4.1.3",
+    "eslint-config-standard": "^4.4.0",
+    "eslint-plugin-standard": "^1.3.1"
   },
   "providedServices": {
     "autocomplete.provider": {
@@ -57,18 +61,18 @@
       }
     }
   },
-  "readme": "# [go-plus](https://atom.io/packages/go-plus) [![OSX Build Status](https://travis-ci.org/joefitzgerald/go-plus.svg?branch=master)](https://travis-ci.org/joefitzgerald/go-plus) [![Windows Build status](https://ci.appveyor.com/api/projects/status/d0cekvaprt9wo1et)](https://ci.appveyor.com/project/joefitzgerald/go-plus) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/joefitzgerald/go-plus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n> An Improved [Go](https://www.golang.org) Experience For The [Atom Editor](https://atom.io)\n\n* Github: https://github.com/joefitzgerald/go-plus\n* Atom: https://atom.io/packages/go-plus\n\n## Installing\n\n1. Install `go-plus`: `apm install go-plus` or open Atom and go to `Preferences > Install`, search for `go-plus`, and install it\n\n## Overview\n\nThis package adds extra Atom functionality for the go language:\n\n* Autocomplete using `gocode` (you _must_ have the `autocomplete-plus` package activated for this to work)\n* Formatting source using `gofmt`, `goimports`, or `goreturns`\n* Code quality inspection using `go vet`\n* Linting using `golint`\n* Syntax checking using `go build` and `go test`\n* Display of test coverage using `go test -coverprofile`\n* Go to definition using `godef`\n\n## Example\n\n![An example of go-plus in action](https://cloud.githubusercontent.com/assets/744740/8767613/68718e22-2e1f-11e5-9e3c-afe5c23792d7.gif)\n\n## Platforms\n\nThe package is currently known to work on OS X, Windows (7+) and Ubuntu. CI jobs exist for OS X and Windows; Ubuntu CI is still in-progress.\n\n## Configuration\n\n### Defaults\n\n| Display Name                            | Name                                        | Default     | Description                                                                                                                                                                                                                            |\n|:----------------------------------------|:--------------------------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Environment Overrides Config            | `go-plus.environmentOverridesConfiguration` | `true`      | Use the environment's value for GOPATH (if set) instead of the configured value for GOPATH (below)                                                                                                                                     |\n| GOPATH                                  | `go-plus.goPath`                            | `unset`     | You should set your GOPATH in the environment, and launch Atom using the `atom` command line tool; if you would like to set it explicitly, you can do so here (e.g. ~/go)                                                              |\n| Go Installation Path                    | `go-plus.goInstallation`                    | `unset`     | You should not normally set this; if you have a non-standard go installation path and `go` is not available on your PATH, you can use this to configure the location to `go` (e.g. /usr/local/othergo/bin/go or c:\\othergo\\bin\\go.exe) |\n| Run Format Tool On Save                 | `go-plus.formatOnSave`                      | `true`      | Run the configured format tool each time a file is saved                                                                                                                                                                               |\n| Format Tool                             | `go-plus.formatTool`                        | `goimports` | Choose one: goimports, goreturns, or gofmt                                                                                                                                                                                             |\n| Format Arguments                        | `go-plus.formatArgs`                        | `-w -e`     | `-w` will always be used; you can specify additional arguments for the format tool if desired                                                                                                                                          |\n| Run Lint Tool On Save                   | `go-plus.lintOnSave`                        | `true`      | Run `golint` each time a file is saved                                                                                                                                                                                                 |\n| Lint Arguments                          | `go-plus.golintArgs`                        | `unset`     | Arguments to pass to `golint` (these are not usually needed)                                                                                                                                                                           |\n| Run Coverage Tool On Save               | `go-plus.runCoverageOnSave`                 | `false`     | Run `go test -coverprofile` each time a file is saved                                                                                                                                                                                  |\n| Run Syntax Check On Save                | `go-plus.syntaxCheckOnSave`                 | `true`      | Run `go build` / `go test` each time a file is saved                                                                                                                                                                                   |\n| Run Vet Tool On Save                    | `go-plus.vetOnSave`                         | `true`      | Run `go vet` each time a file is saved                                                                                                                                                                                                 |\n| Vet Arguments                           | `go-plus.vetArgs`                           | `unset`     | Arguments to pass to `go vet` (these are not usually needed)                                                                                                                                                                           |\n| Automatically Get Missing Tools         | `go-plus.getMissingTools`                   | `true`      | Run `go get -u` to retrieve any tools that are required but not currently available in the go tool directory, the PATH, or your GOPATH                                                                                                 |\n| Show Message Panel                      | `go-plus.showPanel`                         | `true`      | Show the go-plus message panel to provide information about issues with your source                                                                                                                                                    |\n| Show Message Panel When No Issues Exist | `go-plus.showPanelWhenNoIssuesExist`        | `false`     | Show the go-plus message panel even when no issues exist                                                                                                                                                                               |\n\n### Detection Of Your Go Installation\n\nThe package will search the following locations (in order) for a `go` executable:\n\n* All directories specified in the PATH environment variable\n* OS X: `/usr/local/go/bin` (package installer)\n* OS X: `/usr/local/bin` (Homebrew)\n* Windows: `C:\\go\\bin` (package installer)\n* Windows: `C:\\tools\\go\\bin` (Chocolatey)\n\nIf you have go installed somewhere else, and *not available on the path*, specify the full path to the go executable in the `Go Installation` preference.\n\n### GOPATH\n\nLove it or hate it, `GOPATH` is very important in `go` land.\n\nSyntax checking requires a valid `GOPATH` for the files you are checking. You\ncan set your `GOPATH` using one of two mechanisms:\n\n* Using the environment: set the `$GOPATH` environment variable to the correct\n  value\n* Using `go-plus` preferences: set the `Go Path` preference\n\nThe environment (if set) is preferred over the `Go Path` preference by default.\nYou can change this by updating the `Environment Overrides Configuration`\npreference.\n\nThe most common reason `GOPATH` might not be set in the environment is due to the\nway OS X launches processes. When you launch Atom via processes created by\n`launchd` (e.g. using Finder, the Dock, or Spotlight) it likely will not have\naccess to your `$GOPATH` if you set it in your shell initialization files (e.g.\n`.bash_profile`, `.bashrc`, `.zshrc`, etc).\n\nConsider launching Atom via your shell – using the Atom Shell Commands – where\nAtom should inherit your environment. Alternatively, try one of the suggestions\nat http://apple.stackexchange.com/a/87283 to set the `GOPATH` for processes\nlaunched by `launchd` (and their children, which will include Atom).\n\nSetting the `Go Path` preference will ensure that you have a sensible fallback\nfor GOPATH if you have launched Atom without the `$GOPATH` environment variable\nset.\n\nIf both the `Go Path` preference and the `$GOPATH` / `%GOPATH%` environment variable are\nempty, `go-plus` will display a warning and will not perform `go build` / `go\ntest` powered syntax checking.\n\n## Planned Features\n\nThe following features will be added soon:\n\n* `godoc` integration ([#12](https://github.com/joefitzgerald/go-plus/issues/12))\n* `gb` support\n* go `vendor experiment` support\n* `gorename` integration ([#174](https://github.com/joefitzgerald/go-plus/issues/174))\n* ... and others: https://github.com/joefitzgerald/go-plus/issues\n\n## Troubleshooting\n\n### GOPATH\n\n> <b>Question:</b> Why can't Atom see my GOPATH? I have set it and I see it in terminal?\n\n> <b>Answer:</b> Did You Launch Atom Using The Shell Command?\n\n(From Above):\n\nThe most common reason `GOPATH` might not be set in the environment on OS X is due to the way OS X launches processes. When you launch Atom via processes created by `launchd` (e.g. using Finder, the Dock, or Spotlight) it likely will not have access to your `$GOPATH` if you set it in your shell initialization files (e.g. `.bash_profile`, `.bashrc`, `.zshrc`, etc).\n\nConsider launching Atom via your shell – using the Atom Shell Commands – where Atom should inherit your environment. Alternatively, try one of the suggestions at http://apple.stackexchange.com/a/87283 to set the `GOPATH` for processes launched by `launchd` (and their children, which will include Atom).\n\n### Still Having Issues?\n\nIf you are having issues and the information above isn't helping, feel free to create an issue at https://github.com/joefitzgerald/go-plus/issues. When you create the issue, please be sure to paste the information from `Packages > Go Plus > Display Go Information` to help us form a response that is targeted to your situation. This looks something like:\n\n```\nGo: go1.3.3 darwin/amd64 (@/usr/local/bin/go)\nGOPATH: /Users/jfitzgerald/go\nCover Tool: /usr/local/Cellar/go/1.3.3/libexec/pkg/tool/darwin_amd64/cover\nVet Tool: /usr/local/Cellar/go/1.3.3/libexec/pkg/tool/darwin_amd64/vet\nFormat Tool: /Users/jfitzgerald/go/bin/goimports\nLint Tool: /Users/jfitzgerald/go/bin/golint\nGit: /usr/bin/git\nPATH: /Users/jfitzgerald/go/bin:/usr/local/bin:/Users/jfitzgerald/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/Users/jfitzgerald/go/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/texbin\nAtom: 0.143.0 (darwin x64 14.0.0)\n```\n\n## Contributors\n\nA list of contributors can be found at https://github.com/joefitzgerald/go-plus/graphs/contributors. Joe Fitzgerald ([@joefitzgerald](https://github.com/joefitzgerald)) is the maintainer of this project.\n\n## Contributing\n\nContributions are greatly appreciated. Please fork this repository, make your\nchanges, and open a pull request. See [Contributing](https://github.com/joefitzgerald/go-plus/wiki/Contributing) for detailed instructions.\n",
+  "readme": "# [go-plus](https://atom.io/packages/go-plus) [![OSX Build Status](https://travis-ci.org/joefitzgerald/go-plus.svg?branch=master)](https://travis-ci.org/joefitzgerald/go-plus) [![Windows Build status](https://ci.appveyor.com/api/projects/status/d0cekvaprt9wo1et)](https://ci.appveyor.com/project/joefitzgerald/go-plus) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/joefitzgerald/go-plus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n> An Improved [Go](https://www.golang.org) Experience For The [Atom Editor](https://atom.io)\n\n* Github: https://github.com/joefitzgerald/go-plus\n* Atom: https://atom.io/packages/go-plus\n\n## Installing\n\n1. Install `go-plus`: `apm install go-plus` or open Atom and go to `Preferences > Install`, search for `go-plus`, and install it\n\n## Overview\n\nThis package adds extra Atom functionality for the go language:\n\n* Autocomplete using `gocode` (you _must_ have the `autocomplete-plus` package activated for this to work)\n* Formatting source using `gofmt`, `goimports`, or `goreturns`\n* Code quality inspection using `go vet`\n* Linting using `golint`\n* Syntax checking using `go build` and `go test`\n* Display of test coverage using `go test -coverprofile`\n* Go to definition using `godef`\n\n## Example\n\n![An example of go-plus in action](https://cloud.githubusercontent.com/assets/744740/8767613/68718e22-2e1f-11e5-9e3c-afe5c23792d7.gif)\n\n## Platforms\n\nThe package is currently known to work on OS X, Windows (7+) and Ubuntu. CI jobs exist for OS X and Windows; Ubuntu CI is still in-progress.\n\n## Configuration\n\n### Defaults\n\n| Display Name                            | Name                                        | Default     | Description                                                                                                                                                                                                                            |\n|:----------------------------------------|:--------------------------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Environment Overrides Config            | `go-plus.environmentOverridesConfiguration` | `true`      | Use the environment's value for GOPATH (if set) instead of the configured value for GOPATH (below)                                                                                                                                     |\n| GOPATH                                  | `go-plus.goPath`                            | `unset`     | You should set your GOPATH in the environment, and launch Atom using the `atom` command line tool; if you would like to set it explicitly, you can do so here (e.g. ~/go)                                                              |\n| Go Installation Path                    | `go-plus.goInstallation`                    | `unset`     | You should not normally set this; if you have a non-standard go installation path and `go` is not available on your PATH, you can use this to configure the location to `go` (e.g. /usr/local/othergo/bin/go or c:\\othergo\\bin\\go.exe) |\n| Run Format Tool On Save                 | `go-plus.formatOnSave`                      | `true`      | Run the configured format tool each time a file is saved                                                                                                                                                                               |\n| Format Tool                             | `go-plus.formatTool`                        | `goimports` | Choose one: goimports, goreturns, or gofmt                                                                                                                                                                                             |\n| Format Arguments                        | `go-plus.formatArgs`                        | `-w -e`     | `-w` will always be used; you can specify additional arguments for the format tool if desired                                                                                                                                          |\n| Run Lint Tool On Save                   | `go-plus.lintOnSave`                        | `true`      | Run `golint` each time a file is saved                                                                                                                                                                                                 |\n| Lint Arguments                          | `go-plus.golintArgs`                        | `unset`     | Arguments to pass to `golint` (these are not usually needed)                                                                                                                                                                           |\n| Run Coverage Tool On Save               | `go-plus.runCoverageOnSave`                 | `false`     | Run `go test -coverprofile` each time a file is saved                                                                                                                                                                                  |\n| Run Syntax Check On Save                | `go-plus.syntaxCheckOnSave`                 | `true`      | Run `go build` / `go test` each time a file is saved                                                                                                                                                                                   |\n| Run Vet Tool On Save                    | `go-plus.vetOnSave`                         | `true`      | Run `go vet` each time a file is saved                                                                                                                                                                                                 |\n| Vet Arguments                           | `go-plus.vetArgs`                           | `unset`     | Arguments to pass to `go vet` (these are not usually needed)                                                                                                                                                                           |\n| Automatically Get Missing Tools         | `go-plus.getMissingTools`                   | `true`      | Run `go get -u` to retrieve any tools that are required but not currently available in the go tool directory, the PATH, or your GOPATH                                                                                                 |\n| Show Message Panel                      | `go-plus.showPanel`                         | `true`      | Show the go-plus message panel to provide information about issues with your source                                                                                                                                                    |\n| Show Message Panel When No Issues Exist | `go-plus.showPanelWhenNoIssuesExist`        | `false`     | Show the go-plus message panel even when no issues exist                                                                                                                                                                               |\n\n### Detection Of Your Go Installation\n\nThe package will search the following locations (in order) for a `go` executable:\n\n* All directories specified in the PATH environment variable\n* OS X: `/usr/local/go/bin` (package installer)\n* OS X: `/usr/local/bin` (Homebrew)\n* Windows: `C:\\go\\bin` (package installer)\n* Windows: `C:\\tools\\go\\bin` (Chocolatey)\n\nIf you have go installed somewhere else, and *not available on the path*, specify the full path to the go executable in the `Go Installation` preference.\n\n### GOPATH\n\nLove it or hate it, `GOPATH` is very important in `go` land.\n\nSyntax checking requires a valid `GOPATH` for the files you are checking. You\ncan set your `GOPATH` using one of two mechanisms:\n\n* Using the environment: set the `$GOPATH` environment variable to the correct\n  value\n* Using `go-plus` preferences: set the `Go Path` preference\n\nThe environment (if set) is preferred over the `Go Path` preference by default.\nYou can change this by updating the `Environment Overrides Configuration`\npreference.\n\nThe most common reason `GOPATH` might not be set in the environment is due to the\nway OS X launches processes. When you launch Atom via processes created by\n`launchd` (e.g. using Finder, the Dock, or Spotlight) it likely will not have\naccess to your `$GOPATH` if you set it in your shell initialization files (e.g.\n`.bash_profile`, `.bashrc`, `.zshrc`, etc).\n\nConsider launching Atom via your shell – using the Atom Shell Commands – where\nAtom should inherit your environment. Alternatively, try one of the suggestions\nat http://apple.stackexchange.com/a/87283 to set the `GOPATH` for processes\nlaunched by `launchd` (and their children, which will include Atom).\n\nSetting the `Go Path` preference will ensure that you have a sensible fallback\nfor GOPATH if you have launched Atom without the `$GOPATH` environment variable\nset.\n\nIf both the `Go Path` preference and the `$GOPATH` / `%GOPATH%` environment variable are\nempty, `go-plus` will display a warning and will not perform `go build` / `go\ntest` powered syntax checking.\n\n## Planned Features\n\nThe following features will be added soon:\n\n* `godoc` integration ([#12](https://github.com/joefitzgerald/go-plus/issues/12))\n* `gb` support\n* go `vendor experiment` support\n* `gorename` integration ([#174](https://github.com/joefitzgerald/go-plus/issues/174))\n* ... and others: https://github.com/joefitzgerald/go-plus/issues\n\n## Troubleshooting\n\n### GOPATH\n\n> <b>Question:</b> Why can't Atom see my GOPATH? I have set it and I see it in terminal?\n\n> <b>Answer:</b> Did You Launch Atom Using The Shell Command?\n\n(From Above):\n\nThe most common reason `GOPATH` might not be set in the environment on OS X is due to the way OS X launches processes. When you launch Atom via processes created by `launchd` (e.g. using Finder, the Dock, or Spotlight) it likely will not have access to your `$GOPATH` if you set it in your shell initialization files (e.g. `.bash_profile`, `.bashrc`, `.zshrc`, etc).\n\nConsider launching Atom via your shell – using the Atom Shell Commands – where Atom should inherit your environment. Alternatively, try one of the suggestions at http://apple.stackexchange.com/a/87283 to set the `GOPATH` for processes launched by `launchd` (and their children, which will include Atom).\n\n### Autocompletion\n\n>**Note:** First of all, make sure [autocomplete-plus](https://atom.io/packages/autocomplete-plus) is present on your setup. Go-plus provides autocompletion through [gocode](https://github.com/nsf/gocode) tool, so you should ensure it's in PATH and available.\n\nIf you can't get autocompletion for the user-defined packages working, while it's there for packages from standard library, it's likely a trivial gocode-related issue. Try running `gocode set`. Some expected output'd be:\n```\npropose-builtins false\nlib-path \"\"\nautobuild false\nforce-debug-output \"\"\npackage-lookup-mode \"go\"\n```\n\nWhat you gotta do is switching autobuild to true, by running `gocode set autobuild true`. Check autocompletion now, it must be working right.\n\n### Still Having Issues?\n\nIf you are having issues and the information above isn't helping, feel free to create an issue at https://github.com/joefitzgerald/go-plus/issues. When you create the issue, please be sure to paste the information from `Packages > Go Plus > Display Go Information` to help us form a response that is targeted to your situation. This looks something like:\n\n```\nGo: go1.3.3 darwin/amd64 (@/usr/local/bin/go)\nGOPATH: /Users/jfitzgerald/go\nCover Tool: /usr/local/Cellar/go/1.3.3/libexec/pkg/tool/darwin_amd64/cover\nVet Tool: /usr/local/Cellar/go/1.3.3/libexec/pkg/tool/darwin_amd64/vet\nFormat Tool: /Users/jfitzgerald/go/bin/goimports\nLint Tool: /Users/jfitzgerald/go/bin/golint\nGit: /usr/bin/git\nPATH: /Users/jfitzgerald/go/bin:/usr/local/bin:/Users/jfitzgerald/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/Users/jfitzgerald/go/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/texbin\nAtom: 0.143.0 (darwin x64 14.0.0)\n```\n\n## Contributors\n\nA list of contributors can be found at https://github.com/joefitzgerald/go-plus/graphs/contributors. Joe Fitzgerald ([@joefitzgerald](https://github.com/joefitzgerald)) is the maintainer of this project.\n\n## Contributing\n\nContributions are greatly appreciated. Please fork this repository, make your\nchanges, and open a pull request. See [Contributing](https://github.com/joefitzgerald/go-plus/wiki/Contributing) for detailed instructions.\n",
   "readmeFilename": "README.md",
-  "_id": "go-plus@3.5.2",
-  "_shasum": "00a167cd0310779cac4d8e53696743fcedc58142",
-  "_resolved": "file:../d-1151029-76986-gsykfe/package.tgz",
-  "_from": "../d-1151029-76986-gsykfe/package.tgz",
+  "_id": "go-plus@3.5.4",
+  "_shasum": "c59589ee06d4eeb0222e9f0dca30a4eacd54580b",
+  "_resolved": "file:../d-11628-62969-1f576b3/package.tgz",
+  "_from": "../d-11628-62969-1f576b3/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "async",
-        "version": "1.5.0",
+        "version": "1.5.2",
         "path": "node_modules/async/lib/async.js"
       },
       {
@@ -103,7 +107,7 @@
       },
       {
         "name": "es5-ext",
-        "version": "0.10.8",
+        "version": "0.10.11",
         "path": "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/index.js"
       },
       {
@@ -113,7 +117,7 @@
       },
       {
         "name": "es6-symbol",
-        "version": "3.0.1",
+        "version": "3.0.2",
         "path": "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/node_modules/es6-symbol/index.js"
       },
       {
@@ -138,13 +142,8 @@
       },
       {
         "name": "event-kit",
-        "version": "1.4.1",
+        "version": "2.0.0",
         "path": "node_modules/event-kit/lib/event-kit.js"
-      },
-      {
-        "name": "grim",
-        "version": "1.5.0",
-        "path": "node_modules/event-kit/node_modules/grim/lib/grim.js"
       },
       {
         "name": "fs-plus",
@@ -168,7 +167,7 @@
       },
       {
         "name": "glob",
-        "version": "6.0.1",
+        "version": "7.0.3",
         "path": "node_modules/glob/glob.js"
       },
       {
@@ -193,7 +192,7 @@
       },
       {
         "name": "brace-expansion",
-        "version": "1.1.2",
+        "version": "1.1.3",
         "path": "node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/index.js"
       },
       {
@@ -266,7 +265,6 @@
         "node_modules/emissary/node_modules/property-accessors/package.json",
         "node_modules/emissary/package.json",
         "node_modules/event-kit/api.json",
-        "node_modules/event-kit/node_modules/grim/package.json",
         "node_modules/event-kit/package.json",
         "node_modules/fs-plus/node_modules/async/component.json",
         "node_modules/fs-plus/node_modules/async/package.json",
@@ -607,6 +605,8 @@
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/copy.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/count.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/create.js",
+        "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/ensure-natural-number-value.js",
+        "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/ensure-natural-number.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/eq.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/every.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/filter.js",
@@ -622,6 +622,7 @@
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-copy-deep.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-copy.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-empty.js",
+        "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-number-value.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-object.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is-plain-object.js",
         "node_modules/emissary/node_modules/es6-weak-map/node_modules/es5-ext/object/is.js",
@@ -755,8 +756,6 @@
         "node_modules/event-kit/lib/disposable.js",
         "node_modules/event-kit/lib/emitter.js",
         "node_modules/event-kit/lib/event-kit.js",
-        "node_modules/event-kit/node_modules/grim/lib/deprecation.js",
-        "node_modules/event-kit/node_modules/grim/lib/grim.js",
         "node_modules/fs-plus/lib/fs-plus.js",
         "node_modules/fs-plus/node_modules/async/lib/async.js",
         "node_modules/fs-plus/node_modules/mkdirp/examples/pow.js",
@@ -813,7 +812,7 @@
           "event-kit": ">=0.8.1",
           "fs-plus": "2.x",
           "glob": ">=4.0.6",
-          "temp": ">=0.8.1",
+          "temp": ">=0.8.3",
           "underscore-plus": "1.x"
         }
       },
@@ -1036,7 +1035,7 @@
         ],
         "dependencies": {
           "es6-iterator": "2",
-          "es6-symbol": "3"
+          "es6-symbol": "~3.0.2"
         }
       },
       {
@@ -1059,7 +1058,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.8"
+          "es5-ext": "~0.10.10"
         }
       },
       {
@@ -1093,24 +1092,6 @@
         "dependencies": {
           "mixto": "1.x",
           "es6-weak-map": "^0.1.2"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/event-kit",
-          "node_modules/event-kit/lib"
-        ],
-        "dependencies": {
-          "grim": "^1.2.1"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/event-kit/node_modules/grim/lib",
-          "node_modules/event-kit/node_modules/grim"
-        ],
-        "dependencies": {
-          "emissary": "^1.2.0"
         }
       },
       {

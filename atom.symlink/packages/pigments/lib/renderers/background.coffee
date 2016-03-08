@@ -4,15 +4,16 @@ module.exports =
 class BackgroundRenderer extends RegionRenderer
   includeTextInRegion: true
   render: (colorMarker) ->
+    color = colorMarker?.color
 
-    color = colorMarker.color.toCSS()
+    return {} unless color?
 
     regions = @renderRegions(colorMarker)
 
-    l = colorMarker.color.luma
+    l = color.luma
 
     colorText = if l > 0.43 then 'black' else 'white'
-    @styleRegion(region, color, colorText) for region in regions
+    @styleRegion(region, color.toCSS(), colorText) for region in regions when region?
     {regions}
 
   styleRegion: (region, color, textColor) ->

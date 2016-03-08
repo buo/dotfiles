@@ -1,7 +1,7 @@
 {
   "name": "linter-ruby",
   "main": "./lib/main",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "Lint Ruby on the fly, using ruby -wc",
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
     }
   },
   "dependencies": {
-    "atom-linter": "^3.0.0",
-    "atom-package-deps": "^2.0.2"
+    "atom-linter": "^4.5.0",
+    "atom-package-deps": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "latest"
@@ -41,23 +41,38 @@
       "atom": true
     }
   },
-  "readme": "linter-ruby\n=========================\n\nThis linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to Ruby's builtin syntax analysis. It will be used with files that have the `Ruby` syntax.\n\n## Installation\nOn first activation the plugin will install all dependencies automatically, you no longer have to worry about installing Linter.\n\nJust install this package and you'll be good to go.\n\n## Settings\nYou can configure linter-ruby by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):\n```coffee\n'linter-ruby':\n  # ruby path. run `which ruby` to find the path.\n  'rubyExecutablePath': null\n\n  # ignored extensions, ERB and markdown files by default.\n  'ignoredExtensions': 'erb, md'\n```\n\n## Contributing\nIf you would like to contribute enhancements or fixes, please do the following:\n\n1. Fork the plugin repository.\n1. Hack on a separate topic branch created from the latest `master`.\n1. Commit and push the topic branch.\n1. Make a pull request.\n1. welcome to the club\n\nPlease note that modifications should follow these coding guidelines:\n\n- Indent is 2 spaces.\n- Code should pass coffeelint linter.\n- Vertical whitespace helps readability, don’t be afraid to use it.\n\nThank you for helping out!\n\n## Donation\n[![Share the love!](https://chewbacco-stuff.s3.amazonaws.com/donate.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXUYS4ARNHCN8)\n",
+  "readme": "# linter-ruby\n\nThis linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides\nan interface to Ruby's builtin syntax analysis. It will be used with files that\nhave the `Ruby` syntax.\n\n## Installation\n\nOn first activation the plugin will install all dependencies automatically, you\nno longer have to worry about installing Linter.\n\nJust install this package and you'll be good to go.\n\n## Settings\n\nYou can configure linter-ruby by editing `~/.atom/config.cson` (choose Open\nYour Config in Atom menu):\n\n```coffeescript\n'linter-ruby':\n  # ruby path. run `which ruby` to find the path.\n  'rubyExecutablePath': null\n\n  # ignored extensions, ERB and markdown files by default.\n  'ignoredExtensions': 'erb, md'\n```\n",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-ruby/issues"
   },
   "homepage": "https://github.com/AtomLinter/linter-ruby#readme",
-  "_id": "linter-ruby@1.2.0",
-  "_shasum": "175ca36c37220e3e99b4ba125f353df4ba696edf",
-  "_resolved": "file:../d-115913-80167-1ljvy4g/package.tgz",
-  "_from": "../d-115913-80167-1ljvy4g/package.tgz",
+  "_id": "linter-ruby@1.2.2",
+  "_shasum": "49d618073032b53857306383e4d2d962822763d2",
+  "_resolved": "file:../d-11628-62969-cb7i6g/package.tgz",
+  "_from": "../d-11628-62969-cb7i6g/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "atom-linter",
-        "version": "3.2.2",
-        "path": "node_modules/atom-linter/lib/helpers.coffee"
+        "version": "4.6.1",
+        "path": "node_modules/atom-linter/lib/index.js"
+      },
+      {
+        "name": "consistent-env",
+        "version": "1.1.2",
+        "path": "node_modules/atom-linter/node_modules/consistent-env/lib/index.js"
+      },
+      {
+        "name": "named-js-regexp",
+        "version": "1.3.1",
+        "path": "node_modules/atom-linter/node_modules/named-js-regexp/lib/named-js-regexp.js"
+      },
+      {
+        "name": "sb-promisify",
+        "version": "1.1.1",
+        "path": "node_modules/atom-linter/node_modules/sb-promisify/lib/index.js"
       },
       {
         "name": "tmp",
@@ -70,35 +85,49 @@
         "path": "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js"
       },
       {
-        "name": "xregexp",
-        "version": "2.0.0",
-        "path": "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
+        "name": "atom-package-deps",
+        "version": "4.0.1",
+        "path": "node_modules/atom-package-deps/lib/index.js"
       },
       {
-        "name": "atom-package-deps",
-        "version": "2.1.3",
-        "path": "node_modules/atom-package-deps/lib/main.js"
+        "name": "atom-package-path",
+        "version": "1.1.0",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js"
+      },
+      {
+        "name": "sb-callsite",
+        "version": "1.1.2",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js"
       }
     ],
     "extensions": {
       ".js": [
         "lib/main.js",
+        "node_modules/atom-linter/lib/helpers.js",
+        "node_modules/atom-linter/lib/index.js",
+        "node_modules/atom-linter/lib/types.js",
+        "node_modules/atom-linter/node_modules/consistent-env/lib/helpers.js",
+        "node_modules/atom-linter/node_modules/consistent-env/lib/index.js",
+        "node_modules/atom-linter/node_modules/named-js-regexp/lib/named-js-regexp.js",
+        "node_modules/atom-linter/node_modules/sb-promisify/lib/index.js",
         "node_modules/atom-linter/node_modules/tmp/Gruntfile.js",
         "node_modules/atom-linter/node_modules/tmp/lib/tmp.js",
         "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js",
-        "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js",
-        "node_modules/atom-package-deps/lib/helper.js",
-        "node_modules/atom-package-deps/lib/main.js",
-        "node_modules/atom-package-deps/lib/view.js"
-      ],
-      ".coffee": [
-        "node_modules/atom-linter/lib/helpers.coffee"
+        "node_modules/atom-package-deps/lib/helpers.js",
+        "node_modules/atom-package-deps/lib/index.js",
+        "node_modules/atom-package-deps/lib/view.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js"
       ],
       ".json": [
+        "node_modules/atom-linter/node_modules/consistent-env/package.json",
+        "node_modules/atom-linter/node_modules/named-js-regexp/package.json",
+        "node_modules/atom-linter/node_modules/sb-promisify/package.json",
         "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/package.json",
         "node_modules/atom-linter/node_modules/tmp/package.json",
-        "node_modules/atom-linter/node_modules/xregexp/package.json",
         "node_modules/atom-linter/package.json",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/package.json",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/package.json",
         "node_modules/atom-package-deps/package.json",
         "package.json"
       ]
@@ -110,19 +139,20 @@
           ""
         ],
         "dependencies": {
-          "atom-linter": "^3.0.0",
-          "atom-package-deps": "^2.0.2"
+          "atom-linter": "^4.5.0",
+          "atom-package-deps": "^4.0.1"
         }
       },
       {
         "paths": [
           "node_modules/atom-linter/lib",
-          "node_modules/atom-linter",
-          "node_modules/atom-linter/spec/fixtures",
-          "node_modules/atom-linter/spec"
+          "node_modules/atom-linter"
         ],
         "dependencies": {
-          "xregexp": "^2.0.0"
+          "consistent-env": "^1.0.1",
+          "named-js-regexp": "^1.3.1",
+          "sb-promisify": "^1.0.0",
+          "tmp": "~0.0.28"
         }
       },
       {
@@ -134,6 +164,25 @@
         ],
         "dependencies": {
           "os-tmpdir": "~1.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/lib",
+          "node_modules/atom-package-deps"
+        ],
+        "dependencies": {
+          "atom-package-path": "^1.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/node_modules/atom-package-path/lib",
+          "node_modules/atom-package-deps/node_modules/atom-package-path",
+          "node_modules/atom-package-deps/node_modules/atom-package-path/spec"
+        ],
+        "dependencies": {
+          "sb-callsite": "^1.1.2"
         }
       }
     ]

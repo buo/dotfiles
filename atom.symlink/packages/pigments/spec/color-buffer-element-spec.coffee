@@ -1,8 +1,13 @@
 path = require 'path'
 require './helpers/spec-helper'
+{mousedown} = require './helpers/events'
 
 ColorBufferElement = require '../lib/color-buffer-element'
 ColorMarkerElement = require '../lib/color-marker-element'
+
+sleep = (duration) ->
+  t = new Date()
+  waitsFor -> new Date() - t > duration
 
 describe 'ColorBufferElement', ->
   [editor, editorElement, colorBuffer, pigments, project, colorBufferElement, jasmineContent] = []
@@ -140,14 +145,18 @@ describe 'ColorBufferElement', ->
 
           describe 'and the markers are updated', ->
             beforeEach ->
-              waitsForPromise -> colorBuffer.variablesAvailable()
+              waitsForPromise 'colors available', ->
+                colorBuffer.variablesAvailable()
+              waitsFor 'last marker visible', ->
+                markers = colorBufferElement.shadowRoot.querySelectorAll('pigments-color-marker')
+                isVisible(markers[3])
 
             it 'hides the created markers', ->
               markers = colorBufferElement.shadowRoot.querySelectorAll('pigments-color-marker')
               expect(isVisible(markers[0])).toBeFalsy()
               expect(isVisible(markers[1])).toBeTruthy()
               expect(isVisible(markers[2])).toBeTruthy()
-              expect(isVisible(markers[3])).toBeFalsy()
+              expect(isVisible(markers[3])).toBeTruthy()
 
       describe 'when a line is edited and gets wrapped', ->
         marker = null
@@ -198,10 +207,13 @@ describe 'ColorBufferElement', ->
 
       describe 'when the current pane is splitted to the right', ->
         beforeEach ->
-          atom.commands.dispatch(editorElement, 'pane:split-right')
+          if parseFloat(atom.getVersion()) > 1.5
+            atom.commands.dispatch(editorElement, 'pane:split-right-and-copy-active-item')
+          else
+            atom.commands.dispatch(editorElement, 'pane:split-right')
           editor = atom.workspace.getTextEditors()[1]
           colorBufferElement = atom.views.getView(project.colorBufferForEditor(editor))
-          waitsFor ->
+          waitsFor 'color buffer element markers', ->
             colorBufferElement.shadowRoot.querySelectorAll('pigments-color-marker').length
 
         it 'should keep all the buffer elements attached', ->
@@ -264,6 +276,20 @@ describe 'ColorBufferElement', ->
 
             it 'sets the size of the gutter based on the number of markers in the same row', ->
               expect(gutter.style.minWidth).toEqual('42px')
+
+            describe 'clicking on a gutter decoration', ->
+              beforeEach ->
+                project.colorPickerAPI =
+                  open: jasmine.createSpy('color-picker.open')
+
+                decoration = editorElement.shadowRoot.querySelector('.pigments-gutter-marker span')
+                mousedown(decoration)
+
+              it 'selects the text in the editor', ->
+                expect(editor.getSelectedScreenRange()).toEqual([[0,13],[0,17]])
+
+              it 'opens the color picker', ->
+                expect(project.colorPickerAPI.open).toHaveBeenCalled()
 
         describe 'when the marker is changed again', ->
           beforeEach ->

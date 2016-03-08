@@ -4,12 +4,16 @@ class DotRenderer
   render: (colorMarker) ->
     range = colorMarker.getScreenRange()
 
+    color = colorMarker.color
+
+    return {} unless color?
+
     textEditor = colorMarker.colorBuffer.editor
     textEditorElement = atom.views.getView(textEditor)
     displayBuffer = colorMarker.marker.displayBuffer
     charWidth = displayBuffer.getDefaultCharWidth()
 
-    markers = displayBuffer.findMarkers {
+    markers = colorMarker.colorBuffer.getMarkerLayer().findMarkers {
       type: 'pigments-color'
       intersectsScreenRowRange: [range.end.row, range.end.row]
     }
@@ -25,6 +29,6 @@ class DotRenderer
 
     class: 'dot'
     style:
-      backgroundColor: colorMarker.color.toCSS()
+      backgroundColor: color.toCSS()
       top: (pixelPosition.top + lineHeight / 2) + 'px'
       left: (column + index * 18) + 'px'

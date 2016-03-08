@@ -141,6 +141,7 @@
         #  Place the Color Picker element
         # ---------------------------
             @close()
+            @canOpen = yes
 
             # TODO: Is this really the best way to do this? Hint: Probably not
             (@Parent = (atom.views.getView atom.workspace).querySelector '.vertical')
@@ -155,7 +156,9 @@
 
             for [_event, _listener] in @listeners
                 window.removeEventListener _event, _listener
+
             @element.remove()
+            @canOpen = no
 
     # -------------------------------------
     #  Load Color Picker extensions // more like dependencies
@@ -250,11 +253,11 @@
     # -------------------------------------
     #  Open the Color Picker
     # -------------------------------------
-        open: ->
+        open: (Editor=null, Cursor=null) ->
             return unless @canOpen
             @emitBeforeOpen()
 
-            Editor = atom.workspace.getActiveTextEditor()
+            Editor = atom.workspace.getActiveTextEditor() unless Editor
             EditorView = atom.views.getView Editor
 
             return unless EditorView
@@ -265,7 +268,7 @@
 
         #  Find the current cursor
         # ---------------------------
-            Cursor = Editor.getLastCursor()
+            Cursor = Editor.getLastCursor() unless Cursor
 
             # Fail if the cursor isn't visible
             _visibleRowRange = EditorView.getVisibleRowRange()
@@ -405,7 +408,7 @@
             requestAnimationFrame => # wait for class delay
                 @element.open()
                 @emitOpen()
-            return
+            return true
 
     # -------------------------------------
     #  Replace selected color

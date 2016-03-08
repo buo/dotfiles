@@ -14,7 +14,10 @@ module.exports = {
   Supported extensions
   ###
   extensions: [
+    "d"
   ]
+
+  defaultBeautifier: "Uncrustify"
 
   options:
     configPath:

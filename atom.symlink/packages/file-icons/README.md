@@ -64,8 +64,8 @@ Icons are located at `./stylesheets/icons.less`. You can create a custom CSS cla
 ## Fonts
 Some custom fonts are already provided
 * [FontAwesome](http://fortawesome.github.io/Font-Awesome/)(`.fa`)
-* [FontMfizz](http://mfizz.com/oss/font-mfizz)(`.mf`)
-* [Icomoon](http://icomoon.io)(`.iconmoon`)
+* [FontMfizz](http://fizzed.com/oss/font-mfizz)(`.mf`)
+* [Icomoon](https://icomoon.io/)(`.iconmoon`)
 * [Devicons](http://vorillaz.github.io/devicons/)(`.devicons`)
 
 ```css
@@ -86,6 +86,10 @@ Medium is colour provided by Base16. Light is medium lightened 15%. Dark is medi
 .medium-blue;
 .dark-maroon;
 ```
+
+# Changelog
+See [CHANGELOG.md](CHANGELOG.md).
+
 
 # Acknowledgments
 

@@ -38,6 +38,8 @@ module.exports = class Beautifiers extends EventEmitter
     'coffee-formatter'
     'coffee-fmt'
     'clang-format'
+    'dfmt'
+    'elm-format'
     'htmlbeautifier'
     'csscomb'
     'gherkin'
@@ -47,8 +49,10 @@ module.exports = class Beautifiers extends EventEmitter
     'jscs'
     'perltidy'
     'php-cs-fixer'
+    'phpcbf'
     'prettydiff'
     'puppet-fix'
+    'remark'
     'rubocop'
     'ruby-beautify'
     'rustfmt'
@@ -57,6 +61,7 @@ module.exports = class Beautifiers extends EventEmitter
     'tidy-markdown'
     'typescript-formatter'
     'yapf'
+    'erl_tidy'
   ]
 
   ###
@@ -257,7 +262,6 @@ module.exports = class Beautifiers extends EventEmitter
       beautifiers = lang.beautifiers
       optionName = "language_#{lang.namespace}"
 
-
       # Add Language configurations
       flatOptions["#{optionName}_disabled"] = {
         title : "Language Config - #{name} - Disable Beautifying Language"
@@ -291,14 +295,24 @@ module.exports = class Beautifiers extends EventEmitter
     str.replace(/#/g, '%23').replace(/;/g, '%3B')
 
 
-  getBeautifiers : (language, options) ->
+  getBeautifiers : (language) ->
 
     # logger.verbose(@beautifiers)
     _.filter( @beautifiers, (beautifier) ->
 
       # logger.verbose('beautifier',beautifier, language)
-      _.contains(beautifier.languages, language)
+      _.includes(beautifier.languages, language)
     )
+
+  getBeautifierForLanguage : (language) ->
+    beautifiers = @getBeautifiers(language.name)
+    logger.verbose('beautifiers', _.map(beautifiers, 'name'))
+    # Select beautifier from language config preferences
+    preferredBeautifierName = atom.config.get("atom-beautify.language_#{language.namespace}_default_beautifier")
+    beautifier = _.find(beautifiers, (beautifier) ->
+      beautifier.name is preferredBeautifierName
+    ) or beautifiers[0]
+    return beautifier
 
   getLanguage : (grammar, filePath) ->
     # Get language
@@ -318,6 +332,56 @@ module.exports = class Beautifiers extends EventEmitter
     # Options for Language
     selections = (language.fallback or []).concat([language.namespace])
     options = @getOptions(selections, allOptions) or {}
+
+  transformOptions : (beautifier, languageName, options) ->
+
+    # Transform options, if applicable
+    beautifierOptions = beautifier.options[languageName]
+    if typeof beautifierOptions is "boolean"
+
+      # Language is supported by beautifier
+      # If true then all options are directly supported
+      # If falsy then pass all options to beautifier,
+      # although no options are directly supported.
+      return options
+    else if typeof beautifierOptions is "object"
+
+      # Transform the options
+      transformedOptions = {}
+
+
+      # Transform for fields
+      for field, op of beautifierOptions
+        if typeof op is "string"
+
+          # Rename
+          transformedOptions[field] = options[op]
+        else if typeof op is "function"
+
+          # Transform
+          transformedOptions[field] = op(options[field])
+        else if typeof op is "boolean"
+
+          # Enable/Disable
+          if op is true
+            transformedOptions[field] = options[field]
+        else if _.isArray(op)
+
+          # Complex function
+          [fields..., fn] = op
+          vals = _.map(fields, (f) ->
+            return options[f]
+          )
+
+          # Apply function
+          transformedOptions[field] = fn.apply( null , vals)
+
+      # Replace old options with new transformed options
+      return transformedOptions
+    else
+      logger.warn("Unsupported Language options: ", beautifierOptions)
+      return options
+
 
   beautify : (text, allOptions, grammar, filePath, {onSave} = {}) ->
     return Promise.all(allOptions)
@@ -364,10 +428,8 @@ module.exports = class Beautifiers extends EventEmitter
             return resolve( null )
 
           # Get more language config
-          preferredBeautifierName = atom.config.get("atom-beautify.language_#{language.namespace}_default_beautifier")
           beautifyOnSave = atom.config.get("atom-beautify.language_#{language.namespace}_beautify_on_save")
           legacyBeautifyOnSave = atom.config.get("atom-beautify.beautifyOnSave")
-
 
           # Verify if beautifying on save
           if onSave and not (beautifyOnSave or legacyBeautifyOnSave)
@@ -380,75 +442,21 @@ module.exports = class Beautifiers extends EventEmitter
 
           # Get Beautifier
           logger.verbose(grammar, language)
-          beautifiers = @getBeautifiers(language.name, options)
 
-          logger.verbose('options', options)
-          logger.verbose('beautifiers', _.map(beautifiers, 'name'))
+          logger.verbose("language options: #{JSON.stringify(options, null, 4)}")
 
           logger.verbose(language.name, filePath, options, allOptions)
 
           # Check if unsupported language
-          if beautifiers.length < 1
+          beautifier = @getBeautifierForLanguage(language)
+          if not beautifier?
             unsupportedGrammar = true
             logger.verbose('Beautifier for language not found')
           else
-            # Select beautifier from language config preferences
-            beautifier = _.find(beautifiers, (beautifier) ->
-              beautifier.name is preferredBeautifierName
-            ) or beautifiers[0]
             logger.verbose('beautifier', beautifier.name)
-            transformOptions = (beautifier, languageName, options) ->
-
-              # Transform options, if applicable
-              beautifierOptions = beautifier.options[languageName]
-              if typeof beautifierOptions is "boolean"
-
-                # Language is supported by beautifier
-                # If true then all options are directly supported
-                # If falsy then pass all options to beautifier,
-                # although no options are directly supported.
-                return options
-              else if typeof beautifierOptions is "object"
-
-                # Transform the options
-                transformedOptions = {}
-
-
-                # Transform for fields
-                for field, op of beautifierOptions
-                  if typeof op is "string"
-
-                    # Rename
-                    transformedOptions[field] = options[op]
-                  else if typeof op is "function"
-
-                    # Transform
-                    transformedOptions[field] = op(options[field])
-                  else if typeof op is "boolean"
-
-                    # Enable/Disable
-                    if op is true
-                      transformedOptions[field] = options[field]
-                  else if _.isArray(op)
-
-                    # Complex function
-                    [fields..., fn] = op
-                    vals = _.map(fields, (f) ->
-                      return options[f]
-                    )
-
-
-                    # Apply function
-                    transformedOptions[field] = fn.apply( null , vals)
-
-                # Replace old options with new transformed options
-                return transformedOptions
-              else
-                logger.warn("Unsupported Language options: ", beautifierOptions)
-                return options
 
             # Apply language-specific option transformations
-            options = transformOptions(beautifier, language.name, options)
+            options = @transformOptions(beautifier, language.name, options)
 
             # Beautify text with language options
             @emit "beautify::start"
@@ -519,7 +527,6 @@ module.exports = class Beautifiers extends EventEmitter
             )
 
       )
-
 
   findFileResults : {}
 
@@ -610,10 +617,10 @@ module.exports = class Beautifiers extends EventEmitter
         options[lang] = options[lang] or {}
         options[lang][opt] = config[k]
 
-      # logger.verbose(lang, opt);
+      # logger.verbose(lang, opt)
       true
 
-    # logger.verbose(options);
+    # logger.verbose(options)
     options
 
   # Look for .jsbeautifierrc in file and home path, check env variables
@@ -629,9 +636,12 @@ module.exports = class Beautifiers extends EventEmitter
     externalOptions = undefined
     if configPath
       fs ?= require("fs")
-      contents = fs.readFileSync(configPath,
-        encoding : "utf8"
-      )
+      try
+        contents = fs.readFileSync(configPath,
+          encoding : "utf8"
+        )
+      catch error
+        contents = null #file isnt available anymore
       unless contents
         externalOptions = {}
       else

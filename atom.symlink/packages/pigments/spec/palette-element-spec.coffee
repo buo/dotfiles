@@ -103,11 +103,11 @@ describe 'PaletteElement', ->
 
       it 'renders the list with sublists for each files', ->
         ols = paletteElement.querySelectorAll('ol ol')
-        expect(ols.length).toEqual(4)
+        expect(ols.length).toEqual(5)
 
       it 'adds a header with the file path for each sublist', ->
         ols = paletteElement.querySelectorAll('.pigments-color-group-header')
-        expect(ols.length).toEqual(4)
+        expect(ols.length).toEqual(5)
 
       describe 'and the sortPaletteColors is set to name', ->
         beforeEach ->
@@ -133,7 +133,7 @@ describe 'PaletteElement', ->
         it 'groups identical colors together', ->
           lis = paletteElement.querySelectorAll('li')
 
-          expect(lis.length).toEqual(37)
+          expect(lis.length).toEqual(40)
 
     describe 'sorting selector', ->
       [sortSelect] = []
@@ -190,3 +190,33 @@ describe 'PaletteElement', ->
       it 'checks the merge checkbox', ->
         mergeCheckBox = paletteElement.querySelector('#merge-duplicates')
         expect(mergeCheckBox.checked).toBeTruthy()
+
+  describe 'when the project variables are modified', ->
+    [spy, initialColorCount] = []
+    beforeEach ->
+      atom.commands.dispatch(workspaceElement, 'pigments:show-palette')
+
+      waitsFor ->
+        paletteElement = workspaceElement.querySelector('pigments-palette')
+
+      runs ->
+        palette = paletteElement.getModel()
+        initialColorCount = palette.getColorsCount()
+        spy = jasmine.createSpy('onDidUpdateVariables')
+
+        project.onDidUpdateVariables(spy)
+
+        atom.config.set 'pigments.sourceNames', [
+          '*.styl'
+          '*.less'
+          '*.sass'
+        ]
+
+      waitsFor -> spy.callCount > 0
+
+    it 'updates the palette', ->
+      expect(palette.getColorsCount()).not.toEqual(initialColorCount)
+
+      lis = paletteElement.querySelectorAll('li')
+
+      expect(lis.length).not.toEqual(initialColorCount)

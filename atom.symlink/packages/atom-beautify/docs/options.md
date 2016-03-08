@@ -125,6 +125,30 @@ Supported options for each language.
 
 ---
 
+####  [Apex - Config Path](#apex---config-path) 
+
+**Namespace**: `apex`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Uncrustify`](#uncrustify) 
+
+**Description**:
+
+Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "apex": {
+        "configPath": ""
+    }
+}
+```
+
 ####  [Arduino - Config Path](#arduino---config-path) 
 
 **Namespace**: `arduino`
@@ -196,6 +220,283 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
     }
 }
 ```
+
+####  [Coldfusion - Indent inner html](#coldfusion---indent-inner-html) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Indent <head> and <body> sections. (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Indent inner html*" and change it to your desired configuration.
+
+####  [Coldfusion - Indent size](#coldfusion---indent-size) 
+
+**Namespace**: `cfml`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "cfml": {
+        "indent_size": 4
+    }
+}
+```
+
+####  [Coldfusion - Indent char](#coldfusion---indent-char) 
+
+**Namespace**: `cfml`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "cfml": {
+        "indent_char": " "
+    }
+}
+```
+
+####  [Coldfusion - Brace style](#coldfusion---brace-style) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `collapse`
+
+**Type**: `string`
+
+**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
+
+**Description**:
+
+[collapse|expand|end-expand|none] (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Brace style*" and change it to your desired configuration.
+
+####  [Coldfusion - Indent scripts](#coldfusion---indent-scripts) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `normal`
+
+**Type**: `string`
+
+**Enum**:  `keep`  `separate`  `normal` 
+
+**Description**:
+
+[keep|separate|normal] (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Indent scripts*" and change it to your desired configuration.
+
+####  [Coldfusion - Wrap line length](#coldfusion---wrap-line-length) 
+
+**Namespace**: `cfml`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "cfml": {
+        "wrap_line_length": 250
+    }
+}
+```
+
+####  [Coldfusion - Wrap attributes](#coldfusion---wrap-attributes) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `auto`
+
+**Type**: `string`
+
+**Enum**:  `auto`  `force` 
+
+**Description**:
+
+Wrap attributes to new lines [auto|force] (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Wrap attributes*" and change it to your desired configuration.
+
+####  [Coldfusion - Wrap attributes indent size](#coldfusion---wrap-attributes-indent-size) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Description**:
+
+Indent wrapped attributes to after N characters (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Wrap attributes indent size*" and change it to your desired configuration.
+
+####  [Coldfusion - Preserve newlines](#coldfusion---preserve-newlines) 
+
+**Namespace**: `cfml`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "cfml": {
+        "preserve_newlines": true
+    }
+}
+```
+
+####  [Coldfusion - Max preserve newlines](#coldfusion---max-preserve-newlines) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Max preserve newlines*" and change it to your desired configuration.
+
+####  [Coldfusion - Unformatted](#coldfusion---unformatted) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `a,sub,sup,b,i,u`
+
+**Type**: `array`
+
+**Description**:
+
+List of tags (defaults to inline) that should not be reformatted (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Unformatted*" and change it to your desired configuration.
+
+####  [Coldfusion - End with newline](#coldfusion---end-with-newline) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+End output with newline (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - End with newline*" and change it to your desired configuration.
+
+####  [Coldfusion - Extra liners](#coldfusion---extra-liners) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `head,body,/html`
+
+**Type**: `array`
+
+**Description**:
+
+List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Not supported by any beautifiers)
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Coldfusion - Extra liners*" and change it to your desired configuration.
 
 ####  [C++ - Config Path](#c---config-path) 
 
@@ -941,7 +1242,7 @@ Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
 
 **Key**: `unformatted`
 
-**Default**: `a,sub,sup,b,i,u`
+**Default**: `a,span,img,bdo,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,sub,sup,tt,i,b,big,small,u,s,strike,font,ins,del,pre,address,dt,h1,h2,h3,h4,h5,h6`
 
 **Type**: `array`
 
@@ -958,11 +1259,42 @@ List of tags (defaults to inline) that should not be reformatted (Supported by J
     "html": {
         "unformatted": [
             "a",
+            "span",
+            "img",
+            "bdo",
+            "em",
+            "strong",
+            "dfn",
+            "code",
+            "samp",
+            "kbd",
+            "var",
+            "cite",
+            "abbr",
+            "acronym",
+            "q",
             "sub",
             "sup",
-            "b",
+            "tt",
             "i",
-            "u"
+            "b",
+            "big",
+            "small",
+            "u",
+            "s",
+            "strike",
+            "font",
+            "ins",
+            "del",
+            "pre",
+            "address",
+            "dt",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
         ]
     }
 }
@@ -1280,13 +1612,13 @@ Add a space before an anonymous function's parens, ie. function () (Supported by
 
 **Type**: `string`
 
-**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
+**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
 
 **Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
 
 **Description**:
 
-[collapse|expand|end-expand|none] (Supported by JS Beautify)
+[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by JS Beautify)
 
 **Example `.jsbeautifyrc` Configuration**
 
@@ -1516,6 +1848,82 @@ If a terminating comma should be inserted into arrays, object literals, and dest
 }
 ```
 
+####  [Markdown - Gfm](#markdown---gfm) 
+
+**Namespace**: `markdown`
+
+**Key**: `gfm`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+GitHub Flavoured Markdown (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "gfm": true
+    }
+}
+```
+
+####  [Markdown - Yaml](#markdown---yaml) 
+
+**Namespace**: `markdown`
+
+**Key**: `yaml`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+Enables raw YAML front matter to be detected (thus ignoring markdown-like syntax). (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "yaml": true
+    }
+}
+```
+
+####  [Markdown - Commonmark](#markdown---commonmark) 
+
+**Namespace**: `markdown`
+
+**Key**: `commonmark`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+Allows and disallows several constructs. (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "commonmark": false
+    }
+}
+```
+
 ####  [Objective-C - Config Path](#objective-c---config-path) 
 
 **Namespace**: `objectivec`
@@ -1660,6 +2068,54 @@ By default, all PSR-2 fixers and some additional ones are run. (Supported by PHP
 }
 ```
 
+####  [PHP - PHPCBF Path](#php---phpcbf-path) 
+
+**Namespace**: `php`
+
+**Key**: `phpcbf_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer) 
+
+**Description**:
+
+Path to the `phpcbf` CLI executable (Supported by PHP-CS-Fixer)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "phpcbf_path": ""
+    }
+}
+```
+
+####  [PHP - PHPCBF Standard](#php---phpcbf-standard) 
+
+**Namespace**: `php`
+
+**Key**: `standard`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer)  [`PHPCBF`](#phpcbf) 
+
+**Description**:
+
+Standard name Squiz, PSR2, PSR1, PHPCS, PEAR, Zend, MySource... or path to CS rules (Supported by PHP-CS-Fixer, PHPCBF)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "standard": ""
+    }
+}
+```
+
 ####  [Python - Max line length](#python---max-line-length) 
 
 **Namespace**: `python`
@@ -1740,6 +2196,30 @@ do not fix these errors/warnings (Supported by autopep8)
 }
 ```
 
+####  [Python - Sort imports](#python---sort-imports) 
+
+**Namespace**: `python`
+
+**Key**: `sort_imports`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`autopep8`](#autopep8) 
+
+**Description**:
+
+sort imports (requires isort installed) (Supported by autopep8)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "python": {
+        "sort_imports": false
+    }
+}
+```
+
 ####  [Ruby - Indent size](#ruby---indent-size) 
 
 **Namespace**: `ruby`
@@ -1762,6 +2242,30 @@ Indentation size/length (Supported by Rubocop, Ruby Beautify)
 {
     "ruby": {
         "indent_size": 4
+    }
+}
+```
+
+####  [Ruby - Rubocop Path](#ruby---rubocop-path) 
+
+**Namespace**: `ruby`
+
+**Key**: `rubocop_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Rubocop`](#rubocop) 
+
+**Description**:
+
+Path to the `rubocop` CLI executable (Supported by Rubocop)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "ruby": {
+        "rubocop_path": ""
     }
 }
 ```
@@ -1854,7 +2358,7 @@ Indentation size/length (Supported by sqlformat)
 
 **Type**: `string`
 
-**Enum**:  `lower`  `upper`  `capitalize` 
+**Enum**:  `unchanged`  `lower`  `upper`  `capitalize` 
 
 **Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
 
@@ -1878,11 +2382,11 @@ Change case of keywords (Supported by sqlformat)
 
 **Key**: `identifiers`
 
-**Default**: `lower`
+**Default**: `unchanged`
 
 **Type**: `string`
 
-**Enum**:  `lower`  `upper`  `capitalize` 
+**Enum**:  `unchanged`  `lower`  `upper`  `capitalize` 
 
 **Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
 
@@ -1895,7 +2399,7 @@ Change case of identifiers (Supported by sqlformat)
 ```json
 {
     "sql": {
-        "identifiers": "lower"
+        "identifiers": "unchanged"
     }
 }
 ```
@@ -1923,6 +2427,61 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
     }
 }
 ```
+
+####  [Language Config - Apex - Disable Beautifying Language](#language-config---apex---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Apex Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Apex - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Apex - Default Beautifier](#language-config---apex---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Uncrustify`
+
+**Type**: `string`
+
+**Enum**:  `Uncrustify` 
+
+**Description**:
+
+Default Beautifier to be used for Apex
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Apex - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Apex - Beautify On Save](#language-config---apex---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Apex files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Apex - Beautify On Save*" and change it to your desired configuration.
 
 ####  [Language Config - Arduino - Disable Beautifying Language](#language-config---arduino---disable-beautifying-language) 
 
@@ -2144,6 +2703,61 @@ Automatically beautify CoffeeScript files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - CoffeeScript - Beautify On Save*" and change it to your desired configuration.
 
+####  [Language Config - Coldfusion - Disable Beautifying Language](#language-config---coldfusion---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Coldfusion Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Coldfusion - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Coldfusion - Default Beautifier](#language-config---coldfusion---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Pretty Diff`
+
+**Type**: `string`
+
+**Enum**:  `Pretty Diff` 
+
+**Description**:
+
+Default Beautifier to be used for Coldfusion
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Coldfusion - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Coldfusion - Beautify On Save](#language-config---coldfusion---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Coldfusion files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Coldfusion - Beautify On Save*" and change it to your desired configuration.
+
 ####  [Language Config - C++ - Disable Beautifying Language](#language-config---c---disable-beautifying-language) 
 
 **Important**: This option is only configurable from within Atom Beautify's setting panel.
@@ -2334,7 +2948,7 @@ Disable D Beautification
 
 **Type**: `string`
 
-**Enum**:  `Uncrustify` 
+**Enum**:  `Uncrustify`  `dfmt` 
 
 **Description**:
 
@@ -2419,6 +3033,61 @@ Automatically beautify EJS files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - EJS - Beautify On Save*" and change it to your desired configuration.
 
+####  [Language Config - Elm - Disable Beautifying Language](#language-config---elm---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Elm Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Elm - Default Beautifier](#language-config---elm---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `elm-format`
+
+**Type**: `string`
+
+**Enum**:  `elm-format` 
+
+**Description**:
+
+Default Beautifier to be used for Elm
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Elm - Beautify On Save](#language-config---elm---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Elm files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Elm - Beautify On Save*" and change it to your desired configuration.
+
 ####  [Language Config - ERB - Disable Beautifying Language](#language-config---erb---disable-beautifying-language) 
 
 **Important**: This option is only configurable from within Atom Beautify's setting panel.
@@ -2473,6 +3142,61 @@ Automatically beautify ERB files on save
 *Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - ERB - Beautify On Save*" and change it to your desired configuration.
+
+####  [Language Config - Erlang - Disable Beautifying Language](#language-config---erlang---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Erlang Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Erlang - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Erlang - Default Beautifier](#language-config---erlang---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `erl_tidy`
+
+**Type**: `string`
+
+**Enum**:  `erl_tidy` 
+
+**Description**:
+
+Default Beautifier to be used for Erlang
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Erlang - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Erlang - Beautify On Save](#language-config---erlang---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Erlang files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Erlang - Beautify On Save*" and change it to your desired configuration.
 
 ####  [Language Config - gherkin - Disable Beautifying Language](#language-config---gherkin---disable-beautifying-language) 
 
@@ -3104,7 +3828,7 @@ Disable Markdown Beautification
 
 **Type**: `string`
 
-**Enum**:  `Tidy Markdown` 
+**Enum**:  `Remark`  `Tidy Markdown` 
 
 **Description**:
 
@@ -3434,7 +4158,7 @@ Disable PHP Beautification
 
 **Type**: `string`
 
-**Enum**:  `PHP-CS-Fixer` 
+**Enum**:  `PHP-CS-Fixer`  `PHPCBF` 
 
 **Description**:
 
@@ -3573,6 +4297,61 @@ Automatically beautify Python files on save
 *Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - Python - Beautify On Save*" and change it to your desired configuration.
+
+####  [Language Config - Riot.js - Disable Beautifying Language](#language-config---riot.js---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable Riot.js Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Riot.js - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - Riot.js - Default Beautifier](#language-config---riot.js---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `JS Beautify`
+
+**Type**: `string`
+
+**Enum**:  `Pretty Diff` 
+
+**Description**:
+
+Default Beautifier to be used for Riot.js
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Riot.js - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - Riot.js - Beautify On Save](#language-config---riot.js---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify Riot.js files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - Riot.js - Beautify On Save*" and change it to your desired configuration.
 
 ####  [Language Config - Ruby - Disable Beautifying Language](#language-config---ruby---disable-beautifying-language) 
 
@@ -4344,6 +5123,59 @@ Automatically beautify XML files on save
 2. Go into *Packages* and search for "*Atom Beautify*" package.
 3. Find the option "*Language Config - XML - Beautify On Save*" and change it to your desired configuration.
 
+####  [Language Config - XTemplate - Disable Beautifying Language](#language-config---xtemplate---disable-beautifying-language) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Disable XTemplate Beautification
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - XTemplate - Disable Beautifying Language*" and change it to your desired configuration.
+
+####  [Language Config - XTemplate - Default Beautifier](#language-config---xtemplate---default-beautifier) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Default**: `Pretty Diff`
+
+**Type**: `string`
+
+**Description**:
+
+Default Beautifier to be used for XTemplate
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - XTemplate - Default Beautifier*" and change it to your desired configuration.
+
+####  [Language Config - XTemplate - Beautify On Save](#language-config---xtemplate---beautify-on-save) 
+
+**Important**: This option is only configurable from within Atom Beautify's setting panel.
+
+**Type**: `boolean`
+
+**Description**:
+
+Automatically beautify XTemplate files on save
+
+**How to Configure**
+
+1. You can open the [Settings View](https://github.com/atom/settings-view) by navigating to
+*Edit > Preferences (Linux)*, *Atom > Preferences (OS X)*, or *File > Preferences (Windows)*.
+2. Go into *Packages* and search for "*Atom Beautify*" package.
+3. Find the option "*Language Config - XTemplate - Beautify On Save*" and change it to your desired configuration.
+
 
 ## Beautifier Options
 
@@ -4352,6 +5184,30 @@ Supported options for each beautifier.
 ---
 
 ### Uncrustify
+
+####  [Apex - Config Path](#apex---config-path) 
+
+**Namespace**: `apex`
+
+**Key**: `configPath`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Uncrustify`](#uncrustify) 
+
+**Description**:
+
+Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "apex": {
+        "configPath": ""
+    }
+}
+```
 
 ####  [Arduino - Config Path](#arduino---config-path) 
 
@@ -4570,11 +5426,11 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 ```
 
 
-### JS Beautify
+### Pretty Diff
 
-####  [CSS - Indent size](#css---indent-size) 
+####  [Coldfusion - Indent size](#coldfusion---indent-size) 
 
-**Namespace**: `css`
+**Namespace**: `cfml`
 
 **Key**: `indent_size`
 
@@ -4582,25 +5438,25 @@ Path to uncrustify config file. i.e. uncrustify.cfg (Supported by Uncrustify)
 
 **Type**: `integer`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Indentation size/length (Supported by JS Beautify, Pretty Diff)
+Indentation size/length (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "css": {
+    "cfml": {
         "indent_size": 4
     }
 }
 ```
 
-####  [CSS - Indent char](#css---indent-char) 
+####  [Coldfusion - Indent char](#coldfusion---indent-char) 
 
-**Namespace**: `css`
+**Namespace**: `cfml`
 
 **Key**: `indent_char`
 
@@ -4608,253 +5464,25 @@ Indentation size/length (Supported by JS Beautify, Pretty Diff)
 
 **Type**: `string`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Indentation character (Supported by JS Beautify, Pretty Diff)
+Indentation character (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "css": {
+    "cfml": {
         "indent_char": " "
     }
 }
 ```
 
-####  [CSS - Selector separator newline](#css---selector-separator-newline) 
+####  [Coldfusion - Wrap line length](#coldfusion---wrap-line-length) 
 
-**Namespace**: `css`
-
-**Key**: `selector_separator_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Add a newline between multiple selectors (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "selector_separator_newline": false
-    }
-}
-```
-
-####  [CSS - Newline between rules](#css---newline-between-rules) 
-
-**Namespace**: `css`
-
-**Key**: `newline_between_rules`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Add a newline between CSS rules (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "newline_between_rules": false
-    }
-}
-```
-
-####  [CSS - Preserve newlines](#css---preserve-newlines) 
-
-**Namespace**: `css`
-
-**Key**: `preserve_newlines`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Retain empty lines. Consecutive empty lines will be converted to a single empty line. (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "preserve_newlines": false
-    }
-}
-```
-
-####  [CSS - Wrap line length](#css---wrap-line-length) 
-
-**Namespace**: `css`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Maximum amount of characters per line (0 = disable) (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "css": {
-        "wrap_line_length": 0
-    }
-}
-```
-
-####  [HTML - Indent inner html](#html---indent-inner-html) 
-
-**Namespace**: `html`
-
-**Key**: `indent_inner_html`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Indent <head> and <body> sections. (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "indent_inner_html": false
-    }
-}
-```
-
-####  [HTML - Indent size](#html---indent-size) 
-
-**Namespace**: `html`
-
-**Key**: `indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation size/length (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "indent_size": 4
-    }
-}
-```
-
-####  [HTML - Indent char](#html---indent-char) 
-
-**Namespace**: `html`
-
-**Key**: `indent_char`
-
-**Default**: ` `
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation character (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "indent_char": " "
-    }
-}
-```
-
-####  [HTML - Brace style](#html---brace-style) 
-
-**Namespace**: `html`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-[collapse|expand|end-expand|none] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-####  [HTML - Indent scripts](#html---indent-scripts) 
-
-**Namespace**: `html`
-
-**Key**: `indent_scripts`
-
-**Default**: `normal`
-
-**Type**: `string`
-
-**Enum**:  `keep`  `separate`  `normal` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-[keep|separate|normal] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "indent_scripts": "normal"
-    }
-}
-```
-
-####  [HTML - Wrap line length](#html---wrap-line-length) 
-
-**Namespace**: `html`
+**Namespace**: `cfml`
 
 **Key**: `wrap_line_length`
 
@@ -4862,79 +5490,25 @@ Indentation character (Supported by JS Beautify, Pretty Diff)
 
 **Type**: `integer`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Maximum characters per line (0 disables) (Supported by JS Beautify, Pretty Diff)
+Maximum characters per line (0 disables) (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "html": {
+    "cfml": {
         "wrap_line_length": 250
     }
 }
 ```
 
-####  [HTML - Wrap attributes](#html---wrap-attributes) 
+####  [Coldfusion - Preserve newlines](#coldfusion---preserve-newlines) 
 
-**Namespace**: `html`
-
-**Key**: `wrap_attributes`
-
-**Default**: `auto`
-
-**Type**: `string`
-
-**Enum**:  `auto`  `force` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Wrap attributes to new lines [auto|force] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "wrap_attributes": "auto"
-    }
-}
-```
-
-####  [HTML - Wrap attributes indent size](#html---wrap-attributes-indent-size) 
-
-**Namespace**: `html`
-
-**Key**: `wrap_attributes_indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Indent wrapped attributes to after N characters (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "wrap_attributes_indent_size": 4
-    }
-}
-```
-
-####  [HTML - Preserve newlines](#html---preserve-newlines) 
-
-**Namespace**: `html`
+**Namespace**: `cfml`
 
 **Key**: `preserve_newlines`
 
@@ -4942,607 +5516,21 @@ Indent wrapped attributes to after N characters (Supported by JS Beautify)
 
 **Type**: `boolean`
 
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+**Supported Beautifiers**:  [`Pretty Diff`](#pretty-diff) 
 
 **Description**:
 
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+Preserve line-breaks (Supported by Pretty Diff)
 
 **Example `.jsbeautifyrc` Configuration**
 
 ```json
 {
-    "html": {
+    "cfml": {
         "preserve_newlines": true
     }
 }
 ```
-
-####  [HTML - Max preserve newlines](#html---max-preserve-newlines) 
-
-**Namespace**: `html`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-####  [HTML - Unformatted](#html---unformatted) 
-
-**Namespace**: `html`
-
-**Key**: `unformatted`
-
-**Default**: `a,sub,sup,b,i,u`
-
-**Type**: `array`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "unformatted": [
-            "a",
-            "sub",
-            "sup",
-            "b",
-            "i",
-            "u"
-        ]
-    }
-}
-```
-
-####  [HTML - End with newline](#html---end-with-newline) 
-
-**Namespace**: `html`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-End output with newline (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "end_with_newline": false
-    }
-}
-```
-
-####  [HTML - Extra liners](#html---extra-liners) 
-
-**Namespace**: `html`
-
-**Key**: `extra_liners`
-
-**Default**: `head,body,/html`
-
-**Type**: `array`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "html": {
-        "extra_liners": [
-            "head",
-            "body",
-            "/html"
-        ]
-    }
-}
-```
-
-####  [JavaScript - Indent size](#javascript---indent-size) 
-
-**Namespace**: `js`
-
-**Key**: `indent_size`
-
-**Default**: `4`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation size/length (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_size": 4
-    }
-}
-```
-
-####  [JavaScript - Indent char](#javascript---indent-char) 
-
-**Namespace**: `js`
-
-**Key**: `indent_char`
-
-**Default**: ` `
-
-**Type**: `string`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Indentation character (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_char": " "
-    }
-}
-```
-
-####  [JavaScript - Indent level](#javascript---indent-level) 
-
-**Namespace**: `js`
-
-**Key**: `indent_level`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Initial indentation level (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_level": 0
-    }
-}
-```
-
-####  [JavaScript - Indent with tabs](#javascript---indent-with-tabs) 
-
-**Namespace**: `js`
-
-**Key**: `indent_with_tabs`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "indent_with_tabs": false
-    }
-}
-```
-
-####  [JavaScript - Preserve newlines](#javascript---preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `preserve_newlines`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "preserve_newlines": true
-    }
-}
-```
-
-####  [JavaScript - Max preserve newlines](#javascript---max-preserve-newlines) 
-
-**Namespace**: `js`
-
-**Key**: `max_preserve_newlines`
-
-**Default**: `10`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "max_preserve_newlines": 10
-    }
-}
-```
-
-####  [JavaScript - Space in paren](#javascript---space-in-paren) 
-
-**Namespace**: `js`
-
-**Key**: `space_in_paren`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_in_paren": false
-    }
-}
-```
-
-####  [JavaScript - Jslint happy](#javascript---jslint-happy) 
-
-**Namespace**: `js`
-
-**Key**: `jslint_happy`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Enable jslint-stricter mode (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "jslint_happy": false
-    }
-}
-```
-
-####  [JavaScript - Space after anon function](#javascript---space-after-anon-function) 
-
-**Namespace**: `js`
-
-**Key**: `space_after_anon_function`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Add a space before an anonymous function's parens, ie. function () (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_after_anon_function": false
-    }
-}
-```
-
-####  [JavaScript - Brace style](#javascript---brace-style) 
-
-**Namespace**: `js`
-
-**Key**: `brace_style`
-
-**Default**: `collapse`
-
-**Type**: `string`
-
-**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-[collapse|expand|end-expand|none] (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "brace_style": "collapse"
-    }
-}
-```
-
-####  [JavaScript - Break chained methods](#javascript---break-chained-methods) 
-
-**Namespace**: `js`
-
-**Key**: `break_chained_methods`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "break_chained_methods": false
-    }
-}
-```
-
-####  [JavaScript - Keep array indentation](#javascript---keep-array-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_array_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Preserve array indentation (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_array_indentation": false
-    }
-}
-```
-
-####  [JavaScript - Keep function indentation](#javascript---keep-function-indentation) 
-
-**Namespace**: `js`
-
-**Key**: `keep_function_indentation`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
- (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "keep_function_indentation": false
-    }
-}
-```
-
-####  [JavaScript - Space before conditional](#javascript---space-before-conditional) 
-
-**Namespace**: `js`
-
-**Key**: `space_before_conditional`
-
-**Default**: `true`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
- (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "space_before_conditional": true
-    }
-}
-```
-
-####  [JavaScript - Eval code](#javascript---eval-code) 
-
-**Namespace**: `js`
-
-**Key**: `eval_code`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
- (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "eval_code": false
-    }
-}
-```
-
-####  [JavaScript - Unescape strings](#javascript---unescape-strings) 
-
-**Namespace**: `js`
-
-**Key**: `unescape_strings`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-Decode printable characters encoded in xNN notation (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "unescape_strings": false
-    }
-}
-```
-
-####  [JavaScript - Wrap line length](#javascript---wrap-line-length) 
-
-**Namespace**: `js`
-
-**Key**: `wrap_line_length`
-
-**Type**: `integer`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "wrap_line_length": 0
-    }
-}
-```
-
-####  [JavaScript - End with newline](#javascript---end-with-newline) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_newline`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
-
-**Description**:
-
-End output with newline (Supported by JS Beautify)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_newline": false
-    }
-}
-```
-
-####  [JavaScript - End with comma](#javascript---end-with-comma) 
-
-**Namespace**: `js`
-
-**Key**: `end_with_comma`
-
-**Type**: `boolean`
-
-**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
-
-**Description**:
-
-If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by JS Beautify, Pretty Diff)
-
-**Example `.jsbeautifyrc` Configuration**
-
-```json
-{
-    "js": {
-        "end_with_comma": false
-    }
-}
-```
-
-
-### Pretty Diff
 
 ####  [CSS - Indent size](#css---indent-size) 
 
@@ -6073,6 +6061,1009 @@ If a terminating comma should be inserted into arrays, object literals, and dest
 ```
 
 
+### JS Beautify
+
+####  [CSS - Indent size](#css---indent-size) 
+
+**Namespace**: `css`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "indent_size": 4
+    }
+}
+```
+
+####  [CSS - Indent char](#css---indent-char) 
+
+**Namespace**: `css`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "indent_char": " "
+    }
+}
+```
+
+####  [CSS - Selector separator newline](#css---selector-separator-newline) 
+
+**Namespace**: `css`
+
+**Key**: `selector_separator_newline`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Add a newline between multiple selectors (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "selector_separator_newline": false
+    }
+}
+```
+
+####  [CSS - Newline between rules](#css---newline-between-rules) 
+
+**Namespace**: `css`
+
+**Key**: `newline_between_rules`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add a newline between CSS rules (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "newline_between_rules": false
+    }
+}
+```
+
+####  [CSS - Preserve newlines](#css---preserve-newlines) 
+
+**Namespace**: `css`
+
+**Key**: `preserve_newlines`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Retain empty lines. Consecutive empty lines will be converted to a single empty line. (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "preserve_newlines": false
+    }
+}
+```
+
+####  [CSS - Wrap line length](#css---wrap-line-length) 
+
+**Namespace**: `css`
+
+**Key**: `wrap_line_length`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum amount of characters per line (0 = disable) (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "css": {
+        "wrap_line_length": 0
+    }
+}
+```
+
+####  [HTML - Indent inner html](#html---indent-inner-html) 
+
+**Namespace**: `html`
+
+**Key**: `indent_inner_html`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent <head> and <body> sections. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_inner_html": false
+    }
+}
+```
+
+####  [HTML - Indent size](#html---indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_size": 4
+    }
+}
+```
+
+####  [HTML - Indent char](#html---indent-char) 
+
+**Namespace**: `html`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_char": " "
+    }
+}
+```
+
+####  [HTML - Brace style](#html---brace-style) 
+
+**Namespace**: `html`
+
+**Key**: `brace_style`
+
+**Default**: `collapse`
+
+**Type**: `string`
+
+**Enum**:  `collapse`  `expand`  `end-expand`  `none` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[collapse|expand|end-expand|none] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "brace_style": "collapse"
+    }
+}
+```
+
+####  [HTML - Indent scripts](#html---indent-scripts) 
+
+**Namespace**: `html`
+
+**Key**: `indent_scripts`
+
+**Default**: `normal`
+
+**Type**: `string`
+
+**Enum**:  `keep`  `separate`  `normal` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[keep|separate|normal] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "indent_scripts": "normal"
+    }
+}
+```
+
+####  [HTML - Wrap line length](#html---wrap-line-length) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_line_length`
+
+**Default**: `250`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Maximum characters per line (0 disables) (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_line_length": 250
+    }
+}
+```
+
+####  [HTML - Wrap attributes](#html---wrap-attributes) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes`
+
+**Default**: `auto`
+
+**Type**: `string`
+
+**Enum**:  `auto`  `force` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Wrap attributes to new lines [auto|force] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes": "auto"
+    }
+}
+```
+
+####  [HTML - Wrap attributes indent size](#html---wrap-attributes-indent-size) 
+
+**Namespace**: `html`
+
+**Key**: `wrap_attributes_indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indent wrapped attributes to after N characters (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "wrap_attributes_indent_size": 4
+    }
+}
+```
+
+####  [HTML - Preserve newlines](#html---preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "preserve_newlines": true
+    }
+}
+```
+
+####  [HTML - Max preserve newlines](#html---max-preserve-newlines) 
+
+**Namespace**: `html`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+####  [HTML - Unformatted](#html---unformatted) 
+
+**Namespace**: `html`
+
+**Key**: `unformatted`
+
+**Default**: `a,span,img,bdo,em,strong,dfn,code,samp,kbd,var,cite,abbr,acronym,q,sub,sup,tt,i,b,big,small,u,s,strike,font,ins,del,pre,address,dt,h1,h2,h3,h4,h5,h6`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags (defaults to inline) that should not be reformatted (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "unformatted": [
+            "a",
+            "span",
+            "img",
+            "bdo",
+            "em",
+            "strong",
+            "dfn",
+            "code",
+            "samp",
+            "kbd",
+            "var",
+            "cite",
+            "abbr",
+            "acronym",
+            "q",
+            "sub",
+            "sup",
+            "tt",
+            "i",
+            "b",
+            "big",
+            "small",
+            "u",
+            "s",
+            "strike",
+            "font",
+            "ins",
+            "del",
+            "pre",
+            "address",
+            "dt",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+        ]
+    }
+}
+```
+
+####  [HTML - End with newline](#html---end-with-newline) 
+
+**Namespace**: `html`
+
+**Key**: `end_with_newline`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+End output with newline (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "end_with_newline": false
+    }
+}
+```
+
+####  [HTML - Extra liners](#html---extra-liners) 
+
+**Namespace**: `html`
+
+**Key**: `extra_liners`
+
+**Default**: `head,body,/html`
+
+**Type**: `array`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+List of tags (defaults to [head,body,/html] that should have an extra newline before them. (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "html": {
+        "extra_liners": [
+            "head",
+            "body",
+            "/html"
+        ]
+    }
+}
+```
+
+####  [JavaScript - Indent size](#javascript---indent-size) 
+
+**Namespace**: `js`
+
+**Key**: `indent_size`
+
+**Default**: `4`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation size/length (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_size": 4
+    }
+}
+```
+
+####  [JavaScript - Indent char](#javascript---indent-char) 
+
+**Namespace**: `js`
+
+**Key**: `indent_char`
+
+**Default**: ` `
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Indentation character (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_char": " "
+    }
+}
+```
+
+####  [JavaScript - Indent level](#javascript---indent-level) 
+
+**Namespace**: `js`
+
+**Key**: `indent_level`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Initial indentation level (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_level": 0
+    }
+}
+```
+
+####  [JavaScript - Indent with tabs](#javascript---indent-with-tabs) 
+
+**Namespace**: `js`
+
+**Key**: `indent_with_tabs`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Indentation uses tabs, overrides `Indent Size` and `Indent Char` (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "indent_with_tabs": false
+    }
+}
+```
+
+####  [JavaScript - Preserve newlines](#javascript---preserve-newlines) 
+
+**Namespace**: `js`
+
+**Key**: `preserve_newlines`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Preserve line-breaks (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "preserve_newlines": true
+    }
+}
+```
+
+####  [JavaScript - Max preserve newlines](#javascript---max-preserve-newlines) 
+
+**Namespace**: `js`
+
+**Key**: `max_preserve_newlines`
+
+**Default**: `10`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Number of line-breaks to be preserved in one chunk (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "max_preserve_newlines": 10
+    }
+}
+```
+
+####  [JavaScript - Space in paren](#javascript---space-in-paren) 
+
+**Namespace**: `js`
+
+**Key**: `space_in_paren`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Add padding spaces within paren, ie. f( a, b ) (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_in_paren": false
+    }
+}
+```
+
+####  [JavaScript - Jslint happy](#javascript---jslint-happy) 
+
+**Namespace**: `js`
+
+**Key**: `jslint_happy`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Enable jslint-stricter mode (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "jslint_happy": false
+    }
+}
+```
+
+####  [JavaScript - Space after anon function](#javascript---space-after-anon-function) 
+
+**Namespace**: `js`
+
+**Key**: `space_after_anon_function`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Add a space before an anonymous function's parens, ie. function () (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_after_anon_function": false
+    }
+}
+```
+
+####  [JavaScript - Brace style](#javascript---brace-style) 
+
+**Namespace**: `js`
+
+**Key**: `brace_style`
+
+**Default**: `collapse`
+
+**Type**: `string`
+
+**Enum**:  `collapse`  `collapse-preserve-inline`  `expand`  `end-expand`  `none` 
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+[collapse|collapse-preserve-inline|expand|end-expand|none] (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "brace_style": "collapse"
+    }
+}
+```
+
+####  [JavaScript - Break chained methods](#javascript---break-chained-methods) 
+
+**Namespace**: `js`
+
+**Key**: `break_chained_methods`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Break chained method calls across subsequent lines (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "break_chained_methods": false
+    }
+}
+```
+
+####  [JavaScript - Keep array indentation](#javascript---keep-array-indentation) 
+
+**Namespace**: `js`
+
+**Key**: `keep_array_indentation`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Preserve array indentation (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "keep_array_indentation": false
+    }
+}
+```
+
+####  [JavaScript - Keep function indentation](#javascript---keep-function-indentation) 
+
+**Namespace**: `js`
+
+**Key**: `keep_function_indentation`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+ (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "keep_function_indentation": false
+    }
+}
+```
+
+####  [JavaScript - Space before conditional](#javascript---space-before-conditional) 
+
+**Namespace**: `js`
+
+**Key**: `space_before_conditional`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+ (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "space_before_conditional": true
+    }
+}
+```
+
+####  [JavaScript - Eval code](#javascript---eval-code) 
+
+**Namespace**: `js`
+
+**Key**: `eval_code`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+ (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "eval_code": false
+    }
+}
+```
+
+####  [JavaScript - Unescape strings](#javascript---unescape-strings) 
+
+**Namespace**: `js`
+
+**Key**: `unescape_strings`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+Decode printable characters encoded in xNN notation (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "unescape_strings": false
+    }
+}
+```
+
+####  [JavaScript - Wrap line length](#javascript---wrap-line-length) 
+
+**Namespace**: `js`
+
+**Key**: `wrap_line_length`
+
+**Type**: `integer`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+Wrap lines at next opportunity after N characters (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "wrap_line_length": 0
+    }
+}
+```
+
+####  [JavaScript - End with newline](#javascript---end-with-newline) 
+
+**Namespace**: `js`
+
+**Key**: `end_with_newline`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify) 
+
+**Description**:
+
+End output with newline (Supported by JS Beautify)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "end_with_newline": false
+    }
+}
+```
+
+####  [JavaScript - End with comma](#javascript---end-with-comma) 
+
+**Namespace**: `js`
+
+**Key**: `end_with_comma`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`JS Beautify`](#js-beautify)  [`Pretty Diff`](#pretty-diff) 
+
+**Description**:
+
+If a terminating comma should be inserted into arrays, object literals, and destructured objects. (Supported by JS Beautify, Pretty Diff)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "js": {
+        "end_with_comma": false
+    }
+}
+```
+
+
 ### CSScomb
 
 ####  [CSS - comb custom config file](#css---comb-custom-config-file) 
@@ -6234,6 +7225,85 @@ Path to the emacs script (Supported by Fortran Beautifier)
 ```
 
 
+### Remark
+
+####  [Markdown - Gfm](#markdown---gfm) 
+
+**Namespace**: `markdown`
+
+**Key**: `gfm`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+GitHub Flavoured Markdown (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "gfm": true
+    }
+}
+```
+
+####  [Markdown - Yaml](#markdown---yaml) 
+
+**Namespace**: `markdown`
+
+**Key**: `yaml`
+
+**Default**: `true`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+Enables raw YAML front matter to be detected (thus ignoring markdown-like syntax). (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "yaml": true
+    }
+}
+```
+
+####  [Markdown - Commonmark](#markdown---commonmark) 
+
+**Namespace**: `markdown`
+
+**Key**: `commonmark`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`Remark`](#remark) 
+
+**Description**:
+
+Allows and disallows several constructs. (Supported by Remark)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "markdown": {
+        "commonmark": false
+    }
+}
+```
+
+
 ### Perltidy
 
 ####  [Perl - Perltidy profile](#perl---perltidy-profile) 
@@ -6335,6 +7405,81 @@ By default, all PSR-2 fixers and some additional ones are run. (Supported by PHP
 }
 ```
 
+####  [PHP - PHPCBF Path](#php---phpcbf-path) 
+
+**Namespace**: `php`
+
+**Key**: `phpcbf_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer) 
+
+**Description**:
+
+Path to the `phpcbf` CLI executable (Supported by PHP-CS-Fixer)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "phpcbf_path": ""
+    }
+}
+```
+
+####  [PHP - PHPCBF Standard](#php---phpcbf-standard) 
+
+**Namespace**: `php`
+
+**Key**: `standard`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer)  [`PHPCBF`](#phpcbf) 
+
+**Description**:
+
+Standard name Squiz, PSR2, PSR1, PHPCS, PEAR, Zend, MySource... or path to CS rules (Supported by PHP-CS-Fixer, PHPCBF)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "standard": ""
+    }
+}
+```
+
+
+### PHPCBF
+
+####  [PHP - PHPCBF Standard](#php---phpcbf-standard) 
+
+**Namespace**: `php`
+
+**Key**: `standard`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`PHP-CS-Fixer`](#php-cs-fixer)  [`PHPCBF`](#phpcbf) 
+
+**Description**:
+
+Standard name Squiz, PSR2, PSR1, PHPCS, PEAR, Zend, MySource... or path to CS rules (Supported by PHP-CS-Fixer, PHPCBF)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "php": {
+        "standard": ""
+    }
+}
+```
+
 
 ### autopep8
 
@@ -6418,6 +7563,30 @@ do not fix these errors/warnings (Supported by autopep8)
 }
 ```
 
+####  [Python - Sort imports](#python---sort-imports) 
+
+**Namespace**: `python`
+
+**Key**: `sort_imports`
+
+**Type**: `boolean`
+
+**Supported Beautifiers**:  [`autopep8`](#autopep8) 
+
+**Description**:
+
+sort imports (requires isort installed) (Supported by autopep8)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "python": {
+        "sort_imports": false
+    }
+}
+```
+
 
 ### Rubocop
 
@@ -6443,6 +7612,30 @@ Indentation size/length (Supported by Rubocop, Ruby Beautify)
 {
     "ruby": {
         "indent_size": 4
+    }
+}
+```
+
+####  [Ruby - Rubocop Path](#ruby---rubocop-path) 
+
+**Namespace**: `ruby`
+
+**Key**: `rubocop_path`
+
+**Type**: `string`
+
+**Supported Beautifiers**:  [`Rubocop`](#rubocop) 
+
+**Description**:
+
+Path to the `rubocop` CLI executable (Supported by Rubocop)
+
+**Example `.jsbeautifyrc` Configuration**
+
+```json
+{
+    "ruby": {
+        "rubocop_path": ""
     }
 }
 ```
@@ -6570,7 +7763,7 @@ Indentation size/length (Supported by sqlformat)
 
 **Type**: `string`
 
-**Enum**:  `lower`  `upper`  `capitalize` 
+**Enum**:  `unchanged`  `lower`  `upper`  `capitalize` 
 
 **Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
 
@@ -6594,11 +7787,11 @@ Change case of keywords (Supported by sqlformat)
 
 **Key**: `identifiers`
 
-**Default**: `lower`
+**Default**: `unchanged`
 
 **Type**: `string`
 
-**Enum**:  `lower`  `upper`  `capitalize` 
+**Enum**:  `unchanged`  `lower`  `upper`  `capitalize` 
 
 **Supported Beautifiers**:  [`sqlformat`](#sqlformat) 
 
@@ -6611,7 +7804,7 @@ Change case of identifiers (Supported by sqlformat)
 ```json
 {
     "sql": {
-        "identifiers": "lower"
+        "identifiers": "unchanged"
     }
 }
 ```
