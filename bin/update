@@ -8,3 +8,4 @@ brew upgrade && brew update
 brew update && brew upgrade brew-cask && brew cleanup
 npm update -g
 sudo gem update -n /usr/local/bin
+# cask-update --all
