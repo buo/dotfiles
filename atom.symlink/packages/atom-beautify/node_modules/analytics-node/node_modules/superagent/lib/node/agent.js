@@ -55,9 +55,16 @@ Agent.prototype.attachCookies = function(req){
 };
 
 // generate HTTP verb methods
-
+if (methods.indexOf('del') == -1) {
+  // create a copy so we don't cause conflicts with
+  // other packages using the methods package and
+  // npm 3.x
+  methods = methods.slice(0);
+  methods.push('del');
+}
 methods.forEach(function(method){
-  var name = 'delete' == method ? 'del' : method;
+  var name = method;
+  method = 'del' == method ? 'delete' : method;
 
   method = method.toUpperCase();
   Agent.prototype[name] = function(url, fn){

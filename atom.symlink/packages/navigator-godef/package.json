@@ -1,0 +1,140 @@
+{
+  "name": "navigator-godef",
+  "description": "Go to definition for the go language.",
+  "keywords": [
+    "go",
+    "golang",
+    "godef",
+    "definition",
+    "symbol"
+  ],
+  "main": "./lib/main",
+  "version": "1.0.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joefitzgerald/navigator-godef.git"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "atom": ">=1.5.3 <2.0.0"
+  },
+  "author": {
+    "name": "Joe Fitzgerald",
+    "email": "jfitzgerald@pivotal.io",
+    "url": "http://github.com/joefitzgerald"
+  },
+  "homepage": "https://atom.io/packages/navigator-godef",
+  "bugs": {
+    "url": "https://github.com/joefitzgerald/navigator-godef/issues"
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.4.0",
+    "babel-eslint": "^6.0.0-beta.6",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-plugin-standard": "^1.3.2",
+    "eslint-plugin-promise": "^1.1.0"
+  },
+  "package-deps": [
+    "go-config",
+    "go-get"
+  ],
+  "consumedServices": {
+    "go-config": {
+      "versions": {
+        "1.0.0": "consumeGoconfig"
+      }
+    },
+    "go-get": {
+      "versions": {
+        "1.0.0": "consumeGoget"
+      }
+    }
+  },
+  "configSchema": {},
+  "standard": {
+    "globals": [
+      "atom",
+      "waitsForPromise"
+    ]
+  },
+  "readme": "# `navigator-godef` [![Build Status](https://travis-ci.org/joefitzgerald/navigator-godef.svg?branch=master)](https://travis-ci.org/joefitzgerald/navigator-godef) [![Build status](https://ci.appveyor.com/api/projects/status/kkuftvp09beng3nm/branch/master?svg=true)](https://ci.appveyor.com/project/joefitzgerald/navigator-godef/branch/master)\n\n> **[godef](https://github.com/rogpeppe/godef)**\n>\n> Find symbol information in Go source. `godef`, given an expression or a\n> location in a source file, prints the location of the definition of the\n> symbol referred to.\n> Known limitations:\n>\n> - it does not understand about \".\" imports\n> - it does not like imports where the last element import path doesn't match\n> the package identifier.\n\n`navigator-godef` runs `godef` and jumps to the definition of the symbol under\nthe cursor, if it can be found. It depends on the following packages:\n\n* [`go-config`](https://atom.io/packages/go-config)\n* [`go-get`](https://atom.io/packages/go-get)\n\n## Contributors\n\nIn addition to https://github.com/joefitzgerald/navigator-godef/graphs/contributors, this package is based on work done by the following people for [go-plus](https://github.com/joefitzgerald/go-plus):\n\n* [Crispin Bennett](https://github.com/crispinb) [here](https://github.com/joefitzgerald/go-plus/pull/137)\n* [Darshan Shaligram](https://github.com/greensnark) [here](https://github.com/joefitzgerald/go-plus/pull/261) and [here](https://github.com/joefitzgerald/go-plus/pull/265)\n* [Matt Smith](https://github.com/ma314smith) [here](https://github.com/joefitzgerald/go-plus/pull/234) and  [here](https://github.com/joefitzgerald/go-plus/pull/239)\n* [Miguel Perez](https://github.com/miguel250) [here](https://github.com/joefitzgerald/go-plus/pull/227)\n",
+  "readmeFilename": "README.md",
+  "_id": "navigator-godef@1.0.3",
+  "_shasum": "207f0a42fff7c0b0fc2a3cfb1a13ebc3a8aa6cb1",
+  "_resolved": "file:../d-11657-10283-14z4kbw/package.tgz",
+  "_from": "../d-11657-10283-14z4kbw/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "atom-package-deps",
+        "version": "4.0.1",
+        "path": "node_modules/atom-package-deps/lib/index.js"
+      },
+      {
+        "name": "atom-package-path",
+        "version": "1.1.0",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js"
+      },
+      {
+        "name": "sb-callsite",
+        "version": "1.1.2",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib/godef.js",
+        "lib/main.js",
+        "lib/navigation-stack.js",
+        "node_modules/atom-package-deps/lib/helpers.js",
+        "node_modules/atom-package-deps/lib/index.js",
+        "node_modules/atom-package-deps/lib/view.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js"
+      ],
+      ".json": [
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/package.json",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/package.json",
+        "node_modules/atom-package-deps/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "keymaps",
+          "lib",
+          "menus",
+          "",
+          "spec"
+        ],
+        "dependencies": {
+          "atom-package-deps": "^4.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/lib",
+          "node_modules/atom-package-deps"
+        ],
+        "dependencies": {
+          "atom-package-path": "^1.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/node_modules/atom-package-path/lib",
+          "node_modules/atom-package-deps/node_modules/atom-package-path",
+          "node_modules/atom-package-deps/node_modules/atom-package-path/spec"
+        ],
+        "dependencies": {
+          "sb-callsite": "^1.1.2"
+        }
+      }
+    ]
+  }
+}

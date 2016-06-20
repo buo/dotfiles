@@ -205,9 +205,13 @@ export default class Minimap {
     }))
 
     subs.add(this.adapter.onDidChangeScrollTop(() => {
-      if (!this.standAlone) {
+      if (!this.standAlone && !this.ignoreTextEditorScroll) {
         this.updateScrollTop()
         this.emitter.emit('did-change-scroll-top', this)
+      }
+
+      if (this.ignoreTextEditorScroll) {
+        this.ignoreTextEditorScroll = false
       }
     }))
     subs.add(this.adapter.onDidChangeScrollLeft(() => {
@@ -228,7 +232,11 @@ export default class Minimap {
     resulting in extra lines appearing at the end of the minimap.
     Forcing a whole repaint to fix that bug is suboptimal but works.
     */
-    subs.add(this.textEditor.displayBuffer.onDidTokenize(() => {
+    const tokenizedBuffer = this.textEditor.tokenizedBuffer
+      ? this.textEditor.tokenizedBuffer
+      : this.textEditor.displayBuffer.tokenizedBuffer
+
+    subs.add(tokenizedBuffer.onDidTokenize(() => {
       this.emitter.emit('did-change-config')
     }))
   }
@@ -478,7 +486,10 @@ export default class Minimap {
    *
    * @param {number} scrollTop the new scroll top value
    */
-  setTextEditorScrollTop (scrollTop) { this.adapter.setScrollTop(scrollTop) }
+  setTextEditorScrollTop (scrollTop, ignoreTextEditorScroll = false) {
+    this.ignoreTextEditorScroll = ignoreTextEditorScroll
+    this.adapter.setScrollTop(scrollTop)
+  }
 
   /**
    * Returns the `TextEditor` scroll left value.

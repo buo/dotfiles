@@ -3,6 +3,11 @@ beautifiers = new Beautifiers()
 Beautifier = require "../src/beautifiers/beautifier"
 Languages = require('../src/languages/')
 _ = require('lodash')
+fs   = require('fs')
+path = require('path')
+Promise = require("bluebird")
+temp = require('temp')
+temp.track()
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
@@ -29,14 +34,17 @@ describe "Atom-Beautify", ->
       # Return promise
       return activationPromise
 
+  afterEach ->
+    temp.cleanupSync()
+
   describe "Beautifiers", ->
 
+    beautifier = null
+
+    beforeEach ->
+      beautifier = new Beautifier()
+
     describe "Beautifier::run", ->
-
-      beautifier = null
-
-      beforeEach ->
-        beautifier = new Beautifier()
 
       it "should error when beautifier's program not found", ->
         expect(beautifier).not.toBe(null)
@@ -186,6 +194,218 @@ describe "Atom-Beautify", ->
             p.then(cb, cb)
             return p
 
+  describe "Options", ->
+
+    editor = null
+    beautifier = null
+    workspaceElement = atom.views.getView(atom.workspace)
+    beforeEach ->
+      beautifier = new Beautifiers()
+      waitsForPromise ->
+        atom.workspace.open().then (e) ->
+          editor = e
+          expect(editor.getText()).toEqual("")
+
+    describe "Migrate Settings", ->
+
+      migrateSettings = (beforeKey, afterKey, val) ->
+        # set old options
+        atom.config.set("atom-beautify.#{beforeKey}", val)
+        atom.commands.dispatch workspaceElement, "atom-beautify:migrate-settings"
+        # Check resulting config
+        expect(_.has(atom.config.get('atom-beautify'), beforeKey)).toBe(false)
+        expect(atom.config.get("atom-beautify.#{afterKey}")).toBe(val)
+
+      it "should migrate js_indent_size to js.indent_size", ->
+        migrateSettings("js_indent_size","js.indent_size", 1)
+        migrateSettings("js_indent_size","js.indent_size", 10)
+
+      it "should migrate analytics to general.analytics", ->
+        migrateSettings("analytics","general.analytics", true)
+        migrateSettings("analytics","general.analytics", false)
+
+      it "should migrate _analyticsUserId to general._analyticsUserId", ->
+        migrateSettings("_analyticsUserId","general._analyticsUserId", "userid")
+        migrateSettings("_analyticsUserId","general._analyticsUserId", "userid2")
+
+      it "should migrate language_js_disabled to js.disabled", ->
+        migrateSettings("language_js_disabled","js.disabled", false)
+        migrateSettings("language_js_disabled","js.disabled", true)
+
+      it "should migrate language_js_default_beautifier to js.default_beautifier", ->
+        migrateSettings("language_js_default_beautifier","js.default_beautifier", "Pretty Diff")
+        migrateSettings("language_js_default_beautifier","js.default_beautifier", "JS Beautify")
+
+      it "should migrate language_js_beautify_on_save to js.beautify_on_save", ->
+        migrateSettings("language_js_beautify_on_save","js.beautify_on_save", true)
+        migrateSettings("language_js_beautify_on_save","js.beautify_on_save", false)
+
+    beautifyEditor = (callback) ->
+      isComplete = false
+      beforeText = null
+      delay = 500
+      runs ->
+        beforeText = editor.getText()
+        atom.commands.dispatch workspaceElement, "atom-beautify:beautify-editor"
+        setTimeout(->
+          isComplete = true
+        , delay)
+      waitsFor ->
+        isComplete
+
+      runs ->
+        afterText = editor.getText()
+        expect(typeof beforeText).toBe('string')
+        expect(typeof afterText).toBe('string')
+        return callback(beforeText, afterText)
+
+    describe "JavaScript", ->
+
+      beforeEach ->
+
+        waitsForPromise ->
+          packName = 'language-javascript'
+          atom.packages.activatePackage(packName)
+
+        runs ->
+          # Setup Editor
+          code = "var hello='world';function(){console.log('hello '+hello)}"
+          editor.setText(code)
+          # console.log(atom.grammars.grammarsByScopeName)
+          grammar = atom.grammars.selectGrammar('source.js')
+          expect(grammar.name).toBe('JavaScript')
+          editor.setGrammar(grammar)
+          expect(editor.getGrammar().name).toBe('JavaScript')
+
+          # See https://discuss.atom.io/t/solved-settimeout-not-working-firing-in-specs-tests/11427/17
+          jasmine.unspy(window, 'setTimeout')
+
+      # afterEach ->
+      #   atom.packages.deactivatePackages()
+      #   atom.packages.unloadPackages()
+
+      describe ".jsbeautifyrc", ->
+
+        it "should look at directories above file", ->
+          isDone = false
+          cb = (err) ->
+            isDone = true
+            expect(err).toBe(undefined)
+          runs ->
+            try
+              # console.log('runs')
+              # Make top directory
+              temp.mkdir('dir1', (err, dirPath) ->
+                # console.log(arguments)
+                return cb(err) if err
+                # Add .jsbeautifyrc file
+                rcPath = path.join(dirPath, '.jsbeautifyrc')
+                myData1 = {
+                  indent_size: 1,
+                  indent_char: '\t'
+                }
+                myData = JSON.stringify(myData1)
+                fs.writeFile(rcPath, myData, (err) ->
+                  # console.log(arguments)
+                  return cb(err) if err
+                  # Make next directory
+                  dirPath = path.join(dirPath, 'dir2')
+                  fs.mkdir(dirPath, (err) ->
+                    # console.log(arguments)
+                    return cb(err) if err
+                    # Add .jsbeautifyrc file
+                    rcPath = path.join(dirPath, '.jsbeautifyrc')
+                    myData2 = {
+                      indent_size: 2,
+                      indent_char: ' '
+                    }
+                    myData = JSON.stringify(myData2)
+                    fs.writeFile(rcPath, myData, (err) ->
+                      # console.log(arguments)
+                      return cb(err) if err
+                      Promise.all(beautifier.getOptionsForPath(rcPath, null))
+                      .then((allOptions) ->
+                        # console.log('allOptions', allOptions)
+
+                        # Extract options
+                        [
+                            editorOptions
+                            configOptions
+                            homeOptions
+                            editorConfigOptions
+                        ] = allOptions
+                        projectOptions = allOptions[4..]
+
+                        # Check that we extracted .jsbeautifyrc files
+                        [config1, config2] = projectOptions[-2..]
+
+                        expect(_.get(config1,'_default.indent_size')).toBe(myData1.indent_size)
+                        expect(_.get(config2,'_default.indent_size')).toBe(myData2.indent_size)
+                        expect(_.get(config1,'_default.indent_char')).toBe(myData1.indent_char)
+                        expect(_.get(config2,'_default.indent_char')).toBe(myData2.indent_char)
+
+                        cb()
+                      )
+                    )
+                  )
+                )
+              )
+            catch err
+              cb(err)
+          waitsFor ->
+            isDone
+
+
+      describe "Package settings", ->
+
+        getOptions = (callback) ->
+          options = null
+          waitsForPromise ->
+            # console.log('beautifier', beautifier.getOptionsForPath, beautifier)
+            allOptions = beautifier.getOptionsForPath(null, null)
+            # Resolve options with promises
+            return Promise.all(allOptions)
+            .then((allOptions) ->
+              options = allOptions
+            )
+          runs ->
+            callback(options)
+
+        it "should change indent_size to 1", ->
+          atom.config.set('atom-beautify.js.indent_size', 1)
+
+          getOptions (allOptions) ->
+            expect(typeof allOptions).toBe('object')
+            configOptions = allOptions[1]
+            expect(typeof configOptions).toBe('object')
+            expect(configOptions.js.indent_size).toBe(1)
+
+            beautifyEditor (beforeText, afterText) ->
+              # console.log(beforeText, afterText, editor)
+              expect(afterText).toBe("""var hello = 'world';
+
+              function() {
+               console.log('hello ' + hello)
+              }""")
+
+        it "should change indent_size to 10", ->
+          atom.config.set('atom-beautify.js.indent_size', 10)
+
+          getOptions (allOptions) ->
+            expect(typeof allOptions).toBe('object')
+            configOptions = allOptions[1]
+            expect(typeof configOptions).toBe('object')
+            expect(configOptions.js.indent_size).toBe(10)
+
+            beautifyEditor (beforeText, afterText) ->
+              # console.log(beforeText, afterText, editor)
+              expect(afterText).toBe("""var hello = 'world';
+
+              function() {
+                        console.log('hello ' + hello)
+              }""")
+
+
 describe "Languages", ->
 
   languages = null
@@ -200,7 +420,7 @@ describe "Languages", ->
       namespaceGroups = _.groupBy(languages.languages, "namespace")
       namespacePairs = _.toPairs(namespaceGroups)
       namespaceOverlap = _.filter(namespacePairs, ([namespace, group]) -> group.length > 1)
-      console.log('namespaces', namespaceGroups, namespacePairs, namespaceOverlap)
+      # console.log('namespaces', namespaceGroups, namespacePairs, namespaceOverlap)
       expect(namespaceOverlap.length).toBe(0, \
         "Language namespaces are overlapping.\n\
         Namespaces are unique: only one language for each namespace.\n"+

@@ -66,6 +66,10 @@ describe 'ColorParser', ->
       '@list-item-height': '@component-line-height'
     }).asUndefined()
 
+  itParses('$text-color !default').withContext({
+    '$text-color': asColor 'cyan'
+  }).asColor(0,255,255)
+
   itParses('c').withContext({'c': 'c'}).asUndefined()
   itParses('c').withContext({
     'c': 'd'
@@ -216,6 +220,15 @@ describe 'ColorParser', ->
     '$a': '0.5'
   }).asColor(102, 128, 153, 0.5)
 
+  itParses('cmyk(0,0.5,1,0)').asColor('#ff7f00')
+  itParses('cmyk(c,m,y,k)').withContext({
+    'c': '0'
+    'm': '0.5'
+    'y': '1'
+    'k': '0'
+  }).asColor('#ff7f00')
+  itParses('cmyk(c,m,y,k)').asInvalid()
+
   itParses('gray(100%)').asColor(255, 255, 255)
   itParses('gray(100)').asColor(255, 255, 255)
   itParses('gray(100%, 0.5)').asColor(255, 255, 255, 0.5)
@@ -234,6 +247,7 @@ describe 'ColorParser', ->
   itParses('YellowGreen').asColor('#9acd32')
   itParses('yellow_green').asColor('#9acd32')
   itParses('YELLOW_GREEN').asColor('#9acd32')
+  itParses('>YELLOW_GREEN').asColor('#9acd32')
 
   itParses('darken(cyan, 20%)').asColor(0, 153, 153)
   itParses('darken(cyan, 20)').asColor(0, 153, 153)
@@ -766,6 +780,14 @@ describe 'ColorParser', ->
     }).asColor(255,0,0)
     itParses('Color(r, g, b, a)').asInvalid()
 
+  #    ######## ##       ##     ##
+  #    ##       ##       ###   ###
+  #    ##       ##       #### ####
+  #    ######   ##       ## ### ##
+  #    ##       ##       ##     ##
+  #    ##       ##       ##     ##
+  #    ######## ######## ##     ##
+
   describe 'elm-lang support', ->
     beforeEach -> @scope = 'elm'
 
@@ -833,3 +855,25 @@ describe 'ColorParser', ->
       'base': asColor 'red'
     }).asColor('#00ffff')
     itParses('complement base').asInvalid()
+
+  #    ##          ###    ######## ######## ##     ##
+  #    ##         ## ##      ##    ##        ##   ##
+  #    ##        ##   ##     ##    ##         ## ##
+  #    ##       ##     ##    ##    ######      ###
+  #    ##       #########    ##    ##         ## ##
+  #    ##       ##     ##    ##    ##        ##   ##
+  #    ######## ##     ##    ##    ######## ##     ##
+
+  describe 'latex support', ->
+    beforeEach -> @scope = 'tex'
+
+    itParses('[gray]{1}').asColor('#ffffff')
+    itParses('[rgb]{1,0.5,0}').asColor('#ff7f00')
+    itParses('[RGB]{255,127,0}').asColor('#ff7f00')
+    itParses('[cmyk]{0,0.5,1,0}').asColor('#ff7f00')
+    itParses('[HTML]{ff7f00}').asColor('#ff7f00')
+    itParses('{blue}').asColor('#0000ff')
+
+    itParses('{blue!20}').asColor('#ccccff')
+    itParses('{blue!20!black}').asColor('#000033')
+    itParses('{blue!20!black!30!green}').asColor('#00590f')

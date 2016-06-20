@@ -1,6 +1,7 @@
 # Binaries.
 browserify = ./node_modules/.bin/browserify
 mocha = ./node_modules/.bin/mocha
+nsp = ./node_modules/.bin/nsp
 
 # Build the browserify bundle.
 analytics-node.js: node_modules lib/index.js
@@ -21,6 +22,9 @@ test: node_modules
 
 clean:
 	@rm analytics-node.js
+
+nsp:
+	@$(nsp) check
 
 # Phonies.
 .PHONY: test

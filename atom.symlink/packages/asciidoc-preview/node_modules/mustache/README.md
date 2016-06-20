@@ -2,6 +2,8 @@
 
 > What could be more logical awesome than no logic at all?
 
+[![Build Status](https://travis-ci.org/janl/mustache.js.svg?branch=master)](https://travis-ci.org/janl/mustache.js) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/janl/mustache.js)
+
 [mustache.js](http://github.com/janl/mustache.js) is an implementation of the [mustache](http://mustache.github.com/) template system in JavaScript.
 
 [Mustache](http://mustache.github.com/) is a logic-less template syntax. It can be used for HTML, config files, source code - anything. It works by expanding tags in a template using values provided in a hash or object.
@@ -16,13 +18,85 @@ You can use mustache.js to render mustache templates anywhere you can use JavaSc
 
 mustache.js ships with support for both the [CommonJS](http://www.commonjs.org/) module API and the [Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD) API, or AMD.
 
+And this will be your templates after you use Mustache:
+
+!['stache](https://cloud.githubusercontent.com/assets/288977/8779228/a3cf700e-2f02-11e5-869a-300312fb7a00.gif)
+
+## Install
+
+You can get Mustache via npm.
+
+```bash
+$ npm install mustache --save
+```
+or install with bower:
+
+```bash
+$ bower install --save mustache
+```
+
+## Command line tool
+
+mustache.js is shipped with a node based command line tool. It might be installed as a global tool on your computer to render a mustache template of some kind
+
+```bash
+$ npm install -g mustache
+
+$ mustache dataView.json myTemplate.mustache > output.html
+```
+
+also supports stdin.
+
+```bash
+$ cat dataView.json | mustache - myTemplate.mustache > output.html
+```
+
+or as a package.json `devDependency` in a build process maybe?
+
+```bash
+$ npm install mustache --save-dev
+```
+
+```json
+{
+  "scripts": {
+    "build": "mustache dataView.json myTemplate.mustache > public/output.html"
+  }
+}
+```
+```bash
+$ npm run build
+```
+
+The command line tool is basically a wrapper around `Mustache.render` so you get all the features.
+
+If your templates use partials you should pass paths to partials using `-p` flag:
+
+```bash
+$ mustache -p path/to/partial1.mustache -p path/to/partial2.mustache dataView.json myTemplate.mustache
+```
+
 ## Who uses mustache.js?
 
 An updated list of mustache.js users is kept [on the Github wiki](http://wiki.github.com/janl/mustache.js/beard-competition). Add yourself or your company if you use mustache.js!
 
+## Contributing
+
+mustache.js is a mature project, but it continues to actively invite maintainers. You can help out a high-profile project that is used in a lot of places on the web. There is [plenty](https://github.com/janl/mustache.js/issues) of [work](https://github.com/janl/mustache.js/pulls) to do. No big commitment required, if all you do is review a single [Pull Request](https://github.com/janl/mustache.js/pulls), you are a maintainer. And a hero.
+
+### Your First Contribution
+
+- review a [Pull Request](https://github.com/janl/mustache.js/pulls)
+- fix an [Issue](https://github.com/janl/mustache.js/issues)
+- update the [documentation](https://github.com/janl/mustache.js#usage)
+- make a website
+- write a tutorial
+
+* * *
+
 ## Usage
 
-Below is quick example how to use mustache.js:
+Below is a quick example how to use mustache.js:
 
 ```js
 var view = {
@@ -39,15 +113,54 @@ In this example, the `Mustache.render` function takes two parameters: 1) the [mu
 
 ## Templates
 
-A [mustache](http://mustache.github.com/) template is a string that contains any number of mustache tags. Tags are indicated by the double mustaches that surround them. `{{person}}` is a tag, as is `{{#person}}`. In both examples we refer to `person` as the tag's key.
+A [mustache](http://mustache.github.com/) template is a string that contains any number of mustache tags. Tags are indicated by the double mustaches that surround them. `{{person}}` is a tag, as is `{{#person}}`. In both examples we refer to `person` as the tag's key. There are several types of tags available in mustache.js, described below.
 
-There are several types of tags available in mustache.js.
+There are several techniques that can be used to load templates and hand them to mustache.js, here are two of them:
+
+#### Include Templates
+
+If you need a template for a dynamic part in a static website, you can consider including the template in the static HTML file to avoid loading templates separately. Here's a small example using `jQuery`:
+
+```html
+<html>
+<body onload="loadUser">
+<div id="target">Loading...</div>
+<script id="template" type="x-tmpl-mustache">
+Hello {{ name }}!
+</script>
+</body>
+</html>
+```
+
+```js
+function loadUser() {
+  var template = $('#template').html();
+  Mustache.parse(template);   // optional, speeds up future uses
+  var rendered = Mustache.render(template, {name: "Luke"});
+  $('#target').html(rendered);
+}
+```
+
+#### Load External Templates
+
+If your templates reside in individual files, you can load them asynchronously and render them when they arrive. Another example using `jQuery`:
+
+```js
+function loadUser() {
+  $.get('template.mst', function(template) {
+    var rendered = Mustache.render(template, {name: "Luke"});
+    $('#target').html(rendered);
+  });
+}
+```
 
 ### Variables
 
 The most basic tag type is a simple variable. A `{{name}}` tag renders the value of the `name` key in the current context. If there is no such key, nothing is rendered.
 
 All variables are HTML-escaped by default. If you want to render unescaped HTML, use the triple mustache: `{{{name}}}`. You can also use `&` to unescape a variable.
+
+If you want `{{name}}` _not_ to be interpreted as a mustache tag, but rather to appear exactly as `{{name}}` in the output, you must change and then restore the default delimiter. See the ["Set Delimiter"](https://github.com/janl/mustache.js#set-delimiter) section for more information about custom delimiters.
 
 View:
 
@@ -60,12 +173,15 @@ View:
 
 Template:
 
-```html
+```
 * {{name}}
 * {{age}}
 * {{company}}
 * {{{company}}}
 * {{&company}}
+{{=<% %>=}}
+* {{company}}
+<%={{ }}=%>
 ```
 
 Output:
@@ -76,6 +192,7 @@ Output:
 * &lt;b&gt;GitHub&lt;/b&gt;
 * <b>GitHub</b>
 * <b>GitHub</b>
+* {{company}}
 ```
 
 JavaScript's dot notation may be used to access keys that are properties of objects in a view.
@@ -268,7 +385,7 @@ Output:
 
 ### Inverted Sections
 
-An inverted section opens with `{{^section}}` instead of `{{#section}}`. The block of an inverted section is rendered only if the value of that section's tag is `null`, `undefined`, `false`, or an empty list.
+An inverted section opens with `{{^section}}` instead of `{{#section}}`. The block of an inverted section is rendered only if the value of that section's tag is `null`, `undefined`, `false`, *falsy* or an empty list.
 
 View:
 
@@ -325,7 +442,8 @@ Mustache requires only this:
 {{> next_more}}
 ```
 
-Why? Because the `next_more.mustache` file will inherit the `size` and `start` variables from the calling context. In this way you may want to think of partials as includes, or template expansion, even though it's not literally true.
+Why? Because the `next_more.mustache` file will inherit the `size` and `start` variables from the calling context. In this way you may want to think of partials as includes, imports, template expansion, nested templates, or subtemplates, even though those aren't literally the case here.
+
 
 For example, this template and partial:
 
@@ -406,18 +524,20 @@ These may be built using [Rake](http://rake.rubyforge.org/) and one of the follo
 
 ## Testing
 
-The mustache.js test suite uses the [mocha](http://visionmedia.github.com/mocha/) testing framework. In order to run the tests you'll need to install [node](http://nodejs.org/). Once that's done you can install mocha using [npm](http://npmjs.org/).
-
-    $ npm install -g mocha
+In order to run the tests you'll need to install [node](http://nodejs.org/).
 
 You also need to install the sub module containing [Mustache specifications](http://github.com/mustache/spec) in the project root.
 
     $ git submodule init
     $ git submodule update
 
+Install dependencies.
+
+    $ npm install
+
 Then run the tests.
 
-    $ mocha test
+    $ npm test
 
 The test suite consists of both unit and integration tests. If a template isn't rendering correctly for you, you can make a test for it by doing the following:
 
@@ -431,7 +551,23 @@ The test suite consists of both unit and integration tests. If a template isn't 
 
 Then, you can run the test with:
 
-    $ TEST=mytest mocha test/render-test.js
+    $ TEST=mytest npm run test-render
+
+### Browser tests
+
+Browser tests are not included in `npm test` as they run for too long, although they are ran automatically on Travis when merged into master. Run browser tests locally in any browser:
+
+    $ npm run test-browser-local
+
+then point your browser to `http://localhost:8080/__zuul`
+
+### Troubleshooting
+
+#### npm install fails
+
+Ensure to have a recent version of npm installed. While developing this project requires npm with support for `^` version ranges.
+
+    $ npm install -g npm
 
 ## Thanks
 
@@ -455,4 +591,6 @@ mustache.js wouldn't kick ass if it weren't for these fine souls:
   * Ross Boucher / boucher
   * Matt Sanford / mzsanford
   * Ben Cherry / bcherry
-  * Michael Jackson / mjijackson
+  * Michael Jackson / mjackson
+  * Phillip Johnsen / phillipj
+  * David da Silva Contín / dasilvacontin

@@ -30,6 +30,7 @@
     background: url(atom://pigments/resources/transparent-background.png);
     z-index: -1;
     border-radius: inherit;
+    box-sizing: border-box;
     .absolute-box;
   }
 
@@ -38,6 +39,7 @@
     background: inherit;
     z-index: -1;
     border-radius: inherit;
+    box-sizing: border-box;
     .absolute-box;
   }
 }
@@ -70,121 +72,208 @@
 //    ##     ## ##     ## ##    ##  ##   ##  ##       ##    ##  ##    ##
 //    ##     ## ##     ## ##     ## ##    ## ######## ##     ##  ######
 
-atom-text-editor::shadow pigments-markers,
-pigments-markers {
-  position: relative;
-  display: block;
-  z-index: 1;
+atom-panel-container.footer {
+  z-index: 3;
+}
 
-  &.above-editor-content {
+atom-text-editor::shadow, atom-text-editor {
+  .pigments-native-background .region,
+  .pigments-native-background-in-selection .region {
+    position: absolute;
+    white-space: pre;
+    .background-color;
     z-index: 1;
   }
-}
-
-atom-text-editor::shadow .gutter .pigments-gutter-marker div {
-  display: flex;
-  align-items: center;
-  padding: 0 0 0 2px;
-  position: absolute;
-
-  span {
-    width: 12px;
-    height: 12px;
-    display: block;
-    // border-radius: 50%;
-    position: relative;
-    .background-color;
-  }
-}
-
-atom-text-editor::shadow pigments-markers::shadow pigments-color-marker,
-pigments-markers::shadow pigments-color-marker,
-pigments-color-marker {
-  display: block;
-  position: absolute;
-
-  &.hidden {
-    .region.background {
-      display: none;
-    }
-
-  }
-
-  &.in-fold {
+  .pigments-native-background-in-selection {
     display: none;
   }
 
-  .region {
+  .pigments-native-underline .region,
+  .pigments-native-underline-in-selection .region {
     position: absolute;
-    white-space: pre;
+    white-space: nowrap;
+    .background-color;
+    z-index: 1;
+    height: 2px !important;
+    margin-top: 1.3em; // adjust to your liking
+  }
 
-    &.background {
-      border-radius: 2px;
+  .pigments-native-outline .region,
+  .pigments-native-outline-in-selection .region {
+    position: absolute;
+    white-space: nowrap;
+    margin-left: -1px;
+    margin-top: -1px;
+    padding: 1px 2px;
+    box-sizing: content-box !important;
+
+    border-radius: 0;
+
+    &::before {
+      box-sizing: border-box;
+      border: 2px solid transparent;
+      border-image: -webkit-repeating-linear-gradient(45deg, #808080 4px, #6A6A6A 4px, #6A6A6A 8px, #808080 8px, #808080 12px) 1 1 1 1 round;
+      content: '';
+      border-radius: inherit;
+      background-color: inherit;
+      border-radius: inherit;
+      .absolute-box;
     }
 
-    &.outline {
-      margin-left: -1px;
-      margin-top: -2px;
-      padding-left: 4px;
-
-      border-radius: 0;
-
-      &::before {
-        box-sizing: border-box;
-        border: 2px solid transparent;
-        border-image: -webkit-repeating-linear-gradient(45deg, #808080 4px, #6A6A6A 4px, #6A6A6A 8px, #808080 8px, #808080 12px) 1 1 1 1 round;
-        content: '';
-        border-radius: inherit;
-        background-color: inherit;
-        border-radius: inherit;
-        .absolute-box;
-      }
-
-      &::after {
-        box-sizing: border-box;
-        content: '';
-        display: block;
-        border: 2px solid transparent;
-        border-color: inherit;
-        border-radius: inherit;
-        .absolute-box;
-      }
+    &::after {
+      box-sizing: border-box;
+      content: '';
+      display: block;
+      border: 2px solid transparent;
+      border-color: inherit;
+      border-radius: inherit;
+      .absolute-box;
     }
+  }
 
-    &.underline {
-      height: 2px !important;
-      margin-top: 1.3em; // adjust to your liking
-    }
+  .gutter .pigments-gutter-marker div,
+  .gutter .pigments-gutter-marker-in-selection div {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 2px;
+    position: absolute;
 
-    &.background, &.underline {
+    span {
+      width: 12px;
+      height: 12px;
+      display: block;
+      box-sizing: border-box;
+      // border-radius: 50%;
+      position: relative;
       .background-color;
     }
   }
 
-  &.dot {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    vertical-align: bottom;
-    transform: translate(0, -50%);
+  .gutter .pigments-gutter-marker-in-selection div span::after {
+    border: 1px solid @text-color-highlight;
+  }
 
-    &:before {
-      content: '';
-      background: url(atom://pigments/resources/transparent-background.png);
-      background-size: 100%;
-      border-radius: inherit;
-      .absolute-box;
+  .gutter[gutter-name="pigments-native-dot"],
+  .gutter[gutter-name="pigments-native-square-dot"] {
+    overflow: visible;
+    z-index: 2;
+    min-width: 0;
+
+    .pigments-gutter-marker div span,
+    .pigments-gutter-marker-in-selection div span {
+      width: 12px;
+      height: 12px;
+      transform: translate(100%, 0);
+    }
+  }
+
+  .gutter[gutter-name="pigments-native-dot"] .pigments-gutter-marker div,
+  .gutter[gutter-name="pigments-native-dot"] .pigments-gutter-marker-in-selection div {
+    span {
+      border-radius: 50%
+    }
+  }
+
+  pigments-markers,
+  pigments-markers {
+    position: relative;
+    display: block;
+    z-index: 1;
+
+    &.above-editor-content {
+      z-index: 1;
+    }
+  }
+
+  pigments-markers::shadow pigments-color-marker,
+  pigments-markers::shadow pigments-color-marker,
+  pigments-color-marker {
+    display: block;
+    position: absolute;
+
+    &.hidden {
+      .region.background {
+        display: none;
+      }
+
     }
 
-    &:after {
-      content: '';
-      background: inherit;
-      border-radius: inherit;
-      .absolute-box;
+    &.in-fold {
+      display: none;
     }
 
-    &.square {
-      border-radius: 0;
+    .region {
+      position: absolute;
+      white-space: pre;
+
+      &.background {
+        border-radius: 2px;
+      }
+
+      &.outline {
+        margin-left: -1px;
+        margin-top: -2px;
+        padding-left: 4px;
+
+        border-radius: 0;
+
+        &::before {
+          box-sizing: border-box;
+          border: 2px solid transparent;
+          border-image: -webkit-repeating-linear-gradient(45deg, #808080 4px, #6A6A6A 4px, #6A6A6A 8px, #808080 8px, #808080 12px) 1 1 1 1 round;
+          content: '';
+          border-radius: inherit;
+          background-color: inherit;
+          border-radius: inherit;
+          .absolute-box;
+        }
+
+        &::after {
+          box-sizing: border-box;
+          content: '';
+          display: block;
+          border: 2px solid transparent;
+          border-color: inherit;
+          border-radius: inherit;
+          .absolute-box;
+        }
+      }
+
+      &.underline {
+        height: 2px !important;
+        margin-top: 1.3em; // adjust to your liking
+      }
+
+      &.background, &.underline {
+        .background-color;
+      }
+    }
+
+    &.dot {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      vertical-align: bottom;
+      transform: translate(0%, -50%);
+
+      &:before {
+        content: '';
+        background: url(atom://pigments/resources/transparent-background.png);
+        background-size: 100%;
+        border-radius: inherit;
+        .absolute-box;
+      }
+
+      &:after {
+        content: '';
+        background: inherit;
+        border-radius: inherit;
+        .absolute-box;
+      }
+
+      &.square {
+        border-radius: 0;
+      }
     }
   }
 }

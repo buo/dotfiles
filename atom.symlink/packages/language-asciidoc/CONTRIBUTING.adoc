@@ -1,0 +1,276 @@
+= Contributing
+
+In the spirit of free software, _everyone_ is encouraged to help improve this project.
+
+To contribute code, simply fork the project on GitHub, hack away and send a pull request with your proposed changes.
+Feel free to use the https://github.com/asciidoctor/atom-language-asciidoc/issues[issue tracker] to provide feedback or suggestions in other ways.
+
+== Project organization
+
+The project is hosted and run using GitHub.
+The issue tracker is in place to report bugs, discuss improvements, show our ambitious goals and desires for the future, and encourage each other.
+Classification labels and versioning tags are added for clarity and the ability to search.
+
+=== Labels
+
+Labels are added to issues and pull request for clarity, in the present but also when looking back at previous issues and pull requests.
+
+.Type labels
+|===
+|bug         | the current implementation has a flaw that needs to be resolved
+|question    | generic question
+|improvement | refinement on top of an existing feature
+|enhancement | new feature
+|duplicate   | a similar (open) issue already exists
+|invalid     | not reproducible or out of date
+|declined    | a decision was made not to pursue
+|===
+
+.Category labels
+|===
+|grammar        | how the syntax is parsed into smaller elements
+|snippets       | included snippets to reduce the amount of typing
+|infrastructure | infrastructure for developing, building, testing, and hosting the project
+|documentation  | documentation of the project, inside the code, in the included documents, or at other projects
+|styling        | element naming and how the elements render, also for the included stylesheet
+|===
+
+.Status labels
+|===
+|WIP   | currently a Work In Progress, not ready for a merge
+|ready | development is done
+|===
+
+== Development
+
+Before diving into the code, we recommend reading the article http://www.sitepoint.com/how-to-write-a-syntax-highlighting-package-for-atom/[How to Write a Syntax Highlighting Package for Atom].
+That article gives you the background information you need to get started with hacking on this package.
+
+To learn more about how the grammar works and useful resources for development, see <<Grammar>>.
+
+=== Retrieve the source code
+
+The source code for this plugin is available from https://github.com/asciidoctor/atom-language-asciidoc.
+
+=== Retrieve the dependencies
+
+Use the following command to download dependencies (https://github.com/atom/season[Season], http://www.coffeelint.org/[CoffeeLint], ...):
+
+[source, shell]
+----
+apm install
+----
+
+=== Prepare for business
+
+. Decide what you want to work on, and what should be the result
+. Have a GitHub account
+. Fork the project to your personal account
+. Check out your forked project for local development using git
+. Navigate to the directory using the command line interface
+. Link the package using `apm link -d`, and start atom in dev-mode using the command `atom -d .`
+. _Develop_ (this is where the magic happens)
+. Commit and push your code onto your forked project
+. Make a pull request and fill in the pull request template to request for the changes to be merged into the upstream project
+. Answer questions or make adjustments based on the discussion around the pull request
+. Wait for the merge, wait for the next release, use it in your normal Atom install
+. _Show off to others what you have made, and feel proud for you have improved the lives of many by contributing to this package!_
+
+== Quality assurance
+
+When opening a pull request on GitHub, https://travis-ci.org/asciidoctor/atom-language-asciidoc[Travis CI] will run the Atom package specs and lint using CoffeeScript files.
+Of course you can do so yourself, so you can ensure your code will pass the check in the pull-request.
+
+=== CoffeeScript lint
+
+This package uses http://www.coffeelint.org/[CoffeeLint] to ensure that the code is uniformly structured.
+The linter definitions are defined in the link:coffeelint.json[coffeelint.json].
+
+When developing in Atom, the https://atom.io/packages/linter-coffeelint[linter-coffeelint] package exposes the linting in your editor.
+It does require CoffeeLint to be http://www.coffeelint.org/#install[installed].
+
+CoffeeLint can also be triggered from the command line:
+
+[source, shell]
+----
+coffeelint -f coffeelint.json grammars/asciidoc.cson spec/*-spec.coffee snippets/language-asciidoc.cson
+----
+
+=== Package specs
+
+Tests are defined in link:spec/[spec/] directory, which provide snippets of text and test if the parsed result meet the expectations.
+Ideally all grammar features are covered in the specs (100% test coverage), with both positive and negative tests.
+Having these tests present will help future contributors make improvements without accidentally breaking other parts of the package.
+
+There are multiple ways in which you can run the tests:
+
+.Testing from the command line
+[source, shell]
+----
+atom --test spec
+----
+
+.Testing via the Command Pallet in Atom
+----
+Window: Run Package Specs
+----
+
+.Testing using the build-package.sh script
+[source, shell]
+----
+curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh > build-package.sh
+sh build-package.sh
+----
+
+.Testing syntax
+* http://flight-manual.atom.io/hacking-atom/sections/writing-specs[Atom specs]
+* http://jasmine.github.io/1.3/introduction.html[Jasmine 1.3]
+
+== Grammar
+
+The grammar is defined in files contains in the directory `grammars/repositories`.
+
+The file link:grammars/language-asciidoc.cson[grammars/language-asciidoc.cson] is a generated file, *you must don't chnage this file manually*.
+
+=== Generate the grammar file
+
+* Run Atom in Dev Mode with the following command:
+
+[source, shell]
+----
+atom -d .
+----
+
+* Open the Command Palette with press keys: `Ctrl+Shift+P`
+* In the Command Palette, find and choose the item named `Asciidoc Grammar: Compile grammar and reload`
+** Tips: write only `agc` for a quick access to the item.
+* The grammar file is re-generated automatically.
+
+==== Live Reload
+
+* To automaticaly reload the grammar when a `.cson` file is saved:
+** In the package settings, checked: `[Only on Developer Mode] Grammars live reload`
+** To quickly toggle Live Reload:
+*** Open the Command Palette with press keys: `Ctrl+Shift+P`
+*** In the Command Palette, find and choose the item named `Asciidoc Grammar: Toggle Live Reload`
+**** Tips: write only `agt` for a quick access to the item.
+
+=== Language definition
+
+The Atom language definitions originate from the language definitions used by TextMate.
+The language definition is interpreted by the https://github.com/atom/first-mate[first-mate] JavaScript module.
+
+A language definition supports both single-line matches using a _match_ regular expression (regexp), and sections matches based on a _begin_ and _end_ regexps.
+The regexps are based on the https://github.com/kkos/oniguruma[Oniguruma] regexp engine (also used in Ruby), as described in <<Regexp handling>>.
+
+.TextMate oriented language resources
+* http://www.apeth.com/nonblog/stories/textmatebundle.html[Practical TextMate guide]
+* http://manual.macromates.com/en/language_grammars.html[TextMate language grammars manual]
+
+==== Naming conventions
+
+We're trying as much as possible to adhere to the naming guidelines described in the http://manual.macromates.com/en/language_grammars.html#naming_conventions[Naming Conventions] section of the TextMate language manual.
+Since the grammar framework was designed with computer programming languages in mind, it's not always clear what name to select.
+We must find the most logical way to map to the existing names, then try to stick to it.
+
+Here are (some of) the patterns we're currently using:
+
+* `markup.heading` - encloses a section title
+* `markup.bold` - encloses strong text
+* `markup.italic` - encloses emphasized text
+* `markup.raw` - encloses monospaced text
+* `markup.link` - encloses a raw URL or target of a link macro
+* `comment.line` - encloses a line comment
+* `comment.block` - encloses a block comment
+* `entity.name.function` - encloses the macro name
+* `string.unquoted` - nested content (such as inside a macro or attribute value)
+* ...
+
+=== Regexp handling
+
+Atom uses the https://github.com/kkos/oniguruma[Oniguruma] library for parsing regular expressions via the https://github.com/atom/node-oniguruma[node-oniguruma] JavaScript module.
+The http://oniguruma.rubyforge.org/oniguruma/files/Syntax_txt.html[Oniguruma documentation] provides an overview of all supported elements.
+
+IMPORTANT: Patterns are defined as JavaScript strings.
+That means backslashes must be escaped twice (`\\\\`), backslashes in character classes escaped once (`\\s`), and single quotes escaped once (`\'`).
+
+Generally it can be said that POSIX-style regex elements are preferred (e.g., `+\p{Blank}+` and `+\p{Word}+`) as they better support internationalization.
+
+.Ruby regexp information
+* http://rubular.com/[Rubular] an online Ruby regex editor
+* http://www.regular-expressions.info/ruby.html[Ruby regexp introduction]
+* http://www.regular-expressions.info/refflavors.html[Regexp reference index] (select Ruby in the table header dropdown)
+
+=== Regex inspiration from upstream
+
+The https://github.com/asciidoctor/asciidoctor[upstream Asciidoctor project], written in Ruby, contains all regexes to support the full Asciidoctor ecosystem. Checking out the https://github.com/asciidoctor/asciidoctor/blob/master/lib/asciidoctor.rb[upstream code] can thus be a great source for regex inspiration. There are however a few things to keep in mind when looking at the regular expressions in Asciidoctor core (`asciidoctor.rb`):
+
+. The regular expressions in core are written for the http://ruby-doc.org/core-1.8.7/Regexp.html[Ruby 1.8 regexp engine], so they are more primitive than what https://github.com/kkos/oniguruma[Oniguruma] supports. Most notably, the Ruby 1.8 regexp engine doesn't support http://www.regular-expressions.info/lookaround.html#lookbehind[look-behind matches] (We're going to start using the Oniguruma engine in Asciidoctor 1.6).
+. The regular expressions in core often capture groups in order to populate the https://en.wikipedia.org/wiki/Abstract_syntax_treed[AST] node, or to perform more fine-grained parsing. The grammar doesn't need to capture a group unless that span of text is needed for highlighting.
+. The grammar should skip matching escaped syntax. Core captures it only because the regexp engine doesn't support look-behind matches.
+
+=== Code language support
+
+AsciiDoc offers the ability to include source code blocks, in a variety of languages.
+By including the language definitions of the language set for the code block, AsciiDoc is able to offer code block language highlighting.
+To get the most of out of this feature, development will have to keep up with languages available in Atom.
+You can check the available source languages available in your Atom editor, to see if some language support is missing.
+
+.Check source language support
+. Open the _Developer Tools_: `Ctrl+Shift+I` on Linux and Windows, `Cmd+Alt+i` on Mac OS X.
+. Run the query `Object.keys(atom.grammars.grammarsByScopeName).sort().join('\n')` in the _Console_.
+
+.Example language query
+image::https://cloud.githubusercontent.com/assets/5674651/14895946/a40b08aa-0d7b-11e6-9bff-458a3d42087c.png[screenshot of a code support query]
+
+== Compat mode not supported
+
+This grammar implements the modern AsciiDoc syntax endorsed by Asciidoctor.
+It does not support the legacy AsciiDoc syntax permitted by Asciidoctor with http://asciidoctor.org/docs/migration/#compat-mode[compat mode] enabled or by AsciiDoc Python.
+Additionally, two-line section titles are not recognized by this grammar.
+
+The reason compat mode is not supported is two-fold.
+
+. An Atom grammar is not capable of supporting different modes based on a setting within the document.
+. Since this project is part of the Asciidoctor organization, which endorses a modern, consistent AsciiDoc syntax, this package is aimed at encouraging migration away from the legacy syntax.
+
+Furthermore, this grammar doesn't support the two-line section titles for both the aforementioned reasons.
+That style confuses the language highlighter and we consider using that style a bad practice.
+
+We hope this grammar encourages authors to write good, clean, modern AsciiDoc.
+So that's the AsciiDoc we designed this grammar to recognize.
+
+== Styling
+
+The styling is defined in link:styles/asciidoc.atom-text-editor.less[styles/asciidoc.atom-text-editor.less]
+
+=== General resources
+
+.The primary references:
+* http://lesscss.org/functions/
+
+.Atom theme variables:
+* https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less
+* https://github.com/atom/atom/blob/master/static/atom.less
+* http://flight-manual.atom.io/hacking-atom/sections/creating-a-theme/#_atom_theme_vars
+
+.Some others references:
+* https://github.com/atom/styleguide
+* https://github.com/atom/template-syntax/blob/master/stylesheets/syntax-variables.less
+
+== Snippets
+
+Snippets are defined in link:snippets/language-asciidoc.cson[snippets/language-asciidoc.cson].
+
+== Package publising
+
+We use https://travis-ci.org[Travis CI] to publish this package.
+
+Every merged PR is released as a new version (by default a `patch`).
+
+We use the https://travis-ci.org/asciidoctor/atom-language-asciidoc/settings[Travis CI UI] to manage the publishing system via secure environment variables:
+
+* `PUBLISH_TYPE`: default `patch`, can be change to `minor`, `major`.
+* `STOP_PUBLISH`: if defined, prevent the publishing.
+* `$encrypted_xxxx_key` and `$encrypted_xxxx_iv`: defined the main key and vector to encrypt the SSH key.
+* `ATOM_ACCESS_TOKEN`: defined the Atom token for `apm`.

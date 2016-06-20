@@ -80,27 +80,6 @@ function patch(Ware) {
         var fn;
 
         /*
-         * Accept other `AttachWare`.
-         */
-
-        if (attach instanceof AttachWare) {
-            if (attach.attachers) {
-                return self.use(attach.attachers);
-            }
-
-            return self;
-        }
-
-        /*
-         * Accept normal ware.
-         */
-
-        if (attach instanceof Ware) {
-            self.fns = self.fns.concat(attach.fns);
-            return self;
-        }
-
-        /*
          * Multiple attachers.
          */
 
@@ -108,8 +87,28 @@ function patch(Ware) {
             index = -1;
             length = attach.length;
 
-            while (++index < length) {
-                self.use.apply(self, [attach[index]].concat(params));
+            /*
+             * So, `attach[0]` is a function, meaning its
+             * either a list of `attachers` or its a `list`.
+             */
+
+            if (typeof attach[0] === 'function') {
+                if (
+                    (attach[1] !== null && attach[1] !== undefined) &&
+                    typeof attach[1] !== 'function'
+                ) {
+                    self.use.apply(self, attach);
+                } else {
+                    while (++index < length) {
+                        self.use.apply(self, [
+                            attach[index]
+                        ].concat(params));
+                    }
+                }
+            } else {
+                while (++index < length) {
+                    self.use(attach[index]);
+                }
             }
 
             return self;

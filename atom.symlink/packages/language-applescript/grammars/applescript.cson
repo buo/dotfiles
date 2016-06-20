@@ -3,7 +3,7 @@
   'script editor'
   'scpt'
 ]
-'firstLineMatch': '^#!.*(osascript)'
+'firstLineMatch': '^#!.*osascript(?!.*JavaScript)|^FasdUAS'
 'name': 'AppleScript'
 'patterns': [
   {

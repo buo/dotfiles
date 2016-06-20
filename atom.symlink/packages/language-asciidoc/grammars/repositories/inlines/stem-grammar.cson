@@ -1,0 +1,20 @@
+key: 'stem-macro'
+
+patterns: [
+
+  # Matches a stem (and alternatives, asciimath and latexmath) inline macro, which may span multiple lines.
+  #
+  # Examples
+  #
+  #   stem:[x != 0]
+  #   asciimath:[x != 0]
+  #   latexmath:[\sqrt{4} = 2]
+  #
+  name: 'markup.macro.inline.stem.asciidoc'
+  begin: '(?<!\\\\)(stem|(?:latex|ascii)math):([a-z,]*)(\\[)'
+  beginCaptures:
+    1: name: 'entity.name.function.asciidoc'
+    2: name: 'markup.meta.attribute-list.asciidoc'
+  contentName: 'string.unquoted.asciidoc'
+  end: '\\]|^$'
+]

@@ -1,0 +1,44 @@
+{
+  "name": "base64",
+  "main": "./lib/base64",
+  "version": "0.3.0",
+  "description": "A Base64 encoder and decoder",
+  "activationCommands": {
+    "atom-workspace": [
+      "base64:encode",
+      "base64:decode"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmattozzi/atom-base64.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.210.0"
+  },
+  "dependencies": {},
+  "readme": "# base64 package\n\n`ctrl-alt-b` to Base64 encode selected text. `ctrl-alt-d` to Base64 decode selected text.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/mmattozzi/atom-base64/issues"
+  },
+  "homepage": "https://github.com/mmattozzi/atom-base64#readme",
+  "_id": "base64@0.3.0",
+  "_shasum": "462c49836f74b5ec9819a459f6ac4f4b2d2573c8",
+  "_resolved": "file:../d-116230-22740-hbhmx/package.tgz",
+  "_from": "../d-116230-22740-hbhmx/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/base64.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

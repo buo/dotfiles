@@ -1,1 +1,1 @@
-var Opal = this.Opal = {};
+var Opal = this.Opal = undefined;

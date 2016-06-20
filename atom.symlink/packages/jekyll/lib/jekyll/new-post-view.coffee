@@ -9,12 +9,19 @@ Utils = require './utils'
 
 module.exports =
 class JekyllNewPostView extends View
+  directoryBoxes: {}
+
   @content: ->
     @div class: 'jekyll-new-post overlay from-top', =>
       @label "Post Title", class: 'icon icon-file-add', outlet: 'promptText'
       @subview 'miniEditor', new TextEditorView(mini: true)
-      @label "Draft"
-      @input type: 'checkbox', outlet: 'draftCheckbox'
+
+      if process.jekyllAtom.config.atom?.postDirs
+        for dir in process.jekyllAtom.config.atom.postDirs
+          @label dir
+          @input type: 'checkbox', outlet: 'dirCheckbox'+ dir, 'data-dir': dir
+
+
       @button outlet: 'createButton', 'Create'
       @div class: 'error-message', outlet: 'errorMessage'
 
@@ -26,6 +33,27 @@ class JekyllNewPostView extends View
     @createButton.on 'click', => @onConfirm(@miniEditor.getText())
 
   attach: ->
+
+
+    if process.jekyllAtom.config.atom?.postDirs
+      for dir in process.jekyllAtom.config.atom.postDirs
+        _ = @
+
+        @directoryBoxes[dir] = @['dirCheckbox' + dir]
+
+        @['dirCheckbox' + dir].on 'change', ->
+          if $(this).prop 'checked'
+            for sdir in Object.keys(_.directoryBoxes)
+              if sdir != $(this).attr('data-dir')
+                _.directoryBoxes[sdir].prop('checked', false)
+
+
+
+        if dir == process.jekyllAtom.config.atom.defaultPostDir
+          @['dirCheckbox' + dir].prop('checked', true)
+        else
+          @['dirCheckbox' + dir].prop('checked', false)
+
     @panel = atom.workspace.addModalPanel(item: this)
 
   destroy: ->
@@ -44,12 +72,15 @@ class JekyllNewPostView extends View
     @flashError() if error
 
   onConfirm: (title) ->
-    draft = !!@draftCheckbox.prop('checked')
-    fileName = Utils.generateFileName(title, draft)
-    if draft
-      relativePath = path.join('_drafts', fileName + '.markdown')
-    else
-      relativePath = path.join('_posts', fileName + '.markdown')
+    postDir = '_posts'
+    if process.jekyllAtom.config.atom?.postDirs
+      for dir in process.jekyllAtom.config.atom.postDirs
+        if !!@['dirCheckbox' + dir].prop('checked')
+          postDir = dir
+
+
+    fileName = Utils.generateFileName title
+    relativePath = path.join(process.jekyllAtom.config.source, postDir, fileName + '.markdown')
     endsWithDirectorySeparator = /\/$/.test(relativePath)
     pathToCreate = atom.project.getDirectories()[0]?.resolve(relativePath)
     return unless pathToCreate

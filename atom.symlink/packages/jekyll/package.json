@@ -1,7 +1,7 @@
 {
   "name": "jekyll",
   "main": "./lib/main",
-  "version": "1.2.0",
+  "version": "1.4.2",
   "description": "A collection of snippets and tools for Jekyll",
   "activationCommands": {
     "atom-workspace": [
@@ -29,7 +29,7 @@
     "fs-plus": "^2.0.4",
     "js-yaml": "^3.4.5",
     "space-pen": "^5",
-    "static-server": "2.0.0",
+    "static-server": "2.0.2",
     "temp": "~0.8.3"
   },
   "keywords": [
@@ -38,16 +38,16 @@
     "server",
     "build"
   ],
-  "readme": "# Jekyll-Atom [![Build Status](https://travis-ci.org/Arcath/jekyll-atom.svg?branch=master)](https://travis-ci.org/Arcath/jekyll-atom) [![Dependency Status](https://david-dm.org/arcath/jekyll-atom.svg)](https://david-dm.org/arcath/jekyll-atom) [![Join the chat at https://gitter.im/Arcath/jekyll-atom](https://badges.gitter.im/Arcath/jekyll-atom.svg)](https://gitter.im/Arcath/jekyll-atom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nA collection of snippets and tools for [Jekyll] in [Atom]\n\n[![Jekyll Logo](https://raw.githubusercontent.com/Arcath/jekyll-atom/master/images/jekyll.png)](http://jekyllrb.com)\n\n# Configuring\n\nJekyll-Atom has a few settings that can be set through the [Atom] settings.\n\n`Server Port` The port used by [static-server](https://github.com/nbluis/static-server), defaults to `3000`\n\n`Build Command` An array containing the default command to build a site, defaults to `jekyll, build`. Can be overridden in your projects `_config.yml`.\n\n - The `Build Command` will most likely need changing due to some weirdness with $PATH in [Atom].\n   - Go into the packages settings (Settings -> Packages -> Jekyll).\n   - Change `Build Command` to `/path/to/jekyll, build`.\n   - You can get your /path/to/jekyll by using `which jekyll` in your terminal.\n\n`Draft By Default` whether the draft tick box is ticked by default on the new post screen.\n\n## _config.yml\n\nJekyll Atom can pickup project specific config from your `_config.yml`.\n\nFor Example:\n\n```yaml\natom:\n  buildCommand:\n    - jekyll\n    - build\n    - --option\n    - --this\n  buildEnv:\n    JEKYLL_ENV: development\n```\n\n# Usage\n\n## Server Management\n\nJekyll-Atom can host a server to preview your site!\n\nThe server runs in the background and can be started/stopped from anywhere using the Toggle Server command `Alt-Shift-T`.\n\nWhilst running any time you save in Atom your site will be built and available on the port you set in config.\n\n## Functions\n\n### Open the layout for the current file\n\nWhen triggered this function looks through your file for `layout: foo` and then opens `LAYOUTS_DIR/foo.LAYOUT_FORMAT`\n\n### Open the include for the cursor position\n\nWhen triggered this function opens up the include for the current tag. For example if you had `{% include snippet.html %}` Atom would open `INCLUDES_DIR/snippet.html`\n\n### Create a new Post\n\nWhen triggered this function brings up a popup at the top of the screen for you to type in the title of your new post e.g. `Something Really Cool!` (on the date 2/4/2014). When you submit the form a new file of `POSTSDIR/2014-04-02-something-really-cool.POST_FORMAT` will be created with a very basic front matter and opened on the screen.\n\n### Open Config\n\nOpens `_config.yml`\n\n### Open Data File\n\nWhen Triggered this function looks at the text around your cursor to find the data file to open. For Example triggering Open Data File whilst your cursor is within the `site.data.team` in this `{{ blah site.data.team }}` would result in `DATADIR/team.yml` being opened.\n\n## Keyboard Shortcuts\n\n`Cmd-Alt-L` Open the layout for the current file\n\n`Cmd-Alt-D` Open the Datafile\n\n`Cmd-Shift-I` Open include\n\n`Cmd-Alt-J` Create a new post\n\n`Alt-Shift-T` Turn the server on/off\n\n## Snippets\n\nThere are a load of snippets provided by this plugin, please check the settings pane in atom for a full list.\n\n# Contributing\n\nFeel free to fork this repo and submit changes!\n\nWhen you fork Jekyll-Atom please:\n\n1. Create your feature branch (`git checkout -b my-new-feature`)\n2. Commit your changes (`git commit -am 'Add some feature'`)\n3. Push to the branch (`git push origin my-new-feature`)\n4. Create new Pull Request\n\n[Jekyll]: http://jekyllrb.com\n[Atom]: https://atom.io\n",
+  "readme": "# Jekyll-Atom [![Build Status](https://travis-ci.org/Arcath/jekyll-atom.svg?branch=master)](https://travis-ci.org/Arcath/jekyll-atom) [![Dependency Status](https://david-dm.org/arcath/jekyll-atom.svg)](https://david-dm.org/arcath/jekyll-atom) [![Join the chat at https://gitter.im/Arcath/jekyll-atom](https://badges.gitter.im/Arcath/jekyll-atom.svg)](https://gitter.im/Arcath/jekyll-atom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nA collection of snippets and tools for [Jekyll] in [Atom]\n\n[![Jekyll Logo](https://raw.githubusercontent.com/Arcath/jekyll-atom/master/images/jekyll.png)](http://jekyllrb.com)\n\n# Configuring\n\nJekyll-Atom has a few settings that can be set through the [Atom] settings.\n\n`Server Port` The port used by [static-server](https://github.com/nbluis/static-server), defaults to `3000`\n\n`Build Command` An array containing the default command to build a site, defaults to `jekyll, build`. Can be overridden in your projects `_config.yml`.\n\n - The `Build Command` will most likely need changing due to some weirdness with $PATH in [Atom].\n   - Go into the packages settings (Settings -> Packages -> Jekyll).\n   - Change `Build Command` to `/path/to/jekyll, build`.\n   - You can get your /path/to/jekyll by using `which jekyll` in your terminal.\n\n## _config.yml\n\nJekyll Atom can pickup project specific config from your `_config.yml`.\n\nFor Example:\n\n```yaml\natom:\n  buildCommand:\n    - jekyll\n    - build\n    - --option\n    - --this\n  buildEnv:\n    JEKYLL_ENV: development\n  postDirs:\n    - _newsletters\n  defaultPostDir: _drafts\n```\n\n### buildCommand\n\nbuildCommand works the same as it does in the Atom settings and is an override for this site.\n\n### buildEnv\n\nThe environment used for the build process lets you set any environment variables you desire.\n\n### postDirs\n\nThe directories that appear on the new post modal. `_posts` and `_drafts` are added by default.\n\n### defaultPostDir\n\nThe default directory to be selected on the new post modal. Defaults to `_posts`.\n\n# Usage\n\n## Server Management\n\nJekyll-Atom can host a server to preview your site!\n\nThe server runs in the background and can be started/stopped from anywhere using the Toggle Server command `Alt-Shift-T`.\n\nWhilst running any time you save in Atom your site will be built and available on the port you set in config.\n\n## Grammars\n\nJekyll-Atom adds 3 language grammars to Atom `Jekyll (HTML)`, `Jekyll (XML)` and `Jekyll (JSON)`. All 3 add Liquid and YAML highlighting to their respective format.\n\n> Liquid Highlighting requires the [language-liquid](https://atom.io/packages/language-liquid) package to be installed.\n\n## Functions\n\n### Open the layout for the current file\n\nWhen triggered this function looks through your file for `layout: foo` and then opens `LAYOUTS_DIR/foo.LAYOUT_FORMAT`\n\n### Open the include for the cursor position\n\nWhen triggered this function opens up the include for the current tag. For example if you had `{% include snippet.html %}` Atom would open `INCLUDES_DIR/snippet.html`\n\n### Create a new Post\n\nWhen triggered this function brings up a popup at the top of the screen for you to type in the title of your new post e.g. `Something Really Cool!` (on the date 2/4/2014). When you submit the form a new file of `POSTSDIR/2014-04-02-something-really-cool.POST_FORMAT` will be created with a very basic front matter and opened on the screen.\n\n### Open Config\n\nOpens `_config.yml`\n\n### Open Data File\n\nWhen Triggered this function looks at the text around your cursor to find the data file to open. For Example triggering Open Data File whilst your cursor is within the `site.data.team` in this `{{ blah site.data.team }}` would result in `DATADIR/team.yml` being opened.\n\n## Keyboard Shortcuts\n\n`Cmd-Alt-L` Open the layout for the current file\n\n`Cmd-Alt-D` Open the Datafile\n\n`Cmd-Shift-I` Open include\n\n`Cmd-Alt-J` Create a new post\n\n`Alt-Shift-T` Turn the server on/off\n\n## Snippets\n\nThere are a load of snippets provided by this plugin, please check the settings pane in atom for a full list.\n\n# Contributing\n\nFeel free to fork this repo and submit changes!\n\nWhen you fork Jekyll-Atom please:\n\n1. Create your feature branch (`git checkout -b my-new-feature`)\n2. Commit your changes (`git commit -am 'Add some feature'`)\n3. Push to the branch (`git push origin my-new-feature`)\n4. Create new Pull Request\n\n[Jekyll]: http://jekyllrb.com\n[Atom]: https://atom.io\n",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/arcath/jekyll-atom/issues"
   },
   "homepage": "https://github.com/arcath/jekyll-atom#readme",
-  "_id": "jekyll@1.2.0",
-  "_shasum": "e8836d403734d7833169d85f4a09d7a2d7dae67b",
-  "_resolved": "file:../d-11628-62969-2bokmp/package.tgz",
-  "_from": "../d-11628-62969-2bokmp/package.tgz",
+  "_id": "jekyll@1.4.2",
+  "_shasum": "e191b455483ed6968822e63304b78c0821f53f1b",
+  "_resolved": "file:../d-11657-3153-1nqb7kj/package.tgz",
+  "_from": "../d-11657-3153-1nqb7kj/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -63,7 +63,7 @@
       },
       {
         "name": "fs-plus",
-        "version": "2.8.1",
+        "version": "2.9.1",
         "path": "node_modules/fs-plus/lib/fs-plus.js"
       },
       {
@@ -93,12 +93,12 @@
       },
       {
         "name": "js-yaml",
-        "version": "3.5.3",
+        "version": "3.6.1",
         "path": "node_modules/js-yaml/index.js"
       },
       {
         "name": "argparse",
-        "version": "1.0.6",
+        "version": "1.0.7",
         "path": "node_modules/js-yaml/node_modules/argparse/index.js"
       },
       {
@@ -188,7 +188,7 @@
       },
       {
         "name": "static-server",
-        "version": "2.0.0",
+        "version": "2.0.2",
         "path": "node_modules/static-server/server.js"
       },
       {
@@ -975,7 +975,7 @@
           "fs-plus": "^2.0.4",
           "js-yaml": "^3.4.5",
           "space-pen": "^5",
-          "static-server": "2.0.0",
+          "static-server": "2.0.2",
           "temp": "~0.8.3"
         }
       },
@@ -1022,7 +1022,7 @@
           "node_modules/js-yaml/lib"
         ],
         "dependencies": {
-          "argparse": "^1.0.2",
+          "argparse": "^1.0.7",
           "esprima": "^2.6.0"
         }
       },

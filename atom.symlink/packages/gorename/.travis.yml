@@ -1,0 +1,33 @@
+language: objective-c
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+sudo: required
+
+os:
+  - linux
+  - osx
+
+language: go
+
+go:
+  - 1.6
+
+env:
+  global:
+    - APM_TEST_PACKAGES="environment go-config go-get"
+    - ATOM_ACCESS_TOKEN=da809a6077bb1b0aa7c5623f7b2d5f1fec2faae4
+
+  matrix:
+    - ATOM_CHANNEL=stable
+    - ATOM_CHANNEL=beta
+
+script:
+  - go get -u golang.org/x/tools/cmd/gorename
+  - 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
+git:
+  depth: 10

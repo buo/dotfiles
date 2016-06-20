@@ -272,6 +272,27 @@ registry.createExpression 'pigments:hwb', strip("
   ]
   @alpha = if a? then context.readFloat(a) else 1
 
+# cmyk(0,0.5,1,0)
+registry.createExpression 'pigments:cmyk', strip("
+  cmyk#{ps}\\s*
+    (#{float}|#{variables})
+    #{comma}
+    (#{float}|#{variables})
+    #{comma}
+    (#{float}|#{variables})
+    #{comma}
+    (#{float}|#{variables})
+  #{pe}
+"), ['*'], (match, expression, context) ->
+  [_,c,m,y,k] = match
+
+  @cmyk = [
+    context.readFloat(c)
+    context.readFloat(m)
+    context.readFloat(y)
+    context.readFloat(k)
+  ]
+
 # gray(50%)
 # The priority is set to 1 to make sure that it appears before named colors
 registry.createExpression 'pigments:gray', strip("
@@ -290,7 +311,7 @@ registry.createExpression 'pigments:gray', strip("
 colors = Object.keys(SVGColors.allCases)
 colorRegexp = "(?:#{namePrefixes})(#{colors.join('|')})\\b(?![ \\t]*[-\\.:=\\(])"
 
-registry.createExpression 'pigments:named_colors', colorRegexp, ['*'], (match, expression, context) ->
+registry.createExpression 'pigments:named_colors', colorRegexp, ['css', 'less', 'styl', 'stylus', 'sass', 'scss'], (match, expression, context) ->
   [_,name] = match
 
   @colorExpression = @name = name
@@ -1211,3 +1232,88 @@ registry.createExpression 'pigments:elm_complement', strip("
 
   @hsl = [(h + 180) % 360, s, l]
   @alpha = baseColor.alpha
+
+##    ##          ###    ######## ######## ##     ##
+##    ##         ## ##      ##    ##        ##   ##
+##    ##        ##   ##     ##    ##         ## ##
+##    ##       ##     ##    ##    ######      ###
+##    ##       #########    ##    ##         ## ##
+##    ##       ##     ##    ##    ##        ##   ##
+##    ######## ##     ##    ##    ######## ##     ##
+
+registry.createExpression 'pigments:latex_gray', strip("
+  \\[gray\\]\\{(#{float})\\}
+"), ['tex'], (match, expression, context) ->
+  [_, amount] = match
+
+  amount = context.readFloat(amount) * 255
+  @rgb = [amount, amount, amount]
+
+registry.createExpression 'pigments:latex_html', strip("
+  \\[HTML\\]\\{(#{hexadecimal}{6})\\}
+"), ['tex'], (match, expression, context) ->
+  [_, hexa] = match
+
+  @hex = hexa
+
+registry.createExpression 'pigments:latex_rgb', strip("
+  \\[rgb\\]\\{(#{float})#{comma}(#{float})#{comma}(#{float})\\}
+"), ['tex'], (match, expression, context) ->
+  [_, r,g,b] = match
+
+  r = Math.floor(context.readFloat(r) * 255)
+  g = Math.floor(context.readFloat(g) * 255)
+  b = Math.floor(context.readFloat(b) * 255)
+  @rgb = [r, g, b]
+
+registry.createExpression 'pigments:latex_RGB', strip("
+  \\[RGB\\]\\{(#{int})#{comma}(#{int})#{comma}(#{int})\\}
+"), ['tex'], (match, expression, context) ->
+  [_, r,g,b] = match
+
+  r = context.readInt(r)
+  g = context.readInt(g)
+  b = context.readInt(b)
+  @rgb = [r, g, b]
+
+registry.createExpression 'pigments:latex_cmyk', strip("
+  \\[cmyk\\]\\{(#{float})#{comma}(#{float})#{comma}(#{float})#{comma}(#{float})\\}
+"), ['tex'], (match, expression, context) ->
+  [_, c,m,y,k] = match
+
+  c = context.readFloat(c)
+  m = context.readFloat(m)
+  y = context.readFloat(y)
+  k = context.readFloat(k)
+  @cmyk = [c,m,y,k]
+
+registry.createExpression 'pigments:latex_predefined', strip('
+  \\{(black|blue|brown|cyan|darkgray|gray|green|lightgray|lime|magenta|olive|orange|pink|purple|red|teal|violet|white|yellow)\\}
+'), ['tex'], (match, expression, context) ->
+  [_, name] = match
+  @hex = context.SVGColors.allCases[name].replace('#','')
+
+registry.createExpression 'pigments:latex_mix', strip('
+  \\{([^!\\n\\}]+[!][^\\}\\n]+)\\}
+'), ['tex'], (match, expression, context) ->
+  [_, expr] = match
+
+  op = expr.split('!')
+
+  mix = ([a,p,b]) ->
+    colorA = if a instanceof context.Color then a else context.readColor("{#{a}}")
+    colorB = if b instanceof context.Color then b else context.readColor("{#{b}}")
+    percent = context.readInt(p)
+
+    context.mixColors(colorA, colorB, percent / 100)
+
+  op.push(new context.Color(255, 255, 255)) if op.length is 2
+
+  nextColor = null
+
+  while op.length > 0
+    triplet = op.splice(0,3)
+    nextColor = mix(triplet)
+    op.unshift(nextColor) if op.length > 0
+
+  @rgb = nextColor.rgb

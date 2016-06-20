@@ -1,0 +1,10 @@
+{
+  "context-menu": {
+    "atom-text-editor[data-grammar~=\"go\"]:not([mini])": [
+      {
+        "label": "Rename Symbol Under Cursor",
+        "command": "golang:gorename"
+      }
+    ]
+  }
+}

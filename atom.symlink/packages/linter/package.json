@@ -4,7 +4,7 @@
   "author": {
     "name": "atom-community"
   },
-  "version": "1.11.3",
+  "version": "1.11.4",
   "description": "A Base Linter with Cow Powers",
   "repository": {
     "type": "git",
@@ -51,10 +51,10 @@
     "url": "https://github.com/atom-community/linter/issues"
   },
   "homepage": "https://github.com/atom-community/linter#readme",
-  "_id": "linter@1.11.3",
-  "_shasum": "91c7f07d13b539f26a62943c3463d0b0d593de5c",
-  "_resolved": "file:../d-1151029-76198-11va0ad/package.tgz",
-  "_from": "../d-1151029-76198-11va0ad/package.tgz",
+  "_id": "linter@1.11.4",
+  "_shasum": "6c270ef12cf5b50d0bada6e84575ccc3a8e8cb37",
+  "_resolved": "file:../d-11657-3153-1xciaok/package.tgz",
+  "_from": "../d-11657-3153-1xciaok/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -70,12 +70,12 @@
       },
       {
         "name": "brace-expansion",
-        "version": "1.1.2",
+        "version": "1.1.4",
         "path": "node_modules/minimatch/node_modules/brace-expansion/index.js"
       },
       {
         "name": "balanced-match",
-        "version": "0.3.0",
+        "version": "0.4.1",
         "path": "node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js"
       },
       {
@@ -122,7 +122,6 @@
         "node_modules/minimatch/minimatch.js",
         "node_modules/minimatch/node_modules/brace-expansion/example.js",
         "node_modules/minimatch/node_modules/brace-expansion/index.js",
-        "node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/example.js",
         "node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js",
         "node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/example/map.js",
         "node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/index.js"
@@ -156,7 +155,7 @@
           "node_modules/minimatch/node_modules/brace-expansion"
         ],
         "dependencies": {
-          "balanced-match": "^0.3.0",
+          "balanced-match": "^0.4.1",
           "concat-map": "0.0.1"
         }
       }

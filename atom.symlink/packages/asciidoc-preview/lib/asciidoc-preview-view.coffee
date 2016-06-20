@@ -1,41 +1,37 @@
-path = require 'path'
-{Emitter, Disposable, CompositeDisposable} = require 'atom'
+{Emitter, Disposable, CompositeDisposable, File} = require 'atom'
 {$, $$$, ScrollView} = require 'atom-space-pen-views'
-_ = require 'underscore-plus'
+path = require 'path'
 fs = require 'fs-plus'
+_ = require 'underscore-plus'
 mustache = require 'mustache'
 renderer = require './renderer'
-markdownDirectory = atom.packages.resolvePackagePath('markdown-preview')
-{File} = require path.join(markdownDirectory, '..', 'pathwatcher')
 
 module.exports =
 class AsciiDocPreviewView extends ScrollView
-  atom.deserializers.add(this)
-
-  @deserialize: (state) ->
-    new AsciiDocPreviewView(state)
-
   @content: ->
     @div class: 'asciidoc-preview native-key-bindings', tabindex: -1
 
-  constructor: ({@editorId, filePath}) ->
+  constructor: ({@editorId, @filePath}) ->
     super
     @emitter = new Emitter
     @disposables = new CompositeDisposable
+    @loaded = false
 
   attached: ->
+    return if @isAttached
+    @isAttached = true
+
     if @editorId?
       @resolveEditor(@editorId)
+    else if atom.workspace?
+      @subscribeToFilePath(@filePath)
     else
-      if atom.workspace?
+      @disposables.add atom.packages.onDidActivateInitialPackages =>
         @subscribeToFilePath(@filePath)
-      else
-        @disposables.add atom.packages.onDidActivateInitialPackages =>
-          @subscribeToFilePath(@filePath)
 
   serialize: ->
     deserializer: 'AsciiDocPreviewView'
-    filePath: @getPath()
+    filePath: @getPath() ? @filePath
     editorId: @editorId
 
   destroy: ->
@@ -52,7 +48,7 @@ class AsciiDocPreviewView extends ScrollView
     @emitter.on 'did-change-asciidoc', callback
 
   subscribeToFilePath: (filePath) ->
-    @file = new File(filePath)
+    @file = new File filePath
     @emitter.emit 'did-change-title'
     @handleEvents()
     @renderAsciiDoc()
@@ -106,24 +102,23 @@ class AsciiDocPreviewView extends ScrollView
     changeHandler = =>
       @renderAsciiDoc()
 
-      # TODO: Remove paneForURI call when ::paneForItem is released
-      pane = atom.workspace.paneForItem?(this) ? atom.workspace.paneForURI(@getURI())
+      pane = atom.workspace.paneForItem(this)
       if pane? and pane isnt atom.workspace.getActivePane()
         pane.activateItem(this)
 
-    renderOnChange = =>
+    renderOnChange = ->
       saveOnly = atom.config.get('asciidoc-preview.renderOnSaveOnly')
-      changeHandler() if !saveOnly
+      changeHandler() if not saveOnly
 
     if @file?
       @disposables.add @file.onDidChange(changeHandler)
     else if @editor?
-      @disposables.add @editor.getBuffer().onDidStopChanging =>
+      @disposables.add @editor.getBuffer().onDidStopChanging ->
         renderOnChange()
       @disposables.add @editor.onDidChangePath => @emitter.emit 'did-change-title'
-      @disposables.add @editor.getBuffer().onDidSave =>
+      @disposables.add @editor.getBuffer().onDidSave ->
         renderOnChange()
-      @disposables.add @editor.getBuffer().onDidReload =>
+      @disposables.add @editor.getBuffer().onDidReload ->
         renderOnChange()
 
     @disposables.add atom.config.onDidChange 'asciidoc-preview.showTitle', changeHandler
@@ -131,14 +126,20 @@ class AsciiDocPreviewView extends ScrollView
     @disposables.add atom.config.onDidChange 'asciidoc-preview.safeMode', changeHandler
     @disposables.add atom.config.onDidChange 'asciidoc-preview.defaultAttributes', changeHandler
     @disposables.add atom.config.onDidChange 'asciidoc-preview.tocType', changeHandler
-    @disposables.add atom.config.onDidChange 'asciidoc-preview.showNumberedHeadings', changeHandler
+    @disposables.add atom.config.onDidChange 'asciidoc-preview.frontMatter', changeHandler
+    @disposables.add atom.config.onDidChange 'asciidoc-preview.sectionNumbering', changeHandler
 
   renderAsciiDoc: ->
-    @showLoading()
-    if @file?
-      @file.read().then (contents) => @renderAsciiDocText(contents)
+    @showLoading() unless @loaded
+    @getAsciiDocSource().then (source) => @renderAsciiDocText(source) if source?
+
+  getAsciiDocSource: ->
+    if @file?.getPath()
+      @file.read()
     else if @editor?
-      @renderAsciiDocText(@editor.getText())
+      Promise.resolve(@editor.getText())
+    else
+      Promise.resolve(null)
 
   renderAsciiDocText: (text) ->
     renderer.toHtml text, @getPath(), (html) =>
@@ -159,20 +160,21 @@ class AsciiDocPreviewView extends ScrollView
 
     statusBar?.addRightTile(item: divLink, priority: 300)
 
-
     html = $(html)
-    for linkElement in html.find("a")
+    for linkElement in html.find('a')
       link = $(linkElement)
       if hrefLink = link.attr('href')
         do(hrefLink) ->
           link.on 'mouseover', (e) ->
             # TODO Use constant
-            cropUrl = if (hrefLink.length > 100) then hrefLink.substr(0, 97).concat('...')  else hrefLink
+            cropUrl = if (hrefLink.length > 100) then hrefLink.substr(0, 97).concat('...') else hrefLink
             divLink.appendChild document.createTextNode(cropUrl)
           link.on 'mouseleave', (e) ->
             $(divLink).empty()
         continue if not hrefLink.match(/^#/)
-        if target = $(hrefLink)
+        # Because jQuery uses CSS syntax for selecting elements, some characters are interpreted as CSS notation.
+        # In order to tell jQuery to treat these characters literally rather than as CSS notation, they must be "escaped" by placing two backslashes in front of them.
+        if target = $(hrefLink.replace(/(\/|:|\.|\[|\]|,|\)|\()/g, '\\$1'))
           continue if not target.offset()
           # TODO Use tab height variable instead of 43
           top = target.offset().top - 43
@@ -187,10 +189,10 @@ class AsciiDocPreviewView extends ScrollView
     else if @editor?
       "#{@editor.getTitle()} Preview"
     else
-      "AsciiDoc Preview"
+      'AsciiDoc Preview'
 
   getIconName: ->
-    "eye"
+    'eye'
 
   getURI: ->
     if @file?
@@ -213,7 +215,7 @@ class AsciiDocPreviewView extends ScrollView
 
   showLoading: ->
     @loading = true
-    if !@firstloadingdone?
+    if not @firstloadingdone?
       @firstloadingdone = true
       @html $$$ ->
         @div class: 'asciidoc-spinner', 'Loading AsciiDoc\u2026'
@@ -239,7 +241,7 @@ class AsciiDocPreviewView extends ScrollView
       filePath += '.html'
     else
       filePath = 'untitled.adoc.html'
-      if projectPath = atom.project.getPath()
+      if projectPath = atom.project.getPaths()[0]
         filePath = path.join(projectPath, filePath)
 
     if htmlFilePath = atom.showSaveDialogSync(filePath)

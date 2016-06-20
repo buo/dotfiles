@@ -87,6 +87,8 @@ module.exports =
 class ColorProject
   @deserialize: (state) ->
     markersVersion = SERIALIZE_MARKERS_VERSION
+    markersVersion += '-dev' if atom.inDevMode() and atom.project.getPaths().some (p) -> p.match(/\/pigments$/)
+
     if state?.version isnt SERIALIZE_VERSION
       state = {}
 
@@ -142,6 +144,15 @@ class ColorProject
 
     @subscriptions.add atom.config.observe 'pigments.ignoreVcsIgnoredPaths', =>
       @loadPathsAndVariables()
+
+    svgColorExpression = @colorExpressionsRegistry.getExpression('pigments:named_colors')
+    defaultScopes = svgColorExpression.scopes.slice()
+    @subscriptions.add atom.config.observe 'pigments.extendedFiletypesForColorWords', (scopes) =>
+      svgColorExpression.scopes = defaultScopes.concat(scopes)
+      @colorExpressionsRegistry.emitter.emit 'did-update-expressions', {
+        name: svgColorExpression.name
+        registry: @colorExpressionsRegistry
+      }
 
     @subscriptions.add @colorExpressionsRegistry.onDidUpdateExpressions ({name}) =>
       return if not @paths? or name is 'pigments:variables'
@@ -269,7 +280,8 @@ class ColorProject
 
   initializeBuffers: ->
     @subscriptions.add atom.workspace.observeTextEditors (editor) =>
-      return if @isBufferIgnored(editor.getPath())
+      editorPath = editor.getPath()
+      return if not editorPath? or @isBufferIgnored(editorPath)
 
       buffer = @colorBufferForEditor(editor)
       if buffer?

@@ -62,12 +62,13 @@ button.icon,
 }
 
 .btn-group {
-  & > .btn:first-child {
-    border-left: 1px solid @button-border-color;
+  & > .btn:first-child:not(:last-child) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
-
-  & > .btn:last-child {
-    border-right: 1px solid @button-border-color;
+  & > .btn:last-child:not(:first-child) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 }
 
@@ -128,15 +129,17 @@ button.icon,
 
 .button-variant(@color) {
   .button(@color);
-  color: @color !important;;
+  color: @color !important;
   border-color: @color !important;
+  background: transparent;
 
   &:hover {
     border-color: @color !important;
   }
 
   &.selected {
-    color: @color !important;
+    color: @base-background-color !important;
+    background: @color !important;
   }
 
   &[disabled],

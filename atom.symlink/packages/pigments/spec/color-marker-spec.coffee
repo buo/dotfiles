@@ -13,11 +13,12 @@ describe 'ColorMarker', ->
       foo: bar;
     }
     """)
-    marker = editor.markBufferRange [[1,9],[1,33]], type: 'pigments-color'
+    marker = editor.markBufferRange [[1,9],[1,33]]
     color = new Color(255, 0, 0, 0.5)
     text = 'hsva(0, 100%, 100%, 0.5)'
+    colorBuffer = {editor}
 
-    colorMarker = new ColorMarker({marker, color, text})
+    colorMarker = new ColorMarker({marker, color, text, colorBuffer})
 
   describe '::convertContentToHex', ->
     beforeEach ->
@@ -64,7 +65,7 @@ describe 'ColorMarker', ->
       colorMarker.color.alpha = 1
       colorMarker.convertContentToRGB()
 
-    it 'replaces the text in the editor by the rgba version', ->
+    it 'replaces the text in the editor by the rgb version', ->
       expect(editor.getText()).toEqual("""
       body {
         color: rgb(255, 0, 0);
@@ -77,10 +78,64 @@ describe 'ColorMarker', ->
       beforeEach ->
         colorMarker.convertContentToRGB()
 
-      it 'replaces the text in the editor by the rgba version', ->
+      it 'replaces the text in the editor by the rgb version', ->
         expect(editor.getText()).toEqual("""
         body {
           color: rgb(255, 0, 0);
+          bar: foo;
+          foo: bar;
+        }
+        """)
+
+  describe '::convertContentToHSLA', ->
+    beforeEach ->
+      colorMarker.convertContentToHSLA()
+
+    it 'replaces the text in the editor by the hsla version', ->
+      expect(editor.getText()).toEqual("""
+      body {
+        color: hsla(0, 100%, 50%, 0.5);
+        bar: foo;
+        foo: bar;
+      }
+      """)
+
+    describe 'when the color alpha is 1', ->
+      beforeEach ->
+        colorMarker.color.alpha = 1
+        colorMarker.convertContentToHSLA()
+
+      it 'replaces the text in the editor by the hsla version', ->
+        expect(editor.getText()).toEqual("""
+        body {
+          color: hsla(0, 100%, 50%, 1);
+          bar: foo;
+          foo: bar;
+        }
+        """)
+
+  describe '::convertContentToHSL', ->
+    beforeEach ->
+      colorMarker.color.alpha = 1
+      colorMarker.convertContentToHSL()
+
+    it 'replaces the text in the editor by the hsl version', ->
+      expect(editor.getText()).toEqual("""
+      body {
+        color: hsl(0, 100%, 50%);
+        bar: foo;
+        foo: bar;
+      }
+      """)
+
+    describe 'when the color alpha is not 1', ->
+      beforeEach ->
+        colorMarker.convertContentToHSL()
+
+      it 'replaces the text in the editor by the hsl version', ->
+        expect(editor.getText()).toEqual("""
+        body {
+          color: hsl(0, 100%, 50%);
           bar: foo;
           foo: bar;
         }

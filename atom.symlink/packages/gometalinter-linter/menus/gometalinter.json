@@ -1,0 +1,12 @@
+{
+  "menu": [{
+    "label": "Packages",
+    "submenu": [{
+      "label": "Go",
+      "submenu": [{
+        "label": "Install and Update Linters",
+        "command": "golang:updatelinters"
+      }]
+    }]
+  }]
+}

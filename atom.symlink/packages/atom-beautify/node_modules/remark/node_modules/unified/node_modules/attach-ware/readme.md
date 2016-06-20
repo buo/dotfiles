@@ -74,11 +74,30 @@ Create a new `AttachWare` based on the given middleware constructor.
 Create configurable middleware.  Works just like the given
 [`Ware`][ware].
 
-### `AttachWare#use(attach[, input...])`
+### `AttachWare#use(attacher[, input...])`
 
-Invokes `attach` with [`context`][context] and all `input`.
+**Signatures**:
 
-If `attach` returns another function (`fn`, which can be synchronous,
+*   `attachWare.use(attacher[, input...])`;
+*   `attachWare.use(attachers[, input...])`;
+*   `attachWare.use(list)`;
+*   `attachWare.use(matrix)`.
+
+**Parameters**:
+
+*   `attacher` (`Function`) — One attacher.
+
+*   `attachers` (`Array.<Function>`) — List where each value is an
+    `attacher`;
+
+*   `list` (`Array`) — List where the first value is an `attacher`,
+    and further values are `input`;
+
+*   `matrix` (`Array`) — Matrix where each entry is a `list`.
+
+Invokes `attacher` with [`context`][context] and all `input`.
+
+If `attacher` returns another function (`fn`, which can be synchronous,
 asynchronous, or a generator function), that function is [added to the
 middleware][ware-use], and will be invoked when [`run()`][ware-run] is
 invoked like normal middleware.

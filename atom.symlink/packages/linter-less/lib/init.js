@@ -16,7 +16,11 @@ export default {
     },
     ignoreUndefinedVariables: {
       type: 'boolean',
-      default: false
+      default: true
+    },
+    ignoreUndefinedMixins: {
+      type: 'boolean',
+      default: true
     },
     ieCompatibilityChecks: {
       title: 'IE Compatibility Checks',

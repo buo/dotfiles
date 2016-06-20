@@ -1,6 +1,6 @@
 {
   "name": "editorconfig",
-  "version": "1.2.4",
+  "version": "1.4.1",
   "description": "Helps developers maintain consistent coding styles between different editors",
   "license": "MIT",
   "repository": {
@@ -17,15 +17,17 @@
     "atom": ">=1.0.11"
   },
   "scripts": {
-    "test": "xo"
+    "test": "xo && apm test"
   },
   "keywords": [
+    "editorconfig",
     "format",
     "code",
     "style",
     "code-style"
   ],
   "dependencies": {
+    "lazy-req": "^1.1.0",
     "atom-set-text": "^1.1.0",
     "editorconfig": "^0.13.2"
   },
@@ -36,18 +38,21 @@
     "esnext": true,
     "globals": [
       "atom"
+    ],
+    "ignores": [
+      "atom/**"
     ]
   },
-  "readme": "# EditorConfig\n\n> [EditorConfig](http://editorconfig.org) helps developers maintain consistent coding styles between different editors\n\n![](https://f.cloud.github.com/assets/170270/2327994/dfe40cb4-a3f6-11e3-862f-894999973373.png)\n\n\n## Install\n\n```\n$ apm install editorconfig\n```\n\nOr, Settings → Install → Search for `editorconfig`\n\n\n## Getting started\n\nSee the EditorConfig [documentation](http://editorconfig.org).\n\n\n## Supported properties\n\n- root\n- indent_style\n- indent_size\n- charset *(supported values: `latin1`, `utf-8`, `utf-16be`, `utf-16le`)*\n- end_of_line *(supported values: `lf`, `crlf`)*\n\n\n## Features\n\n- Applies the above settings from your `.editorconfig` file\n- Syntax highlights `.editorconfig` files\n- Ability to [generate](#generate-config) an `.editorconfig` file based on the current settings\n\n\n## Example file\n\n```ini\nroot = true\n\n[*]\nindent_style = space\nindent_size = 4\nend_of_line = lf\ncharset = utf-8\ntrim_trailing_whitespace = true # doesn't work yet\ninsert_final_newline = true # doesn't work yet\n```\n\n\n## Generate config\n\nYou can generate an `.editorconfig` file based on the current setting by opening the Command Palette and choosing `EditorConfig: Generate Config`.\n\n\n## License\n\nMIT © [Sindre Sorhus](http://sindresorhus.com)\n",
+  "readme": "# EditorConfig [![Build Status](https://travis-ci.org/sindresorhus/atom-editorconfig.svg?branch=master)](https://travis-ci.org/sindresorhus/atom-editorconfig)\n\n> [EditorConfig](http://editorconfig.org) helps developers maintain consistent coding styles between different editors\n\n![](https://f.cloud.github.com/assets/170270/2327994/dfe40cb4-a3f6-11e3-862f-894999973373.png)\n\n\n## Install\n\n```\n$ apm install editorconfig\n```\n\nOr, Settings → Install → Search for `editorconfig`\n\n\n## Getting started\n\nSee the EditorConfig [documentation](http://editorconfig.org).\n\n\n## Supported properties\n\n- root\n- indent_style\n- indent_size\n- charset *(supported values: `latin1`, `utf-8`, `utf-16be`, `utf-16le`)*\n- end_of_line *(supported values: `lf`, `crlf`)*\n\n\n## Features\n\n- Applies the above settings from your `.editorconfig` file\n- Syntax highlights `.editorconfig` files\n- Ability to [generate](#generate-config) an `.editorconfig` file based on the current settings\n\n\n## Example file\n\n```ini\nroot = true\n\n[*]\nindent_style = space\nindent_size = 4\nend_of_line = lf\ncharset = utf-8\ntrim_trailing_whitespace = true # doesn't work yet\ninsert_final_newline = true # doesn't work yet\n```\n\n\n## Generate config\n\nYou can generate an `.editorconfig` file based on the current setting by opening the Command Palette and choosing `EditorConfig: Generate Config`.\n\n\n## License\n\nMIT © [Sindre Sorhus](https://sindresorhus.com)\n",
   "readmeFilename": "readme.md",
   "bugs": {
     "url": "https://github.com/sindresorhus/atom-editorconfig/issues"
   },
   "homepage": "https://github.com/sindresorhus/atom-editorconfig#readme",
-  "_id": "editorconfig@1.2.4",
-  "_shasum": "37fe8586bd97042be966318a684985e028dad9f8",
-  "_resolved": "file:../d-11628-62969-d5b1dc/package.tgz",
-  "_from": "../d-11628-62969-d5b1dc/package.tgz",
+  "_id": "editorconfig@1.4.1",
+  "_shasum": "806c4238f22ffd06df312ccec5d048c1ff1d3b62",
+  "_resolved": "file:../d-11657-3153-1mv7h9m/package.tgz",
+  "_from": "../d-11657-3153-1mv7h9m/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -63,7 +68,7 @@
       },
       {
         "name": "bluebird",
-        "version": "3.3.4",
+        "version": "3.4.0",
         "path": "node_modules/editorconfig/node_modules/bluebird/js/release/bluebird.js"
       },
       {
@@ -90,6 +95,11 @@
         "name": "sigmund",
         "version": "1.0.1",
         "path": "node_modules/editorconfig/node_modules/sigmund/sigmund.js"
+      },
+      {
+        "name": "lazy-req",
+        "version": "1.1.0",
+        "path": "node_modules/lazy-req/index.js"
       }
     ],
     "extensions": {
@@ -147,7 +157,8 @@
         "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/map.js",
         "node_modules/editorconfig/node_modules/lru-cache/node_modules/pseudomap/pseudomap.js",
         "node_modules/editorconfig/node_modules/sigmund/bench.js",
-        "node_modules/editorconfig/node_modules/sigmund/sigmund.js"
+        "node_modules/editorconfig/node_modules/sigmund/sigmund.js",
+        "node_modules/lazy-req/index.js"
       ],
       ".json": [
         "node_modules/atom-set-text/package.json",
@@ -158,6 +169,7 @@
         "node_modules/editorconfig/node_modules/lru-cache/package.json",
         "node_modules/editorconfig/node_modules/sigmund/package.json",
         "node_modules/editorconfig/package.json",
+        "node_modules/lazy-req/package.json",
         "package.json"
       ]
     },
@@ -165,9 +177,11 @@
       {
         "paths": [
           "commands",
-          ""
+          "",
+          "spec"
         ],
         "dependencies": {
+          "lazy-req": "^1.1.0",
           "atom-set-text": "^1.1.0",
           "editorconfig": "^0.13.2"
         }

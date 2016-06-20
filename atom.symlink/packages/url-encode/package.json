@@ -1,0 +1,44 @@
+{
+  "name": "url-encode",
+  "main": "./lib/url-encode",
+  "version": "0.5.0",
+  "description": "URL encode or decode the selected text.",
+  "activationCommands": {
+    "atom-workspace": [
+      "url-encode:encode",
+      "url-encode:decode"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmattozzi/url-encode.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.210.0"
+  },
+  "dependencies": {},
+  "readme": "# url-encode package\n\n`cmd-u cmd-e` to URL encode selected text. `cmd-u cmd-d` to URL decode selected text.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/mmattozzi/url-encode/issues"
+  },
+  "homepage": "https://github.com/mmattozzi/url-encode#readme",
+  "_id": "url-encode@0.5.0",
+  "_shasum": "15dbfec438e5eb68ab6c407c96801a8c4d27d4bd",
+  "_resolved": "file:../d-116230-22789-1qtvt4t/package.tgz",
+  "_from": "../d-116230-22789-1qtvt4t/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/url-encode.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "atom-text-editor[data-grammar~=\"go\"]:not([mini])": {
+    "ctrl-alt-c": "golang:gocover",
+    "ctrl-alt-shift-c": "golang:cleargocover"
+  }
+}

@@ -1,4 +1,4 @@
-# EditorConfig
+# EditorConfig [![Build Status](https://travis-ci.org/sindresorhus/atom-editorconfig.svg?branch=master)](https://travis-ci.org/sindresorhus/atom-editorconfig)
 
 > [EditorConfig](http://editorconfig.org) helps developers maintain consistent coding styles between different editors
 
@@ -57,4 +57,4 @@ You can generate an `.editorconfig` file based on the current setting by opening
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)

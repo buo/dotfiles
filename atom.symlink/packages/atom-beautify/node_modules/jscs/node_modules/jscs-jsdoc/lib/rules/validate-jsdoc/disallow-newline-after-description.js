@@ -5,7 +5,6 @@ module.exports.options = {
 };
 
 var RE_NEWLINE_AT_THE_END = /\n$/;
-var RE_NEWLINES = /\n/g;
 
 /**
  * Disallows newline after description in jsdoc comment
@@ -23,10 +22,5 @@ function disallowNewlineAfterDescription(node, err) {
         return;
     }
 
-    var loc = node.jsdoc.loc.start;
-    var lines = doc.description.split(RE_NEWLINES);
-    err('Newline required after description', {
-        line: loc.line + lines.length,
-        column: loc.column + 3 + lines[lines.length - 1].length
-    });
+    err('Newline required after description', doc.tags[0].loc.offset - 4);
 }

@@ -20,6 +20,7 @@ describe 'ColorProject', ->
       '*.styl'
     ]
     atom.config.set 'pigments.ignoredNames', []
+    atom.config.set 'pigments.extendedFiletypesForColorWords', ['*']
 
     [fixturesPath] = atom.project.getPaths()
     rootPath = "#{fixturesPath}/project"
@@ -226,8 +227,8 @@ describe 'ColorProject', ->
       waitsForPromise -> project.initialize()
 
     it 'ignores the looping definition', ->
-      expect(project.getVariables().length).toEqual(4)
-      expect(project.getColorVariables().length).toEqual(4)
+      expect(project.getVariables().length).toEqual(5)
+      expect(project.getColorVariables().length).toEqual(5)
 
   describe 'when the variables have been loaded', ->
     beforeEach ->
@@ -544,7 +545,7 @@ describe 'ColorProject', ->
         waitsForPromise -> project.initialize()
 
       it 'finds the variables from the two directories', ->
-        expect(project.getVariables().length).toEqual(16)
+        expect(project.getVariables().length).toEqual(17)
 
     describe 'when the project has VCS ignored files', ->
       [projectPath] = []
@@ -590,7 +591,7 @@ describe 'ColorProject', ->
             expect(project.getPaths().length).toEqual(3)
 
           it 'reloads the variables', ->
-            expect(project.getVariables().length).toEqual(7)
+            expect(project.getVariables().length).toEqual(10)
 
       describe 'when the ignoreVcsIgnoredPaths setting is disabled', ->
         beforeEach ->
@@ -600,7 +601,7 @@ describe 'ColorProject', ->
           waitsForPromise -> project.initialize()
 
         it 'finds the variables from the three files', ->
-          expect(project.getVariables().length).toEqual(7)
+          expect(project.getVariables().length).toEqual(10)
           expect(project.getPaths().length).toEqual(3)
 
         describe 'and then enabled', ->
@@ -1013,4 +1014,4 @@ describe 'ColorProject', ->
       waitsForPromise -> project.initialize()
 
     it 'loads the defaults file content', ->
-      expect(project.getColorVariables().length).toEqual(6)
+      expect(project.getColorVariables().length).toEqual(12)

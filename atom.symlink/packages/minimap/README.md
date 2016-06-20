@@ -101,6 +101,14 @@ The opacity used to render the line text in the Minimap. `(default=0.6)`
 ---|---
 ![](https://github.com/atom-minimap/minimap/blob/master/resources/text-opacity-default.png?raw=true)|![](https://github.com/atom-minimap/minimap/blob/master/resources/text-opacity-1.png?raw=true)
 
+#### Ignore Whitespaces In Tokens
+
+When enabled, text editor tokens are rendered as plain blocks, with no regards to the whitespaces they contains. `(default=false)`
+
+`false`|`true`
+---|---
+![](https://github.com/atom-minimap/minimap/blob/master/resources/with-whitespaces.png?raw=true)|![](https://github.com/atom-minimap/minimap/blob/master/resources/without-whitespaces.png?raw=true)
+
 ### Display Plugins Controls
 
 If checked, the Minimap plugins can be activated/deactivated from the Minimap settings view and a quick settings dropdown will be available on the top right corner of the Minimap. `(default=true)`
@@ -159,15 +167,29 @@ The scrolling speed when the `Independent Minimap Scroll On Mouse Wheel Events` 
 
 If checked the Minimap scroll is done using a `translate3d` transform, otherwise the `translate` transform is used. `(default=true)`
 
+#### Adjust Minimap Width To Soft Wrap
+
+If this option is enabled and Soft Wrap is checked then the Minimap max width is set to the Preferred Line Length value. `(default=true)`
+
+#### Adjust Minimap Width Only When Smaller
+
+If this option and `adjustMinimapWidthToSoftWrap` are enabled the minimap width will never go past the limit sets by CSS. On the other hand, when disabled the minimap will expand to honor the preferred line width. `(default=true)`
+
 #### Absolute Mode
 
-When enabled the Minimap uses an absolute positioning, letting the editor's content flow below the Minimap. `(default=true)`
+When enabled the Minimap uses an absolute positioning, letting the editor's content flow below the Minimap. `(default=false)`
 
 Note that this setting will do nothing if `Display Minimap On Left` is also enabled.
 
 `false`|`true`
 ---|---
 ![](https://github.com/atom-minimap/minimap/blob/master/resources/normal-mode.png?raw=true)|![](https://github.com/atom-minimap/minimap/blob/master/resources/absolute-mode.png?raw=true)
+
+#### Adjust Absolute Mode Height
+
+When enabled and `Absolute Mode` is also enabled, the minimap height will be adjusted to only take the space required by the text editor content, leaving the space below triggering mouse events on the text editor. `(default=false)`
+
+**Be aware this can have some impact on performances as the minimap canvases will be resized every time a change in the editor make its height change.**
 
 ### Key Bindings
 
@@ -188,8 +210,8 @@ The Minimap package doesn't provide any default keybindings. But you can define 
 If you want to hide the default editor scrollbar, edit your `style.less` (Open Your Stylesheet) and use the following snippet:
 
 ```css
-atom-text-editor .vertical-scrollbar,
-atom-text-editor::shadow .vertical-scrollbar {
+atom-text-editor[with-minimap] .vertical-scrollbar,
+atom-text-editor[with-minimap]::shadow .vertical-scrollbar {
   opacity: 0;
   width: 0;
 }
@@ -211,10 +233,9 @@ atom-text-editor::shadow atom-text-editor-minimap {
 ![minimap-custom-background](https://github.com/atom-minimap/minimap/blob/master/resources/minimap-custom-visible-area.png?raw=true)
 
 ```css
-atom-text-editor atom-text-editor-minimap::shadow .minimap-visible-area,
-atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-visible-area {
-  background-color: green;
-  opacity: .5;
+atom-text-editor atom-text-editor-minimap::shadow .minimap-visible-area::after,
+atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-visible-area::after {
+  background-color: rgba(0, 255, 0, 0.5);
 }
 ```
 
@@ -226,6 +247,18 @@ atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-visible-area 
 atom-text-editor atom-text-editor-minimap::shadow .minimap-scroll-indicator,
 atom-text-editor::shadow atom-text-editor-minimap::shadow .minimap-scroll-indicator {
   background-color: green;
+}
+```
+
+#### Adding an opaque background to the minimap in absolute mode with adjusted height
+
+With both `absoluteMode` and `adjustAbsoluteModeHeight` settings are enabled, the canvases in the minimap won't necessarily takes the whole editor's height.
+
+```css
+atom-text-editor::shadow, atom-text-editor, html {
+  atom-text-editor-minimap::shadow canvas:first-child {
+    background: @syntax-background-color;
+  }
 }
 ```
 
@@ -282,127 +315,10 @@ To generate these comments you can use on these useful Atom packages:
 - [Minimap Titles](https://atom.io/packages/minimap-titles)
 - [Draw Package](https://atom.io/packages/draw-package)
 
-----
+### Developers Documentation
 
-## Developers Documentation
-
-You can find below the developers documentation on how to create Minimap's plugins and how to use decorations and stand-alone Minimaps.
-
-For a more detailled documentation of the API make sure to check the [Minimap API Documentation](http://atom-minimap.github.io/minimap/).
-
-### Plugins
-
-The Minimap comes with a plugin system used to extend the features displayed in it. Minimap plugins, once activated, are known and can be managed through the Minimap settings.
-
-#### Plugin Generation Command
-
-Use the `Generate Javascript Plugin`, `Generate Coffee Plugin` or `Generate Babel Plugin` commands, available in the command palette, to generate a new Minimap plugin package.
-
-- `Minimap: Generate Javascript Plugin`: Will generate a vanilla JavaScript package.
-- `Minimap: Generate Coffee Plugin`: Will generate a CoffeeScript package.
-- `Minimap: Generate Babel Plugin`: Will generate a ES6 package that uses babel-js.
-
-#### Plugins Controls
-
-When the `displayPluginsControls` setting is toggled on, plugins activation can be managed directly from the Minimap package settings or by using the quick settings dropdown available on the Mimimap itself:
-
-![Minimap Screenshot](https://github.com/atom-minimap/minimap/blob/master/resources/plugins-list.gif?raw=true)
-
-### Stand-alone Mode
-
-Starting with version 4.13, the Minimap can operate in a stand-alone mode. Basically, it means that a Minimap can be appended to the DOM outside of a `TextEditor` and without being affected by it.
-
-The example below demonstrates how to retrieve and display a stand-alone Minimap:
-
-```js
-atom.packages.serviceHub.consume('minimap', '1.0.0', (api) => {
-  editor = atom.workspace.getActiveTextEditor()
-  minimap = api.standAloneMinimapForEditor(editor)
-
-  minimapElement = atom.views.getView(minimap)
-  minimapElement.attach(document.body)
-  minimapElement.style.cssText = `
-    width: 300px;
-    height: 300px;
-    position: fixed;
-    top: 0;
-    right: 100px;
-    z-index: 10;
-  `
-})
-```
-
-In a nutshell, here's the main changes to expect when using a stand-alone Minimap:
-
-- In stand-alone mode, it's the `MinimapElement` that is responsible to sets the size of the underlying `Minimap` model, so you can give it any size and the Minimap will just adapt to it.
-- Scrolling in the target `TextEditor` won't change the Minimap display.
-- The mouse controls in the Minimap are removed.
-- The visible area and the quick settings button are removed.
-- Stand-alone Minimaps aren't dispatched in the `observeMinimaps` callback, so they won't be targeted by plugins and won't receive the decorations that plugins normally creates on Minimaps.
-
-For the moment, stand-alone Minimaps still need a target `TextEditor` but I hope to make it work with just a path at some point.
-
-### Minimap Decorations
-
-The Minimap package mimic the decoration API available on editors so that you can easily add your own decorations on the Minimap.
-
-While the interface is the same, some details such as the available decorations types change relatively to the editor's decorations API.
-
-#### Scope And Styling
-
-The most important change is that decorations on the Minimap doesn't use a `class`, but rather a `scope`
-
-```js
-minimapView.decorateMarker(marker, {type: 'line', scope: '.scope .to .the.marker.style'})
-```
-
-It's still possible to pass a class parameter to the decoration:
-
-
-```js
-minimapView.decorateMarker(marker, {type: 'line', class: 'the marker style'})
-```
-
-In that case, when rendering the decoration a scope will be build that will look like `.minimap .editor .the.marker.style`.
-
-The reason of using a scope rather than a class is that while editor's decorations are part of the DOM and benefit of the styles cascading, Minimap's decorations, rendered in a canvas, do not. In order to work around that, decoration's styles are defined using a `scope` property containing the selector allowing to retrieve the decoration style.
-
-This allow the Minimap decorations to still be styled using css. For instance, the scope used by the `minimap-selection` package is:
-
-```css
-.minimap .editor .selection .region {
-  /* ... */
-}
-```
-
-Note that the scope is prefixed with `.minimap` so that you can override the selection style in the Minimap without impacting the editor's one.
-
-Also note that only the `background` property will be retrieved to style a decoration.
-
-A last option is to pass a css color directly in a `color` option, such as:
-
-```js
-minimapView.decorateMarker(marker, {type: 'line', color: '#ff0000'})
-```
-
-In that case neither the scope nor the class will be used.
-
-#### Decorations Origin
-
-A plugin can and should set the plugin origin on the decorations it creates so that the Minimap can easily know which order to apply on the decorations. When not provided, the plugin origin will be inferred from the path of the function invoking the `decorateMarker` method. If the origin can't be inferred the order value will always be `0` for this decoration.
-
-```js
-minimapView.decorateMarker(marker, {type: 'line', color: '#ff0000', plugin: 'my-plugin-name'})
-```
-
-#### Decorations Types
-
-Another non-trivial change is the list of available decoration's type. At the time, the available types on the Minimap are:
-
-- `line`: Same as the editor one, it colors the line background with a color extracted from the decoration scope.
-- `highlight-under`: Correspond to an editor `highlight` decoration that is rendered before rendering the line content.
-- `highlight-over`, `highlight`: Correspond to an editor `highlight` decoration that is rendered after having rendered the line content.
-- `highlight-outline`: Correspond to an editor `highlight` decoration that is rendered only as an outline in the Minimap.
+- [Developers Documentation](http://github.com/atom-minimap/minimap/docs/Developers Documentation.md)
+- [Minimap API Documentation](http://atom-minimap.github.io/minimap/)
 
 ### License
 

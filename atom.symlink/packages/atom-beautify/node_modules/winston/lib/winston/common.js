@@ -85,7 +85,7 @@ exports.clone = function (obj) {
   if (obj instanceof Error) {
     // With potential custom Error objects, this might not be exactly correct,
     // but probably close-enough for purposes of this lib.
-    copy = new Error(obj.message);
+    copy = { message: obj.message };
     Object.getOwnPropertyNames(obj).forEach(function (key) {
       copy[key] = obj[key];
     });
@@ -260,7 +260,10 @@ exports.log = function (options) {
         delete meta.stack;
         delete meta.trace;
         output += ' ' + exports.serialize(meta);
-        output += '\n' + stack.join('\n');
+
+        if (stack) {
+          output += '\n' + stack.join('\n');
+        }
       } else {
         output += ' ' + exports.serialize(meta);
       }
@@ -308,6 +311,14 @@ exports.timestamp = function () {
 // logging to non-JSON inputs.
 //
 exports.serialize = function (obj, key) {
+  // symbols cannot be directly casted to strings
+  if (typeof key === 'symbol') {
+    key = key.toString()
+  }
+  if (typeof obj === 'symbol') {
+    obj = obj.toString()
+  }
+
   if (obj === null) {
     obj = 'null';
   }

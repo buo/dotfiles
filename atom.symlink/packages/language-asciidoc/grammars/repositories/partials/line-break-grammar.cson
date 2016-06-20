@@ -1,0 +1,17 @@
+key: 'line-break'
+
+patterns: [
+
+  # Matches a trailing + preceded by at least one space character
+  # at the end of a line of non-empty content, which forces a
+  # hard line break (<br> tag in HTML output).
+  #
+  # Examples
+  #
+  #   Foo +
+  #   Bar
+  #
+  match: '(?<=\\S)\\p{Blank}+(\\+)$'
+  captures:
+    1: name: 'variable.line-break.asciidoc'
+]

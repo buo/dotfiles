@@ -7,8 +7,12 @@ describe 'ColorContext', ->
   [context, parser] = []
 
   itParses = (expression) ->
-    asUndefinedColor: ->
+    asUndefined: ->
       it "parses '#{expression}' as undefined", ->
+        expect(context.getValue(expression)).toBeUndefined()
+
+    asUndefinedColor: ->
+      it "parses '#{expression}' as undefined color", ->
         expect(context.readColor(expression)).toBeUndefined()
 
     asInt: (expected) ->
@@ -35,6 +39,10 @@ describe 'ColorContext', ->
       it "parses '#{expression}' as a color with value of #{jasmine.pp expected}", ->
         expect(context.readColor(expression)).toBeColor(expected...)
 
+    asInvalidColor: (expected...) ->
+      it "parses '#{expression}' as an invalid color", ->
+        expect(context.readColor(expression)).not.toBeValid()
+
   describe 'created without any variables', ->
     beforeEach ->
       context = new ColorContext({registry})
@@ -58,33 +66,48 @@ describe 'ColorContext', ->
     itParses('rgb(255,127,0)').asColor(255, 127, 0)
 
   describe 'with a variables array', ->
-    createVar = (name, value) -> {value, name, path: '/path/to/file.coffee'}
+    createVar = (name, value, path) ->
+      {value, name, path: path ? '/path/to/file.coffee'}
 
-    createColorVar = (name, value) ->
-      v = createVar(name, value)
+    createColorVar = (name, value, path) ->
+      v = createVar(name, value, path)
       v.isColor = true
       v
 
-    beforeEach ->
+    describe 'that contains valid variables', ->
+      beforeEach ->
+        variables = [
+          createVar 'x', '10'
+          createVar 'y', '0.1'
+          createVar 'z', '10%'
+          createColorVar 'c', 'rgb(255,127,0)'
+        ]
 
-      variables = [
-        createVar 'x', '10'
-        createVar 'y', '0.1'
-        createVar 'z', '10%'
-        createColorVar 'c', 'rgb(255,127,0)'
-      ]
+        colorVariables = variables.filter (v) -> v.isColor
 
-      colorVariables = variables.filter (v) -> v.isColor
+        context = new ColorContext({variables, colorVariables, registry})
 
-      context = new ColorContext({variables, colorVariables, registry})
+      itParses('x').asInt(10)
+      itParses('y').asFloat(0.1)
+      itParses('z').asIntOrPercent(26)
+      itParses('z').asFloatOrPercent(0.1)
 
-    itParses('x').asInt(10)
-    itParses('y').asFloat(0.1)
-    itParses('z').asIntOrPercent(26)
-    itParses('z').asFloatOrPercent(0.1)
+      itParses('c').asColorExpression('rgb(255,127,0)')
+      itParses('c').asColor(255, 127, 0)
 
-    itParses('c').asColorExpression('rgb(255,127,0)')
-    itParses('c').asColor(255, 127, 0)
+    describe 'that contains alias for named colors', ->
+      beforeEach ->
+        variables =[
+          createColorVar '$text-color', 'white', '/path/to/file.css.sass'
+          createColorVar '$background-color', 'black', '/path/to/file.css.sass'
+        ]
+
+        colorVariables = variables.filter (v) -> v.isColor
+
+        context = new ColorContext({variables, colorVariables, registry})
+
+      itParses('$text-color').asColor(255,255,255)
+      itParses('$background-color').asColor(0,0,0)
 
     describe 'that contains invalid colors', ->
       beforeEach ->
@@ -97,6 +120,51 @@ describe 'ColorContext', ->
         context = new ColorContext({variables, registry})
 
       itParses('@list-item-height').asUndefinedColor()
+
+    describe 'that contains circular references', ->
+      beforeEach ->
+        variables =[
+          createVar '@foo', '@bar'
+          createVar '@bar', '@baz'
+          createVar '@baz', '@foo'
+          createVar '@taz', '@taz'
+        ]
+
+        context = new ColorContext({variables, registry})
+
+      itParses('@foo').asUndefined()
+      itParses('@taz').asUndefined()
+
+    describe 'that contains circular references', ->
+      beforeEach ->
+        variables =[
+          createColorVar '@foo', '@bar'
+          createColorVar '@bar', '@baz'
+          createColorVar '@baz', '@foo'
+          createColorVar '@taz', '@taz'
+        ]
+
+        colorVariables = variables.filter (v) -> v.isColor
+
+        context = new ColorContext({variables, colorVariables, registry})
+
+      itParses('@foo').asInvalidColor()
+      itParses('@foo').asUndefined()
+      itParses('@taz').asUndefined()
+
+    describe 'that contains circular references nested in operations', ->
+      beforeEach ->
+        variables =[
+          createColorVar '@foo', 'complement(@bar)'
+          createColorVar '@bar', 'transparentize(@baz, 0.5)'
+          createColorVar '@baz', 'darken(@foo, 10%)'
+        ]
+
+        colorVariables = variables.filter (v) -> v.isColor
+
+        context = new ColorContext({variables, colorVariables, registry})
+
+      itParses('@foo').asInvalidColor()
 
   describe 'with variables from a default file', ->
     [projectPath, referenceVariable] = []

@@ -45,20 +45,21 @@ function validateLeadingUnderscoresAccess(node, err) {
 
     // fetch name from variable, property or function
     var name;
-    var nameLocation;
-    switch (node.parentNode.type) {
-    case 'VariableDeclarator':
-        name = node.parentNode.id.name;
-        nameLocation = node.parentNode.id.loc;
-        break;
-    case 'Property':
-        name = node.parentNode.key.name;
-        nameLocation = node.parentNode.key.loc;
-        break;
-    default: // try to use func name itself (if not anonymous)
-        name = (node.id || {}).name;
-        nameLocation = (node.id || {}).loc;
-        break;
+    var nodeToReport;
+
+    switch (node.parentElement.type) {
+        case 'VariableDeclarator':
+            name = node.parentElement.id.name;
+            nodeToReport = node.parentElement.id;
+            break;
+        case 'ObjectProperty':
+            name = node.parentElement.key.name;
+            nodeToReport = node.parentElement.key;
+            break;
+        default: // try to use func name itself (if not anonymous)
+            name = (node.id || {}).name;
+            nodeToReport = node.id || node;
+            break;
     }
 
     if (nativeUnderscoredProperties.indexOf(name) !== -1) {
@@ -84,7 +85,7 @@ function validateLeadingUnderscoresAccess(node, err) {
 
     if (!access || !accessTag) {
         if (!override) {
-            err('Missing access tag for ' + (name || 'anonymous function'), (nameLocation || node.loc).start);
+            err('Missing access tag for ' + (name || 'anonymous function'), nodeToReport);
         }
     } else if ([true, access].indexOf(option) === -1) {
         err('Method access doesn\'t match', accessTag.loc);

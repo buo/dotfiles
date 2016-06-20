@@ -8,9 +8,6 @@ module.exports =
   Emitter: new Emitter()
 
   config:
-    draftByDefault:
-      type: 'boolean'
-      default: false
     serverPort:
       type: 'integer'
       default: 3000
@@ -25,6 +22,9 @@ module.exports =
       buildCommand: atom.config.get('jekyll.buildCommand')
     }
 
+    Utils.setMainModule(this)
+    Utils.getConfigFromSite()
+
     unless atom.packages.isPackageLoaded('language-liquid')
       atom.notifications.addWarning('Jekyll', {detail: 'Please install the language-liquid package to get full syntax highlighting'})
 
@@ -33,14 +33,9 @@ module.exports =
     atom.commands.add 'atom-workspace', "jekyll:open-include", => @handleCommand('openInclude', true, true)
     atom.commands.add 'atom-workspace', "jekyll:open-data", => @handleCommand('openData', true, true)
     atom.commands.add 'atom-workspace', "jekyll:toggle-server", => @handleCommand('toggleServer', true, false)
-    atom.commands.add 'atom-workspace', 'jekyll:new-post', => @handleCommand('newPost', false, false)
+    atom.commands.add 'atom-workspace', 'jekyll:new-post', => @handleCommand('newPost', true, false)
     atom.commands.add 'atom-workspace', 'jekyll:build-site', => @handleCommand('buildSite', true, false)
     atom.commands.add 'atom-workspace', 'jekyll:publish-draft', => @handleCommand('publishDraft', true, true)
-
-    Jekyll.createNewPostView()
-
-    Utils.setMainModule(this)
-    Utils.getConfigFromSite()
 
     @Emitter.emit 'loaded'
     @Emitter.on 'config-loaded', => @dispose

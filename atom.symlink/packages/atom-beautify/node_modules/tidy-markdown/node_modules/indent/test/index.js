@@ -1,4 +1,3 @@
-
 var assert = require('assert');
 var indent = require('..');
 var string = 'hello\nworld';
@@ -22,5 +21,10 @@ describe('indent', function () {
   it('should default to 2 spaces', function(){
     var str = indent(string);
     assert.equal(str, '  hello\n  world');
+  });
+
+  it('shouldn\'t indent blank lines', function(){
+    var str = indent('hello\n\nworld');
+    assert.equal(str, '  hello\n\n  world');
   });
 });

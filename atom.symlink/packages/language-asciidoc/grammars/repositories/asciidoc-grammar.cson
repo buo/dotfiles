@@ -1,0 +1,135 @@
+# Grammar master
+name: ''
+scopeName: ''
+fileTypes: []
+
+maxTokensPerLine: 100
+
+patterns: [
+  include: '#comment'
+,
+  include: '#callout-list-item'
+,
+  include: '#titles'
+,
+  include: '#attribute-entry'
+,
+  include: '#blocks'
+,
+  include: '#block-title'
+,
+  include: '#tables'
+,
+  include: '#horizontal-rule'
+,
+  include: '#list'
+,
+  include: '#inlines'
+,
+  include: '#block-attribute'
+,
+  include: '#line-break'
+]
+repository:
+  blocks:
+    patterns: [
+      include: '#front-matter-block'
+    ,
+      include: '#comment-open-block'
+    ,
+      include: '#admonition-paragraph'
+    ,
+      include: '#quote-paragraph'
+    ,
+      include: '#source-paragraphs'
+    ,
+      include: '#passthrough-paragraph'
+    ,
+      include: '#example-block'
+    ,
+      include: '#sidebar-block'
+    ,
+      include: '#literal-block'
+    ,
+      include: '#open-block'
+    ]
+  'source-paragraphs':
+    patterns: [
+      include: '#source-asciidoctor'
+    ,
+      include: '#source-markdown'
+    ]
+  tables:
+    patterns: [
+      include: '#table-psv'
+    ,
+      include: '#table-nested'
+    ,
+      include: '#table-csv'
+    ,
+      include: '#table-dsv'
+    ]
+  'tables-includes':
+    patterns: [
+        include: '#comment'
+      ,
+        include: '#callout-list-item'
+      ,
+        include: '#attribute-entry'
+      ,
+        include: '#block-title'
+      ,
+        include: '#explicit-paragraph'
+      ,
+        include: '#section'
+      ,
+        include: '#blocks'
+      ,
+        include: '#list'
+      ,
+        include: '#inlines'
+      ,
+        include: '#line-break'
+    ]
+  inlines:
+    patterns: [
+      include: '#typographic-quotes'
+    ,
+      include: '#strong'
+    ,
+      include: '#monospace'
+    ,
+      include: '#emphasis'
+    ,
+      include: '#superscript'
+    ,
+      include: '#subscript'
+    ,
+      include: '#mark'
+    ,
+      include: '#general-block-macro'
+    ,
+      include: '#anchor-macro'
+    ,
+      include: '#footnote-macro'
+    ,
+      include: '#image-macro'
+    ,
+      include: '#kbd-macro'
+    ,
+      include: '#link-macro'
+    ,
+      include: '#stem-macro'
+    ,
+      include: '#menu-macro'
+    ,
+      include: '#passthrough-macro'
+    ,
+      include: '#xref-macro'
+    ,
+      include: '#attribute-reference'
+    ,
+      include: '#characters'
+    ,
+      include: '#bibliography-anchor'
+    ]

@@ -20,6 +20,16 @@ var argv = require('minimist')(process.argv.slice(2))
 }
 , code
 ;
+
+var help = "\nUsage: coffee-fmt --indent_style {space|tab} [options] -i path/to/script.coffee >> beautified.coffee \n\n\
+    --indent_size N        Integer, number of spaces to use as indentation level. Ignored when using tabs. \n\
+    --debug={true|false}   Boolean, it will print all parse info to stdout as well. Defaults to false.\n";
+
+if (argv.help !== undefined || argv.indent_style === undefined || argv.i === undefined) {
+	console.log(help);
+	process.exit(argv.help !== undefined ? 0 : 1);
+}
+
 if (argv.indent_style.toLowerCase() === "space") {
 	for (i = 1; i < argv.indent_size;  i+= 1) {
 		options.tab += SPACE;

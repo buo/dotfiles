@@ -1,0 +1,32 @@
+key: 'emphasis'
+
+patterns: [
+
+  # Matches emphasis unconstrained phrases
+  #
+  # Examples
+  #
+  #   e__mphasis__ phrase
+  #
+  name: 'markup.emphasis.unconstrained.asciidoc'
+  match: '(?<!\\\\\\\\)(\\[(?:[^\\]]+?)\\])?((__)((?!_).+?)(__))'
+  captures:
+    1: name: 'markup.meta.attribute-list.asciidoc'
+    2: name: 'markup.italic.asciidoc'
+    3: name: 'punctuation.definition.asciidoc'
+    5: name: 'punctuation.definition.asciidoc'
+,
+  # Matches emphasis constrained phrases
+  #
+  # Examples
+  #
+  #   _emphasis phrase_
+  #
+  name: 'markup.emphasis.constrained.asciidoc'
+  match: '(?!_{4,}\\s*$)(?<=^|[^\\p{Word};:])(\\[(?:[^\\]]+?)\\])?((_)(\\S|\\S.*?\\S)(_))(?!\\p{Word})'
+  captures:
+    1: name: 'markup.meta.attribute-list.asciidoc'
+    2: name: 'markup.italic.asciidoc'
+    3: name: 'punctuation.definition.asciidoc'
+    5: name: 'punctuation.definition.asciidoc'
+]

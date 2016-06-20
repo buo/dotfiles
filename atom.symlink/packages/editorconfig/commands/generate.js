@@ -1,9 +1,21 @@
-'use babel';
+/** @babel */
 import fs from 'fs';
 import path from 'path';
 
 const init = () => {
-	const configFile = path.join(atom.project.getPaths()[0], '.editorconfig');
+	let basePath = '';
+
+	if (atom.project.getPaths().length > 0) {
+		basePath = atom.project.getPaths()[0];
+	} else if (typeof atom.workspace.getActiveTextEditor() !== 'undefined' &&
+		atom.workspace.getActiveTextEditor().getPath()) {
+		basePath = path.dirname(atom.workspace.getActiveTextEditor().getPath());
+	} else {
+		atom.notifications.addError(`An .editorconfig file can't be generated without an open file or project.`);
+		return;
+	}
+
+	const configFile = path.join(basePath, '.editorconfig');
 
 	const conf = {
 		core: atom.config.get('core'),
@@ -12,8 +24,8 @@ const init = () => {
 	};
 
 	const indent = conf.editor.softTabs ?
-				`indent_style = space\nindent_size = ${conf.editor.tabLength}` :
-				'indent_style = tab';
+		`indent_style = space\nindent_size = ${conf.editor.tabLength}` :
+		'indent_style = tab';
 
 	const endOfLine = process.platform === 'win32' ? 'crlf' : 'lf';
 	const charset = conf.core.fileEncoding.replace('utf8', 'utf-8') || 'utf-8';
@@ -36,7 +48,7 @@ trim_trailing_whitespace = false
 		if (err) {
 			fs.writeFile(configFile, ret, err => {
 				if (err) {
-					atom.notifications.addError(err);
+					atom.notifications.addError(err.message, {detail: err.stack});
 					return;
 				}
 
@@ -50,6 +62,8 @@ trim_trailing_whitespace = false
 	});
 };
 
-export default () => {
+const subscriber = () => {
 	atom.commands.add('atom-workspace', 'EditorConfig:generate-config', init);
 };
+
+export {subscriber as default, init};

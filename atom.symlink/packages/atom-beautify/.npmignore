@@ -1,3 +1,9 @@
 .DS_Store
+.npmignore
 npm-debug.log
-node_modules
+spec/
+docs/
+examples/
+.travis.yml
+appveyor.yml
+*.md

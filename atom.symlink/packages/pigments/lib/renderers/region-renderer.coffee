@@ -10,7 +10,7 @@ class RegionRenderer
     rowSpan = range.end.row - range.start.row
     regions = []
 
-    displayBuffer = colorMarker.marker.displayBuffer
+    textEditor = colorMarker.colorBuffer.editor
 
     if rowSpan is 0
       regions.push @createRegion(range.start, range.end, colorMarker)
@@ -22,7 +22,7 @@ class RegionRenderer
           column: Infinity
         },
         colorMarker,
-        displayBuffer.screenLines[range.start.row]
+        @screenLineForScreenRow(textEditor, range.start.row)
       )
       if rowSpan > 1
         for row in [range.start.row + 1...range.end.row]
@@ -30,22 +30,27 @@ class RegionRenderer
             {row, column: 0},
             {row, column: Infinity},
             colorMarker,
-            displayBuffer.screenLines[row]
+            @screenLineForScreenRow(textEditor, row)
           )
 
       regions.push @createRegion(
         {row: range.end.row, column: 0},
         range.end,
         colorMarker,
-        displayBuffer.screenLines[range.end.row]
+        @screenLineForScreenRow(textEditor, range.end.row)
       )
 
     regions
 
+  screenLineForScreenRow: (textEditor, row) ->
+    if textEditor.screenLineForScreenRow?
+      textEditor.screenLineForScreenRow(row)
+    else
+      textEditor.displayBuffer.screenLines[row]
+
   createRegion: (start, end, colorMarker, screenLine) ->
     textEditor = colorMarker.colorBuffer.editor
     textEditorElement = atom.views.getView(textEditor)
-    displayBuffer = colorMarker.marker.displayBuffer
 
     return unless textEditorElement.component?
 
@@ -54,26 +59,26 @@ class RegionRenderer
 
     clippedStart = {
       row: start.row
-      column: screenLine?.clipScreenColumn(start.column) ? start.column
+      column: @clipScreenColumn(screenLine, start.column) ? start.column
     }
     clippedEnd = {
       row: end.row
-      column: screenLine?.clipScreenColumn(end.column) ? end.column
+      column: @clipScreenColumn(screenLine, end.column) ? end.column
     }
 
-    bufferRange = displayBuffer.bufferRangeForScreenRange({
+    bufferRange = textEditor.bufferRangeForScreenRange({
       start: clippedStart
       end: clippedEnd
     })
 
-    needAdjustment = screenLine?.isSoftWrapped() and end.column >= screenLine?.text.length - screenLine?.softWrapIndentationDelta
+    needAdjustment = screenLine?.isSoftWrapped?() and end.column >= screenLine?.text.length - screenLine?.softWrapIndentationDelta
 
     bufferRange.end.column++ if needAdjustment
 
     startPosition = textEditorElement.pixelPositionForScreenPosition(clippedStart)
     endPosition = textEditorElement.pixelPositionForScreenPosition(clippedEnd)
 
-    text = displayBuffer.buffer.getTextInRange(bufferRange)
+    text = textEditor.getBuffer().getTextInRange(bufferRange)
 
     css = {}
     css.left = startPosition.left
@@ -89,3 +94,10 @@ class RegionRenderer
     region.style[name] = value + 'px' for name, value of css
 
     region
+
+  clipScreenColumn: (line, column) ->
+    if line?
+      if line.clipScreenColumn?
+        line.clipScreenColumn(column)
+      else
+        Math.min(line.lineText.length, column)

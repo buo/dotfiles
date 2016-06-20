@@ -31,14 +31,12 @@ module.exports =
       description: "Glob patterns of files to ignore when scanning the project for variables."
       items:
         type: 'string'
-
     ignoredBufferNames:
       type: 'array'
       default: []
       description: "Glob patterns of files that won't get any colors highlighted"
       items:
         type: 'string'
-
     extendedSearchNames:
       type: 'array'
       default: ['**/*.css']
@@ -47,12 +45,17 @@ module.exports =
       type: 'array'
       default: ['*']
       description: "An array of file extensions where colors will be highlighted. If the wildcard `*` is present in this array then colors in every file will be highlighted."
+    extendedFiletypesForColorWords:
+      type: 'array'
+      default: []
+      description: "An array of file extensions where color values such as `red`, `azure` or `whitesmoke` will be highlighted. By default CSS and CSS pre-processors files are supported."
     ignoredScopes:
       type: 'array'
       default: []
       description: "Regular expressions of scopes in which colors are ignored. For example, to ignore all colors in comments you can use `\\.comment`."
       items:
         type: 'string'
+
     autocompleteScopes:
       type: 'array'
       default: [
@@ -76,7 +79,19 @@ module.exports =
     markerType:
       type: 'string'
       default: 'background'
-      enum: ['background', 'outline', 'underline', 'dot', 'square-dot', 'gutter']
+      enum: [
+        'native-background'
+        'native-underline'
+        'native-outline'
+        'native-dot'
+        'native-square-dot'
+        'background'
+        'outline'
+        'underline'
+        'dot'
+        'square-dot'
+        'gutter'
+      ]
     sortPaletteColors:
       type: 'string'
       default: 'none'
@@ -98,6 +113,8 @@ module.exports =
       title: 'Ignore VCS Ignored Paths'
 
   activate: (state) ->
+    @patchAtom()
+
     @project = if state.project?
       atom.deserializers.deserialize(state.project)
     else
@@ -133,6 +150,12 @@ module.exports =
       'pigments:convert-to-rgba': convertMethod (marker) ->
         marker.convertContentToRGBA() if marker?
 
+      'pigments:convert-to-hsl': convertMethod (marker) ->
+        marker.convertContentToHSL() if marker?
+
+      'pigments:convert-to-hsla': convertMethod (marker) ->
+        marker.convertContentToHSLA() if marker?
+
     atom.workspace.addOpener (uriToOpen) =>
       url ||= require 'url'
 
@@ -151,6 +174,8 @@ module.exports =
           {label: 'Convert to hexadecimal', command: 'pigments:convert-to-hex'}
           {label: 'Convert to RGB', command: 'pigments:convert-to-rgb'}
           {label: 'Convert to RGBA', command: 'pigments:convert-to-rgba'}
+          {label: 'Convert to HSL', command: 'pigments:convert-to-hsl'}
+          {label: 'Convert to HSLA', command: 'pigments:convert-to-hsla'}
         ]
         shouldDisplay: (event) => @shouldDisplayContextMenu(event)
       }]
@@ -273,6 +298,54 @@ module.exports =
 
     JSON.stringify(o, null, 2)
     .replace(///#{atom.project.getPaths().join('|')}///g, '<root>')
+
+  patchAtom: ->
+    requireCore = (name) ->
+      require Object.keys(require.cache).filter((s) -> s.indexOf(name) > -1)[0]
+
+    HighlightComponent = requireCore('highlights-component')
+    TextEditorPresenter = requireCore('text-editor-presenter')
+
+    unless TextEditorPresenter.getTextInScreenRange?
+      TextEditorPresenter::getTextInScreenRange = (screenRange) ->
+        if @displayLayer?
+          @model.getTextInRange(@displayLayer.translateScreenRange(screenRange))
+        else
+          @model.getTextInRange(@model.bufferRangeForScreenRange(screenRange))
+
+      _buildHighlightRegions = TextEditorPresenter::buildHighlightRegions
+      TextEditorPresenter::buildHighlightRegions = (screenRange) ->
+        regions = _buildHighlightRegions.call(this, screenRange)
+
+        if regions.length is 1
+          regions[0].text = @getTextInScreenRange(screenRange)
+        else
+          regions[0].text = @getTextInScreenRange([
+            screenRange.start
+            [screenRange.start.row, Infinity]
+          ])
+          regions[regions.length - 1].text = @getTextInScreenRange([
+            [screenRange.end.row, 0]
+            screenRange.end
+          ])
+
+          if regions.length > 2
+            regions[1].text = @getTextInScreenRange([
+              [screenRange.start.row + 1, 0]
+              [screenRange.end.row - 1, Infinity]
+            ])
+
+        regions
+
+      _updateHighlightRegions = HighlightComponent::updateHighlightRegions
+      HighlightComponent::updateHighlightRegions = (id, newHighlightState) ->
+        _updateHighlightRegions.call(this, id; newHighlightState)
+
+        if newHighlightState.class?.match /^pigments-native-background\s/
+          for newRegionState, i in newHighlightState.regions
+            regionNode = @regionNodesByHighlightId[id][i]
+
+            regionNode.textContent = newRegionState.text if newRegionState.text?
 
   loadDeserializersAndRegisterViews: ->
     ColorBuffer = require './color-buffer'

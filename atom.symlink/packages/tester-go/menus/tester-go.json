@@ -1,0 +1,34 @@
+{
+  "context-menu": {
+    "atom-text-editor[data-grammar~=\"go\"]:not([mini])": [
+      {
+        "label": "Show Test Coverage",
+        "command": "golang:gocover"
+      },
+      {
+        "label": "Clear Test Coverage",
+        "command": "golang:cleargocover"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Go",
+          "submenu": [
+            {
+              "label": "Show Test Coverage",
+              "command": "golang:gocover"
+            },
+            {
+              "label": "Clear Test Coverage",
+              "command": "golang:cleargocover"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -39,7 +39,7 @@ class ColorMarkerElement extends HTMLElement
       if isValid then @bufferElement.requestMarkerUpdate([this]) else @release()
 
     @subscriptions.add atom.config.observe 'pigments.markerType', (type) =>
-      @bufferElement.requestMarkerUpdate([this]) unless type is 'gutter'
+      @bufferElement.requestMarkerUpdate([this]) unless @bufferElement.useNativeDecorations()
 
     @subscriptions.add @subscribeTo this,
       click: (e) =>
@@ -57,15 +57,18 @@ class ColorMarkerElement extends HTMLElement
     @clear()
 
   render: ->
-    return unless @colorMarker? and @colorMarker.color?
-    return if @colorMarker.marker.displayBuffer.isDestroyed()
+    return unless @colorMarker? and @colorMarker.color? and @renderer?
+
+    {colorMarker, renderer, bufferElement} = this
+
+    return if bufferElement.editor.isDestroyed()
     @innerHTML = ''
-    {style, regions, class: cls} = @renderer.render(@colorMarker)
+    {style, regions, class: cls} = renderer.render(colorMarker)
 
     regions = (regions or []).filter (r) -> r?
 
     if regions?.some((r) -> r?.invalid) and !SPEC_MODE
-      return @bufferElement.requestMarkerUpdate([this])
+      return bufferElement.requestMarkerUpdate([this])
 
     @appendChild(region) for region in regions
     if cls?
@@ -78,7 +81,7 @@ class ColorMarkerElement extends HTMLElement
     else
       @style.cssText = ''
 
-    @lastMarkerScreenRange = @colorMarker.getScreenRange()
+    @lastMarkerScreenRange = colorMarker.getScreenRange()
 
   checkScreenRange: ->
     return unless @colorMarker? and @lastMarkerScreenRange?
@@ -106,6 +109,19 @@ module.exports =
 ColorMarkerElement =
 registerOrUpdateElement 'pigments-color-marker', ColorMarkerElement.prototype
 
+ColorMarkerElement.isNativeDecorationType = (type) ->
+  type in [
+    'gutter'
+    'native-background'
+    'native-outline'
+    'native-underline'
+    'native-dot'
+    'native-square-dot'
+  ]
+
 ColorMarkerElement.setMarkerType = (markerType) ->
-  return if markerType is 'gutter'
+  return if ColorMarkerElement.isNativeDecorationType(markerType)
+  return unless RENDERERS[markerType]?
+
+  @prototype.rendererType = markerType
   @prototype.renderer = new RENDERERS[markerType]

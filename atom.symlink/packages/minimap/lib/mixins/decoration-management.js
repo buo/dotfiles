@@ -284,6 +284,16 @@ export default class DecorationManagement extends Mixin {
    *   highlight is rendered below the line's text.
    * - __highlight-outline__: Renders a colored outline on the minimap. The
    *   highlight box is rendered above the line's text.
+   * - __foreground-custom__: A decoration type for which you have the control
+   *   over the render routine. Note that your routine should implement a render
+   *   on a per-line basis to avoid any side-effect with the offset bitmap cache
+   *   mechanism. These decorations are rendred on the foreground decorations
+   *   layer.
+   * - __background-custom__: A decoration type for which you have the control
+   *   over the render routine. Note that your routine should implement a render
+   *   on a per-line basis to avoid any side-effect with the offset bitmap cache
+   *   mechanism. These decorations are rendred on the background decorations
+   *   layer.
    * @param  {string} [decorationParams.class] the CSS class to use to retrieve
    *                                        the background color of the
    *                                        decoration by building a scop
@@ -304,6 +314,11 @@ export default class DecorationManagement extends Mixin {
    *                                            omitted the Minimap will attempt
    *                                            to infer the plugin origin from
    *                                            the path of the caller function.
+   * @param  {function} [decorationParams.render] the render routine for custom
+   *                                              decorations. The function
+   *                                              receives the decoration and
+   *                                              the render data for the
+   *                                              current render pass.
    * @return {Decoration} the created decoration
    * @emits  {did-add-decoration} when the decoration is created successfully
    * @emits  {did-change} when the decoration is created successfully
@@ -457,7 +472,7 @@ export default class DecorationManagement extends Mixin {
    * @access private
    */
   emitDecorationChanges (type, decoration) {
-    if (decoration.marker.displayBuffer.isDestroyed()) { return }
+    if (!this.textEditor || this.textEditor.isDestroyed()) { return }
 
     this.invalidateDecorationForScreenRowsCache()
 

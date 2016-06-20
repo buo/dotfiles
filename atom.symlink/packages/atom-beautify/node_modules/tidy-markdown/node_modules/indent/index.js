@@ -1,4 +1,3 @@
-
 var assert = require('assert');
 
 /**
@@ -14,5 +13,5 @@ module.exports = function indent(string, w){
   assert('string' == typeof string);
   assert('string' == typeof w || 'number' == typeof w);
   if ('number' == typeof w) w = new Array(w + 1).join(' ');
-  return string.replace(/^/mg, w);
+  return string.replace(/^(?!$)/mg, w);
 };

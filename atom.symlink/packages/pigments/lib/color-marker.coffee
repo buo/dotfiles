@@ -56,12 +56,15 @@ class ColorMarker
     range = @marker.getBufferRange()
 
     try
-      scope = @marker.displayBuffer.scopeDescriptorForBufferPosition(range.start)
+      scope = if @colorBuffer.editor.scopeDescriptorForBufferPosition?
+        @colorBuffer.editor.scopeDescriptorForBufferPosition(range.start)
+      else
+        @colorBuffer.editor.displayBuffer.scopeDescriptorForBufferPosition(range.start)
       scopeChain = scope.getScopeChain()
 
       return if not scopeChain or (!forceEvaluation and scopeChain is @lastScopeChain)
 
-      @ignored = @colorBuffer.ignoredScopes.some (scopeRegExp) ->
+      @ignored = (@colorBuffer.ignoredScopes ? []).some (scopeRegExp) ->
         scopeChain.match(scopeRegExp)
 
       @lastScopeChain = scopeChain
@@ -79,14 +82,24 @@ class ColorMarker
   convertContentToHex: ->
     hex = '#' + fill(@color.hex, 6)
 
-    @marker.displayBuffer.buffer.setTextInRange(@marker.getBufferRange(), hex)
+    @colorBuffer.editor.getBuffer().setTextInRange(@marker.getBufferRange(), hex)
 
   convertContentToRGB: ->
     rgba = "rgb(#{Math.round @color.red}, #{Math.round @color.green}, #{Math.round @color.blue})"
 
-    @marker.displayBuffer.buffer.setTextInRange(@marker.getBufferRange(), rgba)
+    @colorBuffer.editor.getBuffer().setTextInRange(@marker.getBufferRange(), rgba)
 
   convertContentToRGBA: ->
     rgba = "rgba(#{Math.round @color.red}, #{Math.round @color.green}, #{Math.round @color.blue}, #{@color.alpha})"
 
-    @marker.displayBuffer.buffer.setTextInRange(@marker.getBufferRange(), rgba)
+    @colorBuffer.editor.getBuffer().setTextInRange(@marker.getBufferRange(), rgba)
+
+  convertContentToHSL: ->
+    hsl = "hsl(#{Math.round @color.hue}, #{Math.round @color.saturation}%, #{Math.round @color.lightness}%)"
+
+    @colorBuffer.editor.getBuffer().setTextInRange(@marker.getBufferRange(), hsl)
+
+  convertContentToHSLA: ->
+    hsla = "hsla(#{Math.round @color.hue}, #{Math.round @color.saturation}%, #{Math.round @color.lightness}%, #{@color.alpha})"
+
+    @colorBuffer.editor.getBuffer().setTextInRange(@marker.getBufferRange(), hsla)
