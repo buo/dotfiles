@@ -1,4 +1,4 @@
-source completions.fish
+source (dirname (status -f))/completions.fish
 
 function heroku-destroy
   set app $argv[1]

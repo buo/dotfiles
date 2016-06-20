@@ -11,4 +11,6 @@ set PATH $PATH $DOTROOT/bin
 
 # The GOPATH enviconment variable
 set -x GOPATH "$HOME/Projects"
-set PATH $GOPATH/bin $PATH
+if [ -d $GOPATH/bin ]
+	set PATH $GOPATH/bin $PATH
+end
