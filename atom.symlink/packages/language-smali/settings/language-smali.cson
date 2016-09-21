@@ -1,0 +1,5 @@
+'.source.smali':
+  'editor':
+    'commentStart': '# '
+    'increaseIndentPattern': '^\\s*\.(method|packed|sparse|array).*$'
+    'decreaseIndentPattern': '^\\s*\.end.*$'

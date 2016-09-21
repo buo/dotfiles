@@ -1,0 +1,33 @@
+{
+  "name": "language-smali",
+  "version": "0.1.1",
+  "description": "Atom language support for smali",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingrz/language-smali.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "readme": "Smali Language\n==========\n\nA language package for [smali](https://code.google.com/p/smali/).\n\nThis package is [converted](https://github.com/johan/cson-cli) from [ShaneWilton/sublime-smali](https://github.com/ShaneWilton/sublime-smali).\n\n#### References\n\n- [smali/baksmali](https://code.google.com/p/smali/)\n- [Dalvik opcodes](http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/xingrz/language-smali/issues"
+  },
+  "homepage": "https://github.com/xingrz/language-smali#readme",
+  "_id": "language-smali@0.1.1",
+  "_shasum": "49681ece826f8184da8e1e075a5c69ee08cca8ca",
+  "_resolved": "file:../d-116813-1266-twtwqb/package.tgz",
+  "_from": "../d-116813-1266-twtwqb/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
