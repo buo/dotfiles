@@ -1,8 +1,8 @@
 # Requirements
+install :homebrew if os == :macos
 install :git
 install :python
 install :ruby
-install :homebrew if os == :macos
 
 install :aws
 install "fish/install.sh"
