@@ -1,6 +1,7 @@
 # Requirements
 install :homebrew if os == :macos
 install :git
+install :go
 install :python
 install :ruby
 
