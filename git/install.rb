@@ -11,7 +11,9 @@ unless File.exists? "#{DOTROOT}/git/gitconfig.symlink"
   File.write "#{DOTROOT}/git/gitconfig.symlink", gitconfig
 end
 
-if os == :macos
-  # Upgrade Git to the official latest one from the pre-installed Apple Git.
-  shell 'brew install git'
+unless cmd_exists? 'git'
+  if os == :macos
+    # Upgrade Git to the official latest one from the pre-installed Apple Git.
+    shell 'brew install git'
+  end
 end
