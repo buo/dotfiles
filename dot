@@ -1,149 +1,71 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-set -e
+DOTROOT = __dir__
 
-cd "$(dirname $0)"
-export DOTROOT=$(pwd)
+def ohai(*args)
+  print "\r\033[2K  [ \033[0;34m..\033[0m ] ", *args, "\n"
+end
 
-function info {
-  printf "\r\033[2K  [ \033[0;34m..\033[0m ] $*\n"
-}
+def ok(*args)
+  print "\r\033[2K  [ \033[1;32mOK\033[0m ] ", *args, "\n"
+end
 
-function ok {
-  printf "\r\033[2K  [ \033[1;32mOK\033[0m ] $*\n"
-}
-
-function fail {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $*\n"
+def fail(*args)
+  print "\r\033[2K  [\033[0;31mFAIL\033[0m] ", *args, "\n"
   exit
-}
+end
 
-function ask {
-  printf "\r\033[2K  [ \033[0;33m??\033[0m ] $1 "
-}
+def ask(question, default = '')
+  printf "\r\033[2K  [ \033[0;33m??\033[0m ] #{question} "
+  printf "[ #{default} ] " if default != ''
+  val = gets.chomp
+  return val != '' ? val : default
+end
 
-function gitconfig {
-  if ! [ -f git/gitconfig.symlink ]; then
-    info "gitconfig"
+def os
+  # RUBY_PLATFORM will say 'java' on JRuby regardless of host OS it is running on
+  # but it's okay for us.
+  case RUBY_PLATFORM
+  when /darwin/
+    :macos
+  else
+    raise "unknown os"
+  end
+end
 
-    git_credential="cache"
-    if [ "$(uname -s)" == "Darwin" ]; then
-      git_credential="osxkeychain"
-    fi
+def cmd_exists?(cmd)
+  result = `which #{cmd}`
+  return result != ''
+end
 
-    ask "What is your git author name?"
-    read -e git_authorname
-    git_authoremail="$git_authorname@users.noreply.github.com"
+def install(filename)
+  filename = "#{filename}/install.rb" if filename.is_a? Symbol
+  filename = "#{DOTROOT}/#{filename}"
+  if filename and File.exists? filename
+    ohai "Run #{filename}"
+    case File.extname(filename)
+    when '.rb'; eval File.read(filename)
+    when '.sh'; print `DOTROOT="#{DOTROOT}" sh -c "#{filename}"`
+    end
+  end
+end
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+def shell(cmd)
+  puts "$ #{cmd}"
+  puts `#{cmd}`
+end
 
-    ok "created gitconfig.symlink"
-  fi
-}
+def link
+  Dir.glob("#{DOTROOT}/**/*.symlink").each do |src|
+    dst = File.join(Dir.home, ".#{File.basename(src).gsub(/\.symlink$/, '')}")
+    unless File.exists? dst
+      ohai "Link #{src} to #{dst}"
+      `ln -s "#{src}" "#{dst}"`
+    end
+  end
+end
 
-function homebrew {
-  # Check for Homebrew
-  if test ! $(which brew); then
-    info "Installing Homebrew for you."
-
-    # Install the correct homebrew for each OS type
-    if [ "$(uname)" == "Darwin" ]; then
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
-    fi
-  fi
-
-  # Install homebrew cask
-  if test ! $(brew cask) &>/dev/null; then
-    brew tap caskroom/fonts
-    #brew tap caskroom/unofficial
-    #brew tap caskroom/versions
-    brew install caskroom/cask/brew-cask
-  fi
-
-  # Changes the path where the symlinks to the applications will be generated.
-  #export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-  # clean up cache files
-  brew cleanup
-  brew cask cleanup
-}
-
-function _link {
-  local src=$1 dst=$2
-  local skip= overwrite= backup=
-  local action=
-
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
-      if [ "$(readlink $dst)" == "$src" ]; then
-        skip=true;
-      else
-        ask "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-         [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-        read -n 1 action
-
-        case "$action" in
-          s) skip=true;;
-          S) skip_all=true;;
-          o) overwrite=true;;
-          O) overwrite_all=true;;
-          b) backup=true;;
-          B) backup_all=true;;
-          *) ;;
-        esac
-      fi
-    fi
-
-    skip=${skip:-$skip_all}
-    overwrite=${overwrite:-$overwrite_all}
-    backup=${backup:-$backup_all}
-
-    if [ "$skip" == "true" ]; then
-      ok "skipped $src"
-    fi
-
-    if [ "$overwrite" == "true" ]; then
-      rm -rf "$dst"
-      ok "removed $dst"
-    fi
-
-    if [ "$backup" == "true" ]; then
-      mv "$dst" "${dst}.backup"
-      ok "moved $dst to ${dst}.backup"
-    fi
-  fi
-
-  # "false" or empty
-  if [ "$skip" != "true" ]; then
-    ln -s "$1" "$2"
-    ok "$1 -> $2"
-  fi
-}
-
-function link {
-  info "link the symbolic links"
-  local overwrite_all=false backup_all=false skip_all=false
-  for src in $(find -H "$DOTROOT" -maxdepth 2 -name "*.symlink")
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    _link "$src" "$dst"
-  done
-}
-
-function install {
-  info "find the installers and run them iteratively"
-  find . -name install.sh | while read installer ; do info "Run ${installer}"; sh -c "${installer}" ; done
-}
-
-gitconfig
-link
-
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]; then
-  homebrew
-  sh -c "$DOTROOT/osx/preferences.sh"
-fi
-
-install
+if __FILE__ == $0
+  require "#{DOTROOT}/recipe.rb"
+  link
+end

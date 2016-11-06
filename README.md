@@ -1,13 +1,11 @@
-# buo dotfiles
+# dotfiles
 
-## Installation
+This is my personal collection of dotfiles. The `dot` command I made is written
+in pure Ruby with zero dependency.
+
+## Usage
 
 ```sh
 git clone https://github.com/buo/dotfiles.git ~/.dotfiles
 ~/.dotfiles/dot
 ```
-
-## Acknowledgements
-
-- [Mathias Bynens](https://github.com/mathiasbynens) and his [dotfiles](https://github.com/mathiasbynens/dotfiles) repository
-- [Zach Holman](https://github.com/holman) and his [dotfiles](https://github.com/holman/dotfiles) repository
