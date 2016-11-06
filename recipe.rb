@@ -11,3 +11,5 @@ install "iterm/install.sh"
 install :license
 
 install "osx/preferences.sh" if os == :macos
+
+install :atom
