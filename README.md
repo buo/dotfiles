@@ -9,3 +9,8 @@ in pure Ruby with zero dependency.
 git clone https://github.com/buo/dotfiles.git ~/.dotfiles
 ~/.dotfiles/dot
 ```
+
+## TODOs
+
+- Resolve dependencies
+- Verify installation
