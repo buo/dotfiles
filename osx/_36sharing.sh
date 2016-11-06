@@ -1,7 +1,7 @@
 # Set computer name
-printf " - What is the name of this machine? "
-read -e hostname
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
-sudo scutil --set ComputerName "$hostname"
-sudo scutil --set HostName "$hostname"
-sudo scutil --set LocalHostName "$hostname"
+if [ $HOSTNAME ]; then
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$HOSTNAME"
+  sudo scutil --set ComputerName "$HOSTNAME"
+  sudo scutil --set HostName "$HOSTNAME"
+  sudo scutil --set LocalHostName "$HOSTNAME"
+fi

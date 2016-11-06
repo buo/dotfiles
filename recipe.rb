@@ -9,7 +9,5 @@ install "fish/install.sh"
 install :hub
 install "iterm/install.sh"
 install :license
-
-install "osx/preferences.sh" if os == :macos
-
+install :osx
 install :atom
