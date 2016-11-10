@@ -1,4 +1,5 @@
+blob-store/
+compile-cache/
+storage/
 .apm
 .node-gyp
-compile-cache
-storage
