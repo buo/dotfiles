@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "use strict":
-    "prefix": "us"
-    "body": """
-    'use strict';
-    """

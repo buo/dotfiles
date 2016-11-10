@@ -1,4 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "JSON.stringify":
-    "prefix": "js"
-    "body": "JSON.stringify(${1:obj});"

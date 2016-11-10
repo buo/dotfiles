@@ -1,5 +1,0 @@
-{
-  "atom-workspace": {
-    "ctrl-alt-shift-g g": "go-get:get-package"
-  }
-}

@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "prompt":
-    "prefix": "pm"
-    "body": """
-    prompt('${1:msg}');
-    """

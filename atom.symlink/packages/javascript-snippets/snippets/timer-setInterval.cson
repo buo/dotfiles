@@ -1,8 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "setInterval":
-    "prefix": "si"
-    "body": """
-    setInterval(function() {
-    \t${0:// body...}
-    }, ${1:delay});
-    """

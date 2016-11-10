@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "alert":
-    "prefix": "al"
-    "body": """
-    alert('${1:msg}');
-    """

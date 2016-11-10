@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "module.exports":
-    "prefix": "me"
-    "body": """
-    module.exports = ${1:name};
-    """

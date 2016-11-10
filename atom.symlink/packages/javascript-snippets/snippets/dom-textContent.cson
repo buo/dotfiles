@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "textContent":
-    "prefix": "tc"
-    "body": """
-    ${1:document}.textContent = '${2:content}';
-    """

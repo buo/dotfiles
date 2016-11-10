@@ -1,6 +1,0 @@
-".source.js, .source.jsx, .source.ts":
-  "process.exit":
-    "prefix": "pe"
-    "body": """
-    process.exit(${1:code});
-    """

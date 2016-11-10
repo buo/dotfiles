@@ -1,7 +1,0 @@
-key: 'line-break-backslash'
-
-patterns: [
-  match: '(?<=\\S)\\p{Blank}+(\\\\)$'
-  captures:
-    1: name: 'variable.line-break.asciidoc'
-]
