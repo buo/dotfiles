@@ -17,6 +17,7 @@
       "tmp"
       "vendor"
     ]
+    telemetryConsent: "no"
     themes: [
       "nucleus-dark-ui"
       "atom-dark-fusion-syntax"
