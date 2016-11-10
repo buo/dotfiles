@@ -52,7 +52,7 @@ end
 
 def shell(cmd)
   puts "$ #{cmd}"
-  puts `#{cmd}`
+  system cmd
 end
 
 def link
