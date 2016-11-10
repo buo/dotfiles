@@ -12,3 +12,4 @@ install "iterm/install.sh"
 install :license
 install :osx
 install :atom
+install :pygments

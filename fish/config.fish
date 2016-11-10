@@ -6,8 +6,8 @@ for file in (find $DOTROOT -maxdepth 3 -name "*.fish" -not -path "$DOTROOT/fish/
   source $file
 end
 
-# Append bin to the path list.
-set PATH $PATH $DOTROOT/bin
+# Prepend bin to the path list.
+set PATH $DOTROOT/bin $PATH
 
 # The GOPATH enviconment variable
 set -x GOPATH "$HOME/Projects"
