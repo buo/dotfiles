@@ -1,2 +1,2 @@
 # Install pygments package to use pygmentize command.
-shell 'pip install pygments'
+shell 'sudo -H pip install pygments'
