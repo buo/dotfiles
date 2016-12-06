@@ -17,6 +17,7 @@ language-fish-shell
 language-jade
 language-javascript-jsx
 language-lua
+language-pug
 language-smali
 linter
 linter-coffeelint
