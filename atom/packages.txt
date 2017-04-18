@@ -14,6 +14,7 @@ language-autoit
 language-cjsx
 language-docker
 language-fish-shell
+language-haproxy
 language-jade
 language-javascript-jsx
 language-lua
