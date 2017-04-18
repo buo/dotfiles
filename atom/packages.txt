@@ -20,6 +20,7 @@ language-javascript-jsx
 language-lua
 language-pug
 language-smali
+language-terraform
 linter
 linter-coffeelint
 linter-docker
