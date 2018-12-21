@@ -1,0 +1,6 @@
+#!/bin/bash
+
+dir="$(dirname "${BASH_SOURCE[0]}")/../plantuml"
+
+java -jar "$dir/plantuml.jar" $*
+
