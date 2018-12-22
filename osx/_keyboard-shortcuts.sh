@@ -14,6 +14,21 @@ defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 52
   </dict>
 "
 
+# Input Sources > Select the previous input source : Ctrl + Space
+defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 60 "
+  <dict>
+    <key>enabled</key><false/>
+    <key>value</key><dict>
+      <key>type</key><string>standard</string>
+      <key>parameters</key>
+      <array>
+        <integer>32</integer>
+        <integer>49</integer>
+        <integer>262144</integer>
+      </array>
+    </dict>
+  </dict>
+"
 
 # Input Sources > Select next source in Input menu : Cmd + Space
 defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 61 "
@@ -30,18 +45,19 @@ defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 61
     </dict>
   </dict>
 "
+
 # Spotlight > Show Spotlight search : ^Space
-defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 64 "
-  <dict>
-    <key>enabled</key><true/>
-    <key>value</key><dict>
-      <key>type</key><string>standard</string>
-      <key>parameters</key>
-      <array>
-        <integer>65535</integer>
-        <integer>49</integer>
-        <integer>262144</integer>
-      </array>
-    </dict>
-  </dict>
-"
+# defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 64 "
+#   <dict>
+#     <key>enabled</key><true/>
+#     <key>value</key><dict>
+#       <key>type</key><string>standard</string>
+#       <key>parameters</key>
+#       <array>
+#         <integer>65535</integer>
+#         <integer>49</integer>
+#         <integer>262144</integer>
+#       </array>
+#     </dict>
+#   </dict>
+# "
