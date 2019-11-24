@@ -1,0 +1,11 @@
+code \
+	--install-extension ms-python.python \
+	--install-extension ms-azuretools.vscode-docker \
+	--install-extension jeff-hykin.better-dockerfile-syntax \
+	--install-extension esbenp.prettier-vscode \
+	--install-extension jasonnutter.search-node-modules \
+	--install-extension prisma.vscode-graphql \
+	--install-extension jpoissonnier.vscode-styled-components \
+	--install-extension 2gua.rainbow-brackets \
+	--install-extension eamodio.gitlens \
+	--install-extension equinusocio.vsc-material-theme
