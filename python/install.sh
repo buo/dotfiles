@@ -1,4 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+brew list python >/dev/null 2>&1
+if test $? -gt 0; then
+	brew install python
+fi
 
 # Install pip
 if test command -v pip >/dev/null 2>&1; then

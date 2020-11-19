@@ -47,9 +47,6 @@
     changed = yellow reverse
     untracked = red reverse
 
-#[commit]
-#   template = ~/.gitmessage
-
 [core]
     attributesfile = ~/.gitattributes
     autocrlf = input
@@ -75,8 +72,9 @@
     default = simple
 
 [user]
-    name = AUTHORNAME
-    email = AUTHOREMAIL
+    name = GIT_USER_NAME
+    email = GIT_USER_EMAIL
+
 [credential]
     helper = GIT_CREDENTIAL_HELPER
 

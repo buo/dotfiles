@@ -1,3 +1,0 @@
-function tower
-  gittower .
-end

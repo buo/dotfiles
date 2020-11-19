@@ -1,71 +1,78 @@
-#!/usr/bin/env ruby
+#!/bin/bash
 
-DOTROOT = __dir__
+# https://stackoverflow.com/a/246128
+DOTROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-def ohai(*args)
-  print "\r\033[2K  [ \033[0;34m..\033[0m ] ", *args, "\n"
-end
+install() {
+  local target=$1
+  DIR="$DOTROOT/$target" source "$DOTROOT/$target/install.sh"
+}
 
-def ok(*args)
-  print "\r\033[2K  [ \033[1;32mOK\033[0m ] ", *args, "\n"
-end
+symlink() {
+  local src=$1 dst=$2
+  local backup= overwrite= skip=
+  local backup_all=false overwrite_all=false skip_all=false
+  local action=
 
-def fail(*args)
-  print "\r\033[2K  [\033[0;31mFAIL\033[0m] ", *args, "\n"
-  exit
-end
+  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
+    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
+      if [ "$(readlink $dst)" == "$src" ]; then
+        skip=true;
+      else
+        echo "File already exists: $dst ($(basename "$src")), what do you want to do?"
+        read -p "[s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all? " action
 
-def ask(question, default = '')
-  printf "\r\033[2K  [ \033[0;33m??\033[0m ] #{question} "
-  printf "[ #{default} ] " if default != ''
-  val = gets.chomp
-  return val != '' ? val : default
-end
+        case "$action" in
+          s) skip=true;;
+          S) skip_all=true;;
+          o) overwrite=true;;
+          O) overwrite_all=true;;
+          b) backup=true;;
+          B) backup_all=true;;
+          *) skip=true;;
+        esac
+      fi
+    fi
 
-def os
-  # RUBY_PLATFORM will say 'java' on JRuby regardless of host OS it is running on
-  # but it's okay for us.
-  case RUBY_PLATFORM
-  when /darwin/
-    :macos
-  else
-    raise "unknown os"
-  end
-end
+    skip=${skip:-$skip_all}
+    overwrite=${overwrite:-$overwrite_all}
+    backup=${backup:-$backup_all}
 
-def cmd_exists?(cmd)
-  result = `which #{cmd}`
-  return result != ''
-end
+    if [ "$skip" == "true" ]; then
+      echo "skipped $src"
+    fi
 
-def install(filename)
-  filename = "#{filename}/install.rb" if filename.is_a? Symbol
-  filename = "#{DOTROOT}/#{filename}"
-  if filename and File.exists? filename
-    ohai "Run #{filename}"
-    case File.extname(filename)
-    when '.rb'; eval File.read(filename)
-    when '.sh'; print `DOTROOT="#{DOTROOT}" sh -c "#{filename}"`
-    end
-  end
-end
+    if [ "$overwrite" == "true" ]; then
+      rm -rf "$dst"
+      echo "removed $dst"
+    fi
 
-def shell(cmd)
-  puts "$ #{cmd}"
-  system cmd
-end
+    if [ "$backup" == "true" ]; then
+      mv "$dst" "${dst}.backup"
+      echo "moved $dst to ${dst}.backup"
+    fi
+  fi
 
-def link
-  Dir.glob("#{DOTROOT}/**/*.symlink").each do |src|
-    dst = File.join(Dir.home, ".#{File.basename(src).gsub(/\.symlink$/, '')}")
-    unless File.exists? dst
-      ohai "Link #{src} to #{dst}"
-      `ln -s "#{src}" "#{dst}"`
-    end
-  end
-end
+  # "false" or empty
+  if [ "$skip" != "true" ]; then
+    ln -s "$1" "$2"
+    echo "$1 -> $2"
+  fi
+}
 
-if __FILE__ == $0
-  require "#{DOTROOT}/recipe.rb"
-  link
-end
+if [ "$#" -gt 0 ]; then
+  eval "$@"
+else
+  install homebrew
+
+  install curl
+  install git
+  install python
+  install vim
+  install yarn
+  install zsh
+
+  install osx
+  install alfred
+  install iterm
+fi
