@@ -19,7 +19,7 @@ if [ ! -f "$DIR/gitconfig.symlink" -o ! -f "$HOME/.gitconfig" ]; then
     git_user_email="${git_user_name}@users.noreply.github.com"
   fi
 
-  sed -e "s/AUTHORNAME/$git_user_name/g" -e "s/AUTHOREMAIL/$git_user_email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" "$DIR/gitconfig.symlink.example" > "$DIR/gitconfig.symlink"
+  sed -e "s/GIT_USER_NAME/$git_user_name/g" -e "s/GIT_USER_EMAIL/$git_user_email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" "$DIR/gitconfig.symlink.example" > "$DIR/gitconfig.symlink"
 
   symlink "$DIR/gitconfig.symlink" "$HOME/.gitconfig"
 fi
