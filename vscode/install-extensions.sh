@@ -8,4 +8,5 @@ code \
 	--install-extension jpoissonnier.vscode-styled-components \
 	--install-extension 2gua.rainbow-brackets \
 	--install-extension eamodio.gitlens \
-	--install-extension equinusocio.vsc-material-theme
+	--install-extension equinusocio.vsc-material-theme \
+	--install-extension dbaeumer.vscode-eslint
