@@ -2,7 +2,7 @@
 
 # Install oh-my-zsh
 if ! command -v zsh &> /dev/null; then
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
   echo "'oh-my-zsh' already installed."
 fi
